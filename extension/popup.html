@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhishGuard</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <div class="heading">
+        <div class="shield">PG</div>
+        <div>
+          <h1>PhishGuard</h1>
+          <p>URL-only risk check</p>
+        </div>
+      </div>
+
+      <p id="url" class="url">Reading active tab…</p>
+      <button id="check" type="button">Check this URL</button>
+
+      <section id="result" class="result hidden" aria-live="polite">
+        <div class="risk-row">
+          <span id="risk-badge" class="badge">Unknown</span>
+          <strong id="probability"></strong>
+        </div>
+        <ul id="reasons"></ul>
+      </section>
+
+      <p id="error" class="error hidden" aria-live="assertive"></p>
+      <p class="disclaimer">Advisory only—this cannot guarantee a site is safe.</p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
