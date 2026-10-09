@@ -8,6 +8,26 @@ from phishguard.domains import get_registered_domain
 REQUIRED_COLUMNS = {"url", "is_phishing"}
 
 
+def validate_training_splits(splits: dict[str, pd.DataFrame]) -> None:
+    """Fail before training when labels, URLs, or domain isolation are invalid."""
+    domains: dict[str, set[str]] = {}
+    for name, frame in splits.items():
+        if not REQUIRED_COLUMNS.issubset(frame.columns):
+            raise ValueError(f"{name}: required URL/label columns are missing")
+        if frame.empty or frame[list(REQUIRED_COLUMNS)].isna().any().any():
+            raise ValueError(f"{name}: empty split or missing values")
+        if set(frame["is_phishing"].unique()) != {0, 1}:
+            raise ValueError(f"{name}: both binary labels 0 and 1 are required")
+        if frame["url"].duplicated().any():
+            raise ValueError(f"{name}: duplicate URLs")
+        domains[name] = set(frame["url"].map(get_registered_domain))
+    names = list(domains)
+    for index, name in enumerate(names):
+        for other in names[index + 1 :]:
+            if not domains[name].isdisjoint(domains[other]):
+                raise ValueError(f"Domain leakage between {name} and {other}")
+
+
 def split_by_domain(
     data: pd.DataFrame,
     train_size: float = 0.8,

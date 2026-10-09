@@ -45,6 +45,26 @@ def test_root_slash_does_not_change_features() -> None:
     assert without_slash == with_slash
 
 
+def test_feature_selection_and_legacy_artifacts() -> None:
+    transformer = URLFeatureExtractor(feature_names=("uses_https", "has_ip_hostname"))
+    assert transformer.transform(["http://192.0.2.10/login"]).tolist() == [[0, 1]]
+    # Simulate the old joblib object, created before this field existed.
+    del transformer.feature_names
+    assert transformer.transform(["https://example.com"]).shape == (
+        1,
+        len(FEATURE_NAMES),
+    )
+
+
 def test_entropy_handles_empty_and_repeated_text() -> None:
     assert shannon_entropy("") == 0
     assert shannon_entropy("aaaa") == 0
+
+
+def test_protocol_invariant_transform_and_old_artifact_compatibility():
+    urls = ["http://example.test/login?id=42", "https://example.test/login?id=42"]
+    transformer = URLFeatureExtractor(normalize_protocol=True)
+    np.testing.assert_array_equal(*transformer.transform(urls))
+    # Old serialized models have no new field and must keep their old behavior.
+    del transformer.normalize_protocol
+    assert not np.array_equal(*transformer.transform(urls))

@@ -4,7 +4,6 @@ from pathlib import Path
 
 import pandas as pd
 
-
 DATASET_PATH = Path("data/external/balanced_urls.csv")
 
 
@@ -52,10 +51,7 @@ def main() -> None:
         print(df["label"].value_counts(dropna=False))
 
         print("\nLABEL DISTRIBUTION (%)")
-        print(
-            (df["label"].value_counts(normalize=True, dropna=False) * 100)
-            .round(2)
-        )
+        print((df["label"].value_counts(normalize=True, dropna=False) * 100).round(2))
 
     print("\n" + "=" * 60)
     print("INSPECTION COMPLETE")

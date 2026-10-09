@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 
 from phishguard.domains import get_registered_domain
-from phishguard.split import split_by_domain
+from phishguard.split import split_by_domain, validate_training_splits
 
 
 def make_test_data() -> pd.DataFrame:
@@ -57,6 +57,32 @@ def test_split_by_domain_is_reproducible() -> None:
         strict=True,
     ):
         pd.testing.assert_frame_equal(first_split, second_split)
+
+
+def test_training_validation_rejects_domain_leakage() -> None:
+    train = pd.DataFrame(
+        {
+            "url": ["https://same.example.com/", "https://other.test/"],
+            "is_phishing": [0, 1],
+        }
+    )
+    validation = pd.DataFrame(
+        {
+            "url": ["https://same.example.com/about", "https://third.test/"],
+            "is_phishing": [0, 1],
+        }
+    )
+    with pytest.raises(ValueError, match="Domain leakage"):
+        validate_training_splits({"train": train, "validation": validation})
+
+
+def test_training_validation_requires_both_labels() -> None:
+    train, validation, test = split_by_domain(make_test_data())
+    validation["is_phishing"] = 0
+    with pytest.raises(ValueError, match="both binary labels"):
+        validate_training_splits(
+            {"train": train, "validation": validation, "test": test}
+        )
 
 
 def test_split_sizes_must_sum_to_one() -> None:

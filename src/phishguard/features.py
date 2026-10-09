@@ -132,15 +132,34 @@ def extract_url_features(url: str) -> dict[str, float]:
 class URLFeatureExtractor(TransformerMixin, BaseEstimator):
     """Scikit-learn transformer that converts URLs into lexical features."""
 
+    def __init__(
+        self,
+        feature_names: tuple[str, ...] | None = None,
+        normalize_protocol: bool = False,
+    ) -> None:
+        self.feature_names = feature_names
+        self.normalize_protocol = normalize_protocol
+
+    def _selected_names(self) -> tuple[str, ...]:
+        # Artifacts created before feature selection have no feature_names field.
+        return getattr(self, "feature_names", None) or FEATURE_NAMES
+
     def fit(self, urls: Iterable[str], y: object = None) -> URLFeatureExtractor:
         return self
 
     def transform(self, urls: Iterable[str]) -> np.ndarray:
-        rows = [extract_url_features(str(url)) for url in urls]
+        rows = []
+        for value in urls:
+            url = str(value)
+            if getattr(self, "normalize_protocol", False):
+                # Constant protocol also removes its effects on length/entropy.
+                # This does not visit the site or depend on labels.
+                url = urlunsplit(urlsplit(url)._replace(scheme="https"))
+            rows.append(extract_url_features(url))
         return np.asarray(
-            [[row[name] for name in FEATURE_NAMES] for row in rows],
+            [[row[name] for name in self._selected_names()] for row in rows],
             dtype=np.float64,
         )
 
     def get_feature_names_out(self, input_features: object = None) -> np.ndarray:
-        return np.asarray(FEATURE_NAMES, dtype=object)
+        return np.asarray(self._selected_names(), dtype=object)

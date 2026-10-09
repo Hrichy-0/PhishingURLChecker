@@ -27,7 +27,7 @@ function showResult(result) {
   errorElement.classList.add("hidden");
   riskBadge.textContent = `${result.risk_level} risk`;
   riskBadge.className = `badge ${result.risk_level}`;
-  probabilityElement.textContent = `${(result.phishing_probability * 100).toFixed(1)}% phishing`;
+  probabilityElement.textContent = `Model risk score: ${(result.phishing_probability * 100).toFixed(1)}/100`;
   reasonsElement.replaceChildren(
     ...result.reasons.map((reason) => {
       const item = document.createElement("li");

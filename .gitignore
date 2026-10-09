@@ -7,8 +7,15 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 
+# Local credentials (keep only a deliberately sanitized example)
+.env
+.env.*
+!.env.example
+
 # Datasets and generated artifacts
 data/raw/
 data/processed/
 data/external/*.csv
+data/external/*.zip
+data/external/huggingface/
 artifacts/

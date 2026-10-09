@@ -4,6 +4,9 @@ This document records what was built, why each decision was made, and what was
 learned. It is written as a learning log rather than only a finished-product
 description.
 
+This is the version 1 learning record. The current XGBoost implementation and
+mixed-source results are documented in [XGBoost experiments](xgboost-experiments.md).
+
 ## 1. Goal and architecture
 
 The goal was to build a complete machine-learning product, not only a notebook:
