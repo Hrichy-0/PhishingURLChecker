@@ -1,0 +1,2 @@
+# Preserve generated result/provenance checksums across Windows and macOS.
+artifacts/** -text

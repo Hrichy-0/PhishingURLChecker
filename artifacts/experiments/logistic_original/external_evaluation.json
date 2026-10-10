@@ -1,0 +1,26 @@
+{
+  "dataset": "/Users/hrishy/Documents/PhishingURLChecker/data/external/balanced_urls.csv",
+  "rows_evaluated": 293638,
+  "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/phishguard_model.joblib",
+  "threshold": 0.38724041122042385,
+  "exact_overlap_excluded": 10,
+  "shared_domain_rows_before_optional_exclusion": 45708,
+  "shared_domains_excluded": true,
+  "reference_data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed",
+  "metrics": {
+    "threshold": 0.38724041122042385,
+    "accuracy": 0.5480557693486537,
+    "precision": 0.54685252075139,
+    "recall": 0.999356768605312,
+    "f1": 0.7068910681155579,
+    "roc_auc": 0.6206780192666795,
+    "average_precision": 0.6203380196240336,
+    "false_positive_rate": 0.9932289208967185,
+    "confusion_matrix": {
+      "true_negative": 904,
+      "false_positive": 132605,
+      "false_negative": 103,
+      "true_positive": 160026
+    }
+  }
+}

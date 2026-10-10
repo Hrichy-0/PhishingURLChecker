@@ -1,0 +1,655 @@
+{
+  "created_date": "2026-10-11",
+  "purpose": "git pull transfer of models and research results to Mac",
+  "files": [
+    {
+      "path": "artifacts/archive/20261003T110344742836Z/external_evaluation.json",
+      "bytes": 703,
+      "sha256": "5746b159ddb29b5e6e5bca75664b81b5050a13702fe75c3896b9bf204c1d4d5b"
+    },
+    {
+      "path": "artifacts/archive/20261003T110344742836Z/model_metadata.json",
+      "bytes": 3113,
+      "sha256": "6d6bc1c4c0e640bd6ef62a4c14c2b3a26cdf3286f245787bd3902e67e51367cb"
+    },
+    {
+      "path": "artifacts/archive/20261003T110344742836Z/phishguard_model.joblib",
+      "bytes": 2113,
+      "sha256": "0dffd1be77c741c60d2c517727aae78e7f92834304da161b3de53ff9aaf38ad7"
+    },
+    {
+      "path": "artifacts/evaluations/false_positive_patterns_2026_10_08/false_positive_patterns.json",
+      "bytes": 111194,
+      "sha256": "552268b6b2f6f2dea7c33623f35548fefed584a56b6342ac80ea6b9299066cbd"
+    },
+    {
+      "path": "artifacts/evaluations/fixed_threshold_external_2026_10_08/external_evaluation.json",
+      "bytes": 15976,
+      "sha256": "501d798a4892cd9b90ff33009f15b1979ce00709ab56f898491e99a3f05af7ec"
+    },
+    {
+      "path": "artifacts/evaluations/hf_ealvaradob/external_evaluation.json",
+      "bytes": 1828,
+      "sha256": "498ee670c1a7264bf70869caed9e83e64531061cf5d25a06850aa516fd422d21"
+    },
+    {
+      "path": "artifacts/evaluations/hf_ealvaradob/false_negatives.csv",
+      "bytes": 2037550,
+      "sha256": "b1f72b47090d7aabb8acb53efa8f39ee9f138b7ba8613927830ec1fe148af45b"
+    },
+    {
+      "path": "artifacts/evaluations/hf_ealvaradob/false_positives.csv",
+      "bytes": 412104,
+      "sha256": "b3fd86e4957b3a9e16bd1100e7eaf00e7eb52f6725f871bcb33f40300104f54d"
+    },
+    {
+      "path": "artifacts/evaluations/hf_phishnchips/external_evaluation.json",
+      "bytes": 1798,
+      "sha256": "db29e3a412ef8b49ef66f0b0753ea9f387c84c2712b0bc1b3c6fe9b4740c22cc"
+    },
+    {
+      "path": "artifacts/evaluations/hf_phishnchips/false_negatives.csv",
+      "bytes": 6566,
+      "sha256": "94045a6addccc1d4e57abfedc5cea536e28aae77083d4fa465369cd366558794"
+    },
+    {
+      "path": "artifacts/evaluations/hf_phishnchips/false_positives.csv",
+      "bytes": 16122,
+      "sha256": "0d1b33dc4dda24cc0969f7af85a9dd15d279d628cb8a4db65e7bc99fa74c8901"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_lexical_http/external_evaluation.json",
+      "bytes": 1688,
+      "sha256": "b0bfdce6c1f5c4b6b7e62441b2bfc6a9091556e8a38b353c535b8c0ed676fa3a"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_lexical_http/false_negatives.csv",
+      "bytes": 1343246,
+      "sha256": "fa4d75dca8925f5d4c7b0307c6472ef83e534d184875094534419305d16a2731"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_lexical_http/false_positives.csv",
+      "bytes": 18068,
+      "sha256": "e7e957aa7638dbc3b75ecdc8dddecac63dc93927f846204c8b6c48d8667e4311"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_lexical_https/external_evaluation.json",
+      "bytes": 1687,
+      "sha256": "381fc8c92b9a70917f118bea012ce14906a6eeeeb5284ef3d5b9ee3d77b9fd43"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_lexical_https/false_negatives.csv",
+      "bytes": 1343246,
+      "sha256": "fa4d75dca8925f5d4c7b0307c6472ef83e534d184875094534419305d16a2731"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_lexical_https/false_positives.csv",
+      "bytes": 18669,
+      "sha256": "2e9551cf83d168431feb1fd5eb70da2911c3d2a9a4de8da1e28c8c272d296b69"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_sites_http/external_evaluation.json",
+      "bytes": 1824,
+      "sha256": "897c1af528877cea41838c45bc33525050ca971e7ef1f3057f0941696879eadb"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_sites_http/false_negatives.csv",
+      "bytes": 297877,
+      "sha256": "766cbcd1486af8d0dd6da21c828df1fd36026466056df876ec957c0c205e8499"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_sites_http/false_positives.csv",
+      "bytes": 7089843,
+      "sha256": "477bf6e033586ff3041f28353affa7bf308c6cc018857069566493ade4f671e5"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_sites_https/external_evaluation.json",
+      "bytes": 1829,
+      "sha256": "d2bea20ca9c6aa7203518c48ad6d71ecafcd24cfac43ef6757048a40ae99930e"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_sites_https/false_negatives.csv",
+      "bytes": 1894686,
+      "sha256": "547d1c2069d3899ad663b5adfdfb71c00d18a803ac51a24edb31d231a5245f40"
+    },
+    {
+      "path": "artifacts/evaluations/kaggle_sites_https/false_positives.csv",
+      "bytes": 3009914,
+      "sha256": "d8e40c5b077dee8d94f665b4b002ad27d57104961b23f2e7e84efbfc38ca670d"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/active_xgboost/external_evaluation.json",
+      "bytes": 2049,
+      "sha256": "a843f207c31662c42eb229f45b6f6b670930674e43b68a90eb354e9178dbebe6"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/active_xgboost/false_negatives.csv",
+      "bytes": 387269,
+      "sha256": "49338a27e05234416bb719e044810d08339ff94d0cd74aff471eaee073dc0b09"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/active_xgboost/false_positives.csv",
+      "bytes": 1642908,
+      "sha256": "63a916aeb55912088f5a151a4e02ff09b36dfdb2bf5ce941745dd5ce62dabd44"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/char_logistic/external_evaluation.json",
+      "bytes": 2128,
+      "sha256": "f40e0e8d3511ebc093e853f46dcf71ff80664f6a751ead47de4a80e6543d7c4e"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/char_logistic/false_negatives.csv",
+      "bytes": 3143084,
+      "sha256": "41c84a9b24c4dd50b5acc36cf8be51705026d38148bd23a13123a2a4537e509b"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/char_logistic/false_positives.csv",
+      "bytes": 957,
+      "sha256": "3ae82dee621576a51afcf34903f3578e520b32c1d5deee9e9b537605dd85cb81"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/common_evaluation.json",
+      "bytes": 8146,
+      "sha256": "31392d26a3ad43914400f01c0e3eaa8a364095230b1c6400feb00767ccba29b4"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/tuned_xgboost/external_evaluation.json",
+      "bytes": 2124,
+      "sha256": "b9246eea571a435c60b0efba92c91b5d0a400591171bd774bb0e0106d0d6ff57"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/tuned_xgboost/false_negatives.csv",
+      "bytes": 2721567,
+      "sha256": "a1a63c8e57184640ea2b1acea09a35a55c5c8ea62fd6c680b7450f5360e35c3a"
+    },
+    {
+      "path": "artifacts/evaluations/url_dataset_2026_10_06/tuned_xgboost/false_positives.csv",
+      "bytes": 431501,
+      "sha256": "b5fd703aa31da42e97de6a4e3653298a7eb17ffcfd29b54a9e7193ee91fb279e"
+    },
+    {
+      "path": "artifacts/evaluations/validation_thresholds_2026_10_06/validation_thresholds.json",
+      "bytes": 16738,
+      "sha256": "d7a5e1b40e2c1baff797caa8baf3f335631228fe5fbb797dd2772fe4d34a42b1"
+    },
+    {
+      "path": "artifacts/experiments/logistic_original/external_evaluation.json",
+      "bytes": 933,
+      "sha256": "4eb9653debd10698110822e5b55e3ccd47474e55cdd04cdf70349366e0b93b0d"
+    },
+    {
+      "path": "artifacts/experiments/logistic_original/false_negatives.csv",
+      "bytes": 6448,
+      "sha256": "ac5f10fb9a8b8ae5f388bd5c1f6ce9d3ce486d91318330d292d0af81f95725d7"
+    },
+    {
+      "path": "artifacts/experiments/logistic_original/false_positives.csv",
+      "bytes": 11462671,
+      "sha256": "8c8530323b9284b9cd54cc0ac4144e7a7945e2aef5bfe523ab7e9afdfe8e080c"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/feature-importance.md",
+      "bytes": 1553,
+      "sha256": "d7cf64e0868a91dd559681126a190f5b5325c279e17819b5efb7a4ffc4b24cca"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/model_metadata.json",
+      "bytes": 27788,
+      "sha256": "99213696e385202dddf3f5bdb11c07aaf96075181354cb4bd05307af0f07d767"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/phreshphish_external_evaluation.json",
+      "bytes": 1811,
+      "sha256": "2fb9b3b8c43d511b68db6ca65448856952123c50a563692b54bafe5552e7a3bb"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/requirements-local.txt",
+      "bytes": 1303,
+      "sha256": "d7fcec69aa62b98e47ed161df74c45881b37aec27e4e84636f555d02312c44c7"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/run_status.json",
+      "bytes": 255,
+      "sha256": "5a351769cdbbe1e06d9f836cc488e57c0bb02e179773460494e413f9d1c1cbbd"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/verification_report.json",
+      "bytes": 3625,
+      "sha256": "89975dc1d73563582d0595fe4b861786b1e55b877105c6a7ffa6571b00329c30"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_full_download_20261009/xgboost_model.ubj",
+      "bytes": 4668140,
+      "sha256": "6707e8eac87fa19b793b5558202ecae3608bd984eae951513786df400e5e851f"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/comparison.json",
+      "bytes": 11665,
+      "sha256": "83040633638f641d9b576976942b08c46e1b3f47c9bc51dabb1eaa5fe0e78605"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/html_features/model_metadata.json",
+      "bytes": 9792,
+      "sha256": "aa2f7a99e54c8f2ae31b6ec7e20596928145074057c88db8da296577b24d3f8a"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/html_features/xgboost_model.ubj",
+      "bytes": 271905,
+      "sha256": "8e154eb874e4527c3ea5cd69b171f22ab7c0e8d83e4d674f24cec5dfdd9c815c"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/html_features_publisher_test_predictions.csv",
+      "bytes": 1607461,
+      "sha256": "9d1e3461377b290a688917199c1e6827e663c11067a2bdc08bb3a24c4d1d9629"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/html_features_test_predictions.csv",
+      "bytes": 768386,
+      "sha256": "47e0742606f75d4114bea140129de946643161fdd9d3e28464afef1e3a6ed302"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/html_features_validation_predictions.csv",
+      "bytes": 1067926,
+      "sha256": "f08ad6cef1c3e48a6db85229fe6afa46a9ff5a2259faeac3c2d6dd61cdb169de"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/run_status.json",
+      "bytes": 619,
+      "sha256": "3bee39071efadf061f6546f3795d0c2f3cb3e2b1d518413c398c94c1616df32f"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/split_manifest.json",
+      "bytes": 163941,
+      "sha256": "18c7a7a162f2cc01c02189af4598711a71e1fa63d1e26660ab72d93f91253551"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_html/model_metadata.json",
+      "bytes": 12314,
+      "sha256": "5a37a570125c54440e16fb454f98bfda59dc15ffc69041a8987aa36bbcfb0451"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_html/xgboost_model.ubj",
+      "bytes": 466114,
+      "sha256": "41f3e3c9a25b20f181667f5d94cbdb1be67668fcf7318d2896f694971313040f"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_html_publisher_test_predictions.csv",
+      "bytes": 1612079,
+      "sha256": "a33313205bd07bd9c44cd6bce827f8106ad52d69c595552bdce0d1aea99f7dea"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_html_test_predictions.csv",
+      "bytes": 778934,
+      "sha256": "71cdd26b0bc6b87d74277b649b8f6890a7785c0fcbfb503361bf76662d6d370b"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_html_validation_predictions.csv",
+      "bytes": 1076212,
+      "sha256": "d9b1306eedfb5283618c33be404a84801b25ddcc3c89978dd809ddf65bf8ab28"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_only/model_metadata.json",
+      "bytes": 10252,
+      "sha256": "2f75a0f22f613431a52f97ba54f6b8e95e7ef39cce55231d96154625d7333858"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_only/xgboost_model.ubj",
+      "bytes": 2407390,
+      "sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_only_publisher_test_predictions.csv",
+      "bytes": 1624877,
+      "sha256": "a357fd267b61124d0c298719057046bbd778670b0dd946c54ecb76b42fc0e00f"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_only_test_predictions.csv",
+      "bytes": 792329,
+      "sha256": "1f63b4315ff4de84a686c5d22116d645f32a412bbe1e7443ba24dd01a765c511"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/url_only_validation_predictions.csv",
+      "bytes": 1084926,
+      "sha256": "6cd4fb5f6c5d36d341e256d0e55205e15a171d0ade364fae3cf3a798cb669dd2"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_html_20261010/verification_report.json",
+      "bytes": 9343,
+      "sha256": "b424c3a5ac3ea8d0f4e35833b43d990598b23fd21f853462b633a9d0e0a4a1e5"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_mixed_20261009/run_status.json",
+      "bytes": 199,
+      "sha256": "b34b691845274aa8515501bde7c19d49e386624786d7fc1ccd4824c42efa40d0"
+    },
+    {
+      "path": "artifacts/experiments/phreshphish_mixed_20261009/training.log",
+      "bytes": 1968,
+      "sha256": "594761618b984c79e8afe4a1da67a00c06ff89e8f262b6f9acc496d4ad9fd099"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_full_v1/char_logistic/model_metadata.json",
+      "bytes": 7346,
+      "sha256": "9c3de225baedb2e3c496a0e664f341decb63ba3cdf5360904407a420d7a84d0f"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_full_v1/char_logistic/phishguard_model.joblib",
+      "bytes": 3810224,
+      "sha256": "70a9ab8b39e84785d8f029326ecef9d169dd88e032ca7a87804d921d2e4c7001"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_full_v1/tuning.json",
+      "bytes": 139929,
+      "sha256": "643170b3a7a932b44b4d207d4b1e19d8f0e78e07aba269edd3d4f947cf95df3d"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_full_v1/xgboost/model_metadata.json",
+      "bytes": 7863,
+      "sha256": "23ef9cc692817103329b6a18de7db649f42bc0333396984442391f788cb6f958"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_full_v1/xgboost/phishguard_model.joblib",
+      "bytes": 995821,
+      "sha256": "b90d0fe8cc1543ea88f9800413af4ac7b95a5b1e73f2c4907487455c0552708c"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_v1/char_logistic/model_metadata.json",
+      "bytes": 7324,
+      "sha256": "9291c8a5a215fd72fb2fb245ea6c9f66e0e2e8f994c7350b9c2f748fd3ffd00b"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_v1/char_logistic/phishguard_model.joblib",
+      "bytes": 3808848,
+      "sha256": "1c1a21644f32685fcbd889ed4f2e3b5e588671c3cdd2055347c0b4ba0ce3bea0"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_v1/tuning.json",
+      "bytes": 138792,
+      "sha256": "464e50f3af744f086435d9960647d8ac58e6b66a86ffb9d5020af6b6b00786b4"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_v1/xgboost/model_metadata.json",
+      "bytes": 7840,
+      "sha256": "7f1dbbf1945afc44944e948b5cb54a80516aa250c3481b5c0af5881bc81aa11f"
+    },
+    {
+      "path": "artifacts/experiments/source_tuning_v1/xgboost/phishguard_model.joblib",
+      "bytes": 911365,
+      "sha256": "7e2c37443c0e09d8d8c3b6d70a33b530472e6e0a0d61a810c5e3500fae0bf6aa"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/benchmark.json",
+      "bytes": 67040,
+      "sha256": "6993637280635415b120c02562ed0e05830ea3e55987235c62cb2fe9d10db1e5"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/external_ealvaradob/external_evaluation.json",
+      "bytes": 1874,
+      "sha256": "c48b9205cbd35b67cd5caf8dfe453296a926f01e28d920ac5785e62987fe2276"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/external_ealvaradob/false_negatives.csv",
+      "bytes": 1935485,
+      "sha256": "2e50048daf7389cc976069f742b464e13d11a2d7458a3401f68463d5238d45bc"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/external_ealvaradob/false_positives.csv",
+      "bytes": 81191,
+      "sha256": "f7a8b2a50db63fb05954f85312c29b908bfe56b1f9ffbf592518a8b97f0a9c2b"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/external_phishnchips/external_evaluation.json",
+      "bytes": 1843,
+      "sha256": "51651133cd20e7c2d1d02af1104c8264d2333847ff362f9c5424b1a4570d205c"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/external_phishnchips/false_negatives.csv",
+      "bytes": 3048,
+      "sha256": "4e6ac60eb1f84b3c0cffb07ba236aad48389efe0b33b01aede2e9bbb935e8d4e"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/external_phishnchips/false_positives.csv",
+      "bytes": 10578,
+      "sha256": "79d793dfbc0245c253dca201c94af10b694aebec1768a926fcc15450d18f6934"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/model_metadata.json",
+      "bytes": 2670,
+      "sha256": "a0427241f3be32555d48a404c73a806ee80a17b7588787262395d32cf3711cf7"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/out_of_fold_predictions.csv",
+      "bytes": 53972362,
+      "sha256": "3322f0bcd80d19ecffcbf33d548e9f894c8f437e825b13a04d3c351bdac59329"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/char_logistic/phishguard_model.joblib",
+      "bytes": 3812016,
+      "sha256": "72d174d026d25912797f4a67a67fdcb1dfe04cd89fdfc0c17f2e328106e9a3c3"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/external_ealvaradob/external_evaluation.json",
+      "bytes": 1870,
+      "sha256": "fb01404e499c46e69f46c22cce624ac5cef057bf062e7fb00a6b8b0caa26bfbe"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/external_ealvaradob/false_negatives.csv",
+      "bytes": 4324013,
+      "sha256": "8a634e312c9de7253348021c7d28a2aa381f6f33cccc2ddfb5f10d5aecb49b7d"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/external_ealvaradob/false_positives.csv",
+      "bytes": 147200,
+      "sha256": "d5ee15cdf52642d62748ee14f996fe012559f5376a09b09968a519cdbab7f0af"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/external_phishnchips/external_evaluation.json",
+      "bytes": 1839,
+      "sha256": "e78f8b59f0914c356982dfecc1bc5ef525973a3d9d7f0cd9572571ab954a4de6"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/external_phishnchips/false_negatives.csv",
+      "bytes": 17848,
+      "sha256": "d6bc52b4da0002d02697232631323a7c0dc1d883ce8153e8c0dd4d7a47b0fccf"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/external_phishnchips/false_positives.csv",
+      "bytes": 200,
+      "sha256": "589363e340c610f8f51e635049c1d59b87c34c1eb435a615bd6b32519226b69f"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/model_metadata.json",
+      "bytes": 2960,
+      "sha256": "8e132a343afc1d46861d23257717c13c006ba3a391414fabc4c0cf7bc7e810e0"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/out_of_fold_predictions.csv",
+      "bytes": 49498227,
+      "sha256": "a1e26d508d22ec5232eee5282b608c5d598f2870e8c5d8138fde6009a929b495"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost/phishguard_model.joblib",
+      "bytes": 990592,
+      "sha256": "7ec7cc9611fe1a6fe0c456fd3f937db921ff6b0d96fb718fc035f0dfea483c41"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/external_ealvaradob/external_evaluation.json",
+      "bytes": 1879,
+      "sha256": "2479fcb764adca4f3f87df76a9ad43b08218d7466795fd8bf9bbbea7a8c9c17c"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/external_ealvaradob/false_negatives.csv",
+      "bytes": 4251565,
+      "sha256": "507d249361c31dafc1c3c1475e4060e63c13224a4e6f04440d95f8c82887075f"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/external_ealvaradob/false_positives.csv",
+      "bytes": 92412,
+      "sha256": "05d2d2f1220e4cace19bb1101bb41e1e25ee5898288040942897609f1e472e4b"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/external_phishnchips/external_evaluation.json",
+      "bytes": 1847,
+      "sha256": "54755ea4996b27ea886875c25d936d0856f0819a1f76ae3ff0bbb1ab3b36cf72"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/external_phishnchips/false_negatives.csv",
+      "bytes": 19269,
+      "sha256": "f24dafb7f52f88e55be62056119af95bbeda0e621c712221e99c7b43f2062b79"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/external_phishnchips/false_positives.csv",
+      "bytes": 362,
+      "sha256": "a2d3951c6605c480abfc29fb41986efdba6266add885b2be79845c5ac6eaa622"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/model_metadata.json",
+      "bytes": 2962,
+      "sha256": "30481b470c25a22f9422a8181a5eb199b5f27eca7bf22cfc1d99618c9d3f1d90"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/out_of_fold_predictions.csv",
+      "bytes": 49486303,
+      "sha256": "abe8b57c94539c7e6f4a13af5bb6d9e7f6178a4a81384f79ae824c40506abc59"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_full_v1/xgboost_no_https/phishguard_model.joblib",
+      "bytes": 981059,
+      "sha256": "7460dbf8d5f8c0aeb19971670c76edbb4159411725daa382b64a11eead65ee08"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/benchmark.json",
+      "bytes": 66365,
+      "sha256": "25e64e7abfdd7cc1710f006245f49296471f2c179c6d941fb4820f8d349a8978"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/char_logistic/model_metadata.json",
+      "bytes": 2648,
+      "sha256": "3aa6694d8c5a5296d8f652f381336e8df1203673148d31c07486a1fc2fb8cfe3"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/char_logistic/out_of_fold_predictions.csv",
+      "bytes": 5270965,
+      "sha256": "d082605230c4bf190dca97ff100541e5427bb09c7a8210b74130d822938b24f4"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/char_logistic/phishguard_model.joblib",
+      "bytes": 3811632,
+      "sha256": "7a1fd6e269d62f3c1a84a22e5336178005072ad936e237363e705d1c0b031b1a"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/xgboost/model_metadata.json",
+      "bytes": 2956,
+      "sha256": "f64c2457cc85592318923c58c12b7012c582f8a6a66fa5d43db423399237a70b"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/xgboost/out_of_fold_predictions.csv",
+      "bytes": 4834633,
+      "sha256": "2133ce0ee10cece928a6ceffad06cb431cfc78082739cec738e6f0a4d2d92d20"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/xgboost/phishguard_model.joblib",
+      "bytes": 854522,
+      "sha256": "3d5e66272acdeed5d2be90fa4c47342855cfd1b3d1646a53d9cd1eac3f581df0"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/xgboost_no_https/model_metadata.json",
+      "bytes": 2953,
+      "sha256": "3eeace12c25711b172832fffacc6e7248a094a746f1d48cc05c806a1090e9331"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/xgboost_no_https/out_of_fold_predictions.csv",
+      "bytes": 4833678,
+      "sha256": "682480479d0c7fa564c59a9af566ce361a4a08c43a7941da34d1a69eba6f7681"
+    },
+    {
+      "path": "artifacts/experiments/url_benchmark_pilot_v1/xgboost_no_https/phishguard_model.joblib",
+      "bytes": 834381,
+      "sha256": "1f7c11adf4d527414c75e07edd7d0e84c3948efe5226e35792e3049088947715"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_mixed/logistic_baseline.joblib",
+      "bytes": 2465,
+      "sha256": "f6585bf9498b6365ad2c051dafb38d4265c4e5249cf142d7b9a7fb1970db5712"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_mixed/model_metadata.json",
+      "bytes": 12320,
+      "sha256": "7dd13d9ec074a4db7889f486dc0bab8a81399dc5388a1603a835d9abcf185c1e"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_mixed/phishguard_model.joblib",
+      "bytes": 4310849,
+      "sha256": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_mixed/xgboost_model.ubj",
+      "bytes": 4292738,
+      "sha256": "1a8655127485307b66a11b699e0360750606fbbdf25c1262bbf3c1bc8e6893be"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/external_evaluation.json",
+      "bytes": 964,
+      "sha256": "b34135ede0026b9c93a259d31da899cc30e8de47724ffec3ec8cffdd12e111c8"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/false_negatives.csv",
+      "bytes": 2083,
+      "sha256": "711513e45ead35b6931ef3665aed551c361ff03606de338765c12f33a8010de1"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/false_positives.csv",
+      "bytes": 11490945,
+      "sha256": "6caa3a4c7f55673b32fa75eaf7581f285797b91b0fd6b721f2f42e99df015c41"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/logistic_baseline.joblib",
+      "bytes": 2465,
+      "sha256": "301d168bc3864d27b934630e79af23f8ef8487387f919ecef7e143fc551d6e05"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/model_metadata.json",
+      "bytes": 8414,
+      "sha256": "1488a2de9cf6a5019ebb67608fdb8fb38790ddde508f651f948a5742b18b14d3"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/phishguard_model.joblib",
+      "bytes": 2221019,
+      "sha256": "1e02eca489a3f8976c7c19bbbc340351053b7b1ae8b2509fc28601d44dc50cc3"
+    },
+    {
+      "path": "artifacts/experiments/xgboost_phiusiil/xgboost_model.ubj",
+      "bytes": 2204051,
+      "sha256": "51d140560a105d866b3e83b515321cc9d1e17cf794dcd466956ba9a5d5a7b153"
+    },
+    {
+      "path": "artifacts/model_metadata.json",
+      "bytes": 12320,
+      "sha256": "7dd13d9ec074a4db7889f486dc0bab8a81399dc5388a1603a835d9abcf185c1e"
+    },
+    {
+      "path": "artifacts/phishguard_model.joblib",
+      "bytes": 4310849,
+      "sha256": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7"
+    },
+    {
+      "path": "artifacts/reports/current-model.md",
+      "bytes": 1517,
+      "sha256": "bca36e80a8802fd04ba7836a8dafeb9098c78c76329b711cfc6eeb058b0327ab"
+    },
+    {
+      "path": "artifacts/reports/html-verification.json",
+      "bytes": 9343,
+      "sha256": "b424c3a5ac3ea8d0f4e35833b43d990598b23fd21f853462b633a9d0e0a4a1e5"
+    }
+  ],
+  "total_bytes": 284886215,
+  "excluded": [
+    "datasets",
+    "feature caches",
+    "split data",
+    "Windows environment",
+    "temporary tests"
+  ],
+  "line_endings": "Artifact bytes preserved by .gitattributes"
+}

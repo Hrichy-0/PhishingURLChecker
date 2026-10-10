@@ -1,11 +1,13 @@
 
 # Local environment and caches
 .DS_Store
+._*
 .venv*/
 __pycache__/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
+artifacts.mac-backup*/
 
 # Local credentials (keep only a deliberately sanitized example)
 .env
@@ -18,4 +20,20 @@ data/processed/
 data/external/*.csv
 data/external/*.zip
 data/external/huggingface/
-artifacts/
+# Publish models and research results; keep datasets and scratch files local.
+artifacts/*
+!artifacts/archive/
+!artifacts/evaluations/
+!artifacts/experiments/
+!artifacts/reports/
+!artifacts/phishguard_model.joblib
+!artifacts/model_metadata.json
+!artifacts/transfer_manifest.json
+artifacts/**/*.parquet
+artifacts/**/*.npy
+artifacts/**/*.py
+artifacts/**/__pycache__/
+artifacts/**/train.csv
+artifacts/**/validation.csv
+artifacts/**/test.csv
+artifacts/**/*fixture*/

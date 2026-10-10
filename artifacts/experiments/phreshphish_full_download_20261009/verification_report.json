@@ -1,0 +1,144 @@
+{
+  "model_hash_verified": true,
+  "trees": 793,
+  "features": 21,
+  "training_elapsed_seconds_recorded": 245.10900000000038,
+  "parameters": {
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "device": "cpu",
+    "eval_metric": "logloss",
+    "eta": 0.05,
+    "max_depth": 7,
+    "min_child_weight": 5,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "lambda": 5.0,
+    "alpha": 0.1,
+    "nthread": 4,
+    "seed": 42
+  },
+  "candidate_trees": [
+    800,
+    797,
+    793
+  ],
+  "splits": {
+    "train": {
+      "rows": 856536,
+      "class_counts": {
+        "0": 470167,
+        "1": 386369
+      },
+      "source_counts": {
+        "phreshphish_train": 393526,
+        "balanced": 273293,
+        "phiusiil": 189717
+      },
+      "matrix_shape": [
+        856536,
+        21
+      ],
+      "matrix_bytes": 71949024,
+      "csv_hash_verified": true,
+      "feature_rows_recomputed_and_matched": 256
+    },
+    "validation": {
+      "rows": 114003,
+      "class_counts": {
+        "1": 61751,
+        "0": 52252
+      },
+      "source_counts": {
+        "phreshphish_train": 57940,
+        "balanced": 33438,
+        "phiusiil": 22625
+      },
+      "matrix_shape": [
+        114003,
+        21
+      ],
+      "matrix_bytes": 9576252,
+      "csv_hash_verified": true,
+      "feature_rows_recomputed_and_matched": 256
+    },
+    "test": {
+      "rows": 98070,
+      "class_counts": {
+        "0": 54933,
+        "1": 43137
+      },
+      "source_counts": {
+        "phreshphish_train": 42427,
+        "balanced": 32615,
+        "phiusiil": 23028
+      },
+      "matrix_shape": [
+        98070,
+        21
+      ],
+      "matrix_bytes": 8237880,
+      "csv_hash_verified": true,
+      "feature_rows_recomputed_and_matched": 256
+    }
+  },
+  "no_domain_overlap_between_splits": true,
+  "validation_recheck": {
+    "rows": 114003,
+    "saved_metrics_reproduced": true,
+    "accuracy": 0.9334140329640448,
+    "majority_class_accuracy": 0.5416611843547977,
+    "confusion_matrix": {
+      "true_negative": 48663,
+      "false_positive": 3589,
+      "false_negative": 4002,
+      "true_positive": 57749
+    },
+    "probability_range": [
+      9.791445336304605e-05,
+      0.9999996423721313
+    ],
+    "probability_std": 0.43117231130599976
+  },
+  "test_recheck": {
+    "rows": 98070,
+    "saved_metrics_reproduced": true,
+    "accuracy": 0.9061180789232182,
+    "majority_class_accuracy": 0.5601407158152341,
+    "confusion_matrix": {
+      "true_negative": 51288,
+      "false_positive": 3645,
+      "false_negative": 5562,
+      "true_positive": 37575
+    },
+    "probability_range": [
+      5.652164327329956e-05,
+      0.9999995231628418
+    ],
+    "probability_std": 0.4259195923805237
+  },
+  "publisher_test_recheck": {
+    "rows": 78989,
+    "saved_metrics_reproduced": true,
+    "accuracy": 0.8094924609755789,
+    "majority_class_accuracy": 0.6859182924204636,
+    "confusion_matrix": {
+      "true_negative": 22222,
+      "false_positive": 2587,
+      "false_negative": 12461,
+      "true_positive": 41719
+    },
+    "probability_range": [
+      0.00010375680722063407,
+      0.9999986886978149
+    ],
+    "probability_std": 0.38125360012054443
+  },
+  "full_download": {
+    "files_present_with_expected_sizes": 77,
+    "total_bytes": 36576373578,
+    "checksum_verification": "All original files verified by downloader; this audit rechecks their sizes"
+  },
+  "active_model_hashes_still_match": true,
+  "audit_elapsed_seconds": 32.06200000000172
+}

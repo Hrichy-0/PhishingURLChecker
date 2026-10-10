@@ -1,0 +1,356 @@
+{
+  "model_version": "0.1.0-native-html-experiment",
+  "model_type": "Native XGBoost: url_only",
+  "created_at": "2026-10-10T22:23:22.894922+00:00",
+  "features": [
+    "url_length",
+    "hostname_length",
+    "path_length",
+    "query_length",
+    "dot_count",
+    "hyphen_count",
+    "underscore_count",
+    "digit_count",
+    "digit_ratio",
+    "subdomain_count",
+    "query_parameter_count",
+    "percent_encoding_count",
+    "special_character_count",
+    "has_ip_hostname",
+    "uses_https",
+    "has_at_symbol",
+    "has_explicit_port",
+    "suspicious_word_count",
+    "character_entropy",
+    "longest_token_length",
+    "tld_length"
+  ],
+  "threshold": 0.4901971220970154,
+  "best_iteration": 479,
+  "parameters": {
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "device": "cuda",
+    "nthread": 4,
+    "eval_metric": "logloss",
+    "eta": 0.05,
+    "max_depth": 7,
+    "min_child_weight": 5,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "lambda": 5.0,
+    "alpha": 0.1,
+    "seed": 42
+  },
+  "max_html_bytes": 1000000,
+  "validation_search": [
+    {
+      "parameters": {
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "device": "cuda",
+        "nthread": 4,
+        "eval_metric": "logloss",
+        "eta": 0.05,
+        "max_depth": 3,
+        "min_child_weight": 10,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "lambda": 5.0,
+        "alpha": 0.1,
+        "seed": 42
+      },
+      "trees": 788,
+      "validation_metrics": {
+        "threshold": 0.5312494039535522,
+        "accuracy": 0.9388643185733824,
+        "precision": 0.9606425937847486,
+        "recall": 0.9399587699707954,
+        "f1": 0.9501881331403763,
+        "roc_auc": 0.980497966460751,
+        "average_precision": 0.9868319858746276,
+        "false_positive_rate": 0.06292397660818713,
+        "confusion_matrix": {
+          "true_negative": 20030,
+          "false_positive": 1345,
+          "false_negative": 2097,
+          "true_positive": 32829
+        }
+      }
+    },
+    {
+      "parameters": {
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "device": "cuda",
+        "nthread": 4,
+        "eval_metric": "logloss",
+        "eta": 0.05,
+        "max_depth": 5,
+        "min_child_weight": 5,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "lambda": 5.0,
+        "alpha": 0.1,
+        "seed": 42
+      },
+      "trees": 584,
+      "validation_metrics": {
+        "threshold": 0.504189133644104,
+        "accuracy": 0.9433935454077192,
+        "precision": 0.9625462706578449,
+        "recall": 0.9455420030922522,
+        "f1": 0.9539683685996968,
+        "roc_auc": 0.9837316826587073,
+        "average_precision": 0.9893817942144291,
+        "false_positive_rate": 0.060116959064327485,
+        "confusion_matrix": {
+          "true_negative": 20090,
+          "false_positive": 1285,
+          "false_negative": 1902,
+          "true_positive": 33024
+        }
+      }
+    },
+    {
+      "parameters": {
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "device": "cuda",
+        "nthread": 4,
+        "eval_metric": "logloss",
+        "eta": 0.05,
+        "max_depth": 7,
+        "min_child_weight": 5,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "lambda": 5.0,
+        "alpha": 0.1,
+        "seed": 42
+      },
+      "trees": 480,
+      "validation_metrics": {
+        "threshold": 0.4901971220970154,
+        "accuracy": 0.945329567858475,
+        "precision": 0.9637157833430402,
+        "recall": 0.9475462406230315,
+        "f1": 0.9555626136921433,
+        "roc_auc": 0.984285012958057,
+        "average_precision": 0.9899952420812729,
+        "false_positive_rate": 0.058292397660818715,
+        "confusion_matrix": {
+          "true_negative": 20129,
+          "false_positive": 1246,
+          "false_negative": 1832,
+          "true_positive": 33094
+        }
+      }
+    }
+  ],
+  "selection_method": "Validation F1 with >=90% validation recall",
+  "validation_metrics": {
+    "threshold": 0.4901971220970154,
+    "accuracy": 0.945329567858475,
+    "precision": 0.9637157833430402,
+    "recall": 0.9475462406230315,
+    "f1": 0.9555626136921433,
+    "roc_auc": 0.984285012958057,
+    "average_precision": 0.9899952420812729,
+    "false_positive_rate": 0.058292397660818715,
+    "confusion_matrix": {
+      "true_negative": 20129,
+      "false_positive": 1246,
+      "false_negative": 1832,
+      "true_positive": 33094
+    }
+  },
+  "test_metrics": {
+    "threshold": 0.4901971220970154,
+    "accuracy": 0.9040284954597902,
+    "precision": 0.9001510682684699,
+    "recall": 0.836933984348873,
+    "f1": 0.8673922085124082,
+    "roc_auc": 0.9532555709813338,
+    "average_precision": 0.9424344241079378,
+    "false_positive_rate": 0.05570941200080273,
+    "confusion_matrix": {
+      "true_negative": 23527,
+      "false_positive": 1388,
+      "false_negative": 2438,
+      "true_positive": 12513
+    }
+  },
+  "publisher_test_metrics": {
+    "threshold": 0.4901971220970154,
+    "accuracy": 0.8497864205980223,
+    "precision": 0.9381292923563137,
+    "recall": 0.8271618169801547,
+    "f1": 0.8791578068043743,
+    "roc_auc": 0.9349015303863932,
+    "average_precision": 0.9666409631742146,
+    "false_positive_rate": 0.1061780760004172,
+    "confusion_matrix": {
+      "true_negative": 25709,
+      "false_positive": 3054,
+      "false_negative": 9676,
+      "true_positive": 46307
+    }
+  },
+  "validation_1_percent_fpr_operating_point": {
+    "threshold": 0.8930121660232544,
+    "target_validation_fpr": 0.01,
+    "metrics": {
+      "validation": {
+        "threshold": 0.8930121660232544,
+        "accuracy": 0.8635370597325092,
+        "precision": 0.992301854060501,
+        "recall": 0.7861192235011166,
+        "f1": 0.8772585669781932,
+        "roc_auc": 0.984285012958057,
+        "average_precision": 0.9899952420812729,
+        "false_positive_rate": 0.009964912280701755,
+        "confusion_matrix": {
+          "true_negative": 21162,
+          "false_positive": 213,
+          "false_negative": 7470,
+          "true_positive": 27456
+        }
+      },
+      "test": {
+        "threshold": 0.8930121660232544,
+        "accuracy": 0.8683590026589073,
+        "precision": 0.9766185283426663,
+        "recall": 0.6649053575011705,
+        "f1": 0.7911659371269399,
+        "roc_auc": 0.9532555709813338,
+        "average_precision": 0.9424344241079378,
+        "false_positive_rate": 0.009552478426650612,
+        "confusion_matrix": {
+          "true_negative": 24677,
+          "false_positive": 238,
+          "false_negative": 5010,
+          "true_positive": 9941
+        }
+      },
+      "publisher_test": {
+        "threshold": 0.8930121660232544,
+        "accuracy": 0.7389257310079532,
+        "precision": 0.9859906987426078,
+        "recall": 0.6135076719718486,
+        "f1": 0.7563782111278725,
+        "roc_auc": 0.9349015303863932,
+        "average_precision": 0.9666409631742146,
+        "false_positive_rate": 0.016966241351736605,
+        "confusion_matrix": {
+          "true_negative": 28275,
+          "false_positive": 488,
+          "false_negative": 21637,
+          "true_positive": 34346
+        }
+      }
+    },
+    "note": "Test FPR is measured; 1% is not guaranteed on unseen data"
+  },
+  "dataset_rows": {
+    "train": 397884,
+    "validation": 56301,
+    "test": 39866,
+    "publisher_test": 84746
+  },
+  "split_manifest_sha256": "18c7a7a162f2cc01c02189af4598711a71e1fa63d1e26660ab72d93f91253551",
+  "feature_importances": [
+    {
+      "feature": "url_length",
+      "gain_importance": 0.042019732809521405
+    },
+    {
+      "feature": "hostname_length",
+      "gain_importance": 0.04484215070107928
+    },
+    {
+      "feature": "path_length",
+      "gain_importance": 0.10288156626692944
+    },
+    {
+      "feature": "query_length",
+      "gain_importance": 0.14557980278770383
+    },
+    {
+      "feature": "dot_count",
+      "gain_importance": 0.02430657146593776
+    },
+    {
+      "feature": "hyphen_count",
+      "gain_importance": 0.02499581799872475
+    },
+    {
+      "feature": "underscore_count",
+      "gain_importance": 0.008740785407553686
+    },
+    {
+      "feature": "digit_count",
+      "gain_importance": 0.018399787639076657
+    },
+    {
+      "feature": "digit_ratio",
+      "gain_importance": 0.020945684971332198
+    },
+    {
+      "feature": "subdomain_count",
+      "gain_importance": 0.04017031755844409
+    },
+    {
+      "feature": "query_parameter_count",
+      "gain_importance": 0.14617705340972154
+    },
+    {
+      "feature": "percent_encoding_count",
+      "gain_importance": 0.014084296172431343
+    },
+    {
+      "feature": "special_character_count",
+      "gain_importance": 0.010055034977464005
+    },
+    {
+      "feature": "has_ip_hostname",
+      "gain_importance": 0.013678192693551635
+    },
+    {
+      "feature": "uses_https",
+      "gain_importance": 0.1820011435579881
+    },
+    {
+      "feature": "has_at_symbol",
+      "gain_importance": 0.005664327487665293
+    },
+    {
+      "feature": "has_explicit_port",
+      "gain_importance": 0.0
+    },
+    {
+      "feature": "suspicious_word_count",
+      "gain_importance": 0.028978286538954855
+    },
+    {
+      "feature": "character_entropy",
+      "gain_importance": 0.05784492160315295
+    },
+    {
+      "feature": "longest_token_length",
+      "gain_importance": 0.029107194342510787
+    },
+    {
+      "feature": "tld_length",
+      "gain_importance": 0.03952733161025636
+    }
+  ],
+  "artifact_format": "Native UBJ experiment; not an API joblib package",
+  "activation_eligible": false,
+  "runtime": {
+    "python": "3.12.10",
+    "xgboost": "3.4.1"
+  },
+  "training_and_evaluation_seconds": 10.76600000000326,
+  "model_sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+  "save_reload_predictions_identical": true
+}

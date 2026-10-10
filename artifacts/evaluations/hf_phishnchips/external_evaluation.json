@@ -1,0 +1,52 @@
+{
+  "dataset": "/Users/hrishy/Documents/PhishingURLChecker/data/external/huggingface/phishnchips/urls.csv",
+  "dataset_sha256": "a288fbd369dd15cde2dfa8b9c6d426101854a98da2304eb58bada3b55ceae409",
+  "model_sha256": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7",
+  "metadata_sha256": "7dd13d9ec074a4db7889f486dc0bab8a81399dc5388a1603a835d9abcf185c1e",
+  "label_mapping": {
+    "0": 0,
+    "1": 1
+  },
+  "missing_scheme_policy": "reject",
+  "scheme_assumed_rows_before_cleaning": 0,
+  "cleaning_report": {
+    "rows_before": 2000,
+    "missing_urls_removed": 0,
+    "missing_labels_removed": 0,
+    "blank_urls_removed": 0,
+    "invalid_urls_removed": 0,
+    "duplicate_urls_removed": 303,
+    "rows_after": 1697
+  },
+  "conflicting_label_exclusion_enabled": true,
+  "conflicting_urls_excluded": 0,
+  "conflicting_rows_excluded": 0,
+  "evaluated_class_counts": {
+    "0": 501,
+    "1": 494
+  },
+  "majority_class_accuracy": 0.5035175879396985,
+  "rows_evaluated": 995,
+  "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/phishguard_model.joblib",
+  "threshold": 0.4711279273033142,
+  "exact_overlap_excluded": 50,
+  "shared_domain_rows_before_optional_exclusion": 652,
+  "shared_domains_excluded": true,
+  "reference_data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed",
+  "metrics": {
+    "threshold": 0.4711279273033142,
+    "accuracy": 0.4442211055276382,
+    "precision": 0.46424242424242423,
+    "recall": 0.7753036437246964,
+    "f1": 0.5807429871114481,
+    "roc_auc": 0.6880106184392349,
+    "average_precision": 0.7962883686587758,
+    "false_positive_rate": 0.8822355289421158,
+    "confusion_matrix": {
+      "true_negative": 59,
+      "false_positive": 442,
+      "false_negative": 111,
+      "true_positive": 383
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "completed",
+  "paired_comparison": true,
+  "active_and_previous_url_models_unchanged": true,
+  "elapsed_seconds_excluding_extraction": 20.797000000005937,
+  "device": "cuda",
+  "limitations": [
+    "Near-duplicate HTML templates are not decontaminated",
+    "Internal splits are domain/HTML grouped, not temporal",
+    "Publisher-test dates are reported, not assumed to be strictly later",
+    "Publisher URL-only results have previously been inspected",
+    "HTML-derived relational features use the page URL as context",
+    "Brand reference list is small and is not an allowlist"
+  ]
+}

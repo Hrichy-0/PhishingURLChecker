@@ -1,0 +1,225 @@
+{
+  "model_version": "0.3.0-source-tuned-char_logistic",
+  "model_type": "char_logistic",
+  "created_at": "2026-10-06T11:12:59.815434+00:00",
+  "label_convention": {
+    "0": "legitimate",
+    "1": "phishing"
+  },
+  "threshold": 0.9642041195785024,
+  "maximum_validation_fpr": 0.01,
+  "selected_configuration": {
+    "name": "char_logistic",
+    "feature_policy": "standard",
+    "weighted": true,
+    "params": {}
+  },
+  "selection_method": "macro held-source development average precision",
+  "data_dir": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/reference",
+  "split_sha256": {
+    "train": "3606dbf9755b77d0087c8193d4e29c98941c4b8484a50b7c30fb83920523250b",
+    "validation": "cc9f668ac0071447d78d2849948de60fbc0248318ccff006e899525055fa5164",
+    "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+  },
+  "development_sha256": "43d61f5dfe1a7f5fdd183f37c4bafa80af8bbf7a0b09931335e155962c569288",
+  "development_sources": [
+    {
+      "source": "0:phiusiil",
+      "path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/sources/phiusiil.csv",
+      "sha256": "9fe5824001e8b2856eb9e56f9ecd6e5ee6729e814206b38152775f0b69c09ade",
+      "cleaning": {
+        "rows_before": 235370,
+        "missing_urls_removed": 0,
+        "missing_labels_removed": 0,
+        "blank_urls_removed": 0,
+        "invalid_urls_removed": 0,
+        "duplicate_urls_removed": 0,
+        "rows_after": 235370
+      }
+    },
+    {
+      "source": "1:balanced",
+      "path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/sources/balanced.csv",
+      "sha256": "ea8a5e98c3ea6e19c1c13080e293296668d5b255a9bc5263e3e95e34b89287ce",
+      "cleaning": {
+        "rows_before": 339356,
+        "missing_urls_removed": 0,
+        "missing_labels_removed": 0,
+        "blank_urls_removed": 0,
+        "invalid_urls_removed": 0,
+        "duplicate_urls_removed": 0,
+        "rows_after": 339356
+      }
+    },
+    {
+      "source": "external0:phishnchips/urls",
+      "path": "/Users/hrishy/Documents/PhishingURLChecker/data/external/huggingface/phishnchips/urls.csv",
+      "sha256": "a288fbd369dd15cde2dfa8b9c6d426101854a98da2304eb58bada3b55ceae409",
+      "cleaning": {
+        "rows_before": 2000,
+        "missing_urls_removed": 0,
+        "missing_labels_removed": 0,
+        "blank_urls_removed": 0,
+        "invalid_urls_removed": 0,
+        "duplicate_urls_removed": 303,
+        "rows_after": 1697
+      },
+      "old_known_domain_rows_excluded": 702
+    },
+    {
+      "source": "external1:ealvaradob/urls",
+      "path": "/Users/hrishy/Documents/PhishingURLChecker/data/external/huggingface/ealvaradob/urls.csv",
+      "sha256": "b64f7146188ff288a4dafc6fa7543d0756d084dc4b958964b72196057c63609f",
+      "cleaning": {
+        "rows_before": 835697,
+        "missing_urls_removed": 0,
+        "missing_labels_removed": 0,
+        "blank_urls_removed": 0,
+        "invalid_urls_removed": 608193,
+        "duplicate_urls_removed": 14295,
+        "rows_after": 213209
+      },
+      "old_known_domain_rows_excluded": 47586
+    }
+  ],
+  "dataset_rows": {
+    "fit": 540294,
+    "validation": 140489
+  },
+  "fit_sha256": "3606dbf9755b77d0087c8193d4e29c98941c4b8484a50b7c30fb83920523250b",
+  "validation_sha256": "cc9f668ac0071447d78d2849948de60fbc0248318ccff006e899525055fa5164",
+  "validation": {
+    "metrics": {
+      "threshold": 0.9642041195785024,
+      "accuracy": 0.7301852814099324,
+      "precision": 0.9989716636197441,
+      "recall": 0.5358806511719133,
+      "f1": 0.697564945426693,
+      "roc_auc": 0.9756397328467462,
+      "average_precision": 0.9842124842633455,
+      "false_positive_rate": 0.0007638382020946141,
+      "confusion_matrix": {
+        "true_negative": 58868,
+        "false_positive": 45,
+        "false_negative": 37861,
+        "true_positive": 43715
+      },
+      "false_alarms_per_1000_benign": 0.7638382020946142
+    },
+    "by_source": {
+      "0:phiusiil": {
+        "rows": 44641,
+        "class_counts": {
+          "0": 24282,
+          "1": 20359
+        },
+        "metrics": {
+          "threshold": 0.9642041195785024,
+          "accuracy": 0.7108711722407652,
+          "precision": 0.9990624162871685,
+          "recall": 0.3663735939879169,
+          "f1": 0.536136567834681,
+          "roc_auc": 0.9270151972570086,
+          "average_precision": 0.9368662604337867,
+          "false_positive_rate": 0.0002882793839057738,
+          "confusion_matrix": {
+            "true_negative": 24275,
+            "false_positive": 7,
+            "false_negative": 12900,
+            "true_positive": 7459
+          }
+        }
+      },
+      "1:balanced": {
+        "rows": 62684,
+        "class_counts": {
+          "1": 32093,
+          "0": 30591
+        },
+        "metrics": {
+          "threshold": 0.9642041195785024,
+          "accuracy": 0.7678195392763704,
+          "precision": 0.9983519918167869,
+          "recall": 0.5474090923254292,
+          "f1": 0.7071040450794929,
+          "roc_auc": 0.9872571588779249,
+          "average_precision": 0.988317287280312,
+          "false_positive_rate": 0.0009479912392533752,
+          "confusion_matrix": {
+            "true_negative": 30562,
+            "false_positive": 29,
+            "false_negative": 14525,
+            "true_positive": 17568
+          }
+        }
+      },
+      "external0:phishnchips/urls": {
+        "rows": 216,
+        "class_counts": {
+          "0": 111,
+          "1": 105
+        },
+        "metrics": {
+          "threshold": 0.9642041195785024,
+          "accuracy": 0.8888888888888888,
+          "precision": 0.9879518072289156,
+          "recall": 0.780952380952381,
+          "f1": 0.8723404255319149,
+          "roc_auc": 0.9353925353925353,
+          "average_precision": 0.9518133718923631,
+          "false_positive_rate": 0.009009009009009009,
+          "confusion_matrix": {
+            "true_negative": 110,
+            "false_positive": 1,
+            "false_negative": 23,
+            "true_positive": 82
+          }
+        }
+      },
+      "external1:ealvaradob/urls": {
+        "rows": 32948,
+        "class_counts": {
+          "1": 29019,
+          "0": 3929
+        },
+        "metrics": {
+          "threshold": 0.9642041195785024,
+          "accuracy": 0.6837137307272065,
+          "precision": 0.9995702159664769,
+          "recall": 0.6411661325338571,
+          "f1": 0.7812231016312221,
+          "roc_auc": 0.9830928299484076,
+          "average_precision": 0.997552134537045,
+          "false_positive_rate": 0.0020361415118350726,
+          "confusion_matrix": {
+            "true_negative": 3921,
+            "false_positive": 8,
+            "false_negative": 10413,
+            "true_positive": 18606
+          }
+        }
+      }
+    }
+  },
+  "activation_eligible": false,
+  "score_caution": "uncalibrated development model; fresh final evaluation required",
+  "reference_test_role": "previously known-domain exclusion only; not scored",
+  "classifier_parameters": {
+    "C": 1.0,
+    "solver": "liblinear",
+    "class_weight": "balanced",
+    "max_iter": 1000,
+    "random_state": 42
+  },
+  "representation": {
+    "scheme_removed": true,
+    "fragment_removed": true,
+    "analyzer": "char",
+    "ngram_range": [
+      3,
+      5
+    ],
+    "max_features": 100000,
+    "learned_vocabulary_size": 100000
+  }
+}

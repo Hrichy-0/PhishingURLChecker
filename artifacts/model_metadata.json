@@ -1,0 +1,433 @@
+{
+  "model_version": "0.1.0-xgboost",
+  "created_at": "2026-10-03T10:57:32.545664+00:00",
+  "model_type": "URLFeatureExtractor + XGBClassifier",
+  "label_convention": {
+    "0": "legitimate",
+    "1": "phishing"
+  },
+  "threshold": 0.4711279273033142,
+  "minimum_validation_recall_target": 0.9,
+  "selection_method": "highest validation F1; early stopping on validation logloss",
+  "seed": 42,
+  "dataset_rows": {
+    "train": 457544,
+    "validation": 56621,
+    "test": 60551
+  },
+  "data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed",
+  "split_sha256": {
+    "train": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+    "validation": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+    "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+  },
+  "split_manifest": {
+    "seed": 42,
+    "grouping": "registered domain (including private public suffixes)",
+    "sources": [
+      {
+        "source": "0:phiusiil",
+        "path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/sources/phiusiil.csv",
+        "sha256": "9fe5824001e8b2856eb9e56f9ecd6e5ee6729e814206b38152775f0b69c09ade",
+        "cleaning": {
+          "rows_before": 235370,
+          "missing_urls_removed": 0,
+          "missing_labels_removed": 0,
+          "blank_urls_removed": 0,
+          "invalid_urls_removed": 0,
+          "duplicate_urls_removed": 0,
+          "rows_after": 235370
+        }
+      },
+      {
+        "source": "1:balanced",
+        "path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/sources/balanced.csv",
+        "sha256": "ea8a5e98c3ea6e19c1c13080e293296668d5b255a9bc5263e3e95e34b89287ce",
+        "cleaning": {
+          "rows_before": 339356,
+          "missing_urls_removed": 0,
+          "missing_labels_removed": 0,
+          "blank_urls_removed": 0,
+          "invalid_urls_removed": 0,
+          "duplicate_urls_removed": 0,
+          "rows_after": 339356
+        }
+      }
+    ],
+    "conflicting_urls_excluded": 0,
+    "conflicting_rows_excluded": 0,
+    "cross_source_duplicates_removed": 10,
+    "split_sha256": {
+      "train": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+      "validation": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+      "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+    }
+  },
+  "features": [
+    "url_length",
+    "hostname_length",
+    "path_length",
+    "query_length",
+    "dot_count",
+    "hyphen_count",
+    "underscore_count",
+    "digit_count",
+    "digit_ratio",
+    "subdomain_count",
+    "query_parameter_count",
+    "percent_encoding_count",
+    "special_character_count",
+    "has_ip_hostname",
+    "uses_https",
+    "has_at_symbol",
+    "has_explicit_port",
+    "suspicious_word_count",
+    "character_entropy",
+    "longest_token_length",
+    "tld_length"
+  ],
+  "dropped_features": [
+    "slash_count"
+  ],
+  "best_iteration": 799,
+  "parameters": {
+    "objective": "binary:logistic",
+    "base_score": null,
+    "booster": null,
+    "callbacks": null,
+    "colsample_bylevel": null,
+    "colsample_bynode": null,
+    "colsample_bytree": 0.8,
+    "device": null,
+    "early_stopping_rounds": 40,
+    "enable_categorical": true,
+    "eval_metric": "logloss",
+    "feature_types": null,
+    "feature_weights": null,
+    "gamma": null,
+    "grow_policy": null,
+    "importance_type": null,
+    "interaction_constraints": null,
+    "learning_rate": 0.05,
+    "max_bin": null,
+    "max_cat_threshold": null,
+    "max_cat_to_onehot": null,
+    "max_delta_step": null,
+    "max_depth": 7,
+    "max_leaves": null,
+    "min_child_weight": 5,
+    "missing": NaN,
+    "monotone_constraints": null,
+    "multi_strategy": null,
+    "n_estimators": 800,
+    "n_jobs": 4,
+    "num_parallel_tree": null,
+    "random_state": 42,
+    "reg_alpha": 0.1,
+    "reg_lambda": 5.0,
+    "sampling_method": null,
+    "scale_pos_weight": null,
+    "subsample": 0.8,
+    "tree_method": "hist",
+    "validate_parameters": null,
+    "verbosity": null
+  },
+  "validation_search": [
+    {
+      "params": {
+        "max_depth": 3,
+        "min_child_weight": 10
+      },
+      "best_iteration": 799,
+      "validation_metrics": {
+        "threshold": 0.4520851969718933,
+        "accuracy": 0.9239504777379417,
+        "precision": 0.9107307877130078,
+        "recall": 0.928719514493573,
+        "f1": 0.9196371915941921,
+        "roc_auc": 0.9767100011996832,
+        "average_precision": 0.9754377668843606,
+        "false_positive_rate": 0.0802538880765652,
+        "confusion_matrix": {
+          "true_negative": 27677,
+          "false_positive": 2415,
+          "false_negative": 1891,
+          "true_positive": 24638
+        }
+      }
+    },
+    {
+      "params": {
+        "max_depth": 5,
+        "min_child_weight": 5
+      },
+      "best_iteration": 799,
+      "validation_metrics": {
+        "threshold": 0.4839746654033661,
+        "accuracy": 0.9336818494904717,
+        "precision": 0.9244446101088415,
+        "recall": 0.9348637340269139,
+        "f1": 0.9296249789156062,
+        "roc_auc": 0.9826076863850705,
+        "average_precision": 0.9818922462111118,
+        "false_positive_rate": 0.06736009570650006,
+        "confusion_matrix": {
+          "true_negative": 28065,
+          "false_positive": 2027,
+          "false_negative": 1728,
+          "true_positive": 24801
+        }
+      }
+    },
+    {
+      "params": {
+        "max_depth": 7,
+        "min_child_weight": 5
+      },
+      "best_iteration": 799,
+      "validation_metrics": {
+        "threshold": 0.4711279273033142,
+        "accuracy": 0.9381324950106851,
+        "precision": 0.927738148313271,
+        "recall": 0.9412718157488031,
+        "f1": 0.9344559827860417,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.06463511896849661,
+        "confusion_matrix": {
+          "true_negative": 28147,
+          "false_positive": 1945,
+          "false_negative": 1558,
+          "true_positive": 24971
+        }
+      }
+    }
+  ],
+  "dummy_test_metrics": {
+    "threshold": 0.5,
+    "accuracy": 0.5038397384023385,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "roc_auc": 0.5,
+    "average_precision": 0.49616026159766147,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": {
+      "true_negative": 30508,
+      "false_positive": 0,
+      "false_negative": 30043,
+      "true_positive": 0
+    }
+  },
+  "logistic_test_metrics": {
+    "threshold": 0.36135519379211184,
+    "accuracy": 0.8353619263100527,
+    "precision": 0.8122122682593007,
+    "recall": 0.8691209266717704,
+    "f1": 0.8397034940747053,
+    "roc_auc": 0.9171958193125407,
+    "average_precision": 0.9187905048153018,
+    "false_positive_rate": 0.1978825226170185,
+    "confusion_matrix": {
+      "true_negative": 24471,
+      "false_positive": 6037,
+      "false_negative": 3932,
+      "true_positive": 26111
+    }
+  },
+  "validation_metrics": {
+    "threshold": 0.4711279273033142,
+    "accuracy": 0.9381324950106851,
+    "precision": 0.927738148313271,
+    "recall": 0.9412718157488031,
+    "f1": 0.9344559827860417,
+    "roc_auc": 0.9843128990980741,
+    "average_precision": 0.9837337476083517,
+    "false_positive_rate": 0.06463511896849661,
+    "confusion_matrix": {
+      "true_negative": 28147,
+      "false_positive": 1945,
+      "false_negative": 1558,
+      "true_positive": 24971
+    }
+  },
+  "test_metrics": {
+    "threshold": 0.4711279273033142,
+    "accuracy": 0.9318921239946492,
+    "precision": 0.9348387746200046,
+    "recall": 0.9273707685650567,
+    "f1": 0.931089797146008,
+    "roc_auc": 0.9832715273005331,
+    "average_precision": 0.9840081972121716,
+    "false_positive_rate": 0.0636554346400944,
+    "confusion_matrix": {
+      "true_negative": 28566,
+      "false_positive": 1942,
+      "false_negative": 2182,
+      "true_positive": 27861
+    }
+  },
+  "test_metrics_by_source": {
+    "0:phiusiil": {
+      "rows": 26286,
+      "xgboost": {
+        "threshold": 0.4711279273033142,
+        "accuracy": 0.947728829034467,
+        "precision": 0.9909216669548677,
+        "recall": 0.9003142183817754,
+        "f1": 0.9434474810668423,
+        "roc_auc": 0.9907683515611363,
+        "average_precision": 0.9923360668635923,
+        "false_positive_rate": 0.007745647683682503,
+        "confusion_matrix": {
+          "true_negative": 13451,
+          "false_positive": 105,
+          "false_negative": 1269,
+          "true_positive": 11461
+        }
+      },
+      "logistic": {
+        "threshold": 0.36135519379211184,
+        "accuracy": 0.8168987293616373,
+        "precision": 0.8892713147802144,
+        "recall": 0.710369206598586,
+        "f1": 0.78981614917682,
+        "roc_auc": 0.8969985347215252,
+        "average_precision": 0.9146017005739556,
+        "false_positive_rate": 0.0830628503983476,
+        "confusion_matrix": {
+          "true_negative": 12430,
+          "false_positive": 1126,
+          "false_negative": 3687,
+          "true_positive": 9043
+        }
+      }
+    },
+    "1:balanced": {
+      "rows": 34265,
+      "xgboost": {
+        "threshold": 0.4711279273033142,
+        "accuracy": 0.9197431781701445,
+        "precision": 0.8992707133848769,
+        "recall": 0.9472650609368682,
+        "f1": 0.9226441631504922,
+        "roc_auc": 0.9782948413202364,
+        "average_precision": 0.9788388960922092,
+        "false_positive_rate": 0.10836479471448797,
+        "confusion_matrix": {
+          "true_negative": 15115,
+          "false_positive": 1837,
+          "false_negative": 913,
+          "true_positive": 16400
+        }
+      },
+      "logistic": {
+        "threshold": 0.36135519379211184,
+        "accuracy": 0.8495257551437326,
+        "precision": 0.7765594431047819,
+        "recall": 0.9858487841506383,
+        "f1": 0.8687773592588822,
+        "roc_auc": 0.9489511048922502,
+        "average_precision": 0.948726446338674,
+        "false_positive_rate": 0.2897003303445021,
+        "confusion_matrix": {
+          "true_negative": 12041,
+          "false_positive": 4911,
+          "false_negative": 245,
+          "true_positive": 17068
+        }
+      }
+    }
+  },
+  "feature_importances": [
+    {
+      "feature": "uses_https",
+      "gain_importance": 0.4582781195640564
+    },
+    {
+      "feature": "has_ip_hostname",
+      "gain_importance": 0.11538107693195343
+    },
+    {
+      "feature": "suspicious_word_count",
+      "gain_importance": 0.10298525542020798
+    },
+    {
+      "feature": "has_at_symbol",
+      "gain_importance": 0.05857439711689949
+    },
+    {
+      "feature": "hostname_length",
+      "gain_importance": 0.041282396763563156
+    },
+    {
+      "feature": "hyphen_count",
+      "gain_importance": 0.03247995674610138
+    },
+    {
+      "feature": "subdomain_count",
+      "gain_importance": 0.029947681352496147
+    },
+    {
+      "feature": "longest_token_length",
+      "gain_importance": 0.025749098509550095
+    },
+    {
+      "feature": "dot_count",
+      "gain_importance": 0.02136242389678955
+    },
+    {
+      "feature": "path_length",
+      "gain_importance": 0.017417335882782936
+    },
+    {
+      "feature": "digit_ratio",
+      "gain_importance": 0.012924496084451675
+    },
+    {
+      "feature": "digit_count",
+      "gain_importance": 0.012732773087918758
+    },
+    {
+      "feature": "special_character_count",
+      "gain_importance": 0.011724969372153282
+    },
+    {
+      "feature": "tld_length",
+      "gain_importance": 0.010646325536072254
+    },
+    {
+      "feature": "url_length",
+      "gain_importance": 0.010585919953882694
+    },
+    {
+      "feature": "query_length",
+      "gain_importance": 0.007723127957433462
+    },
+    {
+      "feature": "has_explicit_port",
+      "gain_importance": 0.007070747669786215
+    },
+    {
+      "feature": "character_entropy",
+      "gain_importance": 0.006866700015962124
+    },
+    {
+      "feature": "underscore_count",
+      "gain_importance": 0.005689563229680061
+    },
+    {
+      "feature": "query_parameter_count",
+      "gain_importance": 0.005480578169226646
+    },
+    {
+      "feature": "percent_encoding_count",
+      "gain_importance": 0.005097041837871075
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "scikit_learn": "1.9.1",
+    "xgboost": "3.4.1"
+  }
+}

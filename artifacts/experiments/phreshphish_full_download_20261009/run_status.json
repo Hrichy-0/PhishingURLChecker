@@ -1,0 +1,8 @@
+{
+  "status": "completed",
+  "elapsed_seconds": 245.10900000000038,
+  "model_sha256": "6707e8eac87fa19b793b5558202ecae3608bd984eae951513786df400e5e851f",
+  "active_model_unchanged": true,
+  "training_device": "local Windows CPU",
+  "threads": 4
+}

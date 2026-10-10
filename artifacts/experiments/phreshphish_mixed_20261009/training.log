@@ -1,0 +1,54 @@
+Combined usable URLs: 1,068,609; {'conflicting_urls_excluded': 0, 'conflicting_rows_excluded': 0, 'cross_source_duplicates_removed': 168}
+Extracting train: 856,536 rows...
+Extracting validation: 114,003 rows...
+Extracting test: 98,070 rows...
+Fitting depth=3 on local CPU, 4 threads...
+[0]	validation-logloss:0.69050
+[50]	validation-logloss:0.44274
+[100]	validation-logloss:0.39277
+[150]	validation-logloss:0.35873
+[200]	validation-logloss:0.33468
+[250]	validation-logloss:0.32097
+[300]	validation-logloss:0.31038
+[350]	validation-logloss:0.30016
+[400]	validation-logloss:0.29307
+[450]	validation-logloss:0.28514
+[500]	validation-logloss:0.27648
+[550]	validation-logloss:0.27151
+[600]	validation-logloss:0.26726
+[650]	validation-logloss:0.26439
+[700]	validation-logloss:0.25885
+[750]	validation-logloss:0.25096
+[799]	validation-logloss:0.24621
+Fitting depth=5 on local CPU, 4 threads...
+[0]	validation-logloss:0.68467
+[50]	validation-logloss:0.37832
+[100]	validation-logloss:0.31556
+[150]	validation-logloss:0.28700
+[200]	validation-logloss:0.26207
+[250]	validation-logloss:0.24592
+[300]	validation-logloss:0.23599
+[350]	validation-logloss:0.22459
+[400]	validation-logloss:0.21928
+[450]	validation-logloss:0.21107
+[500]	validation-logloss:0.20726
+[550]	validation-logloss:0.20362
+[600]	validation-logloss:0.20008
+[650]	validation-logloss:0.19759
+[700]	validation-logloss:0.19561
+[750]	validation-logloss:0.19309
+[799]	validation-logloss:0.19181
+Fitting depth=7 on local CPU, 4 threads...
+[0]	validation-logloss:0.68212
+[50]	validation-logloss:0.32067
+[100]	validation-logloss:0.25653
+[150]	validation-logloss:0.22897
+[200]	validation-logloss:0.21477
+[250]	validation-logloss:0.20596
+[300]	validation-logloss:0.20001
+[350]	validation-logloss:0.19547
+[400]	validation-logloss:0.19285
+[450]	validation-logloss:0.19091
+[500]	validation-logloss:0.18902
+[550]	validation-logloss:0.18724
+[600]	validation-logloss:0.18572

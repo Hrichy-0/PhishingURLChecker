@@ -1,0 +1,1843 @@
+{
+  "created_at": "2026-10-05T12:37:31.494142+00:00",
+  "status": "complete",
+  "seed": 42,
+  "fold_count": 5,
+  "development_rows": 514165,
+  "development_domains": 321575,
+  "development_sha256": "6e15b2838de84d4fe221d7142a046ff637834542271e6041871d8a7f99b7fabf",
+  "class_counts": {
+    "0": 274334,
+    "1": 239831
+  },
+  "provenance": {
+    "data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed",
+    "split_sha256": {
+      "train": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+      "validation": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+      "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+    },
+    "development_splits": [
+      "train",
+      "validation"
+    ],
+    "available_development_rows": 514165,
+    "pilot": false,
+    "sampling": "uniform label-blind row sample; domains disjoint during evaluation",
+    "held_out_test_rows_not_scored": 60551
+  },
+  "protocol": {
+    "outer_cv": "StratifiedGroupKFold by registered domain including private suffixes",
+    "inner_validation": "20% of outer-training domains; early stopping + threshold",
+    "maximum_inner_validation_fpr": 0.01,
+    "comparison_metric": "mean outer-fold average_precision (PR-AUC summary)",
+    "hyperparameters": "fixed; no outer-fold tuning",
+    "score_caution": "uncalibrated model scores, not verified probabilities",
+    "final_test": "not used by this benchmark",
+    "uncertainty": "fold standard deviation; not a confidence interval"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "sklearn": "1.9.1"
+  },
+  "variants": {
+    "xgboost": {
+      "folds": [
+        {
+          "fold": 1,
+          "threshold": 0.8732884526252747,
+          "rows": {
+            "fit": 330458,
+            "validation": 80873,
+            "test": 102834
+          },
+          "role_sha256": {
+            "fit": "c8913c56336f6904ec54c8b4eb1118e2916a5b270f346b4b06f5c5cab31f65bb",
+            "validation": "7e4b84d8423c5e3260e1eace6160dcb82b1fa60be25be66f00204962e1763f6b",
+            "test": "eb49e82ab13aa7a4bb473f2fac32b23b5ad69bda8a6c9c40d429863cb88324d5"
+          },
+          "seconds": 11.096784291999938,
+          "validation_metrics": {
+            "threshold": 0.8732884526252747,
+            "accuracy": 0.882185649104151,
+            "precision": 0.9842948717948717,
+            "recall": 0.7525731089691227,
+            "f1": 0.8529765762429404,
+            "roc_auc": 0.9818320117638891,
+            "average_precision": 0.9799201565954663,
+            "false_positive_rate": 0.009989353749971685,
+            "confusion_matrix": {
+              "true_negative": 43706,
+              "false_positive": 441,
+              "false_negative": 9087,
+              "true_positive": 27639
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9271252698523834,
+            "precision": 0.9198356880562644,
+            "recall": 0.9243229720432797,
+            "f1": 0.9220738707262292,
+            "roc_auc": 0.9771264527188792,
+            "average_precision": 0.9771766937710071,
+            "false_positive_rate": 0.07042484553556783,
+            "confusion_matrix": {
+              "true_negative": 51003,
+              "false_positive": 3864,
+              "false_negative": 3630,
+              "true_positive": 44337
+            }
+          },
+          "metrics": {
+            "threshold": 0.8732884526252747,
+            "accuracy": 0.872804714394072,
+            "precision": 0.9853911010935804,
+            "recall": 0.7382575520670461,
+            "f1": 0.8441075514874142,
+            "roc_auc": 0.9771264527188792,
+            "average_precision": 0.9771766937710071,
+            "false_positive_rate": 0.009568593143419542,
+            "confusion_matrix": {
+              "true_negative": 54342,
+              "false_positive": 525,
+              "false_negative": 12555,
+              "true_positive": 35412
+            },
+            "false_alarms_per_1000_benign": 9.568593143419543
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 42601,
+              "class_counts": {
+                "0": 24221,
+                "1": 18380
+              },
+              "metrics": {
+                "threshold": 0.8732884526252747,
+                "accuracy": 0.8824675477101477,
+                "precision": 0.998434588147596,
+                "recall": 0.7287268770402612,
+                "f1": 0.8425224091838339,
+                "roc_auc": 0.9769281598055699,
+                "average_precision": 0.980368886602279,
+                "false_positive_rate": 0.0008670162255893646,
+                "confusion_matrix": {
+                  "true_negative": 24200,
+                  "false_positive": 21,
+                  "false_negative": 4986,
+                  "true_positive": 13394
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 60233,
+              "class_counts": {
+                "0": 30646,
+                "1": 29587
+              },
+              "metrics": {
+                "threshold": 0.8732884526252747,
+                "accuracy": 0.8659704812976275,
+                "precision": 0.9776218808276352,
+                "recall": 0.7441781863656336,
+                "f1": 0.8450747471645973,
+                "roc_auc": 0.979058283764972,
+                "average_precision": 0.9784920104603759,
+                "false_positive_rate": 0.01644586569209685,
+                "confusion_matrix": {
+                  "true_negative": 30142,
+                  "false_positive": 504,
+                  "false_negative": 7569,
+                  "true_positive": 22018
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "threshold": 0.868080735206604,
+          "rows": {
+            "fit": 328489,
+            "validation": 82843,
+            "test": 102833
+          },
+          "role_sha256": {
+            "fit": "dea472022dc4a717e3be300bc90437af4240ee4ef02671cf9f8aa41ead76d183",
+            "validation": "f9e1c48deaad88c18293876c2307ac9eacc4ad7ebb478064652b1587bed9d9f8",
+            "test": "ad778c0782793e5dbc7116560ce945c846594310ca2c10e3ea57d0633e30aef8"
+          },
+          "seconds": 10.857130292002694,
+          "validation_metrics": {
+            "threshold": 0.868080735206604,
+            "accuracy": 0.8749200294533033,
+            "precision": 0.9854149203688181,
+            "recall": 0.7475137981026019,
+            "f1": 0.8501345057996587,
+            "roc_auc": 0.9798075823054804,
+            "average_precision": 0.9794528698309771,
+            "false_positive_rate": 0.009994026558838395,
+            "confusion_matrix": {
+              "true_negative": 43091,
+              "false_positive": 435,
+              "false_negative": 9927,
+              "true_positive": 29390
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9313936187799636,
+            "precision": 0.9256330760107369,
+            "recall": 0.9274277613309427,
+            "f1": 0.9265295495964593,
+            "roc_auc": 0.9804870641914135,
+            "average_precision": 0.9792978112142061,
+            "false_positive_rate": 0.0651393369420599,
+            "confusion_matrix": {
+              "true_negative": 51293,
+              "false_positive": 3574,
+              "false_negative": 3481,
+              "true_positive": 44485
+            }
+          },
+          "metrics": {
+            "threshold": 0.868080735206604,
+            "accuracy": 0.8724436708060642,
+            "precision": 0.9839466740730454,
+            "recall": 0.7385856648459326,
+            "f1": 0.8437913089042646,
+            "roc_auc": 0.9804870641914135,
+            "average_precision": 0.9792978112142061,
+            "false_positive_rate": 0.010534565403612372,
+            "confusion_matrix": {
+              "true_negative": 54289,
+              "false_positive": 578,
+              "false_negative": 12539,
+              "true_positive": 35427
+            },
+            "false_alarms_per_1000_benign": 10.534565403612373
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41170,
+              "class_counts": {
+                "0": 24303,
+                "1": 16867
+              },
+              "metrics": {
+                "threshold": 0.868080735206604,
+                "accuracy": 0.8919358756376002,
+                "precision": 0.9980747633563292,
+                "recall": 0.7376534060591687,
+                "f1": 0.8483278219070671,
+                "roc_auc": 0.9860257936853679,
+                "average_precision": 0.9858015180129287,
+                "false_positive_rate": 0.0009875324034069868,
+                "confusion_matrix": {
+                  "true_negative": 24279,
+                  "false_positive": 24,
+                  "false_negative": 4425,
+                  "true_positive": 12442
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61663,
+              "class_counts": {
+                "1": 31099,
+                "0": 30564
+              },
+              "metrics": {
+                "threshold": 0.868080735206604,
+                "accuracy": 0.8594294795906784,
+                "precision": 0.9764645906792981,
+                "recall": 0.7390912891089746,
+                "f1": 0.841355832936784,
+                "roc_auc": 0.9783591481950745,
+                "average_precision": 0.978479414829881,
+                "false_positive_rate": 0.018125899751341448,
+                "confusion_matrix": {
+                  "true_negative": 30010,
+                  "false_positive": 554,
+                  "false_negative": 8114,
+                  "true_positive": 22985
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "threshold": 0.8614157438278198,
+          "rows": {
+            "fit": 329615,
+            "validation": 81716,
+            "test": 102834
+          },
+          "role_sha256": {
+            "fit": "9b22d71624fc41dcc9d47b6385fea6e3cbfc2092f902de1cec4039965b34efaf",
+            "validation": "3c498d86a5c62d9f9b36b0a86cf686c6c11eccd71f5649ed1a18d8ca53c5c453",
+            "test": "a983f41fa6576b0cb30b1123527b7b369842a53e1da93444e28ab634a59c5a8d"
+          },
+          "seconds": 10.900763417004782,
+          "validation_metrics": {
+            "threshold": 0.8614157438278198,
+            "accuracy": 0.8831930099368545,
+            "precision": 0.9849626647396855,
+            "recall": 0.7586133785646136,
+            "f1": 0.8570958034524576,
+            "roc_auc": 0.9817219410558669,
+            "average_precision": 0.9805610380904282,
+            "false_positive_rate": 0.009935431065842125,
+            "confusion_matrix": {
+              "true_negative": 43547,
+              "false_positive": 437,
+              "false_negative": 9108,
+              "true_positive": 28624
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9226617655639185,
+            "precision": 0.9200487098196477,
+            "recall": 0.9135846224408957,
+            "f1": 0.916805272242272,
+            "roc_auc": 0.9767023745246564,
+            "average_precision": 0.9765491086777338,
+            "false_positive_rate": 0.06940293066997157,
+            "confusion_matrix": {
+              "true_negative": 51060,
+              "false_positive": 3808,
+              "false_negative": 4145,
+              "true_positive": 43821
+            }
+          },
+          "metrics": {
+            "threshold": 0.8614157438278198,
+            "accuracy": 0.8774043604255402,
+            "precision": 0.9832709181860427,
+            "recall": 0.7499270316474169,
+            "f1": 0.8508911991862707,
+            "roc_auc": 0.9767023745246564,
+            "average_precision": 0.9765491086777338,
+            "false_positive_rate": 0.011154042429102574,
+            "confusion_matrix": {
+              "true_negative": 54256,
+              "false_positive": 612,
+              "false_negative": 11995,
+              "true_positive": 35971
+            },
+            "false_alarms_per_1000_benign": 11.154042429102574
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41538,
+              "class_counts": {
+                "0": 24286,
+                "1": 17252
+              },
+              "metrics": {
+                "threshold": 0.8614157438278198,
+                "accuracy": 0.8872598584428716,
+                "precision": 0.9971521240408195,
+                "recall": 0.7306399258057037,
+                "f1": 0.8433412504599739,
+                "roc_auc": 0.9794227197864447,
+                "average_precision": 0.9798319471373582,
+                "false_positive_rate": 0.0014823355019352713,
+                "confusion_matrix": {
+                  "true_negative": 24250,
+                  "false_positive": 36,
+                  "false_negative": 4647,
+                  "true_positive": 12605
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61296,
+              "class_counts": {
+                "1": 30714,
+                "0": 30582
+              },
+              "metrics": {
+                "threshold": 0.8614157438278198,
+                "accuracy": 0.8707256590968415,
+                "precision": 0.9759418594937767,
+                "recall": 0.7607605652145601,
+                "f1": 0.8550204918032787,
+                "roc_auc": 0.9775159729597698,
+                "average_precision": 0.9784164147957081,
+                "false_positive_rate": 0.01883460859329017,
+                "confusion_matrix": {
+                  "true_negative": 30006,
+                  "false_positive": 576,
+                  "false_negative": 7348,
+                  "true_positive": 23366
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "threshold": 0.8708592057228088,
+          "rows": {
+            "fit": 329445,
+            "validation": 81888,
+            "test": 102832
+          },
+          "role_sha256": {
+            "fit": "341f0b3ff1e6e58a34b2e202f6c8dc4ef71b8a0b393981896390bbbd5b2e9edc",
+            "validation": "95b4fe058f494ff083077c4c872adee72d722be5ea6ab5e31487b148654ea32c",
+            "test": "c4bb347d80206728e803f76aee0265d5832b5e5b59eccb7086689b76f6920788"
+          },
+          "seconds": 11.022951499995543,
+          "validation_metrics": {
+            "threshold": 0.8708592057228088,
+            "accuracy": 0.8642047674872997,
+            "precision": 0.9843380402838506,
+            "recall": 0.7199591066373073,
+            "f1": 0.8316426949280847,
+            "roc_auc": 0.9749433768626885,
+            "average_precision": 0.9746088476339427,
+            "false_positive_rate": 0.009990855052583448,
+            "confusion_matrix": {
+              "true_negative": 43303,
+              "false_positive": 437,
+              "false_negative": 10683,
+              "true_positive": 27465
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9283588766142835,
+            "precision": 0.9234267120001669,
+            "recall": 0.9229454196722678,
+            "f1": 0.9231860031071767,
+            "roc_auc": 0.9808227197314011,
+            "average_precision": 0.9798285697060705,
+            "false_positive_rate": 0.06690846790361973,
+            "confusion_matrix": {
+              "true_negative": 51195,
+              "false_positive": 3671,
+              "false_negative": 3696,
+              "true_positive": 44270
+            }
+          },
+          "metrics": {
+            "threshold": 0.8708592057228088,
+            "accuracy": 0.8756515481562159,
+            "precision": 0.9855892664881429,
+            "recall": 0.7442980444481507,
+            "f1": 0.8481155495373505,
+            "roc_auc": 0.9808227197314011,
+            "average_precision": 0.9798285697060705,
+            "false_positive_rate": 0.009514088871067692,
+            "confusion_matrix": {
+              "true_negative": 54344,
+              "false_positive": 522,
+              "false_negative": 12265,
+              "true_positive": 35701
+            },
+            "false_alarms_per_1000_benign": 9.514088871067692
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 42069,
+              "class_counts": {
+                "0": 24259,
+                "1": 17810
+              },
+              "metrics": {
+                "threshold": 0.8708592057228088,
+                "accuracy": 0.8930804155078561,
+                "precision": 0.9976076555023924,
+                "recall": 0.7492419988770354,
+                "f1": 0.8557686141217213,
+                "roc_auc": 0.9855067918899447,
+                "average_precision": 0.9854292800858777,
+                "false_positive_rate": 0.001319098066696896,
+                "confusion_matrix": {
+                  "true_negative": 24227,
+                  "false_positive": 32,
+                  "false_negative": 4466,
+                  "true_positive": 13344
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 60763,
+              "class_counts": {
+                "0": 30607,
+                "1": 30156
+              },
+              "metrics": {
+                "threshold": 0.8708592057228088,
+                "accuracy": 0.8635847472968747,
+                "precision": 0.9785529828861558,
+                "recall": 0.7413781668656321,
+                "f1": 0.843612625700432,
+                "roc_auc": 0.9792901012707153,
+                "average_precision": 0.979059788344922,
+                "false_positive_rate": 0.016009409612180222,
+                "confusion_matrix": {
+                  "true_negative": 30117,
+                  "false_positive": 490,
+                  "false_negative": 7799,
+                  "true_positive": 22357
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 5,
+          "threshold": 0.868277370929718,
+          "rows": {
+            "fit": 329263,
+            "validation": 82070,
+            "test": 102832
+          },
+          "role_sha256": {
+            "fit": "a600b275980a0f7dec735280d006fb2e8ac331417c3d7ddadbb15d79793d572c",
+            "validation": "2accff99778a647ba5d0363aa5fd1afad9783984d5a117499d62bc7a6d770d58",
+            "test": "f4fe444d536395ead747497e57001a2a15697aab82cf8a31e825d18a0498863c"
+          },
+          "seconds": 11.270573875000991,
+          "validation_metrics": {
+            "threshold": 0.868277370929718,
+            "accuracy": 0.8697209699037407,
+            "precision": 0.984171322160149,
+            "recall": 0.7283472914237252,
+            "f1": 0.8371512123796759,
+            "roc_auc": 0.9788205270838116,
+            "average_precision": 0.9774004270813608,
+            "false_positive_rate": 0.009968875456718842,
+            "confusion_matrix": {
+              "true_negative": 43896,
+              "false_positive": 442,
+              "false_negative": 10250,
+              "true_positive": 27482
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.929846740314299,
+            "precision": 0.9188628047527032,
+            "recall": 0.9318892548888796,
+            "f1": 0.9253301867262866,
+            "roc_auc": 0.980664691424193,
+            "average_precision": 0.979425838133545,
+            "false_positive_rate": 0.07193890569751758,
+            "confusion_matrix": {
+              "true_negative": 50919,
+              "false_positive": 3947,
+              "false_negative": 3267,
+              "true_positive": 44699
+            }
+          },
+          "metrics": {
+            "threshold": 0.868277370929718,
+            "accuracy": 0.874270655049012,
+            "precision": 0.9834690216641369,
+            "recall": 0.7429429179001793,
+            "f1": 0.8464507547416301,
+            "roc_auc": 0.980664691424193,
+            "average_precision": 0.979425838133545,
+            "false_positive_rate": 0.01091750811066963,
+            "confusion_matrix": {
+              "true_negative": 54267,
+              "false_positive": 599,
+              "false_negative": 12330,
+              "true_positive": 35636
+            },
+            "false_alarms_per_1000_benign": 10.917508110669631
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41706,
+              "class_counts": {
+                "0": 24225,
+                "1": 17481
+              },
+              "metrics": {
+                "threshold": 0.868277370929718,
+                "accuracy": 0.8956984606531434,
+                "precision": 0.9974240472763088,
+                "recall": 0.7531033693724616,
+                "f1": 0.8582138200782269,
+                "roc_auc": 0.9868657871742689,
+                "average_precision": 0.9867488420748867,
+                "false_positive_rate": 0.0014035087719298245,
+                "confusion_matrix": {
+                  "true_negative": 24191,
+                  "false_positive": 34,
+                  "false_negative": 4316,
+                  "true_positive": 13165
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61126,
+              "class_counts": {
+                "0": 30641,
+                "1": 30485
+              },
+              "metrics": {
+                "threshold": 0.868277370929718,
+                "accuracy": 0.8596505578640841,
+                "precision": 0.9754731724257684,
+                "recall": 0.737116614728555,
+                "f1": 0.8397077782552643,
+                "roc_auc": 0.9772248708967971,
+                "average_precision": 0.9772395922616512,
+                "false_positive_rate": 0.018439345974348095,
+                "confusion_matrix": {
+                  "true_negative": 30076,
+                  "false_positive": 565,
+                  "false_negative": 8014,
+                  "true_positive": 22471
+                }
+              }
+            }
+          }
+        }
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.8745149897661808,
+          "std": 0.002056412611693
+        },
+        "precision": {
+          "mean": 0.9843333963009897,
+          "std": 0.0010864514133650481
+        },
+        "recall": {
+          "mean": 0.7428022421817451,
+          "std": 0.004781568039765295
+        },
+        "f1": {
+          "mean": 0.846671272771386,
+          "std": 0.002949966153323132
+        },
+        "roc_auc": {
+          "mean": 0.9791606605181086,
+          "std": 0.002059433653674809
+        },
+        "average_precision": {
+          "mean": 0.9784556043005125,
+          "std": 0.0014837484526737678
+        },
+        "false_positive_rate": {
+          "mean": 0.010337759591574364,
+          "std": 0.0007601330516224256
+        },
+        "false_alarms_per_1000_benign": {
+          "mean": 10.337759591574363,
+          "std": 0.7601330516224258
+        }
+      },
+      "package": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/url_benchmark_full_v1/xgboost"
+    },
+    "xgboost_no_https": {
+      "folds": [
+        {
+          "fold": 1,
+          "threshold": 0.8488420844078064,
+          "rows": {
+            "fit": 330458,
+            "validation": 80873,
+            "test": 102834
+          },
+          "role_sha256": {
+            "fit": "c8913c56336f6904ec54c8b4eb1118e2916a5b270f346b4b06f5c5cab31f65bb",
+            "validation": "7e4b84d8423c5e3260e1eace6160dcb82b1fa60be25be66f00204962e1763f6b",
+            "test": "eb49e82ab13aa7a4bb473f2fac32b23b5ad69bda8a6c9c40d429863cb88324d5"
+          },
+          "seconds": 11.013955707996502,
+          "validation_metrics": {
+            "threshold": 0.8488420844078064,
+            "accuracy": 0.8182829869053949,
+            "precision": 0.9807524441340782,
+            "recall": 0.6118553613244023,
+            "f1": 0.7535799322579564,
+            "roc_auc": 0.9686538494851307,
+            "average_precision": 0.9647013683178622,
+            "false_positive_rate": 0.009989353749971685,
+            "confusion_matrix": {
+              "true_negative": 43706,
+              "false_positive": 441,
+              "false_negative": 14255,
+              "true_positive": 22471
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.8996927086372212,
+            "precision": 0.9069430634213825,
+            "recall": 0.8747055267162841,
+            "f1": 0.8905326385719895,
+            "roc_auc": 0.9642080680077214,
+            "average_precision": 0.9622460758031547,
+            "false_positive_rate": 0.07846246377604024,
+            "confusion_matrix": {
+              "true_negative": 50562,
+              "false_positive": 4305,
+              "false_negative": 6010,
+              "true_positive": 41957
+            }
+          },
+          "metrics": {
+            "threshold": 0.8488420844078064,
+            "accuracy": 0.8073788824707782,
+            "precision": 0.9810050903624749,
+            "recall": 0.5986407321700336,
+            "f1": 0.7435459229912738,
+            "roc_auc": 0.9642080680077214,
+            "average_precision": 0.9622460758031547,
+            "false_positive_rate": 0.010133595786173838,
+            "confusion_matrix": {
+              "true_negative": 54311,
+              "false_positive": 556,
+              "false_negative": 19252,
+              "true_positive": 28715
+            },
+            "false_alarms_per_1000_benign": 10.133595786173839
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 42601,
+              "class_counts": {
+                "0": 24221,
+                "1": 18380
+              },
+              "metrics": {
+                "threshold": 0.8488420844078064,
+                "accuracy": 0.7877279876059248,
+                "precision": 0.9935511153398879,
+                "recall": 0.511316648531012,
+                "f1": 0.6751679298825389,
+                "roc_auc": 0.9737701007125221,
+                "average_precision": 0.9741961991080748,
+                "false_positive_rate": 0.00251847570290244,
+                "confusion_matrix": {
+                  "true_negative": 24160,
+                  "false_positive": 61,
+                  "false_negative": 8982,
+                  "true_positive": 9398
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 60233,
+              "class_counts": {
+                "0": 30646,
+                "1": 29587
+              },
+              "metrics": {
+                "threshold": 0.8488420844078064,
+                "accuracy": 0.8212773728686933,
+                "precision": 0.975015142337977,
+                "recall": 0.6528880927434346,
+                "f1": 0.7820806089192089,
+                "roc_auc": 0.9573609582122504,
+                "average_precision": 0.9588935391983977,
+                "false_positive_rate": 0.01615218951902369,
+                "confusion_matrix": {
+                  "true_negative": 30151,
+                  "false_positive": 495,
+                  "false_negative": 10270,
+                  "true_positive": 19317
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "threshold": 0.8465564846992493,
+          "rows": {
+            "fit": 328489,
+            "validation": 82843,
+            "test": 102833
+          },
+          "role_sha256": {
+            "fit": "dea472022dc4a717e3be300bc90437af4240ee4ef02671cf9f8aa41ead76d183",
+            "validation": "f9e1c48deaad88c18293876c2307ac9eacc4ad7ebb478064652b1587bed9d9f8",
+            "test": "ad778c0782793e5dbc7116560ce945c846594310ca2c10e3ea57d0633e30aef8"
+          },
+          "seconds": 10.753855709001073,
+          "validation_metrics": {
+            "threshold": 0.8465564846992493,
+            "accuracy": 0.8061996789107106,
+            "precision": 0.9819741422178021,
+            "recall": 0.6027163822265178,
+            "f1": 0.7469621270626803,
+            "roc_auc": 0.966297716199507,
+            "average_precision": 0.9645977844870249,
+            "false_positive_rate": 0.009994026558838395,
+            "confusion_matrix": {
+              "true_negative": 43091,
+              "false_positive": 435,
+              "false_negative": 15620,
+              "true_positive": 23697
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9031925549191407,
+            "precision": 0.9119183337306833,
+            "recall": 0.8771838385523079,
+            "f1": 0.8942139099941555,
+            "roc_auc": 0.9674476234415658,
+            "average_precision": 0.964894717281289,
+            "false_positive_rate": 0.07407002387591813,
+            "confusion_matrix": {
+              "true_negative": 50803,
+              "false_positive": 4064,
+              "false_negative": 5891,
+              "true_positive": 42075
+            }
+          },
+          "metrics": {
+            "threshold": 0.8465564846992493,
+            "accuracy": 0.8054321083698812,
+            "precision": 0.983802865646847,
+            "recall": 0.5926281115790352,
+            "f1": 0.7396825396825397,
+            "roc_auc": 0.9674476234415658,
+            "average_precision": 0.964894717281289,
+            "false_positive_rate": 0.008529717316419706,
+            "confusion_matrix": {
+              "true_negative": 54399,
+              "false_positive": 468,
+              "false_negative": 19540,
+              "true_positive": 28426
+            },
+            "false_alarms_per_1000_benign": 8.529717316419706
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41170,
+              "class_counts": {
+                "0": 24303,
+                "1": 16867
+              },
+              "metrics": {
+                "threshold": 0.8465564846992493,
+                "accuracy": 0.7915958222006315,
+                "precision": 0.9939206103230421,
+                "recall": 0.494338056560147,
+                "f1": 0.6602787456445993,
+                "roc_auc": 0.9808155215148382,
+                "average_precision": 0.9781071833287439,
+                "false_positive_rate": 0.002098506357239847,
+                "confusion_matrix": {
+                  "true_negative": 24252,
+                  "false_positive": 51,
+                  "false_negative": 8529,
+                  "true_positive": 8338
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61663,
+              "class_counts": {
+                "1": 31099,
+                "0": 30564
+              },
+              "metrics": {
+                "threshold": 0.8465564846992493,
+                "accuracy": 0.814670061463114,
+                "precision": 0.9796634967081199,
+                "recall": 0.6459371683976977,
+                "f1": 0.7785442988915587,
+                "roc_auc": 0.9580793575291314,
+                "average_precision": 0.9612695825457063,
+                "false_positive_rate": 0.01364350215940322,
+                "confusion_matrix": {
+                  "true_negative": 30147,
+                  "false_positive": 417,
+                  "false_negative": 11011,
+                  "true_positive": 20088
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "threshold": 0.8414601683616638,
+          "rows": {
+            "fit": 329615,
+            "validation": 81716,
+            "test": 102834
+          },
+          "role_sha256": {
+            "fit": "9b22d71624fc41dcc9d47b6385fea6e3cbfc2092f902de1cec4039965b34efaf",
+            "validation": "3c498d86a5c62d9f9b36b0a86cf686c6c11eccd71f5649ed1a18d8ca53c5c453",
+            "test": "a983f41fa6576b0cb30b1123527b7b369842a53e1da93444e28ab634a59c5a8d"
+          },
+          "seconds": 10.823200874998292,
+          "validation_metrics": {
+            "threshold": 0.8414601683616638,
+            "accuracy": 0.8129742033383915,
+            "precision": 0.9811806061645304,
+            "recall": 0.6065938725750026,
+            "f1": 0.7497011087636548,
+            "roc_auc": 0.9671507205698422,
+            "average_precision": 0.9640342586155463,
+            "false_positive_rate": 0.009980902146234994,
+            "confusion_matrix": {
+              "true_negative": 43545,
+              "false_positive": 439,
+              "false_negative": 14844,
+              "true_positive": 22888
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.900567905556528,
+            "precision": 0.9090987924642834,
+            "recall": 0.8742442563482467,
+            "f1": 0.8913309172839637,
+            "roc_auc": 0.9652210648279693,
+            "average_precision": 0.9633802117948864,
+            "false_positive_rate": 0.07641977108697237,
+            "confusion_matrix": {
+              "true_negative": 50675,
+              "false_positive": 4193,
+              "false_negative": 6032,
+              "true_positive": 41934
+            }
+          },
+          "metrics": {
+            "threshold": 0.8414601683616638,
+            "accuracy": 0.8149347492074606,
+            "precision": 0.9803127386208957,
+            "recall": 0.6156027185923363,
+            "f1": 0.7562846568570953,
+            "roc_auc": 0.9652210648279693,
+            "average_precision": 0.9633802117948864,
+            "false_positive_rate": 0.010807756798133703,
+            "confusion_matrix": {
+              "true_negative": 54275,
+              "false_positive": 593,
+              "false_negative": 18438,
+              "true_positive": 29528
+            },
+            "false_alarms_per_1000_benign": 10.807756798133703
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41538,
+              "class_counts": {
+                "0": 24286,
+                "1": 17252
+              },
+              "metrics": {
+                "threshold": 0.8414601683616638,
+                "accuracy": 0.7908902691511387,
+                "precision": 0.9895976223136717,
+                "recall": 0.5017968931138419,
+                "f1": 0.665923076923077,
+                "roc_auc": 0.9751582819515007,
+                "average_precision": 0.972519248519832,
+                "false_positive_rate": 0.003747014741003047,
+                "confusion_matrix": {
+                  "true_negative": 24195,
+                  "false_positive": 91,
+                  "false_negative": 8595,
+                  "true_positive": 8657
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61296,
+              "class_counts": {
+                "1": 30714,
+                "0": 30582
+              },
+              "metrics": {
+                "threshold": 0.8414601683616638,
+                "accuracy": 0.8312287914382668,
+                "precision": 0.976512422214944,
+                "recall": 0.6795272514162922,
+                "f1": 0.801389982145257,
+                "roc_auc": 0.9587506753518649,
+                "average_precision": 0.9621623343970549,
+                "false_positive_rate": 0.01641488457262442,
+                "confusion_matrix": {
+                  "true_negative": 30080,
+                  "false_positive": 502,
+                  "false_negative": 9843,
+                  "true_positive": 20871
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "threshold": 0.841139018535614,
+          "rows": {
+            "fit": 329445,
+            "validation": 81888,
+            "test": 102832
+          },
+          "role_sha256": {
+            "fit": "341f0b3ff1e6e58a34b2e202f6c8dc4ef71b8a0b393981896390bbbd5b2e9edc",
+            "validation": "95b4fe058f494ff083077c4c872adee72d722be5ea6ab5e31487b148654ea32c",
+            "test": "c4bb347d80206728e803f76aee0265d5832b5e5b59eccb7086689b76f6920788"
+          },
+          "seconds": 10.90179779099708,
+          "validation_metrics": {
+            "threshold": 0.841139018535614,
+            "accuracy": 0.8066749706916765,
+            "precision": 0.9811564831184512,
+            "recall": 0.5964663940442487,
+            "f1": 0.7419097148633007,
+            "roc_auc": 0.9644238825762669,
+            "average_precision": 0.9621044343065567,
+            "false_positive_rate": 0.009990855052583448,
+            "confusion_matrix": {
+              "true_negative": 43303,
+              "false_positive": 437,
+              "false_negative": 15394,
+              "true_positive": 22754
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.8983293138322701,
+            "precision": 0.9096786876651887,
+            "recall": 0.8682400033356961,
+            "f1": 0.8884764312457999,
+            "roc_auc": 0.9665387986954557,
+            "average_precision": 0.9642933193209153,
+            "false_positive_rate": 0.07536543578901324,
+            "confusion_matrix": {
+              "true_negative": 50731,
+              "false_positive": 4135,
+              "false_negative": 6320,
+              "true_positive": 41646
+            }
+          },
+          "metrics": {
+            "threshold": 0.841139018535614,
+            "accuracy": 0.8174789948654115,
+            "precision": 0.9809257124032285,
+            "recall": 0.6207730475753659,
+            "f1": 0.7603580138149411,
+            "roc_auc": 0.9665387986954557,
+            "average_precision": 0.9642933193209153,
+            "false_positive_rate": 0.010552983632850945,
+            "confusion_matrix": {
+              "true_negative": 54287,
+              "false_positive": 579,
+              "false_negative": 18190,
+              "true_positive": 29776
+            },
+            "false_alarms_per_1000_benign": 10.552983632850946
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 42069,
+              "class_counts": {
+                "0": 24259,
+                "1": 17810
+              },
+              "metrics": {
+                "threshold": 0.841139018535614,
+                "accuracy": 0.8065321257933395,
+                "precision": 0.9902666531481293,
+                "recall": 0.5483997754070746,
+                "f1": 0.7058866042713113,
+                "roc_auc": 0.9785653635056958,
+                "average_precision": 0.9756465110758139,
+                "false_positive_rate": 0.003957294200090688,
+                "confusion_matrix": {
+                  "true_negative": 24163,
+                  "false_positive": 96,
+                  "false_negative": 8043,
+                  "true_positive": 9767
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 60763,
+              "class_counts": {
+                "0": 30607,
+                "1": 30156
+              },
+              "metrics": {
+                "threshold": 0.841139018535614,
+                "accuracy": 0.8250580122772082,
+                "precision": 0.9764298262736678,
+                "recall": 0.6635163814829553,
+                "f1": 0.7901200442268204,
+                "roc_auc": 0.9582411416634848,
+                "average_precision": 0.9606107128407055,
+                "false_positive_rate": 0.015780703760577646,
+                "confusion_matrix": {
+                  "true_negative": 30124,
+                  "false_positive": 483,
+                  "false_negative": 10147,
+                  "true_positive": 20009
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 5,
+          "threshold": 0.8485281467437744,
+          "rows": {
+            "fit": 329263,
+            "validation": 82070,
+            "test": 102832
+          },
+          "role_sha256": {
+            "fit": "a600b275980a0f7dec735280d006fb2e8ac331417c3d7ddadbb15d79793d572c",
+            "validation": "2accff99778a647ba5d0363aa5fd1afad9783984d5a117499d62bc7a6d770d58",
+            "test": "f4fe444d536395ead747497e57001a2a15697aab82cf8a31e825d18a0498863c"
+          },
+          "seconds": 11.00885883400042,
+          "validation_metrics": {
+            "threshold": 0.8485281467437744,
+            "accuracy": 0.807152430851712,
+            "precision": 0.9805625027423106,
+            "recall": 0.5922824128061063,
+            "f1": 0.7384961089172711,
+            "roc_auc": 0.9635791917152022,
+            "average_precision": 0.9605833228844316,
+            "false_positive_rate": 0.009991429473589246,
+            "confusion_matrix": {
+              "true_negative": 43895,
+              "false_positive": 443,
+              "false_negative": 15384,
+              "true_positive": 22348
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9033374824957212,
+            "precision": 0.9082846589933001,
+            "recall": 0.8818121169161489,
+            "f1": 0.8948526456089873,
+            "roc_auc": 0.9667807553704408,
+            "average_precision": 0.9642083755989309,
+            "false_positive_rate": 0.0778442022381803,
+            "confusion_matrix": {
+              "true_negative": 50595,
+              "false_positive": 4271,
+              "false_negative": 5669,
+              "true_positive": 42297
+            }
+          },
+          "metrics": {
+            "threshold": 0.8485281467437744,
+            "accuracy": 0.811770655049012,
+            "precision": 0.9803882060581638,
+            "recall": 0.6086394529458367,
+            "f1": 0.751029018316526,
+            "roc_auc": 0.9667807553704408,
+            "average_precision": 0.9642083755989309,
+            "false_positive_rate": 0.010644114752305617,
+            "confusion_matrix": {
+              "true_negative": 54282,
+              "false_positive": 584,
+              "false_negative": 18772,
+              "true_positive": 29194
+            },
+            "false_alarms_per_1000_benign": 10.644114752305617
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41706,
+              "class_counts": {
+                "0": 24225,
+                "1": 17481
+              },
+              "metrics": {
+                "threshold": 0.8485281467437744,
+                "accuracy": 0.8035534455474033,
+                "precision": 0.9904942965779467,
+                "recall": 0.5364681654367599,
+                "f1": 0.6959812980073472,
+                "roc_auc": 0.9805983781064023,
+                "average_precision": 0.9775217316516323,
+                "false_positive_rate": 0.0037151702786377707,
+                "confusion_matrix": {
+                  "true_negative": 24135,
+                  "false_positive": 90,
+                  "false_negative": 8103,
+                  "true_positive": 9378
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61126,
+              "class_counts": {
+                "0": 30641,
+                "1": 30485
+              },
+              "metrics": {
+                "threshold": 0.8485281467437744,
+                "accuracy": 0.8173772208225633,
+                "precision": 0.9756770064007878,
+                "recall": 0.6500246022634082,
+                "f1": 0.7802342750270695,
+                "roc_auc": 0.9567019567908535,
+                "average_precision": 0.9592560123235847,
+                "false_positive_rate": 0.01612218922358931,
+                "confusion_matrix": {
+                  "true_negative": 30147,
+                  "false_positive": 494,
+                  "false_negative": 10669,
+                  "true_positive": 19816
+                }
+              }
+            }
+          }
+        }
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.8113990779925085,
+          "std": 0.005034161502695084
+        },
+        "precision": {
+          "mean": 0.9812869226183218,
+          "std": 0.0014401907407572453
+        },
+        "recall": {
+          "mean": 0.6072568125725215,
+          "std": 0.011645709345125595
+        },
+        "f1": {
+          "mean": 0.7501800303324752,
+          "std": 0.00859923373812417
+        },
+        "roc_auc": {
+          "mean": 0.9660392620686306,
+          "std": 0.0013043723901056648
+        },
+        "average_precision": {
+          "mean": 0.9638045399598353,
+          "std": 0.0010246145615133177
+        },
+        "false_positive_rate": {
+          "mean": 0.010133633657176762,
+          "std": 0.0009305153127887342
+        },
+        "false_alarms_per_1000_benign": {
+          "mean": 10.133633657176762,
+          "std": 0.9305153127887339
+        }
+      },
+      "package": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/url_benchmark_full_v1/xgboost_no_https"
+    },
+    "char_logistic": {
+      "folds": [
+        {
+          "fold": 1,
+          "threshold": 0.7650483435974401,
+          "rows": {
+            "fit": 330458,
+            "validation": 80873,
+            "test": 102834
+          },
+          "role_sha256": {
+            "fit": "c8913c56336f6904ec54c8b4eb1118e2916a5b270f346b4b06f5c5cab31f65bb",
+            "validation": "7e4b84d8423c5e3260e1eace6160dcb82b1fa60be25be66f00204962e1763f6b",
+            "test": "eb49e82ab13aa7a4bb473f2fac32b23b5ad69bda8a6c9c40d429863cb88324d5"
+          },
+          "seconds": 36.72592795800301,
+          "validation_metrics": {
+            "threshold": 0.7650483435974401,
+            "accuracy": 0.9059389413030307,
+            "precision": 0.9853004899836673,
+            "recall": 0.8048793770081142,
+            "f1": 0.8859981716546526,
+            "roc_auc": 0.9748809113906765,
+            "average_precision": 0.9755239620751234,
+            "false_positive_rate": 0.009989353749971685,
+            "confusion_matrix": {
+              "true_negative": 43706,
+              "false_positive": 441,
+              "false_negative": 7166,
+              "true_positive": 29560
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9237995215590175,
+            "precision": 0.9505152787444712,
+            "recall": 0.8825859445035128,
+            "f1": 0.915291981060688,
+            "roc_auc": 0.9728905012132718,
+            "average_precision": 0.9748169546110813,
+            "false_positive_rate": 0.04016986531066032,
+            "confusion_matrix": {
+              "true_negative": 52663,
+              "false_positive": 2204,
+              "false_negative": 5632,
+              "true_positive": 42335
+            }
+          },
+          "metrics": {
+            "threshold": 0.7650483435974401,
+            "accuracy": 0.8984966061808352,
+            "precision": 0.9857368434676814,
+            "recall": 0.7938791252319303,
+            "f1": 0.8794660384766392,
+            "roc_auc": 0.9728905012132718,
+            "average_precision": 0.9748169546110813,
+            "false_positive_rate": 0.01004246632766508,
+            "confusion_matrix": {
+              "true_negative": 54316,
+              "false_positive": 551,
+              "false_negative": 9887,
+              "true_positive": 38080
+            },
+            "false_alarms_per_1000_benign": 10.04246632766508
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 42601,
+              "class_counts": {
+                "0": 24221,
+                "1": 18380
+              },
+              "metrics": {
+                "threshold": 0.7650483435974401,
+                "accuracy": 0.8427266965564189,
+                "precision": 0.9955872369314325,
+                "recall": 0.6383025027203482,
+                "f1": 0.777880917650179,
+                "roc_auc": 0.9311570652522817,
+                "average_precision": 0.937311818307366,
+                "false_positive_rate": 0.002146897320506998,
+                "confusion_matrix": {
+                  "true_negative": 24169,
+                  "false_positive": 52,
+                  "false_negative": 6648,
+                  "true_positive": 11732
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 60233,
+              "class_counts": {
+                "0": 30646,
+                "1": 29587
+              },
+              "metrics": {
+                "threshold": 0.7650483435974401,
+                "accuracy": 0.9379409957996447,
+                "precision": 0.981413193280441,
+                "recall": 0.8905262446344678,
+                "f1": 0.933763334160258,
+                "roc_auc": 0.9908852994146718,
+                "average_precision": 0.9909782463193078,
+                "false_positive_rate": 0.01628271226261176,
+                "confusion_matrix": {
+                  "true_negative": 30147,
+                  "false_positive": 499,
+                  "false_negative": 3239,
+                  "true_positive": 26348
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "threshold": 0.7664883687767777,
+          "rows": {
+            "fit": 328489,
+            "validation": 82843,
+            "test": 102833
+          },
+          "role_sha256": {
+            "fit": "dea472022dc4a717e3be300bc90437af4240ee4ef02671cf9f8aa41ead76d183",
+            "validation": "f9e1c48deaad88c18293876c2307ac9eacc4ad7ebb478064652b1587bed9d9f8",
+            "test": "ad778c0782793e5dbc7116560ce945c846594310ca2c10e3ea57d0633e30aef8"
+          },
+          "seconds": 37.95873862499866,
+          "validation_metrics": {
+            "threshold": 0.7664883687767777,
+            "accuracy": 0.8915418321403136,
+            "precision": 0.9860585859880777,
+            "recall": 0.7825368161355138,
+            "f1": 0.8725875296019513,
+            "roc_auc": 0.9745562240757418,
+            "average_precision": 0.9765118964544623,
+            "false_positive_rate": 0.009994026558838395,
+            "confusion_matrix": {
+              "true_negative": 43091,
+              "false_positive": 435,
+              "false_negative": 8550,
+              "true_positive": 30767
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9244114243482151,
+            "precision": 0.9508873482757847,
+            "recall": 0.8835842054788808,
+            "f1": 0.9160011671007273,
+            "roc_auc": 0.9741962445025403,
+            "average_precision": 0.9758529541175267,
+            "false_positive_rate": 0.039896476935134054,
+            "confusion_matrix": {
+              "true_negative": 52678,
+              "false_positive": 2189,
+              "false_negative": 5584,
+              "true_positive": 42382
+            }
+          },
+          "metrics": {
+            "threshold": 0.7664883687767777,
+            "accuracy": 0.8988165277683234,
+            "precision": 0.9858994592636672,
+            "recall": 0.7944377267230955,
+            "f1": 0.8798734659477931,
+            "roc_auc": 0.9741962445025403,
+            "average_precision": 0.9758529541175267,
+            "false_positive_rate": 0.009933110977454572,
+            "confusion_matrix": {
+              "true_negative": 54322,
+              "false_positive": 545,
+              "false_negative": 9860,
+              "true_positive": 38106
+            },
+            "false_alarms_per_1000_benign": 9.933110977454572
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41170,
+              "class_counts": {
+                "0": 24303,
+                "1": 16867
+              },
+              "metrics": {
+                "threshold": 0.7664883687767777,
+                "accuracy": 0.8483361671119748,
+                "precision": 0.9949678501537601,
+                "recall": 0.6330112053121479,
+                "f1": 0.773751721139213,
+                "roc_auc": 0.9289872847250265,
+                "average_precision": 0.9306046208397183,
+                "false_positive_rate": 0.00222194790766572,
+                "confusion_matrix": {
+                  "true_negative": 24249,
+                  "false_positive": 54,
+                  "false_negative": 6190,
+                  "true_positive": 10677
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61663,
+              "class_counts": {
+                "1": 31099,
+                "0": 30564
+              },
+              "metrics": {
+                "threshold": 0.7664883687767777,
+                "accuracy": 0.9325203120185525,
+                "precision": 0.9824140401146132,
+                "recall": 0.8819897745908228,
+                "f1": 0.9294972805367763,
+                "roc_auc": 0.9910839034179126,
+                "average_precision": 0.9914981344488383,
+                "false_positive_rate": 0.016064651223661824,
+                "confusion_matrix": {
+                  "true_negative": 30073,
+                  "false_positive": 491,
+                  "false_negative": 3670,
+                  "true_positive": 27429
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "threshold": 0.763855222125692,
+          "rows": {
+            "fit": 329615,
+            "validation": 81716,
+            "test": 102834
+          },
+          "role_sha256": {
+            "fit": "9b22d71624fc41dcc9d47b6385fea6e3cbfc2092f902de1cec4039965b34efaf",
+            "validation": "3c498d86a5c62d9f9b36b0a86cf686c6c11eccd71f5649ed1a18d8ca53c5c453",
+            "test": "a983f41fa6576b0cb30b1123527b7b369842a53e1da93444e28ab634a59c5a8d"
+          },
+          "seconds": 36.10556345799705,
+          "validation_metrics": {
+            "threshold": 0.763855222125692,
+            "accuracy": 0.8954794654657594,
+            "precision": 0.9854002461006353,
+            "recall": 0.7852750980600022,
+            "f1": 0.8740284066606687,
+            "roc_auc": 0.9737331077563472,
+            "average_precision": 0.9750104926381421,
+            "false_positive_rate": 0.009980902146234994,
+            "confusion_matrix": {
+              "true_negative": 43545,
+              "false_positive": 439,
+              "false_negative": 8102,
+              "true_positive": 29630
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9232160569461462,
+            "precision": 0.950629779577148,
+            "recall": 0.8811449776925322,
+            "f1": 0.9145694934325839,
+            "roc_auc": 0.9733001991526337,
+            "average_precision": 0.9750867394290134,
+            "false_positive_rate": 0.04000510315666691,
+            "confusion_matrix": {
+              "true_negative": 52673,
+              "false_positive": 2195,
+              "false_negative": 5701,
+              "true_positive": 42265
+            }
+          },
+          "metrics": {
+            "threshold": 0.763855222125692,
+            "accuracy": 0.9000914094560165,
+            "precision": 0.9868509429088091,
+            "recall": 0.7964182962932077,
+            "f1": 0.8814666112880152,
+            "roc_auc": 0.9733001991526337,
+            "average_precision": 0.9750867394290134,
+            "false_positive_rate": 0.0092768097980608,
+            "confusion_matrix": {
+              "true_negative": 54359,
+              "false_positive": 509,
+              "false_negative": 9765,
+              "true_positive": 38201
+            },
+            "false_alarms_per_1000_benign": 9.2768097980608
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41538,
+              "class_counts": {
+                "0": 24286,
+                "1": 17252
+              },
+              "metrics": {
+                "threshold": 0.763855222125692,
+                "accuracy": 0.8457556935817805,
+                "precision": 0.9955222516677328,
+                "recall": 0.6314630187804312,
+                "f1": 0.7727611278595495,
+                "roc_auc": 0.9274569354366076,
+                "average_precision": 0.9298621981273251,
+                "false_positive_rate": 0.002017623322078564,
+                "confusion_matrix": {
+                  "true_negative": 24237,
+                  "false_positive": 49,
+                  "false_negative": 6358,
+                  "true_positive": 10894
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61296,
+              "class_counts": {
+                "1": 30714,
+                "0": 30582
+              },
+              "metrics": {
+                "threshold": 0.763855222125692,
+                "accuracy": 0.9369126859827721,
+                "precision": 0.9834335722260237,
+                "recall": 0.8890733867291789,
+                "f1": 0.9338759597134112,
+                "roc_auc": 0.9911908120744122,
+                "average_precision": 0.9916239426971569,
+                "false_positive_rate": 0.015041527696030345,
+                "confusion_matrix": {
+                  "true_negative": 30122,
+                  "false_positive": 460,
+                  "false_negative": 3407,
+                  "true_positive": 27307
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "threshold": 0.7480979939018939,
+          "rows": {
+            "fit": 329445,
+            "validation": 81888,
+            "test": 102832
+          },
+          "role_sha256": {
+            "fit": "341f0b3ff1e6e58a34b2e202f6c8dc4ef71b8a0b393981896390bbbd5b2e9edc",
+            "validation": "95b4fe058f494ff083077c4c872adee72d722be5ea6ab5e31487b148654ea32c",
+            "test": "c4bb347d80206728e803f76aee0265d5832b5e5b59eccb7086689b76f6920788"
+          },
+          "seconds": 35.978893999999855,
+          "validation_metrics": {
+            "threshold": 0.7480979939018939,
+            "accuracy": 0.8922674872997265,
+            "precision": 0.9855298013245033,
+            "recall": 0.7801981755268953,
+            "f1": 0.8709252648212091,
+            "roc_auc": 0.9725390426423327,
+            "average_precision": 0.9741482830411422,
+            "false_positive_rate": 0.009990855052583448,
+            "confusion_matrix": {
+              "true_negative": 43303,
+              "false_positive": 437,
+              "false_negative": 8385,
+              "true_positive": 29763
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9244204138789481,
+            "precision": 0.9499395513365871,
+            "recall": 0.884584914314306,
+            "f1": 0.9160981086449607,
+            "roc_auc": 0.9732195151236536,
+            "average_precision": 0.9746937191691425,
+            "false_positive_rate": 0.04075383662012904,
+            "confusion_matrix": {
+              "true_negative": 52630,
+              "false_positive": 2236,
+              "false_negative": 5536,
+              "true_positive": 42430
+            }
+          },
+          "metrics": {
+            "threshold": 0.7480979939018939,
+            "accuracy": 0.8942741559047768,
+            "precision": 0.9850918031071821,
+            "recall": 0.7852228661968894,
+            "f1": 0.8738747099767982,
+            "roc_auc": 0.9732195151236536,
+            "average_precision": 0.9746937191691425,
+            "false_positive_rate": 0.010388947617832538,
+            "confusion_matrix": {
+              "true_negative": 54296,
+              "false_positive": 570,
+              "false_negative": 10302,
+              "true_positive": 37664
+            },
+            "false_alarms_per_1000_benign": 10.388947617832537
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 42069,
+              "class_counts": {
+                "0": 24259,
+                "1": 17810
+              },
+              "metrics": {
+                "threshold": 0.7480979939018939,
+                "accuracy": 0.8304452209465402,
+                "precision": 0.9949930458970793,
+                "recall": 0.6025266704098821,
+                "f1": 0.7505507955936352,
+                "roc_auc": 0.9322380593815862,
+                "average_precision": 0.9363640477607161,
+                "false_positive_rate": 0.002225977987551012,
+                "confusion_matrix": {
+                  "true_negative": 24205,
+                  "false_positive": 54,
+                  "false_negative": 7079,
+                  "true_positive": 10731
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 60763,
+              "class_counts": {
+                "0": 30607,
+                "1": 30156
+              },
+              "metrics": {
+                "threshold": 0.7480979939018939,
+                "accuracy": 0.9384658427003275,
+                "precision": 0.9812015009654268,
+                "recall": 0.8931224300305081,
+                "f1": 0.9350924398923705,
+                "roc_auc": 0.9903916450870023,
+                "average_precision": 0.9905033319462987,
+                "false_positive_rate": 0.01685888848956121,
+                "confusion_matrix": {
+                  "true_negative": 30091,
+                  "false_positive": 516,
+                  "false_negative": 3223,
+                  "true_positive": 26933
+                }
+              }
+            }
+          }
+        },
+        {
+          "fold": 5,
+          "threshold": 0.7544962341158549,
+          "rows": {
+            "fit": 329263,
+            "validation": 82070,
+            "test": 102832
+          },
+          "role_sha256": {
+            "fit": "a600b275980a0f7dec735280d006fb2e8ac331417c3d7ddadbb15d79793d572c",
+            "validation": "2accff99778a647ba5d0363aa5fd1afad9783984d5a117499d62bc7a6d770d58",
+            "test": "f4fe444d536395ead747497e57001a2a15697aab82cf8a31e825d18a0498863c"
+          },
+          "seconds": 35.64308383400203,
+          "validation_metrics": {
+            "threshold": 0.7544962341158549,
+            "accuracy": 0.9043377604483978,
+            "precision": 0.9856014561055677,
+            "recall": 0.8036679741333616,
+            "f1": 0.8853851881049358,
+            "roc_auc": 0.9744660288686537,
+            "average_precision": 0.9754940401125718,
+            "false_positive_rate": 0.009991429473589246,
+            "confusion_matrix": {
+              "true_negative": 43895,
+              "false_positive": 443,
+              "false_negative": 7408,
+              "true_positive": 30324
+            }
+          },
+          "fixed_0_5_metrics": {
+            "threshold": 0.5,
+            "accuracy": 0.9253637000155593,
+            "precision": 0.950954715376178,
+            "recall": 0.8856690155526832,
+            "f1": 0.9171515236563434,
+            "roc_auc": 0.974798937156179,
+            "average_precision": 0.9763938097248681,
+            "false_positive_rate": 0.039933656545037,
+            "confusion_matrix": {
+              "true_negative": 52675,
+              "false_positive": 2191,
+              "false_negative": 5484,
+              "true_positive": 42482
+            }
+          },
+          "metrics": {
+            "threshold": 0.7544962341158549,
+            "accuracy": 0.9025400653493076,
+            "precision": 0.9856894168245354,
+            "recall": 0.8027144227160906,
+            "f1": 0.8848416601553523,
+            "roc_auc": 0.974798937156179,
+            "average_precision": 0.9763938097248681,
+            "false_positive_rate": 0.01018845915503226,
+            "confusion_matrix": {
+              "true_negative": 54307,
+              "false_positive": 559,
+              "false_negative": 9463,
+              "true_positive": 38503
+            },
+            "false_alarms_per_1000_benign": 10.18845915503226
+          },
+          "by_source": {
+            "0:phiusiil": {
+              "rows": 41706,
+              "class_counts": {
+                "0": 24225,
+                "1": 17481
+              },
+              "metrics": {
+                "threshold": 0.7544962341158549,
+                "accuracy": 0.8488466887258428,
+                "precision": 0.9948640750907642,
+                "recall": 0.6426977861678393,
+                "f1": 0.7809133245290888,
+                "roc_auc": 0.933949492797399,
+                "average_precision": 0.9367907470395862,
+                "false_positive_rate": 0.00239422084623323,
+                "confusion_matrix": {
+                  "true_negative": 24167,
+                  "false_positive": 58,
+                  "false_negative": 6246,
+                  "true_positive": 11235
+                }
+              }
+            },
+            "1:balanced": {
+              "rows": 61126,
+              "class_counts": {
+                "0": 30641,
+                "1": 30485
+              },
+              "metrics": {
+                "threshold": 0.7544962341158549,
+                "accuracy": 0.9391748192258613,
+                "precision": 0.9819582988224279,
+                "recall": 0.8944726914876169,
+                "f1": 0.9361760565798056,
+                "roc_auc": 0.9911593859520424,
+                "average_precision": 0.9915883404769161,
+                "false_positive_rate": 0.01635064129760778,
+                "confusion_matrix": {
+                  "true_negative": 30140,
+                  "false_positive": 501,
+                  "false_negative": 3217,
+                  "true_positive": 27268
+                }
+              }
+            }
+          }
+        }
+      ],
+      "summary": {
+        "accuracy": {
+          "mean": 0.8988437529318519,
+          "std": 0.0030092291934917708
+        },
+        "precision": {
+          "mean": 0.9858536931143751,
+          "std": 0.000635947838921599
+        },
+        "recall": {
+          "mean": 0.7945344874322428,
+          "std": 0.006277046067851215
+        },
+        "f1": {
+          "mean": 0.8799044971689195,
+          "std": 0.003980179688766291
+        },
+        "roc_auc": {
+          "mean": 0.9736810794296558,
+          "std": 0.0007902730950893602
+        },
+        "average_precision": {
+          "mean": 0.9753688354103265,
+          "std": 0.0007288476806730953
+        },
+        "false_positive_rate": {
+          "mean": 0.00996595877520905,
+          "std": 0.00042139194229067807
+        },
+        "false_alarms_per_1000_benign": {
+          "mean": 9.96595877520905,
+          "std": 0.42139194229067817
+        }
+      },
+      "package": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/url_benchmark_full_v1/char_logistic"
+    }
+  },
+  "highest_cv_average_precision": "xgboost"
+}

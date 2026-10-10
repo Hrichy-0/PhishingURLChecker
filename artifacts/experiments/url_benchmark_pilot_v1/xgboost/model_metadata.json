@@ -1,0 +1,101 @@
+{
+  "model_version": "0.2.0-experimental-xgboost",
+  "model_type": "xgboost",
+  "label_convention": {
+    "0": "legitimate",
+    "1": "phishing"
+  },
+  "threshold": 0.8960579633712769,
+  "created_at": "2026-10-05T12:32:59.198347+00:00",
+  "selection_method": "fixed parameters; inner-domain validation FPR budget",
+  "maximum_validation_fpr": 0.01,
+  "data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed",
+  "split_sha256": {
+    "train": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+    "validation": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+    "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+  },
+  "development_sha256": "7e3b46ff3bd9a76eafae482796dc4a1ca9c0cb905b8f3111a38054b6d4956760",
+  "fit_sha256": "e2dcc2c88f2c02b6b84e62dd9f05fdf176ea9ed86919af4c7e42fc32c73d6c9a",
+  "validation_sha256": "d6a8e78b8515505a9ebab14746bb2cf8245d344e00d76c86f3108096471ae0db",
+  "dataset_rows": {
+    "fit": 40211,
+    "validation": 9789
+  },
+  "validation_metrics": {
+    "threshold": 0.8960579633712769,
+    "accuracy": 0.8677086525692104,
+    "precision": 0.9843609022556391,
+    "recall": 0.724756421612046,
+    "f1": 0.834842494579773,
+    "roc_auc": 0.9793302721872896,
+    "average_precision": 0.9774239252591795,
+    "false_positive_rate": 0.009861558884885265,
+    "confusion_matrix": {
+      "true_negative": 5221,
+      "false_positive": 52,
+      "false_negative": 1243,
+      "true_positive": 3273
+    }
+  },
+  "cross_validation_summary": {
+    "accuracy": {
+      "mean": 0.8615799314863993,
+      "std": 0.009764844812143356
+    },
+    "precision": {
+      "mean": 0.9841715782633804,
+      "std": 0.0024417979868136424
+    },
+    "recall": {
+      "mean": 0.7166101304365865,
+      "std": 0.021940399212993275
+    },
+    "f1": {
+      "mean": 0.8291817792644679,
+      "std": 0.014277260940438269
+    },
+    "roc_auc": {
+      "mean": 0.9768098094007647,
+      "std": 0.0027497357137926887
+    },
+    "average_precision": {
+      "mean": 0.9758105838799234,
+      "std": 0.0022176849649537126
+    },
+    "false_positive_rate": {
+      "mean": 0.010213366681177154,
+      "std": 0.0017600405556282932
+    },
+    "false_alarms_per_1000_benign": {
+      "mean": 10.213366681177154,
+      "std": 1.7600405556282934
+    }
+  },
+  "score_caution": "uncalibrated; advisory research experiment only",
+  "activation_eligible": false,
+  "features": [
+    "url_length",
+    "hostname_length",
+    "path_length",
+    "query_length",
+    "dot_count",
+    "hyphen_count",
+    "underscore_count",
+    "digit_count",
+    "digit_ratio",
+    "subdomain_count",
+    "query_parameter_count",
+    "percent_encoding_count",
+    "special_character_count",
+    "has_ip_hostname",
+    "uses_https",
+    "has_at_symbol",
+    "has_explicit_port",
+    "suspicious_word_count",
+    "character_entropy",
+    "longest_token_length",
+    "tld_length"
+  ],
+  "best_iteration": 398
+}

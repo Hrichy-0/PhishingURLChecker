@@ -1,0 +1,54 @@
+{
+  "dataset": "C:\\Users\\hrish\\Documents\\PhishingURLChecker\\data\\external\\huggingface\\phreshphish_full\\test.csv",
+  "dataset_sha256": "39336f1125969b17a188dbc3cc0cd27b8041e19505f7a715e465255a927cb3e4",
+  "cleaning": {
+    "rows_before": 168060,
+    "missing_urls_removed": 0,
+    "missing_labels_removed": 0,
+    "blank_urls_removed": 0,
+    "invalid_urls_removed": 1555,
+    "duplicate_urls_removed": 0,
+    "rows_after": 166505
+  },
+  "known_domain_rows_excluded": 87516,
+  "rows_evaluated": 78989,
+  "class_counts": {
+    "1": 54180,
+    "0": 24809
+  },
+  "metrics": {
+    "threshold": 0.4718417227268219,
+    "accuracy": 0.8094924609755789,
+    "precision": 0.9416106170721799,
+    "recall": 0.7700073827980805,
+    "f1": 0.847206709583088,
+    "roc_auc": 0.9204508186360701,
+    "average_precision": 0.9594117155443825,
+    "false_positive_rate": 0.10427667378773832,
+    "confusion_matrix": {
+      "true_negative": 22222,
+      "false_positive": 2587,
+      "false_negative": 12461,
+      "true_positive": 41719
+    }
+  },
+  "role": "Publisher-held-out test; all development and internal-test domains purged",
+  "independent_collection_verified": false,
+  "previous_model_same_rows": {
+    "threshold": 0.4711279273033142,
+    "accuracy": 0.7030219397637646,
+    "precision": 0.8901503606623997,
+    "recall": 0.6468623108157991,
+    "f1": 0.7492517530357449,
+    "roc_auc": 0.8495378121852057,
+    "average_precision": 0.910508413415212,
+    "false_positive_rate": 0.17433189568301827,
+    "confusion_matrix": {
+      "true_negative": 20484,
+      "false_positive": 4325,
+      "false_negative": 19133,
+      "true_positive": 35047
+    }
+  },
+  "previous_native_sha256": "1a8655127485307b66a11b699e0360750606fbbdf25c1262bbf3c1bc8e6893be"
+}

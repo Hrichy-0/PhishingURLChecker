@@ -1,0 +1,55 @@
+{
+  "evaluation_role": "development_stress_test",
+  "independent_provenance_verified": false,
+  "provenance_caution": "File fingerprints and domain exclusion do not establish independent collection or remove all template leakage. Verify provenance separately.",
+  "dataset": "/Users/hrishy/Downloads/URL dataset.csv",
+  "dataset_sha256": "accb2dfbfd3329a8b5cb1b85dcad90314a660c272be755cb45d0f6865014b466",
+  "model_sha256": "70a9ab8b39e84785d8f029326ecef9d169dd88e032ca7a87804d921d2e4c7001",
+  "metadata_sha256": "9c3de225baedb2e3c496a0e664f341decb63ba3cdf5360904407a420d7a84d0f",
+  "label_mapping": {
+    "legitimate": 0,
+    "phishing": 1
+  },
+  "missing_scheme_policy": "reject",
+  "scheme_assumed_rows_before_cleaning": 0,
+  "cleaning_report": {
+    "rows_before": 450176,
+    "missing_urls_removed": 0,
+    "missing_labels_removed": 0,
+    "blank_urls_removed": 0,
+    "invalid_urls_removed": 567,
+    "duplicate_urls_removed": 0,
+    "rows_after": 449609
+  },
+  "conflicting_label_exclusion_enabled": false,
+  "conflicting_urls_excluded": 0,
+  "conflicting_rows_excluded": 0,
+  "evaluated_class_counts": {
+    "0": 153225,
+    "1": 58044
+  },
+  "majority_class_accuracy": 0.7252602132825924,
+  "rows_evaluated": 211269,
+  "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/char_logistic/phishguard_model.joblib",
+  "threshold": 0.9642041195785024,
+  "exact_overlap_excluded": 9265,
+  "shared_domain_rows_before_optional_exclusion": 229075,
+  "shared_domains_excluded": true,
+  "reference_data_dir": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/reference",
+  "metrics": {
+    "threshold": 0.9642041195785024,
+    "accuracy": 0.8065262769265723,
+    "precision": 0.99918590451823,
+    "recall": 0.2960340431396871,
+    "f1": 0.45674565728791483,
+    "roc_auc": 0.956345195124253,
+    "average_precision": 0.92491633369103,
+    "false_positive_rate": 9.136890194158916e-05,
+    "confusion_matrix": {
+      "true_negative": 153211,
+      "false_positive": 14,
+      "false_negative": 40861,
+      "true_positive": 17183
+    }
+  }
+}

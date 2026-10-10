@@ -1,0 +1,2913 @@
+{
+  "status": "complete",
+  "analysis_role": "post_evaluation_development_diagnostic",
+  "evaluation_report_sha256": "501d798a4892cd9b90ff33009f15b1979ce00709ab56f898491e99a3f05af7ec",
+  "model_sha256": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7",
+  "thresholds": {
+    "current": 0.4711279273033142,
+    "candidate": 0.7853294610977173
+  },
+  "caution": "Legitimate means publisher-labeled, not independently verified. URL-weighted observational slices overlap and have correlated features; they do not prove causation. This diagnostic makes these sources development data. Sampled TreeSHAP explains model margins, not safety or causal effects. No URL visited, model retrained or threshold changed.",
+  "datasets": {
+    "uploaded_urls": {
+      "legitimate_rows": 153225,
+      "false_positives_current": 18054,
+      "false_positives_candidate": 11536,
+      "minimum_support_for_summary": 100,
+      "current_patterns": {
+        "http": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "https": {
+          "legitimate_rows": 153225,
+          "false_positives": 18054,
+          "false_positive_rate": 0.11782672540381792,
+          "share_of_all_false_positives": 1.0,
+          "other_legitimate_rows": 0,
+          "other_false_positive_rate": null,
+          "risk_ratio_vs_other": null
+        },
+        "nonroot_path": {
+          "legitimate_rows": 111616,
+          "false_positives": 12545,
+          "false_positive_rate": 0.11239428038990826,
+          "share_of_all_false_positives": 0.6948598648498948,
+          "other_legitimate_rows": 41609,
+          "other_false_positive_rate": 0.13239924054891972,
+          "risk_ratio_vs_other": 0.8489042680602091
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 5748,
+          "false_positives": 924,
+          "false_positive_rate": 0.16075156576200417,
+          "share_of_all_false_positives": 0.0511797939514789,
+          "other_legitimate_rows": 147477,
+          "other_false_positive_rate": 0.11615370532354198,
+          "risk_ratio_vs_other": 1.3839555553930583
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 29905,
+          "false_positives": 4157,
+          "false_positive_rate": 0.13900685504096305,
+          "share_of_all_false_positives": 0.23025368339426167,
+          "other_legitimate_rows": 123320,
+          "other_false_positive_rate": 0.11269056114174505,
+          "risk_ratio_vs_other": 1.233527046387822
+        },
+        "query_present": {
+          "legitimate_rows": 17465,
+          "false_positives": 2208,
+          "false_positive_rate": 0.12642427712567994,
+          "share_of_all_false_positives": 0.12229976736457294,
+          "other_legitimate_rows": 135760,
+          "other_false_positive_rate": 0.11672068355922216,
+          "risk_ratio_vs_other": 1.0831351673975962
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 8655,
+          "false_positives": 1190,
+          "false_positive_rate": 0.13749277874061236,
+          "share_of_all_false_positives": 0.06591337099811675,
+          "other_legitimate_rows": 144570,
+          "other_false_positive_rate": 0.11664937400567199,
+          "risk_ratio_vs_other": 1.1786842399508022
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 13008,
+          "false_positives": 8890,
+          "false_positive_rate": 0.6834255842558425,
+          "share_of_all_false_positives": 0.49241165392710756,
+          "other_legitimate_rows": 140217,
+          "other_false_positive_rate": 0.06535584130312301,
+          "risk_ratio_vs_other": 10.456993141379472
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 11757,
+          "false_positives": 3735,
+          "false_positive_rate": 0.3176830824189844,
+          "share_of_all_false_positives": 0.20687936191425724,
+          "other_legitimate_rows": 141468,
+          "other_false_positive_rate": 0.10121723640681991,
+          "risk_ratio_vs_other": 3.138626321925336
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 9306,
+          "false_positives": 1681,
+          "false_positive_rate": 0.1806361487212551,
+          "share_of_all_false_positives": 0.0931095602082641,
+          "other_legitimate_rows": 143919,
+          "other_false_positive_rate": 0.11376538191621675,
+          "risk_ratio_vs_other": 1.587795388005516
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 24877,
+          "false_positives": 14551,
+          "false_positive_rate": 0.5849177955541263,
+          "share_of_all_false_positives": 0.8059709759610059,
+          "other_legitimate_rows": 128348,
+          "other_false_positive_rate": 0.027292984697852712,
+          "risk_ratio_vs_other": 21.43106743470768
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 3883,
+          "false_positives": 581,
+          "false_positive_rate": 0.14962657738861704,
+          "share_of_all_false_positives": 0.032181234075551124,
+          "other_legitimate_rows": 149342,
+          "other_false_positive_rate": 0.11699990625544053,
+          "risk_ratio_vs_other": 1.2788606604687716
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 12,
+          "false_positives": 10,
+          "false_positive_rate": 0.8333333333333334,
+          "share_of_all_false_positives": 0.0005538938739337543,
+          "other_legitimate_rows": 153213,
+          "other_false_positive_rate": 0.11777068525516764,
+          "risk_ratio_vs_other": 7.075897805364665
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 17,
+          "false_positives": 12,
+          "false_positive_rate": 0.7058823529411765,
+          "share_of_all_false_positives": 0.0006646726487205051,
+          "other_legitimate_rows": 153208,
+          "other_false_positive_rate": 0.11776147459662681,
+          "risk_ratio_vs_other": 5.994170464993447
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 368,
+          "false_positives": 121,
+          "false_positive_rate": 0.328804347826087,
+          "share_of_all_false_positives": 0.006702115874598427,
+          "other_legitimate_rows": 152857,
+          "other_false_positive_rate": 0.11731880123252451,
+          "risk_ratio_vs_other": 2.8026569004434383
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 50,
+          "false_positives": 41,
+          "false_positive_rate": 0.82,
+          "share_of_all_false_positives": 0.0022709648831283928,
+          "other_legitimate_rows": 153175,
+          "other_false_positive_rate": 0.11759751917741146,
+          "risk_ratio_vs_other": 6.972936212735246
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 319,
+          "false_positives": 81,
+          "false_positive_rate": 0.25391849529780564,
+          "share_of_all_false_positives": 0.00448654037886341,
+          "other_legitimate_rows": 152906,
+          "other_false_positive_rate": 0.11754280407570665,
+          "risk_ratio_vs_other": 2.160221523507832
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 152864,
+          "false_positives": 17795,
+          "false_positive_rate": 0.11641066568976345,
+          "share_of_all_false_positives": 0.9856541486651158,
+          "other_legitimate_rows": 361,
+          "other_false_positive_rate": 0.7174515235457064,
+          "risk_ratio_vs_other": 0.16225579271816448
+        }
+      },
+      "candidate_patterns": {
+        "http": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.07528797519986948,
+          "risk_ratio_vs_other": null
+        },
+        "https": {
+          "legitimate_rows": 153225,
+          "false_positives": 11536,
+          "false_positive_rate": 0.07528797519986948,
+          "share_of_all_false_positives": 1.0,
+          "other_legitimate_rows": 0,
+          "other_false_positive_rate": null,
+          "risk_ratio_vs_other": null
+        },
+        "nonroot_path": {
+          "legitimate_rows": 111616,
+          "false_positives": 8443,
+          "false_positive_rate": 0.07564327694954129,
+          "share_of_all_false_positives": 0.731882801664355,
+          "other_legitimate_rows": 41609,
+          "other_false_positive_rate": 0.0743348794731909,
+          "risk_ratio_vs_other": 1.017601393660997
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 5748,
+          "false_positives": 537,
+          "false_positive_rate": 0.09342379958246347,
+          "share_of_all_false_positives": 0.0465499306518724,
+          "other_legitimate_rows": 147477,
+          "other_false_positive_rate": 0.07458112112397187,
+          "risk_ratio_vs_other": 1.252646757980086
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 29905,
+          "false_positives": 2839,
+          "false_positive_rate": 0.09493395753218525,
+          "share_of_all_false_positives": 0.2460991678224688,
+          "other_legitimate_rows": 123320,
+          "other_false_positive_rate": 0.07052384041518002,
+          "risk_ratio_vs_other": 1.3461257494387817
+        },
+        "query_present": {
+          "legitimate_rows": 17465,
+          "false_positives": 1575,
+          "false_positive_rate": 0.09018036072144289,
+          "share_of_all_false_positives": 0.13652912621359223,
+          "other_legitimate_rows": 135760,
+          "other_false_positive_rate": 0.07337212728344136,
+          "risk_ratio_vs_other": 1.229081996942384
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 8655,
+          "false_positives": 813,
+          "false_positive_rate": 0.09393414211438475,
+          "share_of_all_false_positives": 0.0704750346740638,
+          "other_legitimate_rows": 144570,
+          "other_false_positive_rate": 0.07417168153835513,
+          "risk_ratio_vs_other": 1.2664421267813675
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 13008,
+          "false_positives": 6722,
+          "false_positive_rate": 0.5167589175891759,
+          "share_of_all_false_positives": 0.5826976421636616,
+          "other_legitimate_rows": 140217,
+          "other_false_positive_rate": 0.03433249891240007,
+          "risk_ratio_vs_other": 15.051596416203049
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 11757,
+          "false_positives": 2369,
+          "false_positive_rate": 0.20149698052224208,
+          "share_of_all_false_positives": 0.20535714285714285,
+          "other_legitimate_rows": 141468,
+          "other_false_positive_rate": 0.06479910651171997,
+          "risk_ratio_vs_other": 3.109564180268413
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 9306,
+          "false_positives": 1249,
+          "false_positive_rate": 0.13421448527831506,
+          "share_of_all_false_positives": 0.10826976421636615,
+          "other_legitimate_rows": 143919,
+          "other_false_positive_rate": 0.07147770620974297,
+          "risk_ratio_vs_other": 1.8777111409322278
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 24877,
+          "false_positives": 10385,
+          "false_positive_rate": 0.41745387305543274,
+          "share_of_all_false_positives": 0.9002253814147018,
+          "other_legitimate_rows": 128348,
+          "other_false_positive_rate": 0.008967806276685262,
+          "risk_ratio_vs_other": 46.55027775753144
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 3883,
+          "false_positives": 366,
+          "false_positive_rate": 0.09425701776976564,
+          "share_of_all_false_positives": 0.031726768377253814,
+          "other_legitimate_rows": 149342,
+          "other_false_positive_rate": 0.07479476637516573,
+          "risk_ratio_vs_other": 1.2602087330145335
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.07528797519986948,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 12,
+          "false_positives": 9,
+          "false_positive_rate": 0.75,
+          "share_of_all_false_positives": 0.0007801664355062413,
+          "other_legitimate_rows": 153213,
+          "other_false_positive_rate": 0.07523513017824858,
+          "risk_ratio_vs_other": 9.968747288973715
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 17,
+          "false_positives": 6,
+          "false_positive_rate": 0.35294117647058826,
+          "share_of_all_false_positives": 0.0005201109570041609,
+          "other_legitimate_rows": 153208,
+          "other_false_positive_rate": 0.07525716672758603,
+          "risk_ratio_vs_other": 4.689801540737717
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 368,
+          "false_positives": 79,
+          "false_positive_rate": 0.21467391304347827,
+          "share_of_all_false_positives": 0.0068481276005547854,
+          "other_legitimate_rows": 152857,
+          "other_false_positive_rate": 0.07495240649757616,
+          "risk_ratio_vs_other": 2.864136364326347
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 50,
+          "false_positives": 33,
+          "false_positive_rate": 0.66,
+          "share_of_all_false_positives": 0.002860610263522885,
+          "other_legitimate_rows": 153175,
+          "other_false_positive_rate": 0.07509711114738045,
+          "risk_ratio_vs_other": 8.788620359906112
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 319,
+          "false_positives": 47,
+          "false_positive_rate": 0.14733542319749215,
+          "share_of_all_false_positives": 0.0040742024965325935,
+          "other_legitimate_rows": 152906,
+          "other_false_positive_rate": 0.0751376662786287,
+          "risk_ratio_vs_other": 1.9608730280647346
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 152864,
+          "false_positives": 11440,
+          "false_positive_rate": 0.07483776428720955,
+          "share_of_all_false_positives": 0.9916782246879334,
+          "other_legitimate_rows": 361,
+          "other_false_positive_rate": 0.2659279778393352,
+          "risk_ratio_vs_other": 0.2814211761216942
+        }
+      },
+      "https_current_patterns": {
+        "nonroot_path": {
+          "legitimate_rows": 111616,
+          "false_positives": 12545,
+          "false_positive_rate": 0.11239428038990826,
+          "share_of_all_false_positives": 0.6948598648498948,
+          "other_legitimate_rows": 41609,
+          "other_false_positive_rate": 0.13239924054891972,
+          "risk_ratio_vs_other": 0.8489042680602091
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 5748,
+          "false_positives": 924,
+          "false_positive_rate": 0.16075156576200417,
+          "share_of_all_false_positives": 0.0511797939514789,
+          "other_legitimate_rows": 147477,
+          "other_false_positive_rate": 0.11615370532354198,
+          "risk_ratio_vs_other": 1.3839555553930583
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 29905,
+          "false_positives": 4157,
+          "false_positive_rate": 0.13900685504096305,
+          "share_of_all_false_positives": 0.23025368339426167,
+          "other_legitimate_rows": 123320,
+          "other_false_positive_rate": 0.11269056114174505,
+          "risk_ratio_vs_other": 1.233527046387822
+        },
+        "query_present": {
+          "legitimate_rows": 17465,
+          "false_positives": 2208,
+          "false_positive_rate": 0.12642427712567994,
+          "share_of_all_false_positives": 0.12229976736457294,
+          "other_legitimate_rows": 135760,
+          "other_false_positive_rate": 0.11672068355922216,
+          "risk_ratio_vs_other": 1.0831351673975962
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 8655,
+          "false_positives": 1190,
+          "false_positive_rate": 0.13749277874061236,
+          "share_of_all_false_positives": 0.06591337099811675,
+          "other_legitimate_rows": 144570,
+          "other_false_positive_rate": 0.11664937400567199,
+          "risk_ratio_vs_other": 1.1786842399508022
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 13008,
+          "false_positives": 8890,
+          "false_positive_rate": 0.6834255842558425,
+          "share_of_all_false_positives": 0.49241165392710756,
+          "other_legitimate_rows": 140217,
+          "other_false_positive_rate": 0.06535584130312301,
+          "risk_ratio_vs_other": 10.456993141379472
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 11757,
+          "false_positives": 3735,
+          "false_positive_rate": 0.3176830824189844,
+          "share_of_all_false_positives": 0.20687936191425724,
+          "other_legitimate_rows": 141468,
+          "other_false_positive_rate": 0.10121723640681991,
+          "risk_ratio_vs_other": 3.138626321925336
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 9306,
+          "false_positives": 1681,
+          "false_positive_rate": 0.1806361487212551,
+          "share_of_all_false_positives": 0.0931095602082641,
+          "other_legitimate_rows": 143919,
+          "other_false_positive_rate": 0.11376538191621675,
+          "risk_ratio_vs_other": 1.587795388005516
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 24877,
+          "false_positives": 14551,
+          "false_positive_rate": 0.5849177955541263,
+          "share_of_all_false_positives": 0.8059709759610059,
+          "other_legitimate_rows": 128348,
+          "other_false_positive_rate": 0.027292984697852712,
+          "risk_ratio_vs_other": 21.43106743470768
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 3883,
+          "false_positives": 581,
+          "false_positive_rate": 0.14962657738861704,
+          "share_of_all_false_positives": 0.032181234075551124,
+          "other_legitimate_rows": 149342,
+          "other_false_positive_rate": 0.11699990625544053,
+          "risk_ratio_vs_other": 1.2788606604687716
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 12,
+          "false_positives": 10,
+          "false_positive_rate": 0.8333333333333334,
+          "share_of_all_false_positives": 0.0005538938739337543,
+          "other_legitimate_rows": 153213,
+          "other_false_positive_rate": 0.11777068525516764,
+          "risk_ratio_vs_other": 7.075897805364665
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 17,
+          "false_positives": 12,
+          "false_positive_rate": 0.7058823529411765,
+          "share_of_all_false_positives": 0.0006646726487205051,
+          "other_legitimate_rows": 153208,
+          "other_false_positive_rate": 0.11776147459662681,
+          "risk_ratio_vs_other": 5.994170464993447
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 368,
+          "false_positives": 121,
+          "false_positive_rate": 0.328804347826087,
+          "share_of_all_false_positives": 0.006702115874598427,
+          "other_legitimate_rows": 152857,
+          "other_false_positive_rate": 0.11731880123252451,
+          "risk_ratio_vs_other": 2.8026569004434383
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 50,
+          "false_positives": 41,
+          "false_positive_rate": 0.82,
+          "share_of_all_false_positives": 0.0022709648831283928,
+          "other_legitimate_rows": 153175,
+          "other_false_positive_rate": 0.11759751917741146,
+          "risk_ratio_vs_other": 6.972936212735246
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 319,
+          "false_positives": 81,
+          "false_positive_rate": 0.25391849529780564,
+          "share_of_all_false_positives": 0.00448654037886341,
+          "other_legitimate_rows": 152906,
+          "other_false_positive_rate": 0.11754280407570665,
+          "risk_ratio_vs_other": 2.160221523507832
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 152864,
+          "false_positives": 17795,
+          "false_positive_rate": 0.11641066568976345,
+          "share_of_all_false_positives": 0.9856541486651158,
+          "other_legitimate_rows": 361,
+          "other_false_positive_rate": 0.7174515235457064,
+          "risk_ratio_vs_other": 0.16225579271816448
+        }
+      },
+      "feature_distributions": {
+        "url_length": {
+          "false_positive_median": 58.0,
+          "accepted_legitimate_median": 49.0
+        },
+        "hostname_length": {
+          "false_positive_median": 29.0,
+          "accepted_legitimate_median": 20.0
+        },
+        "path_length": {
+          "false_positive_median": 17.0,
+          "accepted_legitimate_median": 19.0
+        },
+        "query_length": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "dot_count": {
+          "false_positive_median": 3.0,
+          "accepted_legitimate_median": 2.0
+        },
+        "hyphen_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "underscore_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "digit_count": {
+          "false_positive_median": 2.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "digit_ratio": {
+          "false_positive_median": 0.028169014084507043,
+          "accepted_legitimate_median": 0.0
+        },
+        "subdomain_count": {
+          "false_positive_median": 2.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "query_parameter_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "percent_encoding_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "special_character_count": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "has_ip_hostname": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "uses_https": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "has_at_symbol": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "has_explicit_port": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "suspicious_word_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "character_entropy": {
+          "false_positive_median": 4.348167374110519,
+          "accepted_legitimate_median": 4.233535197831868
+        },
+        "longest_token_length": {
+          "false_positive_median": 12.0,
+          "accepted_legitimate_median": 11.0
+        },
+        "tld_length": {
+          "false_positive_median": 3.0,
+          "accepted_legitimate_median": 3.0
+        }
+      },
+      "keyword_patterns": {
+        "account": {
+          "legitimate_rows": 26,
+          "false_positives": 12,
+          "false_positive_rate": 0.46153846153846156,
+          "share_of_all_false_positives": 0.0006646726487205051,
+          "other_legitimate_rows": 153199,
+          "other_false_positive_rate": 0.11776839274407797,
+          "risk_ratio_vs_other": 3.9190350720114604
+        },
+        "bank": {
+          "legitimate_rows": 125,
+          "false_positives": 24,
+          "false_positive_rate": 0.192,
+          "share_of_all_false_positives": 0.0013293452974410102,
+          "other_legitimate_rows": 153100,
+          "other_false_positive_rate": 0.1177661659046375,
+          "risk_ratio_vs_other": 1.6303494176372713
+        },
+        "confirm": {
+          "legitimate_rows": 4,
+          "false_positives": 1,
+          "false_positive_rate": 0.25,
+          "share_of_all_false_positives": 5.538938739337543e-05,
+          "other_legitimate_rows": 153221,
+          "other_false_positive_rate": 0.11782327487746458,
+          "risk_ratio_vs_other": 2.121821857862959
+        },
+        "credential": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "invoice": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "login": {
+          "legitimate_rows": 35,
+          "false_positives": 23,
+          "false_positive_rate": 0.6571428571428571,
+          "share_of_all_false_positives": 0.001273955910047635,
+          "other_legitimate_rows": 153190,
+          "other_false_positive_rate": 0.11770350545074744,
+          "risk_ratio_vs_other": 5.5830355657320325
+        },
+        "password": {
+          "legitimate_rows": 4,
+          "false_positives": 2,
+          "false_positive_rate": 0.5,
+          "share_of_all_false_positives": 0.00011077877478675086,
+          "other_legitimate_rows": 153221,
+          "other_false_positive_rate": 0.11781674835694846,
+          "risk_ratio_vs_other": 4.243878794593397
+        },
+        "payment": {
+          "legitimate_rows": 3,
+          "false_positives": 1,
+          "false_positive_rate": 0.3333333333333333,
+          "share_of_all_false_positives": 5.538938739337543e-05,
+          "other_legitimate_rows": 153222,
+          "other_false_positive_rate": 0.11782250590646252,
+          "risk_ratio_vs_other": 2.8291142746357942
+        },
+        "recover": {
+          "legitimate_rows": 1,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153224,
+          "other_false_positive_rate": 0.11782749438730225,
+          "risk_ratio_vs_other": 0.0
+        },
+        "reset": {
+          "legitimate_rows": 16,
+          "false_positives": 8,
+          "false_positive_rate": 0.5,
+          "share_of_all_false_positives": 0.00044311509914700343,
+          "other_legitimate_rows": 153209,
+          "other_false_positive_rate": 0.11778681409055604,
+          "risk_ratio_vs_other": 4.244957331264546
+        },
+        "secure": {
+          "legitimate_rows": 26,
+          "false_positives": 18,
+          "false_positive_rate": 0.6923076923076923,
+          "share_of_all_false_positives": 0.0009970089730807576,
+          "other_legitimate_rows": 153199,
+          "other_false_positive_rate": 0.11772922799757178,
+          "risk_ratio_vs_other": 5.88050821434055
+        },
+        "signin": {
+          "legitimate_rows": 2,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153223,
+          "other_false_positive_rate": 0.11782826338082403,
+          "risk_ratio_vs_other": 0.0
+        },
+        "support": {
+          "legitimate_rows": 67,
+          "false_positives": 19,
+          "false_positive_rate": 0.2835820895522388,
+          "share_of_all_false_positives": 0.0010523983604741331,
+          "other_legitimate_rows": 153158,
+          "other_false_positive_rate": 0.11775421460191436,
+          "risk_ratio_vs_other": 2.4082542651312333
+        },
+        "suspend": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "update": {
+          "legitimate_rows": 63,
+          "false_positives": 16,
+          "false_positive_rate": 0.25396825396825395,
+          "share_of_all_false_positives": 0.0008862301982940069,
+          "other_legitimate_rows": 153162,
+          "other_false_positive_rate": 0.11777072642039148,
+          "risk_ratio_vs_other": 2.156463339299574
+        },
+        "verify": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        },
+        "wallet": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 153225,
+          "other_false_positive_rate": 0.11782672540381792,
+          "risk_ratio_vs_other": null
+        }
+      },
+      "domain_summary": {
+        "unique_legitimate_domains": 81246,
+        "domains_with_false_positives": 10568,
+        "largest_false_positive_counts": [
+          {
+            "domain": "businessweek.com",
+            "legitimate_rows": 189,
+            "false_positives": 163,
+            "candidate_false_positives": 162,
+            "false_positive_rate": 0.8624338624338624
+          },
+          {
+            "domain": "foodpages.ca",
+            "legitimate_rows": 239,
+            "false_positives": 157,
+            "candidate_false_positives": 86,
+            "false_positive_rate": 0.6569037656903766
+          },
+          {
+            "domain": "opentopia.com",
+            "legitimate_rows": 158,
+            "false_positives": 152,
+            "candidate_false_positives": 136,
+            "false_positive_rate": 0.9620253164556962
+          },
+          {
+            "domain": "rivals.com",
+            "legitimate_rows": 194,
+            "false_positives": 148,
+            "candidate_false_positives": 132,
+            "false_positive_rate": 0.7628865979381443
+          },
+          {
+            "domain": "websters-online-dictionary.org",
+            "legitimate_rows": 143,
+            "false_positives": 143,
+            "candidate_false_positives": 102,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "goldenmap.com",
+            "legitimate_rows": 407,
+            "false_positives": 143,
+            "candidate_false_positives": 22,
+            "false_positive_rate": 0.35135135135135137
+          },
+          {
+            "domain": "suite101.com",
+            "legitimate_rows": 205,
+            "false_positives": 138,
+            "candidate_false_positives": 86,
+            "false_positive_rate": 0.6731707317073171
+          },
+          {
+            "domain": "onepakistan.com",
+            "legitimate_rows": 119,
+            "false_positives": 119,
+            "candidate_false_positives": 116,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "blockshopper.com",
+            "legitimate_rows": 106,
+            "false_positives": 105,
+            "candidate_false_positives": 89,
+            "false_positive_rate": 0.9905660377358491
+          },
+          {
+            "domain": "btjunkie.org",
+            "legitimate_rows": 145,
+            "false_positives": 104,
+            "candidate_false_positives": 40,
+            "false_positive_rate": 0.7172413793103448
+          }
+        ]
+      },
+      "tree_shap": {
+        "false_positives": {
+          "sample_rows": 100,
+          "mean_margin_contribution": {
+            "url_length": 0.2976495921611786,
+            "hostname_length": 2.787724256515503,
+            "path_length": 0.07297788560390472,
+            "query_length": -0.0009702008101157844,
+            "dot_count": 0.39827847480773926,
+            "hyphen_count": -0.23364166915416718,
+            "underscore_count": 0.005681322887539864,
+            "digit_count": -0.004241546615958214,
+            "digit_ratio": 0.00470640929415822,
+            "subdomain_count": -0.5266985893249512,
+            "query_parameter_count": 0.009297080338001251,
+            "percent_encoding_count": -0.0016733661759644747,
+            "special_character_count": 0.03195086121559143,
+            "has_ip_hostname": -0.022215381264686584,
+            "uses_https": -1.6963332891464233,
+            "has_at_symbol": -0.01678122580051422,
+            "has_explicit_port": -0.0013036843156442046,
+            "suspicious_word_count": -0.12354394048452377,
+            "character_entropy": 0.41286131739616394,
+            "longest_token_length": 0.38653504848480225,
+            "tld_length": 0.6409652829170227
+          },
+          "mean_base_margin": -0.13156796991825104
+        },
+        "accepted_legitimate": {
+          "sample_rows": 100,
+          "mean_margin_contribution": {
+            "url_length": 0.006890056189149618,
+            "hostname_length": -0.1783476024866104,
+            "path_length": -0.050835877656936646,
+            "query_length": -0.02372819371521473,
+            "dot_count": 0.042124681174755096,
+            "hyphen_count": -0.07303734123706818,
+            "underscore_count": -0.025182953104376793,
+            "digit_count": -0.02426508255302906,
+            "digit_ratio": -0.0954362079501152,
+            "subdomain_count": -0.4950122833251953,
+            "query_parameter_count": 0.005321344826370478,
+            "percent_encoding_count": 0.0034739470575004816,
+            "special_character_count": 0.0151292085647583,
+            "has_ip_hostname": -0.022571222856640816,
+            "uses_https": -1.7546671628952026,
+            "has_at_symbol": -0.019271669909358025,
+            "has_explicit_port": -0.0013674591900780797,
+            "suspicious_word_count": -0.11998524516820908,
+            "character_entropy": -0.028152162209153175,
+            "longest_token_length": -0.5528748035430908,
+            "tld_length": -0.09657973051071167
+          },
+          "mean_base_margin": -0.13156796991825104
+        }
+      },
+      "subdomain_definition_audit": {
+        "definition": "Naive max(hostname labels - 2, 0) versus offline PSL-aware subdomain labels; private suffixes included consistently with domain grouping; IP counts zero.",
+        "overcounted_legitimate_rows": 13142,
+        "overcounted_false_positives": 6556,
+        "overcounted_false_positive_rate": 0.49885862121442703,
+        "naive_at_least_2_but_psl_less_than_2_rows": 12432,
+        "naive_at_least_2_but_psl_less_than_2_false_positives": 6356,
+        "psl_at_least_2_rows": 12445,
+        "psl_at_least_2_false_positives": 8195,
+        "psl_at_least_2_false_positive_rate": 0.6584973885094415,
+        "caution": "Diagnostic semantic mismatch only. Existing model was trained with naive features; changing serving-time definitions without retraining would invalidate its feature meaning.",
+        "suffixes_with_largest_fp_counts": [
+          {
+            "suffix": "com",
+            "legitimate_rows": 107570,
+            "false_positives": 8234,
+            "fpr": 0.07654550525239379
+          },
+          {
+            "suffix": "blogspot.com",
+            "legitimate_rows": 7033,
+            "false_positives": 6067,
+            "fpr": 0.8626475188397554
+          },
+          {
+            "suffix": "org",
+            "legitimate_rows": 13004,
+            "false_positives": 1263,
+            "fpr": 0.09712396185788988
+          },
+          {
+            "suffix": "net",
+            "legitimate_rows": 9219,
+            "false_positives": 760,
+            "fpr": 0.08243844234732617
+          },
+          {
+            "suffix": "ca",
+            "legitimate_rows": 4072,
+            "false_positives": 333,
+            "fpr": 0.08177799607072692
+          },
+          {
+            "suffix": "info",
+            "legitimate_rows": 1011,
+            "false_positives": 258,
+            "fpr": 0.2551928783382789
+          },
+          {
+            "suffix": "edu",
+            "legitimate_rows": 873,
+            "false_positives": 182,
+            "fpr": 0.20847651775486828
+          },
+          {
+            "suffix": "co.uk",
+            "legitimate_rows": 2501,
+            "false_positives": 108,
+            "fpr": 0.04318272690923631
+          },
+          {
+            "suffix": "at",
+            "legitimate_rows": 117,
+            "false_positives": 65,
+            "fpr": 0.5555555555555556
+          },
+          {
+            "suffix": "name",
+            "legitimate_rows": 179,
+            "false_positives": 65,
+            "fpr": 0.36312849162011174
+          }
+        ]
+      }
+    },
+    "hf_phishnchips": {
+      "legitimate_rows": 501,
+      "false_positives_current": 442,
+      "false_positives_candidate": 85,
+      "minimum_support_for_summary": 20,
+      "current_patterns": {
+        "http": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "https": {
+          "legitimate_rows": 501,
+          "false_positives": 442,
+          "false_positive_rate": 0.8822355289421158,
+          "share_of_all_false_positives": 1.0,
+          "other_legitimate_rows": 0,
+          "other_false_positive_rate": null,
+          "risk_ratio_vs_other": null
+        },
+        "nonroot_path": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "query_present": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 23,
+          "false_positives": 22,
+          "false_positive_rate": 0.9565217391304348,
+          "share_of_all_false_positives": 0.049773755656108594,
+          "other_legitimate_rows": 478,
+          "other_false_positive_rate": 0.8786610878661087,
+          "risk_ratio_vs_other": 1.0886128364389234
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 45,
+          "false_positives": 40,
+          "false_positive_rate": 0.8888888888888888,
+          "share_of_all_false_positives": 0.09049773755656108,
+          "other_legitimate_rows": 456,
+          "other_false_positive_rate": 0.881578947368421,
+          "risk_ratio_vs_other": 1.0082918739635158
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 1,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.884,
+          "risk_ratio_vs_other": 0.0
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 3,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 498,
+          "other_false_positive_rate": 0.8875502008032129,
+          "risk_ratio_vs_other": 0.0
+        }
+      },
+      "candidate_patterns": {
+        "http": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "https": {
+          "legitimate_rows": 501,
+          "false_positives": 85,
+          "false_positive_rate": 0.16966067864271456,
+          "share_of_all_false_positives": 1.0,
+          "other_legitimate_rows": 0,
+          "other_false_positive_rate": null,
+          "risk_ratio_vs_other": null
+        },
+        "nonroot_path": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.011764705882352941,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.168,
+          "risk_ratio_vs_other": 5.952380952380952
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "query_present": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 23,
+          "false_positives": 22,
+          "false_positive_rate": 0.9565217391304348,
+          "share_of_all_false_positives": 0.25882352941176473,
+          "other_legitimate_rows": 478,
+          "other_false_positive_rate": 0.13179916317991633,
+          "risk_ratio_vs_other": 7.257418909592822
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 45,
+          "false_positives": 15,
+          "false_positive_rate": 0.3333333333333333,
+          "share_of_all_false_positives": 0.17647058823529413,
+          "other_legitimate_rows": 456,
+          "other_false_positive_rate": 0.15350877192982457,
+          "risk_ratio_vs_other": 2.1714285714285713
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 1,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.17,
+          "risk_ratio_vs_other": 0.0
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.011764705882352941,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.168,
+          "risk_ratio_vs_other": 5.952380952380952
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.011764705882352941,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.168,
+          "risk_ratio_vs_other": 5.952380952380952
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.16966067864271456,
+          "risk_ratio_vs_other": null
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 3,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 498,
+          "other_false_positive_rate": 0.1706827309236948,
+          "risk_ratio_vs_other": 0.0
+        }
+      },
+      "https_current_patterns": {
+        "nonroot_path": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "query_present": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 23,
+          "false_positives": 22,
+          "false_positive_rate": 0.9565217391304348,
+          "share_of_all_false_positives": 0.049773755656108594,
+          "other_legitimate_rows": 478,
+          "other_false_positive_rate": 0.8786610878661087,
+          "risk_ratio_vs_other": 1.0886128364389234
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 45,
+          "false_positives": 40,
+          "false_positive_rate": 0.8888888888888888,
+          "share_of_all_false_positives": 0.09049773755656108,
+          "other_legitimate_rows": 456,
+          "other_false_positive_rate": 0.881578947368421,
+          "risk_ratio_vs_other": 1.0082918739635158
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 1,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.884,
+          "risk_ratio_vs_other": 0.0
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 3,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 498,
+          "other_false_positive_rate": 0.8875502008032129,
+          "risk_ratio_vs_other": 0.0
+        }
+      },
+      "feature_distributions": {
+        "url_length": {
+          "false_positive_median": 20.0,
+          "accepted_legitimate_median": 16.0
+        },
+        "hostname_length": {
+          "false_positive_median": 12.0,
+          "accepted_legitimate_median": 8.0
+        },
+        "path_length": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "query_length": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "dot_count": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "hyphen_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "underscore_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "digit_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "digit_ratio": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "subdomain_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "query_parameter_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "percent_encoding_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "special_character_count": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "has_ip_hostname": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "uses_https": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "has_at_symbol": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "has_explicit_port": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "suspicious_word_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "character_entropy": {
+          "false_positive_median": 3.720893622717123,
+          "accepted_legitimate_median": 3.521640636343318
+        },
+        "longest_token_length": {
+          "false_positive_median": 8.0,
+          "accepted_legitimate_median": 5.0
+        },
+        "tld_length": {
+          "false_positive_median": 3.0,
+          "accepted_legitimate_median": 2.0
+        }
+      },
+      "keyword_patterns": {
+        "account": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "bank": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "confirm": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "credential": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "invoice": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "login": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0022624434389140274,
+          "other_legitimate_rows": 500,
+          "other_false_positive_rate": 0.882,
+          "risk_ratio_vs_other": 1.1337868480725624
+        },
+        "password": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "payment": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "recover": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "reset": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "secure": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "signin": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "support": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "suspend": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "update": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "verify": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        },
+        "wallet": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 501,
+          "other_false_positive_rate": 0.8822355289421158,
+          "risk_ratio_vs_other": null
+        }
+      },
+      "domain_summary": {
+        "unique_legitimate_domains": 501,
+        "domains_with_false_positives": 442,
+        "largest_false_positive_counts": [
+          {
+            "domain": "007.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "pioneerrx.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "pstream.mov",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "pressenza.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "prdgforward.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "practiscore.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "potia.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "posts.gle",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "porcore.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 1,
+            "false_positive_rate": 1.0
+          },
+          {
+            "domain": "pokellector.com",
+            "legitimate_rows": 1,
+            "false_positives": 1,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 1.0
+          }
+        ]
+      },
+      "tree_shap": {
+        "false_positives": {
+          "sample_rows": 100,
+          "mean_margin_contribution": {
+            "url_length": 0.16948333382606506,
+            "hostname_length": -1.401147484779358,
+            "path_length": 1.102022647857666,
+            "query_length": 0.10080037266016006,
+            "dot_count": 0.031425438821315765,
+            "hyphen_count": 0.28905782103538513,
+            "underscore_count": 0.039087411016225815,
+            "digit_count": 0.03124375268816948,
+            "digit_ratio": -0.10500888526439667,
+            "subdomain_count": 2.0448825359344482,
+            "query_parameter_count": 0.016413003206253052,
+            "percent_encoding_count": 0.00724127609282732,
+            "special_character_count": 0.1283910870552063,
+            "has_ip_hostname": -0.017889080569148064,
+            "uses_https": -1.24118971824646,
+            "has_at_symbol": -0.008298492059111595,
+            "has_explicit_port": -0.001412664307281375,
+            "suspicious_word_count": -0.06579515337944031,
+            "character_entropy": -0.2639964520931244,
+            "longest_token_length": 0.26605576276779175,
+            "tld_length": 0.032542962580919266
+          },
+          "mean_base_margin": -0.13156796991825104
+        },
+        "accepted_legitimate": {
+          "sample_rows": 59,
+          "mean_margin_contribution": {
+            "url_length": -0.07176147401332855,
+            "hostname_length": -2.1166467666625977,
+            "path_length": 0.8844579458236694,
+            "query_length": 0.08885537087917328,
+            "dot_count": -0.01517491228878498,
+            "hyphen_count": 0.2952401340007782,
+            "underscore_count": 0.04403633251786232,
+            "digit_count": 0.026437129825353622,
+            "digit_ratio": -0.15214121341705322,
+            "subdomain_count": 1.054429292678833,
+            "query_parameter_count": 0.014967396855354309,
+            "percent_encoding_count": 0.006445543374866247,
+            "special_character_count": 0.1231715977191925,
+            "has_ip_hostname": -0.021204926073551178,
+            "uses_https": -1.659101963043213,
+            "has_at_symbol": -0.010187225416302681,
+            "has_explicit_port": -0.001419053296558559,
+            "suspicious_word_count": -0.09083838015794754,
+            "character_entropy": -0.3864058256149292,
+            "longest_token_length": 0.383029043674469,
+            "tld_length": -0.1136605516076088
+          },
+          "mean_base_margin": -0.13156796991825104
+        }
+      },
+      "subdomain_definition_audit": {
+        "definition": "Naive max(hostname labels - 2, 0) versus offline PSL-aware subdomain labels; private suffixes included consistently with domain grouping; IP counts zero.",
+        "overcounted_legitimate_rows": 12,
+        "overcounted_false_positives": 0,
+        "overcounted_false_positive_rate": 0.0,
+        "naive_at_least_2_but_psl_less_than_2_rows": 1,
+        "naive_at_least_2_but_psl_less_than_2_false_positives": 0,
+        "psl_at_least_2_rows": 0,
+        "psl_at_least_2_false_positives": 0,
+        "psl_at_least_2_false_positive_rate": null,
+        "caution": "Diagnostic semantic mismatch only. Existing model was trained with naive features; changing serving-time definitions without retraining would invalidate its feature meaning.",
+        "suffixes_with_largest_fp_counts": [
+          {
+            "suffix": "com",
+            "legitimate_rows": 321,
+            "false_positives": 309,
+            "fpr": 0.9626168224299065
+          },
+          {
+            "suffix": "net",
+            "legitimate_rows": 47,
+            "false_positives": 43,
+            "fpr": 0.9148936170212766
+          },
+          {
+            "suffix": "io",
+            "legitimate_rows": 21,
+            "false_positives": 13,
+            "fpr": 0.6190476190476191
+          },
+          {
+            "suffix": "org",
+            "legitimate_rows": 8,
+            "false_positives": 8,
+            "fpr": 1.0
+          },
+          {
+            "suffix": "co",
+            "legitimate_rows": 7,
+            "false_positives": 5,
+            "fpr": 0.7142857142857143
+          },
+          {
+            "suffix": "me",
+            "legitimate_rows": 5,
+            "false_positives": 5,
+            "fpr": 1.0
+          },
+          {
+            "suffix": "app",
+            "legitimate_rows": 4,
+            "false_positives": 4,
+            "fpr": 1.0
+          },
+          {
+            "suffix": "cloud",
+            "legitimate_rows": 4,
+            "false_positives": 4,
+            "fpr": 1.0
+          },
+          {
+            "suffix": "ie",
+            "legitimate_rows": 3,
+            "false_positives": 3,
+            "fpr": 1.0
+          },
+          {
+            "suffix": "edu",
+            "legitimate_rows": 3,
+            "false_positives": 3,
+            "fpr": 1.0
+          }
+        ]
+      }
+    },
+    "hf_ealvaradob": {
+      "legitimate_rows": 19338,
+      "false_positives_current": 6644,
+      "false_positives_candidate": 3654,
+      "minimum_support_for_summary": 100,
+      "current_patterns": {
+        "http": {
+          "legitimate_rows": 11208,
+          "false_positives": 5589,
+          "false_positive_rate": 0.49866167023554603,
+          "share_of_all_false_positives": 0.8412101143889223,
+          "other_legitimate_rows": 8130,
+          "other_false_positive_rate": 0.12976629766297662,
+          "risk_ratio_vs_other": 3.842767183900464
+        },
+        "https": {
+          "legitimate_rows": 8130,
+          "false_positives": 1055,
+          "false_positive_rate": 0.12976629766297662,
+          "share_of_all_false_positives": 0.15878988561107765,
+          "other_legitimate_rows": 11208,
+          "other_false_positive_rate": 0.49866167023554603,
+          "risk_ratio_vs_other": 0.26022914013359133
+        },
+        "nonroot_path": {
+          "legitimate_rows": 15459,
+          "false_positives": 4417,
+          "false_positive_rate": 0.2857235267481726,
+          "share_of_all_false_positives": 0.6648103552077061,
+          "other_legitimate_rows": 3879,
+          "other_false_positive_rate": 0.5741170404743491,
+          "risk_ratio_vs_other": 0.4976747015070325
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 1198,
+          "false_positives": 577,
+          "false_positive_rate": 0.48163606010016696,
+          "share_of_all_false_positives": 0.08684527393136665,
+          "other_legitimate_rows": 18140,
+          "other_false_positive_rate": 0.3344542447629548,
+          "risk_ratio_vs_other": 1.4400656222543313
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 4804,
+          "false_positives": 754,
+          "false_positive_rate": 0.1569525395503747,
+          "share_of_all_false_positives": 0.11348585189644793,
+          "other_legitimate_rows": 14534,
+          "other_false_positive_rate": 0.4052566396036879,
+          "risk_ratio_vs_other": 0.3872917164389042
+        },
+        "query_present": {
+          "legitimate_rows": 740,
+          "false_positives": 136,
+          "false_positive_rate": 0.1837837837837838,
+          "share_of_all_false_positives": 0.020469596628537028,
+          "other_legitimate_rows": 18598,
+          "other_false_positive_rate": 0.34993010001075386,
+          "risk_ratio_vs_other": 0.5252014153059021
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 969,
+          "false_positives": 210,
+          "false_positive_rate": 0.21671826625386997,
+          "share_of_all_false_positives": 0.03160746538229982,
+          "other_legitimate_rows": 18369,
+          "other_false_positive_rate": 0.3502640317926942,
+          "risk_ratio_vs_other": 0.6187282923247338
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 619,
+          "false_positives": 406,
+          "false_positive_rate": 0.6558966074313409,
+          "share_of_all_false_positives": 0.061107766405779654,
+          "other_legitimate_rows": 18719,
+          "other_false_positive_rate": 0.33324429723810034,
+          "risk_ratio_vs_other": 1.9682155489751956
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 1654,
+          "false_positives": 731,
+          "false_positive_rate": 0.4419588875453446,
+          "share_of_all_false_positives": 0.11002408187838651,
+          "other_legitimate_rows": 17684,
+          "other_false_positive_rate": 0.3343700520244289,
+          "risk_ratio_vs_other": 1.3217657648151317
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 967,
+          "false_positives": 402,
+          "false_positive_rate": 0.4157187176835574,
+          "share_of_all_false_positives": 0.060505719446116796,
+          "other_legitimate_rows": 18371,
+          "other_false_positive_rate": 0.33977464482064124,
+          "risk_ratio_vs_other": 1.223513066735763
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 998,
+          "false_positives": 400,
+          "false_positive_rate": 0.40080160320641284,
+          "share_of_all_false_positives": 0.060204695966285374,
+          "other_legitimate_rows": 18340,
+          "other_false_positive_rate": 0.34045801526717556,
+          "risk_ratio_vs_other": 1.1772423771309435
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 790,
+          "false_positives": 430,
+          "false_positive_rate": 0.5443037974683544,
+          "share_of_all_false_positives": 0.06472004816375677,
+          "other_legitimate_rows": 18548,
+          "other_false_positive_rate": 0.33502264395083026,
+          "risk_ratio_vs_other": 1.624677636859195
+        },
+        "ip_hostname": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.00015051173991571343,
+          "other_legitimate_rows": 19337,
+          "other_false_positive_rate": 0.3435382944613953,
+          "risk_ratio_vs_other": 2.910883636911034
+        },
+        "explicit_port": {
+          "legitimate_rows": 44,
+          "false_positives": 28,
+          "false_positive_rate": 0.6363636363636364,
+          "share_of_all_false_positives": 0.004214328717639976,
+          "other_legitimate_rows": 19294,
+          "other_false_positive_rate": 0.34290452990567016,
+          "risk_ratio_vs_other": 1.8558041112454655
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 19338,
+          "other_false_positive_rate": 0.3435722411831627,
+          "risk_ratio_vs_other": null
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 1082,
+          "false_positives": 463,
+          "false_positive_rate": 0.42791127541589646,
+          "share_of_all_false_positives": 0.06968693558097531,
+          "other_legitimate_rows": 18256,
+          "other_false_positive_rate": 0.33857361963190186,
+          "risk_ratio_vs_other": 1.2638647862793408
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 114,
+          "false_positives": 79,
+          "false_positive_rate": 0.6929824561403509,
+          "share_of_all_false_positives": 0.011890427453341361,
+          "other_legitimate_rows": 19224,
+          "other_false_positive_rate": 0.3415002080732418,
+          "risk_ratio_vs_other": 2.0292299675311662
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 988,
+          "false_positives": 397,
+          "false_positive_rate": 0.4018218623481781,
+          "share_of_all_false_positives": 0.05975316074653823,
+          "other_legitimate_rows": 18350,
+          "other_false_positive_rate": 0.3404359673024523,
+          "risk_ratio_vs_other": 1.1803155393131213
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 11590,
+          "false_positives": 3407,
+          "false_positive_rate": 0.2939603106125971,
+          "share_of_all_false_positives": 0.5127934978928357,
+          "other_legitimate_rows": 7748,
+          "other_false_positive_rate": 0.41778523489932884,
+          "risk_ratio_vs_other": 0.7036158438759352
+        }
+      },
+      "candidate_patterns": {
+        "http": {
+          "legitimate_rows": 11208,
+          "false_positives": 3194,
+          "false_positive_rate": 0.2849750178443969,
+          "share_of_all_false_positives": 0.8741105637657361,
+          "other_legitimate_rows": 8130,
+          "other_false_positive_rate": 0.056580565805658053,
+          "risk_ratio_vs_other": 5.036623684945536
+        },
+        "https": {
+          "legitimate_rows": 8130,
+          "false_positives": 460,
+          "false_positive_rate": 0.056580565805658053,
+          "share_of_all_false_positives": 0.12588943623426382,
+          "other_legitimate_rows": 11208,
+          "other_false_positive_rate": 0.2849750178443969,
+          "risk_ratio_vs_other": 0.19854570493106305
+        },
+        "nonroot_path": {
+          "legitimate_rows": 15459,
+          "false_positives": 1983,
+          "false_positive_rate": 0.12827479138366,
+          "share_of_all_false_positives": 0.5426929392446633,
+          "other_legitimate_rows": 3879,
+          "other_false_positive_rate": 0.43078112915699923,
+          "risk_ratio_vs_other": 0.297772540860094
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 1198,
+          "false_positives": 268,
+          "false_positive_rate": 0.22370617696160267,
+          "share_of_all_false_positives": 0.07334428024083196,
+          "other_legitimate_rows": 18140,
+          "other_false_positive_rate": 0.1866593164277839,
+          "risk_ratio_vs_other": 1.1984731394221713
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 4804,
+          "false_positives": 386,
+          "false_positive_rate": 0.08034970857618651,
+          "share_of_all_false_positives": 0.1056376573617953,
+          "other_legitimate_rows": 14534,
+          "other_false_positive_rate": 0.22485207100591717,
+          "risk_ratio_vs_other": 0.35734475656251363
+        },
+        "query_present": {
+          "legitimate_rows": 740,
+          "false_positives": 91,
+          "false_positive_rate": 0.12297297297297298,
+          "share_of_all_false_positives": 0.02490421455938697,
+          "other_legitimate_rows": 18598,
+          "other_false_positive_rate": 0.1915797397569631,
+          "risk_ratio_vs_other": 0.6418892369776457
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 969,
+          "false_positives": 140,
+          "false_positive_rate": 0.14447884416924664,
+          "share_of_all_false_positives": 0.038314176245210725,
+          "other_legitimate_rows": 18369,
+          "other_false_positive_rate": 0.19130056072731233,
+          "risk_ratio_vs_other": 0.7552452727788536
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 619,
+          "false_positives": 327,
+          "false_positive_rate": 0.5282714054927302,
+          "share_of_all_false_positives": 0.08949096880131363,
+          "other_legitimate_rows": 18719,
+          "other_false_positive_rate": 0.1777338533041295,
+          "risk_ratio_vs_other": 2.9722610277783037
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 1654,
+          "false_positives": 513,
+          "false_positive_rate": 0.3101571946795647,
+          "share_of_all_false_positives": 0.14039408866995073,
+          "other_legitimate_rows": 17684,
+          "other_false_positive_rate": 0.17761818593078488,
+          "risk_ratio_vs_other": 1.7462017926499276
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 967,
+          "false_positives": 278,
+          "false_positive_rate": 0.2874870734229576,
+          "share_of_all_false_positives": 0.07608100711548987,
+          "other_legitimate_rows": 18371,
+          "other_false_positive_rate": 0.1837678950519841,
+          "risk_ratio_vs_other": 1.5644031474683513
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 998,
+          "false_positives": 292,
+          "false_positive_rate": 0.2925851703406814,
+          "share_of_all_false_positives": 0.07991242474001095,
+          "other_legitimate_rows": 18340,
+          "other_false_positive_rate": 0.18331515812431842,
+          "risk_ratio_vs_other": 1.5960773420726047
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 790,
+          "false_positives": 259,
+          "false_positive_rate": 0.3278481012658228,
+          "share_of_all_false_positives": 0.07088122605363985,
+          "other_legitimate_rows": 18548,
+          "other_false_positive_rate": 0.18303860254474877,
+          "risk_ratio_vs_other": 1.7911418504502155
+        },
+        "ip_hostname": {
+          "legitimate_rows": 1,
+          "false_positives": 1,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.0002736726874657909,
+          "other_legitimate_rows": 19337,
+          "other_false_positive_rate": 0.18891244763924084,
+          "risk_ratio_vs_other": 5.293457432247468
+        },
+        "explicit_port": {
+          "legitimate_rows": 44,
+          "false_positives": 17,
+          "false_positive_rate": 0.38636363636363635,
+          "share_of_all_false_positives": 0.004652435686918446,
+          "other_legitimate_rows": 19294,
+          "other_false_positive_rate": 0.18850419819633046,
+          "risk_ratio_vs_other": 2.0496288149573823
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 19338,
+          "other_false_positive_rate": 0.18895439031957803,
+          "risk_ratio_vs_other": null
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 1082,
+          "false_positives": 299,
+          "false_positive_rate": 0.27634011090573013,
+          "share_of_all_false_positives": 0.08182813355227149,
+          "other_legitimate_rows": 18256,
+          "other_false_positive_rate": 0.1837751971954426,
+          "risk_ratio_vs_other": 1.5036855632473947
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 114,
+          "false_positives": 66,
+          "false_positive_rate": 0.5789473684210527,
+          "share_of_all_false_positives": 0.0180623973727422,
+          "other_legitimate_rows": 19224,
+          "other_false_positive_rate": 0.18664169787765295,
+          "risk_ratio_vs_other": 3.101918676289386
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 988,
+          "false_positives": 243,
+          "false_positive_rate": 0.24595141700404857,
+          "share_of_all_false_positives": 0.0665024630541872,
+          "other_legitimate_rows": 18350,
+          "other_false_positive_rate": 0.18588555858310626,
+          "risk_ratio_vs_other": 1.3231335391452042
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 11590,
+          "false_positives": 1872,
+          "false_positive_rate": 0.16151855047454702,
+          "share_of_all_false_positives": 0.5123152709359606,
+          "other_legitimate_rows": 7748,
+          "other_false_positive_rate": 0.2299948373773877,
+          "risk_ratio_vs_other": 0.7022703305705894
+        }
+      },
+      "https_current_patterns": {
+        "nonroot_path": {
+          "legitimate_rows": 6012,
+          "false_positives": 528,
+          "false_positive_rate": 0.08782435129740519,
+          "share_of_all_false_positives": 0.500473933649289,
+          "other_legitimate_rows": 2118,
+          "other_false_positive_rate": 0.24881964117091596,
+          "risk_ratio_vs_other": 0.35296390141917305
+        },
+        "short_path_1_to_9": {
+          "legitimate_rows": 677,
+          "false_positives": 143,
+          "false_positive_rate": 0.21122599704579026,
+          "share_of_all_false_positives": 0.13554502369668248,
+          "other_legitimate_rows": 7453,
+          "other_false_positive_rate": 0.12236683214812827,
+          "risk_ratio_vs_other": 1.7261703464717926
+        },
+        "path_length_at_least_40": {
+          "legitimate_rows": 1822,
+          "false_positives": 84,
+          "false_positive_rate": 0.04610318331503842,
+          "share_of_all_false_positives": 0.07962085308056872,
+          "other_legitimate_rows": 6308,
+          "other_false_positive_rate": 0.1539315155358275,
+          "risk_ratio_vs_other": 0.29950451117534743
+        },
+        "query_present": {
+          "legitimate_rows": 411,
+          "false_positives": 61,
+          "false_positive_rate": 0.14841849148418493,
+          "share_of_all_false_positives": 0.05781990521327014,
+          "other_legitimate_rows": 7719,
+          "other_false_positive_rate": 0.12877315714470786,
+          "risk_ratio_vs_other": 1.152557681857569
+        },
+        "url_length_at_least_100": {
+          "legitimate_rows": 446,
+          "false_positives": 49,
+          "false_positive_rate": 0.10986547085201794,
+          "share_of_all_false_positives": 0.046445497630331754,
+          "other_legitimate_rows": 7684,
+          "other_false_positive_rate": 0.13092139510671524,
+          "risk_ratio_vs_other": 0.8391712505237633
+        },
+        "hostname_length_at_least_30": {
+          "legitimate_rows": 227,
+          "false_positives": 97,
+          "false_positive_rate": 0.42731277533039647,
+          "share_of_all_false_positives": 0.09194312796208531,
+          "other_legitimate_rows": 7903,
+          "other_false_positive_rate": 0.12121978995318233,
+          "risk_ratio_vs_other": 3.5251073731066005
+        },
+        "hyphen_in_hostname": {
+          "legitimate_rows": 670,
+          "false_positives": 140,
+          "false_positive_rate": 0.208955223880597,
+          "share_of_all_false_positives": 0.13270142180094788,
+          "other_legitimate_rows": 7460,
+          "other_false_positive_rate": 0.12265415549597855,
+          "risk_ratio_vs_other": 1.703613082130332
+        },
+        "digit_in_hostname": {
+          "legitimate_rows": 327,
+          "false_positives": 69,
+          "false_positive_rate": 0.21100917431192662,
+          "share_of_all_false_positives": 0.06540284360189573,
+          "other_legitimate_rows": 7803,
+          "other_false_positive_rate": 0.12636165577342048,
+          "risk_ratio_vs_other": 1.6698829484340398
+        },
+        "at_least_2_naively_counted_subdomains": {
+          "legitimate_rows": 541,
+          "false_positives": 92,
+          "false_positive_rate": 0.17005545286506468,
+          "share_of_all_false_positives": 0.08720379146919431,
+          "other_legitimate_rows": 7589,
+          "other_false_positive_rate": 0.12689418895770194,
+          "risk_ratio_vs_other": 1.340135858559684
+        },
+        "percent_encoded_characters": {
+          "legitimate_rows": 251,
+          "false_positives": 30,
+          "false_positive_rate": 0.11952191235059761,
+          "share_of_all_false_positives": 0.02843601895734597,
+          "other_legitimate_rows": 7879,
+          "other_false_positive_rate": 0.13009265135169437,
+          "risk_ratio_vs_other": 0.9187445340588865
+        },
+        "ip_hostname": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 8130,
+          "other_false_positive_rate": 0.12976629766297662,
+          "risk_ratio_vs_other": null
+        },
+        "explicit_port": {
+          "legitimate_rows": 38,
+          "false_positives": 24,
+          "false_positive_rate": 0.631578947368421,
+          "share_of_all_false_positives": 0.022748815165876776,
+          "other_legitimate_rows": 8092,
+          "other_false_positive_rate": 0.12740978744438952,
+          "risk_ratio_vs_other": 4.957067742100158
+        },
+        "at_symbol_anywhere": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 8130,
+          "other_false_positive_rate": 0.12976629766297662,
+          "risk_ratio_vs_other": null
+        },
+        "suspicious_word_anywhere": {
+          "legitimate_rows": 828,
+          "false_positives": 265,
+          "false_positive_rate": 0.32004830917874394,
+          "share_of_all_false_positives": 0.25118483412322273,
+          "other_legitimate_rows": 7302,
+          "other_false_positive_rate": 0.1081895371131197,
+          "risk_ratio_vs_other": 2.95821867547239
+        },
+        "suspicious_word_in_hostname": {
+          "legitimate_rows": 80,
+          "false_positives": 49,
+          "false_positive_rate": 0.6125,
+          "share_of_all_false_positives": 0.046445497630331754,
+          "other_legitimate_rows": 8050,
+          "other_false_positive_rate": 0.12496894409937888,
+          "risk_ratio_vs_other": 4.901217693836979
+        },
+        "suspicious_word_outside_hostname": {
+          "legitimate_rows": 768,
+          "false_positives": 229,
+          "false_positive_rate": 0.2981770833333333,
+          "share_of_all_false_positives": 0.21706161137440758,
+          "other_legitimate_rows": 7362,
+          "other_false_positive_rate": 0.1121977723444716,
+          "risk_ratio_vs_other": 2.6576025272397095
+        },
+        "hostname_starts_www": {
+          "legitimate_rows": 4954,
+          "false_positives": 176,
+          "false_positive_rate": 0.03552684699232943,
+          "share_of_all_false_positives": 0.16682464454976303,
+          "other_legitimate_rows": 3176,
+          "other_false_positive_rate": 0.2767632241813602,
+          "risk_ratio_vs_other": 0.12836549038411635
+        }
+      },
+      "feature_distributions": {
+        "url_length": {
+          "false_positive_median": 41.0,
+          "accepted_legitimate_median": 55.0
+        },
+        "hostname_length": {
+          "false_positive_median": 19.0,
+          "accepted_legitimate_median": 17.0
+        },
+        "path_length": {
+          "false_positive_median": 13.0,
+          "accepted_legitimate_median": 28.0
+        },
+        "query_length": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "dot_count": {
+          "false_positive_median": 2.0,
+          "accepted_legitimate_median": 2.0
+        },
+        "hyphen_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "underscore_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "digit_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "digit_ratio": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "subdomain_count": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "query_parameter_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "percent_encoding_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "special_character_count": {
+          "false_positive_median": 1.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "has_ip_hostname": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "uses_https": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 1.0
+        },
+        "has_at_symbol": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "has_explicit_port": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "suspicious_word_count": {
+          "false_positive_median": 0.0,
+          "accepted_legitimate_median": 0.0
+        },
+        "character_entropy": {
+          "false_positive_median": 4.094894353473965,
+          "accepted_legitimate_median": 4.233954211712293
+        },
+        "longest_token_length": {
+          "false_positive_median": 11.0,
+          "accepted_legitimate_median": 11.0
+        },
+        "tld_length": {
+          "false_positive_median": 3.0,
+          "accepted_legitimate_median": 3.0
+        }
+      },
+      "keyword_patterns": {
+        "account": {
+          "legitimate_rows": 145,
+          "false_positives": 54,
+          "false_positive_rate": 0.3724137931034483,
+          "share_of_all_false_positives": 0.008127633955448525,
+          "other_legitimate_rows": 19193,
+          "other_false_positive_rate": 0.3433543479393529,
+          "risk_ratio_vs_other": 1.0846339804301188
+        },
+        "bank": {
+          "legitimate_rows": 104,
+          "false_positives": 43,
+          "false_positive_rate": 0.41346153846153844,
+          "share_of_all_false_positives": 0.006472004816375677,
+          "other_legitimate_rows": 19234,
+          "other_false_positive_rate": 0.3431943433503171,
+          "risk_ratio_vs_other": 1.2047446191136542
+        },
+        "confirm": {
+          "legitimate_rows": 9,
+          "false_positives": 3,
+          "false_positive_rate": 0.3333333333333333,
+          "share_of_all_false_positives": 0.0004515352197471403,
+          "other_legitimate_rows": 19329,
+          "other_false_positive_rate": 0.34357700863986756,
+          "risk_ratio_vs_other": 0.9701852130703207
+        },
+        "credential": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 19338,
+          "other_false_positive_rate": 0.3435722411831627,
+          "risk_ratio_vs_other": null
+        },
+        "invoice": {
+          "legitimate_rows": 3,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 19335,
+          "other_false_positive_rate": 0.34362554952159297,
+          "risk_ratio_vs_other": 0.0
+        },
+        "login": {
+          "legitimate_rows": 433,
+          "false_positives": 208,
+          "false_positive_rate": 0.48036951501154734,
+          "share_of_all_false_positives": 0.031306441902468396,
+          "other_legitimate_rows": 18905,
+          "other_false_positive_rate": 0.34043903729172176,
+          "risk_ratio_vs_other": 1.4110294719225145
+        },
+        "password": {
+          "legitimate_rows": 125,
+          "false_positives": 46,
+          "false_positive_rate": 0.368,
+          "share_of_all_false_positives": 0.006923540036122818,
+          "other_legitimate_rows": 19213,
+          "other_false_positive_rate": 0.3434133139020455,
+          "risk_ratio_vs_other": 1.071595028796605
+        },
+        "payment": {
+          "legitimate_rows": 71,
+          "false_positives": 18,
+          "false_positive_rate": 0.2535211267605634,
+          "share_of_all_false_positives": 0.0027092113184828417,
+          "other_legitimate_rows": 19267,
+          "other_false_positive_rate": 0.34390408470441686,
+          "risk_ratio_vs_other": 0.7371855643368208
+        },
+        "recover": {
+          "legitimate_rows": 22,
+          "false_positives": 10,
+          "false_positive_rate": 0.45454545454545453,
+          "share_of_all_false_positives": 0.0015051173991571343,
+          "other_legitimate_rows": 19316,
+          "other_false_positive_rate": 0.3434458480016567,
+          "risk_ratio_vs_other": 1.3234850768766957
+        },
+        "reset": {
+          "legitimate_rows": 33,
+          "false_positives": 7,
+          "false_positive_rate": 0.21212121212121213,
+          "share_of_all_false_positives": 0.001053582179409994,
+          "other_legitimate_rows": 19305,
+          "other_false_positive_rate": 0.3437969437969438,
+          "risk_ratio_vs_other": 0.6169956305559741
+        },
+        "secure": {
+          "legitimate_rows": 32,
+          "false_positives": 19,
+          "false_positive_rate": 0.59375,
+          "share_of_all_false_positives": 0.0028597230583985553,
+          "other_legitimate_rows": 19306,
+          "other_false_positive_rate": 0.34315756759556615,
+          "risk_ratio_vs_other": 1.730254716981132
+        },
+        "signin": {
+          "legitimate_rows": 24,
+          "false_positives": 16,
+          "false_positive_rate": 0.6666666666666666,
+          "share_of_all_false_positives": 0.002408187838651415,
+          "other_legitimate_rows": 19314,
+          "other_false_positive_rate": 0.3431707569638604,
+          "risk_ratio_vs_other": 1.9426674713337355
+        },
+        "support": {
+          "legitimate_rows": 164,
+          "false_positives": 83,
+          "false_positive_rate": 0.5060975609756098,
+          "share_of_all_false_positives": 0.012492474413004214,
+          "other_legitimate_rows": 19174,
+          "other_false_positive_rate": 0.3421821216230312,
+          "risk_ratio_vs_other": 1.4790298177330197
+        },
+        "suspend": {
+          "legitimate_rows": 0,
+          "false_positives": 0,
+          "false_positive_rate": null,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 19338,
+          "other_false_positive_rate": 0.3435722411831627,
+          "risk_ratio_vs_other": null
+        },
+        "update": {
+          "legitimate_rows": 47,
+          "false_positives": 14,
+          "false_positive_rate": 0.2978723404255319,
+          "share_of_all_false_positives": 0.002107164358819988,
+          "other_legitimate_rows": 19291,
+          "other_false_positive_rate": 0.3436835830179877,
+          "risk_ratio_vs_other": 0.8667051763422225
+        },
+        "verify": {
+          "legitimate_rows": 2,
+          "false_positives": 2,
+          "false_positive_rate": 1.0,
+          "share_of_all_false_positives": 0.00030102347983142685,
+          "other_legitimate_rows": 19336,
+          "other_false_positive_rate": 0.3435043442283823,
+          "risk_ratio_vs_other": 2.911171333935562
+        },
+        "wallet": {
+          "legitimate_rows": 1,
+          "false_positives": 0,
+          "false_positive_rate": 0.0,
+          "share_of_all_false_positives": 0.0,
+          "other_legitimate_rows": 19337,
+          "other_false_positive_rate": 0.3435900087914361,
+          "risk_ratio_vs_other": 0.0
+        }
+      },
+      "domain_summary": {
+        "unique_legitimate_domains": 13329,
+        "domains_with_false_positives": 5201,
+        "largest_false_positive_counts": [
+          {
+            "domain": "sensagent.com",
+            "legitimate_rows": 115,
+            "false_positives": 110,
+            "candidate_false_positives": 74,
+            "false_positive_rate": 0.9565217391304348
+          },
+          {
+            "domain": "dictionary.com",
+            "legitimate_rows": 158,
+            "false_positives": 97,
+            "candidate_false_positives": 0,
+            "false_positive_rate": 0.6139240506329114
+          },
+          {
+            "domain": "definitions.net",
+            "legitimate_rows": 94,
+            "false_positives": 82,
+            "candidate_false_positives": 15,
+            "false_positive_rate": 0.8723404255319149
+          },
+          {
+            "domain": "explained.today",
+            "legitimate_rows": 83,
+            "false_positives": 82,
+            "candidate_false_positives": 81,
+            "false_positive_rate": 0.9879518072289156
+          },
+          {
+            "domain": "academic.ru",
+            "legitimate_rows": 425,
+            "false_positives": 73,
+            "candidate_false_positives": 57,
+            "false_positive_rate": 0.17176470588235293
+          },
+          {
+            "domain": "thefullwiki.org",
+            "legitimate_rows": 146,
+            "false_positives": 40,
+            "candidate_false_positives": 4,
+            "false_positive_rate": 0.273972602739726
+          },
+          {
+            "domain": "tutorialspoint.com",
+            "legitimate_rows": 72,
+            "false_positives": 28,
+            "candidate_false_positives": 1,
+            "false_positive_rate": 0.3888888888888889
+          },
+          {
+            "domain": "dictionarist.com",
+            "legitimate_rows": 53,
+            "false_positives": 28,
+            "candidate_false_positives": 3,
+            "false_positive_rate": 0.5283018867924528
+          },
+          {
+            "domain": "abbreviations.com",
+            "legitimate_rows": 30,
+            "false_positives": 24,
+            "candidate_false_positives": 18,
+            "false_positive_rate": 0.8
+          },
+          {
+            "domain": "softpedia.com",
+            "legitimate_rows": 48,
+            "false_positives": 21,
+            "candidate_false_positives": 7,
+            "false_positive_rate": 0.4375
+          }
+        ]
+      },
+      "tree_shap": {
+        "false_positives": {
+          "sample_rows": 100,
+          "mean_margin_contribution": {
+            "url_length": 0.07427379488945007,
+            "hostname_length": 0.1606878638267517,
+            "path_length": 0.2287810742855072,
+            "query_length": 0.06297340989112854,
+            "dot_count": -0.0066215116530656815,
+            "hyphen_count": 0.01741035468876362,
+            "underscore_count": -0.0038325157947838306,
+            "digit_count": 0.11381357908248901,
+            "digit_ratio": -0.005440252833068371,
+            "subdomain_count": 0.12329947203397751,
+            "query_parameter_count": 0.017492404207587242,
+            "percent_encoding_count": 0.014392923563718796,
+            "special_character_count": 0.09312434494495392,
+            "has_ip_hostname": -0.030427368357777596,
+            "uses_https": 1.0440549850463867,
+            "has_at_symbol": -0.013600693084299564,
+            "has_explicit_port": -0.0013498944463208318,
+            "suspicious_word_count": 0.019940851256251335,
+            "character_entropy": -0.03196527436375618,
+            "longest_token_length": -0.06380157917737961,
+            "tld_length": -0.028496824204921722
+          },
+          "mean_base_margin": -0.13156796991825104
+        },
+        "accepted_legitimate": {
+          "sample_rows": 100,
+          "mean_margin_contribution": {
+            "url_length": -0.07286348938941956,
+            "hostname_length": -0.4775475263595581,
+            "path_length": -0.2859574556350708,
+            "query_length": 0.006779399700462818,
+            "dot_count": -0.0812205821275711,
+            "hyphen_count": -1.2222248315811157,
+            "underscore_count": -0.06124712899327278,
+            "digit_count": -0.07421610504388809,
+            "digit_ratio": -0.08239143341779709,
+            "subdomain_count": -0.16114185750484467,
+            "query_parameter_count": -0.0023086904548108578,
+            "percent_encoding_count": 2.0339717593742535e-05,
+            "special_character_count": -0.0047547644935548306,
+            "has_ip_hostname": -0.0324108712375164,
+            "uses_https": -0.3112584352493286,
+            "has_at_symbol": -0.016311101615428925,
+            "has_explicit_port": -0.001365212956443429,
+            "suspicious_word_count": -0.061607807874679565,
+            "character_entropy": -0.16692759096622467,
+            "longest_token_length": -0.18789884448051453,
+            "tld_length": -0.10247185081243515
+          },
+          "mean_base_margin": -0.13156796991825104
+        }
+      },
+      "subdomain_definition_audit": {
+        "definition": "Naive max(hostname labels - 2, 0) versus offline PSL-aware subdomain labels; private suffixes included consistently with domain grouping; IP counts zero.",
+        "overcounted_legitimate_rows": 1391,
+        "overcounted_false_positives": 598,
+        "overcounted_false_positive_rate": 0.42990654205607476,
+        "naive_at_least_2_but_psl_less_than_2_rows": 858,
+        "naive_at_least_2_but_psl_less_than_2_false_positives": 285,
+        "psl_at_least_2_rows": 140,
+        "psl_at_least_2_false_positives": 115,
+        "psl_at_least_2_false_positive_rate": 0.8214285714285714,
+        "caution": "Diagnostic semantic mismatch only. Existing model was trained with naive features; changing serving-time definitions without retraining would invalidate its feature meaning.",
+        "suffixes_with_largest_fp_counts": [
+          {
+            "suffix": "com",
+            "legitimate_rows": 12445,
+            "false_positives": 4000,
+            "fpr": 0.32141422257934915
+          },
+          {
+            "suffix": "org",
+            "legitimate_rows": 1509,
+            "false_positives": 478,
+            "fpr": 0.3167660702451955
+          },
+          {
+            "suffix": "net",
+            "legitimate_rows": 833,
+            "false_positives": 345,
+            "fpr": 0.4141656662665066
+          },
+          {
+            "suffix": "ru",
+            "legitimate_rows": 741,
+            "false_positives": 212,
+            "fpr": 0.28609986504723345
+          },
+          {
+            "suffix": "blogspot.com",
+            "legitimate_rows": 141,
+            "false_positives": 130,
+            "fpr": 0.9219858156028369
+          },
+          {
+            "suffix": "co.uk",
+            "legitimate_rows": 362,
+            "false_positives": 113,
+            "fpr": 0.31215469613259667
+          },
+          {
+            "suffix": "today",
+            "legitimate_rows": 85,
+            "false_positives": 84,
+            "fpr": 0.9882352941176471
+          },
+          {
+            "suffix": "info",
+            "legitimate_rows": 164,
+            "false_positives": 75,
+            "fpr": 0.4573170731707317
+          },
+          {
+            "suffix": "de",
+            "legitimate_rows": 140,
+            "false_positives": 54,
+            "fpr": 0.38571428571428573
+          },
+          {
+            "suffix": "ca",
+            "legitimate_rows": 88,
+            "false_positives": 43,
+            "fpr": 0.48863636363636365
+          }
+        ]
+      }
+    }
+  },
+  "training_shape_audit": {
+    "training_sha256": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+    "source_label_shapes": [
+      {
+        "source": "0:phiusiil",
+        "is_phishing": 0,
+        "rows": 107778,
+        "www_hostname_rate": 1.0,
+        "root_path_rate": 1.0,
+        "http_rate": 0.0
+      },
+      {
+        "source": "0:phiusiil",
+        "is_phishing": 1,
+        "rows": 78222,
+        "www_hostname_rate": 0.42931656055841066,
+        "root_path_rate": 0.7152463501316765,
+        "http_rate": 0.5275625783027793
+      },
+      {
+        "source": "1:balanced",
+        "is_phishing": 0,
+        "rows": 136464,
+        "www_hostname_rate": 0.7198821667252902,
+        "root_path_rate": 0.029047954039160512,
+        "http_rate": 0.33301090397467464
+      },
+      {
+        "source": "1:balanced",
+        "is_phishing": 1,
+        "rows": 135080,
+        "www_hostname_rate": 0.27935297601421377,
+        "root_path_rate": 0.07000296120817294,
+        "http_rate": 0.9767026946994374
+      }
+    ],
+    "caution": "Observed training-source conventions may encourage shortcuts; distribution differences alone do not isolate causal explanations."
+  }
+}

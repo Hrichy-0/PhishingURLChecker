@@ -1,0 +1,3677 @@
+{
+  "created_at": "2026-10-06T11:02:52.260025+00:00",
+  "status": "complete",
+  "seed": 42,
+  "development_rows": 680783,
+  "development_sha256": "43d61f5dfe1a7f5fdd183f37c4bafa80af8bbf7a0b09931335e155962c569288",
+  "provenance": {
+    "data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed",
+    "split_sha256": {
+      "train": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+      "validation": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+      "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+    },
+    "development_splits": [
+      "train",
+      "validation"
+    ],
+    "available_development_rows": 680783,
+    "pilot": false,
+    "sampling": "uniform label-blind rows per source; domain isolation preserved",
+    "held_out_test_rows_not_scored": 60551,
+    "development_sources": [
+      {
+        "source": "0:phiusiil",
+        "path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/sources/phiusiil.csv",
+        "sha256": "9fe5824001e8b2856eb9e56f9ecd6e5ee6729e814206b38152775f0b69c09ade",
+        "cleaning": {
+          "rows_before": 235370,
+          "missing_urls_removed": 0,
+          "missing_labels_removed": 0,
+          "blank_urls_removed": 0,
+          "invalid_urls_removed": 0,
+          "duplicate_urls_removed": 0,
+          "rows_after": 235370
+        }
+      },
+      {
+        "source": "1:balanced",
+        "path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/sources/balanced.csv",
+        "sha256": "ea8a5e98c3ea6e19c1c13080e293296668d5b255a9bc5263e3e95e34b89287ce",
+        "cleaning": {
+          "rows_before": 339356,
+          "missing_urls_removed": 0,
+          "missing_labels_removed": 0,
+          "blank_urls_removed": 0,
+          "invalid_urls_removed": 0,
+          "duplicate_urls_removed": 0,
+          "rows_after": 339356
+        }
+      },
+      {
+        "source": "external0:phishnchips/urls",
+        "path": "/Users/hrishy/Documents/PhishingURLChecker/data/external/huggingface/phishnchips/urls.csv",
+        "sha256": "a288fbd369dd15cde2dfa8b9c6d426101854a98da2304eb58bada3b55ceae409",
+        "cleaning": {
+          "rows_before": 2000,
+          "missing_urls_removed": 0,
+          "missing_labels_removed": 0,
+          "blank_urls_removed": 0,
+          "invalid_urls_removed": 0,
+          "duplicate_urls_removed": 303,
+          "rows_after": 1697
+        },
+        "old_known_domain_rows_excluded": 702
+      },
+      {
+        "source": "external1:ealvaradob/urls",
+        "path": "/Users/hrishy/Documents/PhishingURLChecker/data/external/huggingface/ealvaradob/urls.csv",
+        "sha256": "b64f7146188ff288a4dafc6fa7543d0756d084dc4b958964b72196057c63609f",
+        "cleaning": {
+          "rows_before": 835697,
+          "missing_urls_removed": 0,
+          "missing_labels_removed": 0,
+          "blank_urls_removed": 0,
+          "invalid_urls_removed": 608193,
+          "duplicate_urls_removed": 14295,
+          "rows_after": 213209
+        },
+        "old_known_domain_rows_excluded": 47586
+      }
+    ],
+    "cross_source_cleaning": {
+      "conflicting_urls_excluded": 0,
+      "conflicting_rows_excluded": 0,
+      "cross_source_duplicates_removed": 0
+    }
+  },
+  "source_counts": {
+    "0:phiusiil": {
+      "rows": 209084,
+      "phishing_rows": 87790
+    },
+    "1:balanced": {
+      "rows": 305081,
+      "phishing_rows": 152041
+    },
+    "external0:phishnchips/urls": {
+      "rows": 995,
+      "phishing_rows": 494
+    },
+    "external1:ealvaradob/urls": {
+      "rows": 165623,
+      "phishing_rows": 146285
+    }
+  },
+  "protocol": {
+    "selection": "highest macro held-source average precision; worst FPR breaks ties",
+    "threshold": "inner validation only; configurable per-source FPR budget",
+    "maximum_inner_validation_fpr": 0.01,
+    "domain_purge": "exclude ALL held-source registered domains before fitting",
+    "weighting": "equal observed source/class total weight; fit labels only",
+    "caution": "development search, NOT unbiased final evaluation; uncalibrated scores",
+    "final_test": "fresh independent dataset required; active model unchanged"
+  },
+  "trials": {
+    "baseline": {
+      "configuration": {
+        "name": "baseline",
+        "feature_policy": "standard",
+        "weighted": false,
+        "params": {}
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9850308299064636,
+            "accuracy": 0.6683964339691224,
+            "precision": 0.874883210789292,
+            "recall": 0.24532406880054675,
+            "f1": 0.38319677600149454,
+            "roc_auc": 0.6477117687722981,
+            "average_precision": 0.6699538357412576,
+            "false_positive_rate": 0.025392847131762493,
+            "confusion_matrix": {
+              "true_negative": 118214,
+              "false_positive": 3080,
+              "false_negative": 66253,
+              "true_positive": 21537
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9850308299064636,
+              "accuracy": 0.6323587699051083,
+              "precision": 0.9988815151741108,
+              "recall": 0.4595619135834234,
+              "f1": 0.6295038827081448,
+              "roc_auc": 0.9676940157016032,
+              "average_precision": 0.9842156530613607,
+              "false_positive_rate": 0.0010915838882218098,
+              "confusion_matrix": {
+                "true_negative": 27453,
+                "false_positive": 30,
+                "false_negative": 31507,
+                "true_positive": 26792
+              },
+              "false_alarms_per_1000_benign": 1.0915838882218099
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9850308299064636,
+                  "accuracy": 0.701696404691858,
+                  "precision": 0.9989209187605981,
+                  "recall": 0.45376562445292534,
+                  "f1": 0.6240520043336945,
+                  "roc_auc": 0.9743494565552162,
+                  "average_precision": 0.9787087880091637,
+                  "false_positive_rate": 0.000588606264452386,
+                  "confusion_matrix": {
+                    "true_negative": 23771,
+                    "false_positive": 14,
+                    "false_negative": 15601,
+                    "true_positive": 12960
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9850308299064636,
+                  "accuracy": 0.5815217391304348,
+                  "precision": 1.0,
+                  "recall": 0.19791666666666666,
+                  "f1": 0.33043478260869563,
+                  "roc_auc": 0.5483546401515151,
+                  "average_precision": 0.7045740217152011,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 77,
+                    "true_positive": 19
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9850308299064636,
+                  "accuracy": 0.5234873090340431,
+                  "precision": 0.9988430110637067,
+                  "recall": 0.4659941974225761,
+                  "f1": 0.6355041291895747,
+                  "roc_auc": 0.9300386551910976,
+                  "average_precision": 0.9905168645740514,
+                  "false_positive_rate": 0.00443213296398892,
+                  "confusion_matrix": {
+                    "true_negative": 3594,
+                    "false_positive": 16,
+                    "false_negative": 15829,
+                    "true_positive": 13813
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 13.055748750004568
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.9853101968765259,
+            "accuracy": 0.716491685814587,
+            "precision": 0.9726292108906323,
+            "recall": 0.4436040278609059,
+            "f1": 0.6093095738193645,
+            "roc_auc": 0.90450561767783,
+            "average_precision": 0.9108011381315541,
+            "false_positive_rate": 0.012401986408782017,
+            "confusion_matrix": {
+              "true_negative": 151142,
+              "false_positive": 1898,
+              "false_negative": 84595,
+              "true_positive": 67446
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9853101968765259,
+              "accuracy": 0.604285511565205,
+              "precision": 0.9970775023885797,
+              "recall": 0.3892704333516182,
+              "f1": 0.5599356141901275,
+              "roc_auc": 0.9717210797692601,
+              "average_precision": 0.9837953223653627,
+              "false_positive_rate": 0.0020887728459530026,
+              "confusion_matrix": {
+                "true_negative": 24843,
+                "false_positive": 52,
+                "false_negative": 27834,
+                "true_positive": 17741
+              },
+              "false_alarms_per_1000_benign": 2.0887728459530024
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.9853101968765259,
+                  "accuracy": 0.7260066932959085,
+                  "precision": 0.9970274523518098,
+                  "recall": 0.36004293742501736,
+                  "f1": 0.5290406383373538,
+                  "roc_auc": 0.986368449460329,
+                  "average_precision": 0.9859855569951161,
+                  "false_positive_rate": 0.0008013198208814518,
+                  "confusion_matrix": {
+                    "true_negative": 21198,
+                    "false_positive": 17,
+                    "false_negative": 10135,
+                    "true_positive": 5702
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.9853101968765259,
+                  "accuracy": 0.5818181818181818,
+                  "precision": 1.0,
+                  "recall": 0.21367521367521367,
+                  "f1": 0.352112676056338,
+                  "roc_auc": 0.6186623516720604,
+                  "average_precision": 0.7458593539050999,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 103,
+                    "false_positive": 0,
+                    "false_negative": 92,
+                    "true_positive": 25
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.9853101968765259,
+                  "accuracy": 0.46858244472558586,
+                  "precision": 0.9970951946219603,
+                  "recall": 0.40559062827048376,
+                  "f1": 0.5766258699304055,
+                  "roc_auc": 0.8940077165520306,
+                  "average_precision": 0.9849737943271977,
+                  "false_positive_rate": 0.009784735812133072,
+                  "confusion_matrix": {
+                    "true_negative": 3542,
+                    "false_positive": 35,
+                    "false_negative": 17607,
+                    "true_positive": 12014
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 12.9121964169899
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.9801778197288513,
+            "accuracy": 0.6090452261306533,
+            "precision": 0.9906542056074766,
+            "recall": 0.2145748987854251,
+            "f1": 0.3527454242928453,
+            "roc_auc": 0.47481353083307076,
+            "average_precision": 0.6299888920892007,
+            "false_positive_rate": 0.001996007984031936,
+            "confusion_matrix": {
+              "true_negative": 500,
+              "false_positive": 1,
+              "false_negative": 388,
+              "true_positive": 106
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9801778197288513,
+              "accuracy": 0.6480654312790487,
+              "precision": 0.9973159231048241,
+              "recall": 0.37123646477466044,
+              "f1": 0.541068125467354,
+              "roc_auc": 0.9609421402433121,
+              "average_precision": 0.9700818549089121,
+              "false_positive_rate": 0.0012656062938258936,
+              "confusion_matrix": {
+                "true_negative": 58396,
+                "false_positive": 74,
+                "false_negative": 46570,
+                "true_positive": 27496
+              },
+              "false_alarms_per_1000_benign": 1.2656062938258936
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.9801778197288513,
+                  "accuracy": 0.7120586210288187,
+                  "precision": 0.9965345462421485,
+                  "recall": 0.2823565510892912,
+                  "f1": 0.4400344299923489,
+                  "roc_auc": 0.9542595631988158,
+                  "average_precision": 0.9566506084016275,
+                  "false_positive_rate": 0.000656464120132934,
+                  "confusion_matrix": {
+                    "true_negative": 24357,
+                    "false_positive": 16,
+                    "false_negative": 11694,
+                    "true_positive": 4601
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.9801778197288513,
+                  "accuracy": 0.7301000616019846,
+                  "precision": 0.9983681946298769,
+                  "recall": 0.4539782117440723,
+                  "f1": 0.624145046486286,
+                  "roc_auc": 0.9720665900325582,
+                  "average_precision": 0.9720704445847987,
+                  "false_positive_rate": 0.000723351088314592,
+                  "confusion_matrix": {
+                    "true_negative": 30392,
+                    "false_positive": 22,
+                    "false_negative": 16189,
+                    "true_positive": 13460
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.9801778197288513,
+                  "accuracy": 0.4113189750039302,
+                  "precision": 0.9961989230281914,
+                  "recall": 0.33550245359505015,
+                  "f1": 0.5019551512249621,
+                  "roc_auc": 0.8717329884723408,
+                  "average_precision": 0.9793161667831971,
+                  "false_positive_rate": 0.00977464023893565,
+                  "confusion_matrix": {
+                    "true_negative": 3647,
+                    "false_positive": 36,
+                    "false_negative": 18687,
+                    "true_positive": 9435
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 15.885896916006459
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.9208233952522278,
+            "accuracy": 0.41179667075225057,
+            "precision": 0.9628857776177936,
+            "recall": 0.3474313839423044,
+            "f1": 0.5106194868085278,
+            "roc_auc": 0.7279873605450717,
+            "average_precision": 0.9520647810616234,
+            "false_positive_rate": 0.10130313372634192,
+            "confusion_matrix": {
+              "true_negative": 17379,
+              "false_positive": 1959,
+              "false_negative": 95461,
+              "true_positive": 50824
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9208233952522278,
+              "accuracy": 0.8468308651292255,
+              "precision": 0.9901280849734458,
+              "recall": 0.6742543505084457,
+              "f1": 0.8022172724511492,
+              "roc_auc": 0.9789714385451737,
+              "average_precision": 0.9774411308622597,
+              "false_positive_rate": 0.0057428441617446615,
+              "confusion_matrix": {
+                "true_negative": 54709,
+                "false_positive": 316,
+                "false_negative": 15312,
+                "true_positive": 31694
+              },
+              "false_alarms_per_1000_benign": 5.742844161744661
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.9208233952522278,
+                  "accuracy": 0.8703297239293727,
+                  "precision": 0.9993117095414265,
+                  "recall": 0.6863034743559442,
+                  "f1": 0.8137457526184888,
+                  "roc_auc": 0.984334654496043,
+                  "average_precision": 0.9840722625433618,
+                  "false_positive_rate": 0.0003322259136212625,
+                  "confusion_matrix": {
+                    "true_negative": 24072,
+                    "false_positive": 8,
+                    "false_negative": 5309,
+                    "true_positive": 11615
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.9208233952522278,
+                  "accuracy": 0.8314809943443378,
+                  "precision": 0.9848656085696035,
+                  "recall": 0.6684342171085543,
+                  "f1": 0.7963684043229498,
+                  "roc_auc": 0.9780075884867864,
+                  "average_precision": 0.977403227738495,
+                  "false_positive_rate": 0.009987353675540711,
+                  "confusion_matrix": {
+                    "true_negative": 30531,
+                    "false_positive": 308,
+                    "false_negative": 9942,
+                    "true_positive": 20043
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.9208233952522278,
+                  "accuracy": 0.6995073891625616,
+                  "precision": 1.0,
+                  "recall": 0.3711340206185567,
+                  "f1": 0.5413533834586466,
+                  "roc_auc": 0.7984827854503015,
+                  "average_precision": 0.867547476315812,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 106,
+                    "false_positive": 0,
+                    "false_negative": 61,
+                    "true_positive": 36
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 14.592834957991727
+        }
+      ],
+      "macro_average_precision": 0.7907021617559089,
+      "macro_recall": 0.3127335948472955,
+      "worst_source_fpr": 0.10130313372634192
+    },
+    "source_balanced": {
+      "configuration": {
+        "name": "source_balanced",
+        "feature_policy": "standard",
+        "weighted": true,
+        "params": {}
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9450934529304504,
+            "accuracy": 0.6890627690306288,
+            "precision": 0.892669976554958,
+            "recall": 0.2949196947260508,
+            "f1": 0.44336181653167117,
+            "roc_auc": 0.678006771366425,
+            "average_precision": 0.7107192254215273,
+            "false_positive_rate": 0.02566491335103138,
+            "confusion_matrix": {
+              "true_negative": 118181,
+              "false_positive": 3113,
+              "false_negative": 61899,
+              "true_positive": 25891
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9450934529304504,
+              "accuracy": 0.6560583805460353,
+              "precision": 0.9968252872769937,
+              "recall": 0.4954973498687799,
+              "f1": 0.661953756960517,
+              "roc_auc": 0.9526799963503649,
+              "average_precision": 0.9775089425834815,
+              "false_positive_rate": 0.003347523923880217,
+              "confusion_matrix": {
+                "true_negative": 27391,
+                "false_positive": 92,
+                "false_negative": 29412,
+                "true_positive": 28887
+              },
+              "false_alarms_per_1000_benign": 3.347523923880217
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9450934529304504,
+                  "accuracy": 0.7315745233637718,
+                  "precision": 0.9951542451542451,
+                  "recall": 0.5105213402892056,
+                  "f1": 0.6748432184759215,
+                  "roc_auc": 0.9657883130285586,
+                  "average_precision": 0.9718695342668875,
+                  "false_positive_rate": 0.0029850746268656717,
+                  "confusion_matrix": {
+                    "true_negative": 23714,
+                    "false_positive": 71,
+                    "false_negative": 13980,
+                    "true_positive": 14581
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9450934529304504,
+                  "accuracy": 0.7065217391304348,
+                  "precision": 1.0,
+                  "recall": 0.4375,
+                  "f1": 0.6086956521739131,
+                  "roc_auc": 0.9748461174242424,
+                  "average_precision": 0.9793848663516619,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 54,
+                    "true_positive": 42
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9450934529304504,
+                  "accuracy": 0.5369000360880548,
+                  "precision": 0.9985299264963248,
+                  "recall": 0.48120909520275285,
+                  "f1": 0.6494411182188631,
+                  "roc_auc": 0.9169612313590377,
+                  "average_precision": 0.9889399083027699,
+                  "false_positive_rate": 0.005817174515235457,
+                  "confusion_matrix": {
+                    "true_negative": 3589,
+                    "false_positive": 21,
+                    "false_negative": 15378,
+                    "true_positive": 14264
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 13.472733917005826
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.951952338218689,
+            "accuracy": 0.7027805730281467,
+            "precision": 0.9694456769534417,
+            "recall": 0.416742852256957,
+            "f1": 0.5829070837166513,
+            "roc_auc": 0.8946637362881452,
+            "average_precision": 0.9010359715582452,
+            "false_positive_rate": 0.0130488761108207,
+            "confusion_matrix": {
+              "true_negative": 151043,
+              "false_positive": 1997,
+              "false_negative": 88679,
+              "true_positive": 63362
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.951952338218689,
+              "accuracy": 0.621001844756634,
+              "precision": 0.9957954485730803,
+              "recall": 0.4157323093801426,
+              "f1": 0.5865762669886381,
+              "roc_auc": 0.9451468745803137,
+              "average_precision": 0.9719455184423237,
+              "false_positive_rate": 0.0032134966860815424,
+              "confusion_matrix": {
+                "true_negative": 24815,
+                "false_positive": 80,
+                "false_negative": 26628,
+                "true_positive": 18947
+              },
+              "false_alarms_per_1000_benign": 3.2134966860815424
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.951952338218689,
+                  "accuracy": 0.7380168411961567,
+                  "precision": 0.9927652733118971,
+                  "recall": 0.3899097051209194,
+                  "f1": 0.5599129528040985,
+                  "roc_auc": 0.9686374257807983,
+                  "average_precision": 0.9671726460975775,
+                  "false_positive_rate": 0.0021211407023332546,
+                  "confusion_matrix": {
+                    "true_negative": 21170,
+                    "false_positive": 45,
+                    "false_negative": 9662,
+                    "true_positive": 6175
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.951952338218689,
+                  "accuracy": 0.7,
+                  "precision": 1.0,
+                  "recall": 0.4358974358974359,
+                  "f1": 0.6071428571428571,
+                  "roc_auc": 0.9881752551655464,
+                  "average_precision": 0.991364713016494,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 103,
+                    "false_positive": 0,
+                    "false_negative": 66,
+                    "true_positive": 51
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.951952338218689,
+                  "accuracy": 0.489878908367974,
+                  "precision": 0.9972561931640013,
+                  "recall": 0.42945882988420375,
+                  "f1": 0.6003728437595865,
+                  "roc_auc": 0.8930114475656523,
+                  "average_precision": 0.985094233893821,
+                  "false_positive_rate": 0.009784735812133072,
+                  "confusion_matrix": {
+                    "true_negative": 3542,
+                    "false_positive": 35,
+                    "false_negative": 16900,
+                    "true_positive": 12721
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 13.178070667010616
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.9443105459213257,
+            "accuracy": 0.6241206030150753,
+            "precision": 0.9918032786885246,
+            "recall": 0.24493927125506074,
+            "f1": 0.39285714285714285,
+            "roc_auc": 0.5764503381900167,
+            "average_precision": 0.6902138720230804,
+            "false_positive_rate": 0.001996007984031936,
+            "confusion_matrix": {
+              "true_negative": 500,
+              "false_positive": 1,
+              "false_negative": 373,
+              "true_positive": 121
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9443105459213257,
+              "accuracy": 0.6789476066879943,
+              "precision": 0.9941359089341152,
+              "recall": 0.42802365457834907,
+              "f1": 0.5984049832476052,
+              "roc_auc": 0.9578941729712674,
+              "average_precision": 0.9677823996651231,
+              "false_positive_rate": 0.003198221310073542,
+              "confusion_matrix": {
+                "true_negative": 58283,
+                "false_positive": 187,
+                "false_negative": 42364,
+                "true_positive": 31702
+              },
+              "false_alarms_per_1000_benign": 3.198221310073542
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.9443105459213257,
+                  "accuracy": 0.736623389397069,
+                  "precision": 0.9879412792729815,
+                  "recall": 0.34691623197299787,
+                  "f1": 0.5135122859608484,
+                  "roc_auc": 0.9499251223760335,
+                  "average_precision": 0.9487992981724336,
+                  "false_positive_rate": 0.002831001518073278,
+                  "confusion_matrix": {
+                    "true_negative": 24304,
+                    "false_positive": 69,
+                    "false_negative": 10642,
+                    "true_positive": 5653
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.9443105459213257,
+                  "accuracy": 0.7546576095100145,
+                  "precision": 0.994561252238509,
+                  "recall": 0.5057506155350939,
+                  "f1": 0.6705272101238653,
+                  "roc_auc": 0.9654850669117222,
+                  "average_precision": 0.9660271601285968,
+                  "false_positive_rate": 0.0026961267837180246,
+                  "confusion_matrix": {
+                    "true_negative": 30332,
+                    "false_positive": 82,
+                    "false_negative": 14654,
+                    "true_positive": 14995
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.9443105459213257,
+                  "accuracy": 0.46222292092438294,
+                  "precision": 0.9967538322813345,
+                  "recall": 0.3930730389019273,
+                  "f1": 0.5638069978577986,
+                  "roc_auc": 0.902454469792734,
+                  "average_precision": 0.984771319611881,
+                  "false_positive_rate": 0.00977464023893565,
+                  "confusion_matrix": {
+                    "true_negative": 3647,
+                    "false_positive": 36,
+                    "false_negative": 17068,
+                    "true_positive": 11054
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 15.578066709000268
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.9464477896690369,
+            "accuracy": 0.4291915977853317,
+            "precision": 0.9652245837379078,
+            "recall": 0.36695491677205455,
+            "f1": 0.5317510240268649,
+            "roc_auc": 0.7195877385674034,
+            "average_precision": 0.9513341624956455,
+            "false_positive_rate": 0.10001034233116145,
+            "confusion_matrix": {
+              "true_negative": 17404,
+              "false_positive": 1934,
+              "false_negative": 92605,
+              "true_positive": 53680
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9464477896690369,
+              "accuracy": 0.8384706608775764,
+              "precision": 0.989480773547994,
+              "recall": 0.6563630174871293,
+              "f1": 0.7892104825610395,
+              "roc_auc": 0.9748138661158281,
+              "average_precision": 0.973957738335578,
+              "false_positive_rate": 0.005960926851431168,
+              "confusion_matrix": {
+                "true_negative": 54697,
+                "false_positive": 328,
+                "false_negative": 16153,
+                "true_positive": 30853
+              },
+              "false_alarms_per_1000_benign": 5.960926851431168
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.9464477896690369,
+                  "accuracy": 0.8763291386206223,
+                  "precision": 0.9983183385184562,
+                  "recall": 0.7015480973765067,
+                  "f1": 0.8240274837769372,
+                  "roc_auc": 0.9765352001639535,
+                  "average_precision": 0.9780590507919453,
+                  "false_positive_rate": 0.0008305647840531562,
+                  "confusion_matrix": {
+                    "true_negative": 24060,
+                    "false_positive": 20,
+                    "false_negative": 5051,
+                    "true_positive": 11873
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.9464477896690369,
+                  "accuracy": 0.8129685650401157,
+                  "precision": 0.9839791937581275,
+                  "recall": 0.6308821077205269,
+                  "f1": 0.768827474090632,
+                  "roc_auc": 0.9728771846173636,
+                  "average_precision": 0.9723323901314865,
+                  "false_positive_rate": 0.009987353675540711,
+                  "confusion_matrix": {
+                    "true_negative": 30531,
+                    "false_positive": 308,
+                    "false_negative": 11068,
+                    "true_positive": 18917
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.9464477896690369,
+                  "accuracy": 0.8325123152709359,
+                  "precision": 1.0,
+                  "recall": 0.6494845360824743,
+                  "f1": 0.7875,
+                  "roc_auc": 0.9908578097646372,
+                  "average_precision": 0.9928153408166546,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 106,
+                    "false_positive": 0,
+                    "false_negative": 34,
+                    "true_positive": 63
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 14.827744084002916
+        }
+      ],
+      "macro_average_precision": 0.8133258078746246,
+      "macro_recall": 0.3308891837525308,
+      "worst_source_fpr": 0.10001034233116145
+    },
+    "regularized": {
+      "configuration": {
+        "name": "regularized",
+        "feature_policy": "standard",
+        "weighted": true,
+        "params": {
+          "max_depth": 3,
+          "min_child_weight": 15,
+          "gamma": 0.5,
+          "reg_alpha": 1.0,
+          "reg_lambda": 15.0,
+          "subsample": 0.7,
+          "colsample_bytree": 0.7
+        }
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9082393646240234,
+            "accuracy": 0.6951177517170133,
+            "precision": 0.868140617344439,
+            "recall": 0.3229297186467707,
+            "f1": 0.47075037776264883,
+            "roc_auc": 0.7056654096884971,
+            "average_precision": 0.7224475580459806,
+            "false_positive_rate": 0.03550051939914588,
+            "confusion_matrix": {
+              "true_negative": 116988,
+              "false_positive": 4306,
+              "false_negative": 59440,
+              "true_positive": 28350
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9082393646240234,
+              "accuracy": 0.6311114219766385,
+              "precision": 0.9945819571751957,
+              "recall": 0.45971629015935095,
+              "f1": 0.6287919667784999,
+              "roc_auc": 0.9368417355780759,
+              "average_precision": 0.9699326827422214,
+              "false_positive_rate": 0.005312374922679474,
+              "confusion_matrix": {
+                "true_negative": 27337,
+                "false_positive": 146,
+                "false_negative": 31498,
+                "true_positive": 26801
+              },
+              "false_alarms_per_1000_benign": 5.312374922679474
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9082393646240234,
+                  "accuracy": 0.7218316585794521,
+                  "precision": 0.9922644163150492,
+                  "recall": 0.4940303210671895,
+                  "f1": 0.6596386246230803,
+                  "roc_auc": 0.9556264981220984,
+                  "average_precision": 0.9633164658796596,
+                  "false_positive_rate": 0.004624763506411604,
+                  "confusion_matrix": {
+                    "true_negative": 23675,
+                    "false_positive": 110,
+                    "false_negative": 14451,
+                    "true_positive": 14110
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9082393646240234,
+                  "accuracy": 0.6684782608695652,
+                  "precision": 1.0,
+                  "recall": 0.3645833333333333,
+                  "f1": 0.5343511450381679,
+                  "roc_auc": 0.9682173295454546,
+                  "average_precision": 0.9747626681269922,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 61,
+                    "true_positive": 35
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9082393646240234,
+                  "accuracy": 0.4880909418982317,
+                  "precision": 0.9971635676016388,
+                  "recall": 0.4269617434721004,
+                  "f1": 0.5979118439079699,
+                  "roc_auc": 0.888594218804231,
+                  "average_precision": 0.9848080008240412,
+                  "false_positive_rate": 0.009972299168975069,
+                  "confusion_matrix": {
+                    "true_negative": 3574,
+                    "false_positive": 36,
+                    "false_negative": 16986,
+                    "true_positive": 12656
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 13.257547792003606
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.9456990957260132,
+            "accuracy": 0.682838328181696,
+            "precision": 0.9613285487774347,
+            "recall": 0.37883202557204965,
+            "f1": 0.5434901583347487,
+            "roc_auc": 0.8712883014791458,
+            "average_precision": 0.876969586359202,
+            "false_positive_rate": 0.015139832723470989,
+            "confusion_matrix": {
+              "true_negative": 150723,
+              "false_positive": 2317,
+              "false_negative": 94443,
+              "true_positive": 57598
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9456990957260132,
+              "accuracy": 0.5616290620122038,
+              "precision": 0.9952107925801011,
+              "recall": 0.32373011519473394,
+              "f1": 0.4885430463576159,
+              "roc_auc": 0.9213795521001702,
+              "average_precision": 0.9598606123645046,
+              "false_positive_rate": 0.002851978308897369,
+              "confusion_matrix": {
+                "true_negative": 24824,
+                "false_positive": 71,
+                "false_negative": 30821,
+                "true_positive": 14754
+              },
+              "false_alarms_per_1000_benign": 2.851978308897369
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.9456990957260132,
+                  "accuracy": 0.7121882759365217,
+                  "precision": 0.9931363203050524,
+                  "recall": 0.32891330428742815,
+                  "f1": 0.4941656389336875,
+                  "roc_auc": 0.9558667176039262,
+                  "average_precision": 0.9526200507751497,
+                  "false_positive_rate": 0.0016969125618666039,
+                  "confusion_matrix": {
+                    "true_negative": 21179,
+                    "false_positive": 36,
+                    "false_negative": 10628,
+                    "true_positive": 5209
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.9456990957260132,
+                  "accuracy": 0.6636363636363637,
+                  "precision": 1.0,
+                  "recall": 0.36752136752136755,
+                  "f1": 0.5375,
+                  "roc_auc": 0.9914529914529914,
+                  "average_precision": 0.9934210933458789,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 103,
+                    "false_positive": 0,
+                    "false_negative": 74,
+                    "true_positive": 43
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.9456990957260132,
+                  "accuracy": 0.39291523585758176,
+                  "precision": 0.9963300828352731,
+                  "recall": 0.32078592890179264,
+                  "f1": 0.4853158996884417,
+                  "roc_auc": 0.8592059302312335,
+                  "average_precision": 0.9797471743671996,
+                  "false_positive_rate": 0.009784735812133072,
+                  "confusion_matrix": {
+                    "true_negative": 3542,
+                    "false_positive": 35,
+                    "false_negative": 20119,
+                    "true_positive": 9502
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 13.007523000007495
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.9190123677253723,
+            "accuracy": 0.6120603015075377,
+            "precision": 1.0,
+            "recall": 0.21862348178137653,
+            "f1": 0.3588039867109635,
+            "roc_auc": 0.6027257226437812,
+            "average_precision": 0.7125039816733475,
+            "false_positive_rate": 0.0,
+            "confusion_matrix": {
+              "true_negative": 501,
+              "false_positive": 0,
+              "false_negative": 386,
+              "true_positive": 108
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9190123677253723,
+              "accuracy": 0.6562594313997706,
+              "precision": 0.9929109896949997,
+              "recall": 0.3876677557853806,
+              "f1": 0.5576206012584479,
+              "roc_auc": 0.9457523418795594,
+              "average_precision": 0.9580977288708352,
+              "false_positive_rate": 0.0035060714896528134,
+              "confusion_matrix": {
+                "true_negative": 58265,
+                "false_positive": 205,
+                "false_negative": 45353,
+                "true_positive": 28713
+              },
+              "false_alarms_per_1000_benign": 3.5060714896528133
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.9190123677253723,
+                  "accuracy": 0.7306481754696568,
+                  "precision": 0.9886550777676121,
+                  "recall": 0.33157410248542496,
+                  "f1": 0.49659926470588234,
+                  "roc_auc": 0.9407415589615352,
+                  "average_precision": 0.9417286220934735,
+                  "false_positive_rate": 0.0025437984655151194,
+                  "confusion_matrix": {
+                    "true_negative": 24311,
+                    "false_positive": 62,
+                    "false_negative": 10892,
+                    "true_positive": 5403
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.9190123677253723,
+                  "accuracy": 0.7416545960075255,
+                  "precision": 0.992541474975603,
+                  "recall": 0.4802522850686364,
+                  "f1": 0.6473008296397318,
+                  "roc_auc": 0.9578390429239524,
+                  "average_precision": 0.9581921513291992,
+                  "false_positive_rate": 0.0035181166568027883,
+                  "confusion_matrix": {
+                    "true_negative": 30307,
+                    "false_positive": 107,
+                    "false_negative": 15410,
+                    "true_positive": 14239
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.9190123677253723,
+                  "accuracy": 0.39987423361106744,
+                  "precision": 0.9960469968156364,
+                  "recall": 0.32255885072185475,
+                  "f1": 0.48730828117865105,
+                  "roc_auc": 0.8706150510219206,
+                  "average_precision": 0.9788620910624819,
+                  "false_positive_rate": 0.00977464023893565,
+                  "confusion_matrix": {
+                    "true_negative": 3647,
+                    "false_positive": 36,
+                    "false_negative": 19051,
+                    "true_positive": 9071
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 15.267428124992875
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.9331315159797668,
+            "accuracy": 0.388092233566594,
+            "precision": 0.9661238460740587,
+            "recall": 0.31836483576579966,
+            "f1": 0.4789140829862718,
+            "roc_auc": 0.6836627917444025,
+            "average_precision": 0.9447206511222928,
+            "false_positive_rate": 0.08444513393318855,
+            "confusion_matrix": {
+              "true_negative": 17705,
+              "false_positive": 1633,
+              "false_negative": 99713,
+              "true_positive": 46572
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9331315159797668,
+              "accuracy": 0.8023345845870373,
+              "precision": 0.9881766589057043,
+              "recall": 0.5778624005446114,
+              "f1": 0.7292667865868392,
+              "roc_auc": 0.9676502474777597,
+              "average_precision": 0.9662992055539027,
+              "false_positive_rate": 0.005906406179009541,
+              "confusion_matrix": {
+                "true_negative": 54700,
+                "false_positive": 325,
+                "false_negative": 19843,
+                "true_positive": 27163
+              },
+              "false_alarms_per_1000_benign": 5.906406179009541
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.9331315159797668,
+                  "accuracy": 0.8247488049946347,
+                  "precision": 0.9982603356528857,
+                  "recall": 0.5764003781611912,
+                  "f1": 0.7308210967935271,
+                  "roc_auc": 0.9701331168518867,
+                  "average_precision": 0.9723921491822927,
+                  "false_positive_rate": 0.0007059800664451827,
+                  "confusion_matrix": {
+                    "true_negative": 24063,
+                    "false_positive": 17,
+                    "false_negative": 7169,
+                    "true_positive": 9755
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.9331315159797668,
+                  "accuracy": 0.7873372353018545,
+                  "precision": 0.9825653798256538,
+                  "recall": 0.5788894447223611,
+                  "f1": 0.7285471448657951,
+                  "roc_auc": 0.9659233547943378,
+                  "average_precision": 0.9648234527518846,
+                  "false_positive_rate": 0.009987353675540711,
+                  "confusion_matrix": {
+                    "true_negative": 30531,
+                    "false_positive": 308,
+                    "false_negative": 12627,
+                    "true_positive": 17358
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.9331315159797668,
+                  "accuracy": 0.7684729064039408,
+                  "precision": 1.0,
+                  "recall": 0.5154639175257731,
+                  "f1": 0.6802721088435374,
+                  "roc_auc": 0.9910523244504961,
+                  "average_precision": 0.9929640496776724,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 106,
+                    "false_positive": 0,
+                    "false_negative": 47,
+                    "true_positive": 50
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 14.521319666004274
+        }
+      ],
+      "macro_average_precision": 0.8141604443002057,
+      "macro_recall": 0.3096875154414992,
+      "worst_source_fpr": 0.08444513393318855
+    },
+    "protocol_invariant": {
+      "configuration": {
+        "name": "protocol_invariant",
+        "feature_policy": "protocol_invariant",
+        "weighted": true,
+        "params": {}
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9241040349006653,
+            "accuracy": 0.7219921180004208,
+            "precision": 0.9050441051970396,
+            "recall": 0.37749174165622507,
+            "f1": 0.5327674487769981,
+            "roc_auc": 0.7838202161551729,
+            "average_precision": 0.7867306688461332,
+            "false_positive_rate": 0.02866588619387604,
+            "confusion_matrix": {
+              "true_negative": 117817,
+              "false_positive": 3477,
+              "false_negative": 54650,
+              "true_positive": 33140
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9241040349006653,
+              "accuracy": 0.671294677205008,
+              "precision": 0.9947081251643439,
+              "recall": 0.5190998130328136,
+              "f1": 0.6821906382786876,
+              "roc_auc": 0.9396060587919429,
+              "average_precision": 0.9715002788551517,
+              "false_positive_rate": 0.00585816686679038,
+              "confusion_matrix": {
+                "true_negative": 27322,
+                "false_positive": 161,
+                "false_negative": 28036,
+                "true_positive": 30263
+              },
+              "false_alarms_per_1000_benign": 5.85816686679038
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9241040349006653,
+                  "accuracy": 0.7288618041493142,
+                  "precision": 0.991448898618142,
+                  "recall": 0.5074402156787228,
+                  "f1": 0.6712985479052317,
+                  "roc_auc": 0.9452484231791903,
+                  "average_precision": 0.9565703402148955,
+                  "false_positive_rate": 0.0052554130754677315,
+                  "confusion_matrix": {
+                    "true_negative": 23660,
+                    "false_positive": 125,
+                    "false_negative": 14068,
+                    "true_positive": 14493
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9241040349006653,
+                  "accuracy": 0.7065217391304348,
+                  "precision": 1.0,
+                  "recall": 0.4375,
+                  "f1": 0.6086956521739131,
+                  "roc_auc": 0.9737215909090909,
+                  "average_precision": 0.979793190374445,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 54,
+                    "true_positive": 42
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9241040349006653,
+                  "accuracy": 0.5804763623240707,
+                  "precision": 0.9977163156559249,
+                  "recall": 0.5305984751366305,
+                  "f1": 0.6927718803682332,
+                  "roc_auc": 0.9189763682249917,
+                  "average_precision": 0.9891519466767649,
+                  "false_positive_rate": 0.009972299168975069,
+                  "confusion_matrix": {
+                    "true_negative": 3574,
+                    "false_positive": 36,
+                    "false_negative": 13914,
+                    "true_positive": 15728
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 14.906187250002404
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.9359171986579895,
+            "accuracy": 0.719998951098233,
+            "precision": 0.9618296267539238,
+            "recall": 0.4562650863911708,
+            "f1": 0.6189280217696785,
+            "roc_auc": 0.8953625480327474,
+            "average_precision": 0.9014841482823888,
+            "false_positive_rate": 0.017988761108207005,
+            "confusion_matrix": {
+              "true_negative": 150287,
+              "false_positive": 2753,
+              "false_negative": 82670,
+              "true_positive": 69371
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9359171986579895,
+              "accuracy": 0.6220377465588194,
+              "precision": 0.9928697824502967,
+              "recall": 0.41858475041140975,
+              "f1": 0.5888962632545648,
+              "roc_auc": 0.8834450196034536,
+              "average_precision": 0.9443048798261072,
+              "false_positive_rate": 0.005503113074914642,
+              "confusion_matrix": {
+                "true_negative": 24758,
+                "false_positive": 137,
+                "false_negative": 26498,
+                "true_positive": 19077
+              },
+              "false_alarms_per_1000_benign": 5.5031130749146415
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.9359171986579895,
+                  "accuracy": 0.7308917197452229,
+                  "precision": 0.9831960461285009,
+                  "recall": 0.376839047799457,
+                  "f1": 0.5448486785045876,
+                  "roc_auc": 0.8337245269615744,
+                  "average_precision": 0.8511766686027139,
+                  "false_positive_rate": 0.004807918925288711,
+                  "confusion_matrix": {
+                    "true_negative": 21113,
+                    "false_positive": 102,
+                    "false_negative": 9869,
+                    "true_positive": 5968
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.9359171986579895,
+                  "accuracy": 0.7318181818181818,
+                  "precision": 1.0,
+                  "recall": 0.49572649572649574,
+                  "f1": 0.6628571428571428,
+                  "roc_auc": 0.9926562111028131,
+                  "average_precision": 0.994068129258521,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 103,
+                    "false_positive": 0,
+                    "false_negative": 59,
+                    "true_positive": 58
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.9359171986579895,
+                  "accuracy": 0.49981926622085665,
+                  "precision": 0.9973253859086046,
+                  "recall": 0.4405995746261099,
+                  "f1": 0.6111878614746997,
+                  "roc_auc": 0.9122202967907386,
+                  "average_precision": 0.9878877208381859,
+                  "false_positive_rate": 0.009784735812133072,
+                  "confusion_matrix": {
+                    "true_negative": 3542,
+                    "false_positive": 35,
+                    "false_negative": 16570,
+                    "true_positive": 13051
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 14.61300008399121
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.9351975321769714,
+            "accuracy": 0.629145728643216,
+            "precision": 0.9844961240310077,
+            "recall": 0.25708502024291496,
+            "f1": 0.40770465489566615,
+            "roc_auc": 0.5545993034174566,
+            "average_precision": 0.6880565702981168,
+            "false_positive_rate": 0.003992015968063872,
+            "confusion_matrix": {
+              "true_negative": 499,
+              "false_positive": 2,
+              "false_negative": 367,
+              "true_positive": 127
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9351975321769714,
+              "accuracy": 0.6673658477696626,
+              "precision": 0.9928651279016243,
+              "recall": 0.40770393972943053,
+              "f1": 0.5780436447166922,
+              "roc_auc": 0.9257584475373799,
+              "average_precision": 0.9464767442485604,
+              "false_positive_rate": 0.003711304942705661,
+              "confusion_matrix": {
+                "true_negative": 58253,
+                "false_positive": 217,
+                "false_negative": 43869,
+                "true_positive": 30197
+              },
+              "false_alarms_per_1000_benign": 3.711304942705661
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.9351975321769714,
+                  "accuracy": 0.7276974525425396,
+                  "precision": 0.9840534025588726,
+                  "recall": 0.325682724762197,
+                  "f1": 0.48939505717447435,
+                  "roc_auc": 0.8306144983318794,
+                  "average_precision": 0.8350509799938142,
+                  "false_positive_rate": 0.00352849464571452,
+                  "confusion_matrix": {
+                    "true_negative": 24287,
+                    "false_positive": 86,
+                    "false_negative": 10988,
+                    "true_positive": 5307
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.9351975321769714,
+                  "accuracy": 0.7416046484524582,
+                  "precision": 0.9932965575029676,
+                  "recall": 0.47978009376370195,
+                  "f1": 0.6470320673186264,
+                  "roc_auc": 0.9461005401477909,
+                  "average_precision": 0.9489135494369791,
+                  "false_positive_rate": 0.003156441112645492,
+                  "confusion_matrix": {
+                    "true_negative": 30318,
+                    "false_positive": 96,
+                    "false_negative": 15424,
+                    "true_positive": 14225
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.9351975321769714,
+                  "accuracy": 0.45002358119792485,
+                  "precision": 0.9967289719626168,
+                  "recall": 0.3792404523149136,
+                  "f1": 0.5494307351501726,
+                  "roc_auc": 0.9301493803530071,
+                  "average_precision": 0.9890244751044679,
+                  "false_positive_rate": 0.009503122454520771,
+                  "confusion_matrix": {
+                    "true_negative": 3648,
+                    "false_positive": 35,
+                    "false_negative": 17457,
+                    "true_positive": 10665
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 17.09906387499359
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.9171193242073059,
+            "accuracy": 0.46119802201385074,
+            "precision": 0.9856303737124372,
+            "recall": 0.39574119014253,
+            "f1": 0.5647351477904594,
+            "roc_auc": 0.8273185747274326,
+            "average_precision": 0.971761297356049,
+            "false_positive_rate": 0.04364463750129279,
+            "confusion_matrix": {
+              "true_negative": 18494,
+              "false_positive": 844,
+              "false_negative": 88394,
+              "true_positive": 57891
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9171193242073059,
+              "accuracy": 0.7765091001754368,
+              "precision": 0.9841568313662733,
+              "recall": 0.5233161724035229,
+              "f1": 0.6832960653324259,
+              "roc_auc": 0.9181808480064305,
+              "average_precision": 0.9241415560670537,
+              "false_positive_rate": 0.007196728759654702,
+              "confusion_matrix": {
+                "true_negative": 54629,
+                "false_positive": 396,
+                "false_negative": 22407,
+                "true_positive": 24599
+              },
+              "false_alarms_per_1000_benign": 7.196728759654702
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.9171193242073059,
+                  "accuracy": 0.7553165544824895,
+                  "precision": 0.9875477571812651,
+                  "recall": 0.41237296147482866,
+                  "f1": 0.5818015088991705,
+                  "roc_auc": 0.8404981209723204,
+                  "average_precision": 0.8549403685865891,
+                  "false_positive_rate": 0.003654485049833887,
+                  "confusion_matrix": {
+                    "true_negative": 23992,
+                    "false_positive": 88,
+                    "false_negative": 9945,
+                    "true_positive": 6979
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.9171193242073059,
+                  "accuracy": 0.7906418519005656,
+                  "precision": 0.9827615156433649,
+                  "recall": 0.5855927963981991,
+                  "f1": 0.7338878207807407,
+                  "roc_auc": 0.9497672336714202,
+                  "average_precision": 0.9528342605482722,
+                  "false_positive_rate": 0.009987353675540711,
+                  "confusion_matrix": {
+                    "true_negative": 30531,
+                    "false_positive": 308,
+                    "false_negative": 12426,
+                    "true_positive": 17559
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.9171193242073059,
+                  "accuracy": 0.8226600985221675,
+                  "precision": 1.0,
+                  "recall": 0.6288659793814433,
+                  "f1": 0.7721518987341772,
+                  "roc_auc": 0.9911495817934254,
+                  "average_precision": 0.9922580311867817,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 106,
+                    "false_positive": 0,
+                    "false_negative": 36,
+                    "true_positive": 61
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 16.153684750010143
+        }
+      ],
+      "macro_average_precision": 0.837008171195672,
+      "macro_recall": 0.3716457596082102,
+      "worst_source_fpr": 0.04364463750129279
+    },
+    "protocol_regularized": {
+      "configuration": {
+        "name": "protocol_regularized",
+        "feature_policy": "protocol_invariant",
+        "weighted": true,
+        "params": {
+          "max_depth": 3,
+          "min_child_weight": 15,
+          "gamma": 0.5,
+          "reg_alpha": 1.0,
+          "reg_lambda": 15.0,
+          "subsample": 0.7,
+          "colsample_bytree": 0.7
+        }
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9002711772918701,
+            "accuracy": 0.7117569971877331,
+            "precision": 0.8803305419672222,
+            "recall": 0.36283175760337166,
+            "f1": 0.5138699555548386,
+            "roc_auc": 0.7533588990014167,
+            "average_precision": 0.7591638490338359,
+            "false_positive_rate": 0.03569838574043234,
+            "confusion_matrix": {
+              "true_negative": 116964,
+              "false_positive": 4330,
+              "false_negative": 55937,
+              "true_positive": 31853
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9002711772918701,
+              "accuracy": 0.6222634119045953,
+              "precision": 0.9926565710372118,
+              "recall": 0.447503387708194,
+              "f1": 0.6168997765455598,
+              "roc_auc": 0.921986386814184,
+              "average_precision": 0.9631083022425223,
+              "false_positive_rate": 0.0070225230142269765,
+              "confusion_matrix": {
+                "true_negative": 27290,
+                "false_positive": 193,
+                "false_negative": 32210,
+                "true_positive": 26089
+              },
+              "false_alarms_per_1000_benign": 7.022523014226977
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9002711772918701,
+                  "accuracy": 0.7043327092805562,
+                  "precision": 0.9882818331094193,
+                  "recall": 0.4636042155386716,
+                  "f1": 0.6311399223051074,
+                  "roc_auc": 0.9310657979189101,
+                  "average_precision": 0.945142790522917,
+                  "false_positive_rate": 0.006600798822787471,
+                  "confusion_matrix": {
+                    "true_negative": 23628,
+                    "false_positive": 157,
+                    "false_negative": 15320,
+                    "true_positive": 13241
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9002711772918701,
+                  "accuracy": 0.657608695652174,
+                  "precision": 1.0,
+                  "recall": 0.34375,
+                  "f1": 0.5116279069767442,
+                  "roc_auc": 0.9753196022727273,
+                  "average_precision": 0.9806320041637621,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 63,
+                    "true_positive": 33
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9002711772918701,
+                  "accuracy": 0.49287260916636594,
+                  "precision": 0.9971986615827562,
+                  "recall": 0.43232575399770595,
+                  "f1": 0.6031581672275433,
+                  "roc_auc": 0.8935807515390026,
+                  "average_precision": 0.9855395274545562,
+                  "false_positive_rate": 0.009972299168975069,
+                  "confusion_matrix": {
+                    "true_negative": 3574,
+                    "false_positive": 36,
+                    "false_negative": 16827,
+                    "true_positive": 12815
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 14.617703291005455
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.9315208792686462,
+            "accuracy": 0.6968968896784788,
+            "precision": 0.9569793488600448,
+            "recall": 0.4102446050736315,
+            "f1": 0.5742959869992956,
+            "roc_auc": 0.8651742507135862,
+            "average_precision": 0.8735385049502976,
+            "false_positive_rate": 0.018322007318348144,
+            "confusion_matrix": {
+              "true_negative": 150236,
+              "false_positive": 2804,
+              "false_negative": 89667,
+              "true_positive": 62374
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9315208792686462,
+              "accuracy": 0.5478501489995743,
+              "precision": 0.9934504102490284,
+              "recall": 0.30286341195831046,
+              "f1": 0.4642082429501085,
+              "roc_auc": 0.8627668056633251,
+              "average_precision": 0.9323127372536817,
+              "false_positive_rate": 0.0036553524804177544,
+              "confusion_matrix": {
+                "true_negative": 24804,
+                "false_positive": 91,
+                "false_negative": 31772,
+                "true_positive": 13803
+              },
+              "false_alarms_per_1000_benign": 3.655352480417754
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.9315208792686462,
+                  "accuracy": 0.6939706358631113,
+                  "precision": 0.9878524945770065,
+                  "recall": 0.28755446107217275,
+                  "f1": 0.4454443194600675,
+                  "roc_auc": 0.8202872948935606,
+                  "average_precision": 0.8350613842635628,
+                  "false_positive_rate": 0.002639641762903606,
+                  "confusion_matrix": {
+                    "true_negative": 21159,
+                    "false_positive": 56,
+                    "false_negative": 11283,
+                    "true_positive": 4554
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.9315208792686462,
+                  "accuracy": 0.6909090909090909,
+                  "precision": 1.0,
+                  "recall": 0.4188034188034188,
+                  "f1": 0.5903614457831325,
+                  "roc_auc": 0.9939424114181395,
+                  "average_precision": 0.9953438135144111,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 103,
+                    "false_positive": 0,
+                    "false_negative": 68,
+                    "true_positive": 49
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.9315208792686462,
+                  "accuracy": 0.3838183023073679,
+                  "precision": 0.9962100703844071,
+                  "recall": 0.310590459471321,
+                  "f1": 0.47354333950998556,
+                  "roc_auc": 0.8841155004566732,
+                  "average_precision": 0.9835137726087059,
+                  "false_positive_rate": 0.009784735812133072,
+                  "confusion_matrix": {
+                    "true_negative": 3542,
+                    "false_positive": 35,
+                    "false_negative": 20421,
+                    "true_positive": 9200
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 14.329104000004008
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.8946620225906372,
+            "accuracy": 0.6190954773869347,
+            "precision": 0.9752066115702479,
+            "recall": 0.2388663967611336,
+            "f1": 0.383739837398374,
+            "roc_auc": 0.4943877427331572,
+            "average_precision": 0.6503621487803867,
+            "false_positive_rate": 0.005988023952095809,
+            "confusion_matrix": {
+              "true_negative": 498,
+              "false_positive": 3,
+              "false_negative": 376,
+              "true_positive": 118
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.8946620225906372,
+              "accuracy": 0.6497329027584958,
+              "precision": 0.9874448950802328,
+              "recall": 0.37802770501984717,
+              "f1": 0.546743343650228,
+              "roc_auc": 0.9126227242094169,
+              "average_precision": 0.9353237511833521,
+              "false_positive_rate": 0.006088592440567813,
+              "confusion_matrix": {
+                "true_negative": 58114,
+                "false_positive": 356,
+                "false_negative": 46067,
+                "true_positive": 27999
+              },
+              "false_alarms_per_1000_benign": 6.088592440567813
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.8946620225906372,
+                  "accuracy": 0.7219435428346611,
+                  "precision": 0.9755864962807553,
+                  "recall": 0.31389996931574105,
+                  "f1": 0.47497446373850866,
+                  "roc_auc": 0.8200603948501257,
+                  "average_precision": 0.8201289618628114,
+                  "false_positive_rate": 0.005251712961063472,
+                  "confusion_matrix": {
+                    "true_negative": 24245,
+                    "false_positive": 128,
+                    "false_negative": 11180,
+                    "true_positive": 5115
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.8946620225906372,
+                  "accuracy": 0.7319647703244926,
+                  "precision": 0.9862207549877996,
+                  "recall": 0.4634894937434652,
+                  "f1": 0.6306128536355918,
+                  "roc_auc": 0.9344895662628835,
+                  "average_precision": 0.9374761580615228,
+                  "false_positive_rate": 0.006312882225290984,
+                  "confusion_matrix": {
+                    "true_negative": 30222,
+                    "false_positive": 192,
+                    "false_negative": 15907,
+                    "true_positive": 13742
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.8946620225906372,
+                  "accuracy": 0.4021065870146203,
+                  "precision": 0.9960775768141207,
+                  "recall": 0.3250835644690989,
+                  "f1": 0.4901876675603217,
+                  "roc_auc": 0.9134617005540596,
+                  "average_precision": 0.9860422647740152,
+                  "false_positive_rate": 0.00977464023893565,
+                  "confusion_matrix": {
+                    "true_negative": 3647,
+                    "false_positive": 36,
+                    "false_negative": 18980,
+                    "true_positive": 9142
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 16.67636075000337
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.9002980589866638,
+            "accuracy": 0.41304045935649036,
+            "precision": 0.985649531877833,
+            "recall": 0.34040400587893493,
+            "f1": 0.5060414824751278,
+            "roc_auc": 0.7922602323248076,
+            "average_precision": 0.9660951828036527,
+            "false_positive_rate": 0.037490950460233735,
+            "confusion_matrix": {
+              "true_negative": 18613,
+              "false_positive": 725,
+              "false_negative": 96489,
+              "true_positive": 49796
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9002980589866638,
+              "accuracy": 0.7534670835334359,
+              "precision": 0.9827677624602333,
+              "recall": 0.47317363740799046,
+              "f1": 0.6387891668341997,
+              "roc_auc": 0.8997034075110967,
+              "average_precision": 0.9066551827252867,
+              "false_positive_rate": 0.00708768741481145,
+              "confusion_matrix": {
+                "true_negative": 54635,
+                "false_positive": 390,
+                "false_negative": 24764,
+                "true_positive": 22242
+              },
+              "false_alarms_per_1000_benign": 7.08768741481145
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.9002980589866638,
+                  "accuracy": 0.7408057750463369,
+                  "precision": 0.9873065015479876,
+                  "recall": 0.37686126211297566,
+                  "f1": 0.5455011973999315,
+                  "roc_auc": 0.8256389530859478,
+                  "average_precision": 0.8395323383537527,
+                  "false_positive_rate": 0.00340531561461794,
+                  "confusion_matrix": {
+                    "true_negative": 23998,
+                    "false_positive": 82,
+                    "false_negative": 10546,
+                    "true_positive": 6378
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.9002980589866638,
+                  "accuracy": 0.7619031961067999,
+                  "precision": 0.980892114895465,
+                  "recall": 0.5272969818242454,
+                  "f1": 0.6858840881485337,
+                  "roc_auc": 0.9313239956013546,
+                  "average_precision": 0.9358434904616769,
+                  "false_positive_rate": 0.009987353675540711,
+                  "confusion_matrix": {
+                    "true_negative": 30531,
+                    "false_positive": 308,
+                    "false_negative": 14174,
+                    "true_positive": 15811
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.9002980589866638,
+                  "accuracy": 0.7832512315270936,
+                  "precision": 1.0,
+                  "recall": 0.5463917525773195,
+                  "f1": 0.7066666666666667,
+                  "roc_auc": 0.9934837580237309,
+                  "average_precision": 0.9947576949856258,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 106,
+                    "false_positive": 0,
+                    "false_negative": 44,
+                    "true_positive": 53
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 15.823639916008688
+        }
+      ],
+      "macro_average_precision": 0.8122899213920433,
+      "macro_recall": 0.33808669132926794,
+      "worst_source_fpr": 0.037490950460233735
+    },
+    "reduced_shape": {
+      "configuration": {
+        "name": "reduced_shape",
+        "feature_policy": "reduced_shape",
+        "weighted": true,
+        "params": {
+          "max_depth": 3,
+          "min_child_weight": 15,
+          "gamma": 0.5,
+          "reg_alpha": 1.0,
+          "reg_lambda": 15.0,
+          "subsample": 0.7,
+          "colsample_bytree": 0.7
+        }
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9028858542442322,
+            "accuracy": 0.6362992864112031,
+            "precision": 0.8952220726783311,
+            "recall": 0.15153206515548467,
+            "f1": 0.259191427179737,
+            "roc_auc": 0.6633263886156736,
+            "average_precision": 0.660486046536938,
+            "false_positive_rate": 0.012836578890959157,
+            "confusion_matrix": {
+              "true_negative": 119737,
+              "false_positive": 1557,
+              "false_negative": 74487,
+              "true_positive": 13303
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9028858542442322,
+              "accuracy": 0.5637080040101653,
+              "precision": 0.9876185581460543,
+              "recall": 0.36257911799516285,
+              "f1": 0.530425836239994,
+              "roc_auc": 0.8683902089531927,
+              "average_precision": 0.9349957892457227,
+              "false_positive_rate": 0.009642324345959321,
+              "confusion_matrix": {
+                "true_negative": 27218,
+                "false_positive": 265,
+                "false_negative": 37161,
+                "true_positive": 21138
+              },
+              "false_alarms_per_1000_benign": 9.64232434595932
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9028858542442322,
+                  "accuracy": 0.6963664845451419,
+                  "precision": 0.9819648428582299,
+                  "recall": 0.451804908791709,
+                  "f1": 0.6188672006138795,
+                  "roc_auc": 0.8899871045952585,
+                  "average_precision": 0.9151019773392403,
+                  "false_positive_rate": 0.00996426319108682,
+                  "confusion_matrix": {
+                    "true_negative": 23548,
+                    "false_positive": 237,
+                    "false_negative": 15657,
+                    "true_positive": 12904
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9028858542442322,
+                  "accuracy": 0.5978260869565217,
+                  "precision": 1.0,
+                  "recall": 0.22916666666666666,
+                  "f1": 0.3728813559322034,
+                  "roc_auc": 0.9492187500000001,
+                  "average_precision": 0.9582320727542286,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 74,
+                    "true_positive": 22
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9028858542442322,
+                  "accuracy": 0.3546854324551907,
+                  "precision": 0.9966019417475728,
+                  "recall": 0.2770393360771878,
+                  "f1": 0.4335568343804445,
+                  "roc_auc": 0.8399271378991515,
+                  "average_precision": 0.9767560523123248,
+                  "false_positive_rate": 0.00775623268698061,
+                  "confusion_matrix": {
+                    "true_negative": 3582,
+                    "false_positive": 28,
+                    "false_negative": 21430,
+                    "true_positive": 8212
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 14.364696042001015
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.9452469348907471,
+            "accuracy": 0.6846804619101157,
+            "precision": 0.9396186607466188,
+            "recall": 0.39251254595799817,
+            "f1": 0.5537173979606038,
+            "roc_auc": 0.8052273698068408,
+            "average_precision": 0.8276170897737294,
+            "false_positive_rate": 0.02505880815473079,
+            "confusion_matrix": {
+              "true_negative": 149205,
+              "false_positive": 3835,
+              "false_negative": 92363,
+              "true_positive": 59678
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9452469348907471,
+              "accuracy": 0.4757059741734071,
+              "precision": 0.9944979367262724,
+              "recall": 0.19036752605595172,
+              "f1": 0.31956389620435,
+              "roc_auc": 0.8175062842655555,
+              "average_precision": 0.9073670603948429,
+              "false_positive_rate": 0.0019280980116489256,
+              "confusion_matrix": {
+                "true_negative": 24847,
+                "false_positive": 48,
+                "false_negative": 36899,
+                "true_positive": 8676
+              },
+              "false_alarms_per_1000_benign": 1.9280980116489257
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.9452469348907471,
+                  "accuracy": 0.6357821440138184,
+                  "precision": 0.9945101351351351,
+                  "recall": 0.14870240575866642,
+                  "f1": 0.25872013183191434,
+                  "roc_auc": 0.7786427190710288,
+                  "average_precision": 0.7916388337704718,
+                  "false_positive_rate": 0.0006127739806740513,
+                  "confusion_matrix": {
+                    "true_negative": 21202,
+                    "false_positive": 13,
+                    "false_negative": 13482,
+                    "true_positive": 2355
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.9452469348907471,
+                  "accuracy": 0.6045454545454545,
+                  "precision": 1.0,
+                  "recall": 0.2564102564102564,
+                  "f1": 0.40816326530612246,
+                  "roc_auc": 0.9883412164965563,
+                  "average_precision": 0.9911777019914044,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 103,
+                    "false_positive": 0,
+                    "false_negative": 87,
+                    "true_positive": 30
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.9452469348907471,
+                  "accuracy": 0.2961925417193807,
+                  "precision": 0.9944672779007272,
+                  "recall": 0.21238310657979137,
+                  "f1": 0.3500153003032242,
+                  "roc_auc": 0.820354285328459,
+                  "average_precision": 0.9733262660358829,
+                  "false_positive_rate": 0.009784735812133072,
+                  "confusion_matrix": {
+                    "true_negative": 3542,
+                    "false_positive": 35,
+                    "false_negative": 23330,
+                    "true_positive": 6291
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 14.087307166992105
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.9003937840461731,
+            "accuracy": 0.5829145728643216,
+            "precision": 1.0,
+            "recall": 0.15991902834008098,
+            "f1": 0.2757417102966841,
+            "roc_auc": 0.46397488423961797,
+            "average_precision": 0.602018942541766,
+            "false_positive_rate": 0.0,
+            "confusion_matrix": {
+              "true_negative": 501,
+              "false_positive": 0,
+              "false_negative": 415,
+              "true_positive": 79
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9003937840461731,
+              "accuracy": 0.6042433753848011,
+              "precision": 0.9814666310255725,
+              "recall": 0.297437420678854,
+              "f1": 0.45652354111405835,
+              "roc_auc": 0.8690769310530067,
+              "average_precision": 0.9009652412089852,
+              "false_positive_rate": 0.007114759705832051,
+              "confusion_matrix": {
+                "true_negative": 58054,
+                "false_positive": 416,
+                "false_negative": 52036,
+                "true_positive": 22030
+              },
+              "false_alarms_per_1000_benign": 7.114759705832051
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.9003937840461731,
+                  "accuracy": 0.6583062850398348,
+                  "precision": 0.9672769770159719,
+                  "recall": 0.1523780300705738,
+                  "f1": 0.26328067013042095,
+                  "roc_auc": 0.7830115019579045,
+                  "average_precision": 0.7727725659028927,
+                  "false_positive_rate": 0.0034464366306979034,
+                  "confusion_matrix": {
+                    "true_negative": 24289,
+                    "false_positive": 84,
+                    "false_negative": 13812,
+                    "true_positive": 2483
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.9003937840461731,
+                  "accuracy": 0.7201438489585935,
+                  "precision": 0.9775364474858673,
+                  "recall": 0.44325272353199097,
+                  "f1": 0.6099366486436312,
+                  "roc_auc": 0.8991545590322447,
+                  "average_precision": 0.9073689818879508,
+                  "false_positive_rate": 0.009929637666863944,
+                  "confusion_matrix": {
+                    "true_negative": 30112,
+                    "false_positive": 302,
+                    "false_negative": 16507,
+                    "true_positive": 13142
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.9003937840461731,
+                  "accuracy": 0.31623958497091653,
+                  "precision": 0.9953379953379954,
+                  "recall": 0.22775762748026457,
+                  "f1": 0.3706919003385711,
+                  "roc_auc": 0.8541018128547885,
+                  "average_precision": 0.9755882864109708,
+                  "false_positive_rate": 0.008145533532446375,
+                  "confusion_matrix": {
+                    "true_negative": 3653,
+                    "false_positive": 30,
+                    "false_negative": 21717,
+                    "true_positive": 6405
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 16.330551332997857
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.927374005317688,
+            "accuracy": 0.28443513280160365,
+            "precision": 0.9877753187901781,
+            "recall": 0.1922206651399665,
+            "f1": 0.32181605932979307,
+            "roc_auc": 0.7405622016206794,
+            "average_precision": 0.9553933401864126,
+            "false_positive_rate": 0.017995656220912194,
+            "confusion_matrix": {
+              "true_negative": 18990,
+              "false_positive": 348,
+              "false_negative": 118166,
+              "true_positive": 28119
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.927374005317688,
+              "accuracy": 0.6999833383971538,
+              "precision": 0.9812151452891107,
+              "recall": 0.35559290303365526,
+              "f1": 0.5220093377679924,
+              "roc_auc": 0.8479029548810293,
+              "average_precision": 0.8593493897578355,
+              "false_positive_rate": 0.005815538391640163,
+              "confusion_matrix": {
+                "true_negative": 54705,
+                "false_positive": 320,
+                "false_negative": 30291,
+                "true_positive": 16715
+              },
+              "false_alarms_per_1000_benign": 5.815538391640163
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.927374005317688,
+                  "accuracy": 0.6501073066042338,
+                  "precision": 0.9953863898500577,
+                  "recall": 0.15297801938076105,
+                  "f1": 0.26519846350832266,
+                  "roc_auc": 0.7822335498703996,
+                  "average_precision": 0.7901424482117911,
+                  "false_positive_rate": 0.0004983388704318936,
+                  "confusion_matrix": {
+                    "true_negative": 24068,
+                    "false_positive": 12,
+                    "false_negative": 14335,
+                    "true_positive": 2589
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.927374005317688,
+                  "accuracy": 0.7337892936998553,
+                  "precision": 0.9786244708168506,
+                  "recall": 0.4702684675671169,
+                  "f1": 0.6352660269405775,
+                  "roc_auc": 0.881886763068727,
+                  "average_precision": 0.8974493208151778,
+                  "false_positive_rate": 0.009987353675540711,
+                  "confusion_matrix": {
+                    "true_negative": 30531,
+                    "false_positive": 308,
+                    "false_negative": 15884,
+                    "true_positive": 14101
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.927374005317688,
+                  "accuracy": 0.645320197044335,
+                  "precision": 1.0,
+                  "recall": 0.25773195876288657,
+                  "f1": 0.4098360655737705,
+                  "roc_auc": 0.9890099202489788,
+                  "average_precision": 0.988854196242159,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 106,
+                    "false_positive": 0,
+                    "false_negative": 72,
+                    "true_positive": 25
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 15.583991457999218
+        }
+      ],
+      "macro_average_precision": 0.7613788547597116,
+      "macro_recall": 0.2240460761483826,
+      "worst_source_fpr": 0.02505880815473079
+    },
+    "char_logistic": {
+      "configuration": {
+        "name": "char_logistic",
+        "feature_policy": "standard",
+        "weighted": true,
+        "params": {}
+      },
+      "held_sources": [
+        {
+          "held_source": "0:phiusiil",
+          "metrics": {
+            "threshold": 0.9639511363051758,
+            "accuracy": 0.673188766237493,
+            "precision": 0.9993328201180395,
+            "recall": 0.221802027565782,
+            "f1": 0.3630295968305756,
+            "roc_auc": 0.8680168523736541,
+            "average_precision": 0.8767344378288129,
+            "false_positive_rate": 0.00010717760153016637,
+            "confusion_matrix": {
+              "true_negative": 121281,
+              "false_positive": 13,
+              "false_negative": 68318,
+              "true_positive": 19472
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9639511363051758,
+              "accuracy": 0.7075260544170106,
+              "precision": 0.9990982867448152,
+              "recall": 0.5701641537590696,
+              "f1": 0.7260098941781608,
+              "roc_auc": 0.9865745919897911,
+              "average_precision": 0.9936749748379294,
+              "false_positive_rate": 0.0010915838882218098,
+              "confusion_matrix": {
+                "true_negative": 27453,
+                "false_positive": 30,
+                "false_negative": 25059,
+                "true_positive": 33240
+              },
+              "false_alarms_per_1000_benign": 1.0915838882218099
+            },
+            "by_source": {
+              "1:balanced": {
+                "rows": 52346,
+                "class_counts": {
+                  "1": 28561,
+                  "0": 23785
+                },
+                "metrics": {
+                  "threshold": 0.9639511363051758,
+                  "accuracy": 0.7556260268215337,
+                  "precision": 0.9987348978430008,
+                  "recall": 0.5528167781240153,
+                  "f1": 0.7116970926301555,
+                  "roc_auc": 0.9865606518168073,
+                  "average_precision": 0.9895279612233131,
+                  "false_positive_rate": 0.0008408660920748371,
+                  "confusion_matrix": {
+                    "true_negative": 23765,
+                    "false_positive": 20,
+                    "false_negative": 12772,
+                    "true_positive": 15789
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 184,
+                "class_counts": {
+                  "1": 96,
+                  "0": 88
+                },
+                "metrics": {
+                  "threshold": 0.9639511363051758,
+                  "accuracy": 0.8695652173913043,
+                  "precision": 1.0,
+                  "recall": 0.75,
+                  "f1": 0.8571428571428571,
+                  "roc_auc": 0.9454308712121212,
+                  "average_precision": 0.9627361182127226,
+                  "false_positive_rate": 0.0,
+                  "confusion_matrix": {
+                    "true_negative": 88,
+                    "false_positive": 0,
+                    "false_negative": 24,
+                    "true_positive": 72
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33252,
+                "class_counts": {
+                  "1": 29642,
+                  "0": 3610
+                },
+                "metrics": {
+                  "threshold": 0.9639511363051758,
+                  "accuracy": 0.6309094189823169,
+                  "precision": 0.9994249238024038,
+                  "recall": 0.5862964712232643,
+                  "f1": 0.7390444600369969,
+                  "roc_auc": 0.984934381308546,
+                  "average_precision": 0.9978860565835425,
+                  "false_positive_rate": 0.002770083102493075,
+                  "confusion_matrix": {
+                    "true_negative": 3600,
+                    "false_positive": 10,
+                    "false_negative": 12263,
+                    "true_positive": 17379
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 40899,
+          "rows": {
+            "fit": 345018,
+            "validation": 85782,
+            "held_source": 209084
+          },
+          "role_sha256": {
+            "fit": "fd1001de2b7c3ed35fe38ef6cd1a200890f27ac32a9426f6b336bb854d235570",
+            "validation": "0aa1d172c94ca68dce0a86ab3b0e52bbc4e02440e5cb34b6ae806f3d24d95d3d",
+            "held_source": "f63f11d6a6500611f2d11db9ec0dc37a1ff368b0af2c4985a627b7512536de41"
+          },
+          "majority_accuracy": 0.5801209083430583,
+          "chance_average_precision": 0.4198790916569417,
+          "seconds": 42.129194417007966
+        },
+        {
+          "held_source": "1:balanced",
+          "metrics": {
+            "threshold": 0.9325622202579082,
+            "accuracy": 0.6805209108400719,
+            "precision": 0.9854301572617946,
+            "recall": 0.36432935852829174,
+            "f1": 0.531977930690074,
+            "roc_auc": 0.9420561857999942,
+            "average_precision": 0.941645830876779,
+            "false_positive_rate": 0.00535154208050183,
+            "confusion_matrix": {
+              "true_negative": 152221,
+              "false_positive": 819,
+              "false_negative": 96648,
+              "true_positive": 55393
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9325622202579082,
+              "accuracy": 0.7246204058464595,
+              "precision": 0.9987041201356862,
+              "recall": 0.5749424026330225,
+              "f1": 0.7297666128223695,
+              "roc_auc": 0.9616662619314892,
+              "average_precision": 0.9818363159392496,
+              "false_positive_rate": 0.0013657360915846556,
+              "confusion_matrix": {
+                "true_negative": 24861,
+                "false_positive": 34,
+                "false_negative": 19372,
+                "true_positive": 26203
+              },
+              "false_alarms_per_1000_benign": 1.3657360915846557
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 37052,
+                "class_counts": {
+                  "0": 21215,
+                  "1": 15837
+                },
+                "metrics": {
+                  "threshold": 0.9325622202579082,
+                  "accuracy": 0.7429288567418763,
+                  "precision": 0.997948879772799,
+                  "recall": 0.3993811959335733,
+                  "f1": 0.5704622322435174,
+                  "roc_auc": 0.9096029889462368,
+                  "average_precision": 0.917109184111545,
+                  "false_positive_rate": 0.0006127739806740513,
+                  "confusion_matrix": {
+                    "true_negative": 21202,
+                    "false_positive": 13,
+                    "false_negative": 9512,
+                    "true_positive": 6325
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 220,
+                "class_counts": {
+                  "1": 117,
+                  "0": 103
+                },
+                "metrics": {
+                  "threshold": 0.9325622202579082,
+                  "accuracy": 0.7954545454545454,
+                  "precision": 0.9864864864864865,
+                  "recall": 0.6239316239316239,
+                  "f1": 0.7643979057591623,
+                  "roc_auc": 0.9427433408015933,
+                  "average_precision": 0.9530403431107475,
+                  "false_positive_rate": 0.009708737864077669,
+                  "confusion_matrix": {
+                    "true_negative": 102,
+                    "false_positive": 1,
+                    "false_negative": 44,
+                    "true_positive": 73
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 33198,
+                "class_counts": {
+                  "1": 29621,
+                  "0": 3577
+                },
+                "metrics": {
+                  "threshold": 0.9325622202579082,
+                  "accuracy": 0.7037170913910477,
+                  "precision": 0.9989911727616646,
+                  "recall": 0.6686134836771209,
+                  "f1": 0.8010759212069732,
+                  "roc_auc": 0.9847972121796607,
+                  "average_precision": 0.9978674327099839,
+                  "false_positive_rate": 0.005591277606933185,
+                  "confusion_matrix": {
+                    "true_negative": 3557,
+                    "false_positive": 20,
+                    "false_negative": 9816,
+                    "true_positive": 19805
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 23843,
+          "rows": {
+            "fit": 281389,
+            "validation": 70470,
+            "held_source": 305081
+          },
+          "role_sha256": {
+            "fit": "aca469522d13baf0c82dbe5a38a97a24860bc1e0d3e2c3da0e40f17ec5e2b173",
+            "validation": "16121c6a91a59332946831d71b5f571ff89166a5d60cd62eef4b4493e32fa27b",
+            "held_source": "2a0f5d88adef0c802dcb7997807fc1e7dde160a74c92cf3126669f7ef73c22d1"
+          },
+          "majority_accuracy": 0.5016372701020385,
+          "chance_average_precision": 0.49836272989796154,
+          "seconds": 33.97093499999028
+        },
+        {
+          "held_source": "external0:phishnchips/urls",
+          "metrics": {
+            "threshold": 0.8983879608393027,
+            "accuracy": 0.742713567839196,
+            "precision": 0.8098958333333334,
+            "recall": 0.6295546558704453,
+            "f1": 0.7084282460136674,
+            "roc_auc": 0.8088559722659944,
+            "average_precision": 0.8335901119870837,
+            "false_positive_rate": 0.14570858283433133,
+            "confusion_matrix": {
+              "true_negative": 428,
+              "false_positive": 73,
+              "false_negative": 183,
+              "true_positive": 311
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.8983879608393027,
+              "accuracy": 0.8525683587855375,
+              "precision": 0.9966661808642425,
+              "recall": 0.7386520130694245,
+              "f1": 0.8484777989733091,
+              "roc_auc": 0.9800920123792722,
+              "average_precision": 0.9861873937012264,
+              "false_positive_rate": 0.003129810159055926,
+              "confusion_matrix": {
+                "true_negative": 58287,
+                "false_positive": 183,
+                "false_negative": 19357,
+                "true_positive": 54709
+              },
+              "false_alarms_per_1000_benign": 3.129810159055926
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 40668,
+                "class_counts": {
+                  "0": 24373,
+                  "1": 16295
+                },
+                "metrics": {
+                  "threshold": 0.8983879608393027,
+                  "accuracy": 0.8096537818432182,
+                  "precision": 0.9979045401629802,
+                  "recall": 0.5260509358698987,
+                  "f1": 0.6889290737392003,
+                  "roc_auc": 0.9270293259961365,
+                  "average_precision": 0.9269399497624122,
+                  "false_positive_rate": 0.0007385221351495508,
+                  "confusion_matrix": {
+                    "true_negative": 24355,
+                    "false_positive": 18,
+                    "false_negative": 7723,
+                    "true_positive": 8572
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60063,
+                "class_counts": {
+                  "0": 30414,
+                  "1": 29649
+                },
+                "metrics": {
+                  "threshold": 0.8983879608393027,
+                  "accuracy": 0.8828063866273745,
+                  "precision": 0.9943589295084835,
+                  "recall": 0.7669398630645216,
+                  "f1": 0.8659672106175144,
+                  "roc_auc": 0.9899673226352675,
+                  "average_precision": 0.990154020368486,
+                  "false_positive_rate": 0.00424146774511738,
+                  "confusion_matrix": {
+                    "true_negative": 30285,
+                    "false_positive": 129,
+                    "false_negative": 6910,
+                    "true_positive": 22739
+                  }
+                }
+              },
+              "external1:ealvaradob/urls": {
+                "rows": 31805,
+                "class_counts": {
+                  "1": 28122,
+                  "0": 3683
+                },
+                "metrics": {
+                  "threshold": 0.8983879608393027,
+                  "accuracy": 0.8503379971702563,
+                  "precision": 0.9984637705897415,
+                  "recall": 0.8320176374368822,
+                  "f1": 0.9076732097137094,
+                  "roc_auc": 0.9890085117088931,
+                  "average_precision": 0.9984698289810441,
+                  "false_positive_rate": 0.00977464023893565,
+                  "confusion_matrix": {
+                    "true_negative": 3647,
+                    "false_positive": 36,
+                    "false_negative": 4724,
+                    "true_positive": 23398
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 42,
+          "rows": {
+            "fit": 547210,
+            "validation": 132536,
+            "held_source": 995
+          },
+          "role_sha256": {
+            "fit": "685682ffde0de24a21619594a24cc82d2d6bdf99be066a69be669295d2565854",
+            "validation": "82c373bf909009e16c11801025ce5497744203aab6b636fe3efca7308134c450",
+            "held_source": "e5ea16402a5cc58f8347926aec399049d9e7f31dc9f2beaa0ab815df167bb018"
+          },
+          "majority_accuracy": 0.5035175879396985,
+          "chance_average_precision": 0.4964824120603015,
+          "seconds": 53.384851082999376
+        },
+        {
+          "held_source": "external1:ealvaradob/urls",
+          "metrics": {
+            "threshold": 0.9038048721350554,
+            "accuracy": 0.5487160599675166,
+            "precision": 0.9941155344365555,
+            "recall": 0.4919711522028916,
+            "f1": 0.6582067779713644,
+            "roc_auc": 0.9398042072314708,
+            "average_precision": 0.9892560737610077,
+            "false_positive_rate": 0.02202916537387527,
+            "confusion_matrix": {
+              "true_negative": 18912,
+              "false_positive": 426,
+              "false_negative": 74317,
+              "true_positive": 71968
+            }
+          },
+          "validation": {
+            "metrics": {
+              "threshold": 0.9038048721350554,
+              "accuracy": 0.8334329762523155,
+              "precision": 0.9953781651315572,
+              "recall": 0.6414287537761136,
+              "f1": 0.7801337697452683,
+              "roc_auc": 0.9689435773982512,
+              "average_precision": 0.9707254764157434,
+              "false_positive_rate": 0.0025442980463425717,
+              "confusion_matrix": {
+                "true_negative": 54885,
+                "false_positive": 140,
+                "false_negative": 16855,
+                "true_positive": 30151
+              },
+              "false_alarms_per_1000_benign": 2.5442980463425715
+            },
+            "by_source": {
+              "0:phiusiil": {
+                "rows": 41004,
+                "class_counts": {
+                  "0": 24080,
+                  "1": 16924
+                },
+                "metrics": {
+                  "threshold": 0.9038048721350554,
+                  "accuracy": 0.7814359574675641,
+                  "precision": 0.9982478097622027,
+                  "recall": 0.47128338454266133,
+                  "f1": 0.6402825720478446,
+                  "roc_auc": 0.920009378697888,
+                  "average_precision": 0.9226370902814799,
+                  "false_positive_rate": 0.0005813953488372093,
+                  "confusion_matrix": {
+                    "true_negative": 24066,
+                    "false_positive": 14,
+                    "false_negative": 8948,
+                    "true_positive": 7976
+                  }
+                }
+              },
+              "1:balanced": {
+                "rows": 60824,
+                "class_counts": {
+                  "0": 30839,
+                  "1": 29985
+                },
+                "metrics": {
+                  "threshold": 0.9038048721350554,
+                  "accuracy": 0.8683250032881757,
+                  "precision": 0.9943759560874651,
+                  "recall": 0.7370685342671336,
+                  "f1": 0.8466032062209113,
+                  "roc_auc": 0.9887254305190143,
+                  "average_precision": 0.9889321367905524,
+                  "false_positive_rate": 0.0040533091215668475,
+                  "confusion_matrix": {
+                    "true_negative": 30714,
+                    "false_positive": 125,
+                    "false_negative": 7884,
+                    "true_positive": 22101
+                  }
+                }
+              },
+              "external0:phishnchips/urls": {
+                "rows": 203,
+                "class_counts": {
+                  "0": 106,
+                  "1": 97
+                },
+                "metrics": {
+                  "threshold": 0.9038048721350554,
+                  "accuracy": 0.8817733990147784,
+                  "precision": 0.9866666666666667,
+                  "recall": 0.7628865979381443,
+                  "f1": 0.8604651162790697,
+                  "roc_auc": 0.9381443298969072,
+                  "average_precision": 0.9516586983311309,
+                  "false_positive_rate": 0.009433962264150943,
+                  "confusion_matrix": {
+                    "true_negative": 105,
+                    "false_positive": 1,
+                    "false_negative": 23,
+                    "true_positive": 74
+                  }
+                }
+              }
+            }
+          },
+          "shared_domain_training_rows_excluded": 11,
+          "rows": {
+            "fit": 413118,
+            "validation": 102031,
+            "held_source": 165623
+          },
+          "role_sha256": {
+            "fit": "1cd2cd0b152118826938227854723323648ba075cd75f2cb7ac00838f92d1b2c",
+            "validation": "961bf9044ace0a3d469417b83e47d373da1c434526db1dd550251755ce9a4912",
+            "held_source": "197fb9114ff74fe7873142cdd572dd2d23f8a9904d067c0e856c2275b0ce6ac6"
+          },
+          "majority_accuracy": 0.8832408542291832,
+          "chance_average_precision": 0.8832408542291832,
+          "seconds": 47.02067325000826
+        }
+      ],
+      "macro_average_precision": 0.9103066136134208,
+      "macro_recall": 0.4269142985418527,
+      "worst_source_fpr": 0.14570858283433133
+    }
+  },
+  "selected_xgboost": "protocol_invariant"
+}

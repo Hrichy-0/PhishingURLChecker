@@ -1,0 +1,504 @@
+{
+  "evaluation_role": "validation_threshold_analysis_only",
+  "activation_eligible": false,
+  "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/phishguard_model.joblib",
+  "model_sha256": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7",
+  "validation_path": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed/validation.csv",
+  "validation_sha256": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+  "rows": 56621,
+  "class_counts": {
+    "0": 30092,
+    "1": 26529
+  },
+  "train_validation_domains_disjoint": true,
+  "test_labels_or_scores_used": false,
+  "caution": "This validation set already informed early stopping/model selection. These are reused development results, not independent performance estimates. Pooled FPR budgets need not hold per source or on new data. Scores are uncalibrated. No active threshold was changed.",
+  "comparisons": [
+    {
+      "name": "current",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.4711279273033142,
+        "accuracy": 0.9381324950106851,
+        "precision": 0.927738148313271,
+        "recall": 0.9412718157488031,
+        "f1": 0.9344559827860417,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.06463511896849661,
+        "confusion_matrix": {
+          "true_negative": 28147,
+          "false_positive": 1945,
+          "false_negative": 1558,
+          "true_positive": 24971
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.4711279273033142,
+          "accuracy": 0.9570265118696933,
+          "precision": 0.9825568309700653,
+          "recall": 0.9125209030100334,
+          "f1": 0.9462447165926087,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.011467889908256881,
+          "confusion_matrix": {
+            "true_negative": 13361,
+            "false_positive": 155,
+            "false_negative": 837,
+            "true_positive": 8731
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.4711279273033142,
+          "accuracy": 0.9251274711512658,
+          "precision": 0.9007210205213533,
+          "recall": 0.9574907139909203,
+          "f1": 0.928238689948844,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.10798745173745174,
+          "confusion_matrix": {
+            "true_negative": 14786,
+            "false_positive": 1790,
+            "false_negative": 721,
+            "true_positive": 16240
+          }
+        }
+      }
+    },
+    {
+      "name": "validation_fpr_2%",
+      "maximum_validation_fpr": 0.02,
+      "metrics": {
+        "threshold": 0.7853294610977173,
+        "accuracy": 0.9169919287896717,
+        "precision": 0.9739047370934827,
+        "recall": 0.8454898413057409,
+        "f1": 0.9051654560129136,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.01997208560414728,
+        "confusion_matrix": {
+          "true_negative": 29491,
+          "false_positive": 601,
+          "false_negative": 4099,
+          "true_positive": 22430
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.7853294610977173,
+          "accuracy": 0.9316842834863975,
+          "precision": 0.9939423909012239,
+          "recall": 0.8403010033444817,
+          "f1": 0.9106869796681203,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.003625332938739272,
+          "confusion_matrix": {
+            "true_negative": 13467,
+            "false_positive": 49,
+            "false_negative": 1528,
+            "true_positive": 8040
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.7853294610977173,
+          "accuracy": 0.9068789694963771,
+          "precision": 0.9630571543300763,
+          "recall": 0.8484169565473734,
+          "f1": 0.9021095194809265,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.033301158301158304,
+          "confusion_matrix": {
+            "true_negative": 16024,
+            "false_positive": 552,
+            "false_negative": 2571,
+            "true_positive": 14390
+          }
+        }
+      }
+    },
+    {
+      "name": "validation_fpr_1%",
+      "maximum_validation_fpr": 0.01,
+      "metrics": {
+        "threshold": 0.8812609314918518,
+        "accuracy": 0.8911357976722417,
+        "precision": 0.9856904364416885,
+        "recall": 0.7789588751931849,
+        "f1": 0.8702151850760096,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.009969427090256546,
+        "confusion_matrix": {
+          "true_negative": 29792,
+          "false_positive": 300,
+          "false_negative": 5864,
+          "true_positive": 20665
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.8812609314918518,
+          "accuracy": 0.9157858256801248,
+          "precision": 0.9972606313592486,
+          "recall": 0.799017558528428,
+          "f1": 0.8871997214807937,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.0015537141166025452,
+          "confusion_matrix": {
+            "true_negative": 13495,
+            "false_positive": 21,
+            "false_negative": 1923,
+            "true_positive": 7645
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.8812609314918518,
+          "accuracy": 0.8741688284581208,
+          "precision": 0.9790209790209791,
+          "recall": 0.7676434172513413,
+          "f1": 0.8605419695968275,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.016831563706563708,
+          "confusion_matrix": {
+            "true_negative": 16297,
+            "false_positive": 279,
+            "false_negative": 3941,
+            "true_positive": 13020
+          }
+        }
+      }
+    },
+    {
+      "name": "fixed_0.5",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.5,
+        "accuracy": 0.9380795111354444,
+        "precision": 0.9322593969434119,
+        "recall": 0.9358437935843794,
+        "f1": 0.9340481565086531,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.059949488236076036,
+        "confusion_matrix": {
+          "true_negative": 28288,
+          "false_positive": 1804,
+          "false_negative": 1702,
+          "true_positive": 24827
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.5,
+          "accuracy": 0.955856870559695,
+          "precision": 0.9843626062322947,
+          "recall": 0.9079222408026756,
+          "f1": 0.9445984885554287,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.010210121337673869,
+          "confusion_matrix": {
+            "true_negative": 13378,
+            "false_positive": 138,
+            "false_negative": 881,
+            "true_positive": 8687
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.5,
+          "accuracy": 0.9258430986671438,
+          "precision": 0.9064360327979333,
+          "recall": 0.9515948352101881,
+          "f1": 0.9284666494089222,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.10050675675675676,
+          "confusion_matrix": {
+            "true_negative": 14910,
+            "false_positive": 1666,
+            "false_negative": 821,
+            "true_positive": 16140
+          }
+        }
+      }
+    },
+    {
+      "name": "fixed_0.7",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.7,
+        "accuracy": 0.9278183006305081,
+        "precision": 0.9612760009865987,
+        "recall": 0.8814504881450488,
+        "f1": 0.919634254252286,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.03130400106340556,
+        "confusion_matrix": {
+          "true_negative": 29150,
+          "false_positive": 942,
+          "false_negative": 3145,
+          "true_positive": 23384
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.7,
+          "accuracy": 0.9404349332871252,
+          "precision": 0.991835754592388,
+          "recall": 0.8633988294314381,
+          "f1": 0.9231714812538414,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.005031074282332051,
+          "confusion_matrix": {
+            "true_negative": 13448,
+            "false_positive": 68,
+            "false_negative": 1307,
+            "true_positive": 8261
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.7,
+          "accuracy": 0.9191340907057877,
+          "precision": 0.9453647558917297,
+          "recall": 0.891633748010141,
+          "f1": 0.9177134534862552,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.052726833976833976,
+          "confusion_matrix": {
+            "true_negative": 15702,
+            "false_positive": 874,
+            "false_negative": 1838,
+            "true_positive": 15123
+          }
+        }
+      }
+    },
+    {
+      "name": "fixed_0.8",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.8,
+        "accuracy": 0.9140071704844492,
+        "precision": 0.9756676036542515,
+        "recall": 0.8373478080591051,
+        "f1": 0.9012313122502383,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.018410208693340424,
+        "confusion_matrix": {
+          "true_negative": 29538,
+          "false_positive": 554,
+          "false_negative": 4315,
+          "true_positive": 22214
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.8,
+          "accuracy": 0.9289551204297348,
+          "precision": 0.9942643391521196,
+          "recall": 0.8334030100334449,
+          "f1": 0.9067546054127814,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.0034033737792246227,
+          "confusion_matrix": {
+            "true_negative": 13470,
+            "false_positive": 46,
+            "false_negative": 1594,
+            "true_positive": 7974
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.8,
+          "accuracy": 0.9037182813012493,
+          "precision": 0.9655546514781665,
+          "recall": 0.839573138376275,
+          "f1": 0.8981677126367908,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.030646718146718148,
+          "confusion_matrix": {
+            "true_negative": 16068,
+            "false_positive": 508,
+            "false_negative": 2721,
+            "true_positive": 14240
+          }
+        }
+      }
+    },
+    {
+      "name": "fixed_0.9",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.9,
+        "accuracy": 0.8835944260963247,
+        "precision": 0.9878156194950088,
+        "recall": 0.7609408571751668,
+        "f1": 0.8596614500159694,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.008274624484912934,
+        "confusion_matrix": {
+          "true_negative": 29843,
+          "false_positive": 249,
+          "false_negative": 6342,
+          "true_positive": 20187
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.9,
+          "accuracy": 0.9113671807312425,
+          "precision": 0.9974867724867725,
+          "recall": 0.7881479933110368,
+          "f1": 0.8805464736104625,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.0014057413435927789,
+          "confusion_matrix": {
+            "true_negative": 13497,
+            "false_positive": 19,
+            "false_negative": 2027,
+            "true_positive": 7541
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.9,
+          "accuracy": 0.8644780391806065,
+          "precision": 0.9821373097235166,
+          "recall": 0.7455928306114026,
+          "f1": 0.8476723531186111,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.013875482625482626,
+          "confusion_matrix": {
+            "true_negative": 16346,
+            "false_positive": 230,
+            "false_negative": 4315,
+            "true_positive": 12646
+          }
+        }
+      }
+    },
+    {
+      "name": "fixed_0.95",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.95,
+        "accuracy": 0.8557072464280038,
+        "precision": 0.9929119905493208,
+        "recall": 0.6970108183497304,
+        "f1": 0.8190556343019135,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.004386547919712881,
+        "confusion_matrix": {
+          "true_negative": 29960,
+          "false_positive": 132,
+          "false_negative": 8038,
+          "true_positive": 18491
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.95,
+          "accuracy": 0.8959019234101542,
+          "precision": 0.9988859490321682,
+          "recall": 0.7496864548494984,
+          "f1": 0.8565287479849544,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.0005918910920390648,
+          "confusion_matrix": {
+            "true_negative": 13508,
+            "false_positive": 8,
+            "false_negative": 2395,
+            "true_positive": 7173
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.95,
+          "accuracy": 0.8280406714971524,
+          "precision": 0.9891627337877993,
+          "recall": 0.6672955604032781,
+          "f1": 0.7969580678097384,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.0074806949806949805,
+          "confusion_matrix": {
+            "true_negative": 16452,
+            "false_positive": 124,
+            "false_negative": 5643,
+            "true_positive": 11318
+          }
+        }
+      }
+    },
+    {
+      "name": "fixed_0.99",
+      "maximum_validation_fpr": null,
+      "metrics": {
+        "threshold": 0.99,
+        "accuracy": 0.7494392539870366,
+        "precision": 0.9992718446601941,
+        "recall": 0.46556598439443625,
+        "f1": 0.6351924708786546,
+        "roc_auc": 0.9843128990980741,
+        "average_precision": 0.9837337476083517,
+        "false_positive_rate": 0.0002990828127076964,
+        "confusion_matrix": {
+          "true_negative": 30083,
+          "false_positive": 9,
+          "false_negative": 14178,
+          "true_positive": 12351
+        }
+      },
+      "by_source": {
+        "0:phiusiil": {
+          "threshold": 0.99,
+          "accuracy": 0.7446283139837117,
+          "precision": 0.9994560783247213,
+          "recall": 0.3840928093645485,
+          "f1": 0.5549263873159683,
+          "roc_auc": 0.9882388941856102,
+          "average_precision": 0.9884296406943589,
+          "false_positive_rate": 0.0001479727730097662,
+          "confusion_matrix": {
+            "true_negative": 13514,
+            "false_positive": 2,
+            "false_negative": 5893,
+            "true_positive": 3675
+          }
+        },
+        "1:balanced": {
+          "threshold": 0.99,
+          "accuracy": 0.752750693264156,
+          "precision": 0.9991938270183116,
+          "recall": 0.5115264430163315,
+          "f1": 0.6766495086569958,
+          "roc_auc": 0.9812964129723902,
+          "average_precision": 0.9818864421011163,
+          "false_positive_rate": 0.0004222972972972973,
+          "confusion_matrix": {
+            "true_negative": 16569,
+            "false_positive": 7,
+            "false_negative": 8285,
+            "true_positive": 8676
+          }
+        }
+      }
+    }
+  ]
+}

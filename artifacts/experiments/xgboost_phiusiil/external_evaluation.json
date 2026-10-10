@@ -1,0 +1,26 @@
+{
+  "dataset": "/Users/hrishy/Documents/PhishingURLChecker/data/external/balanced_urls.csv",
+  "rows_evaluated": 293638,
+  "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/xgboost_phiusiil/phishguard_model.joblib",
+  "threshold": 0.48883795738220215,
+  "exact_overlap_excluded": 10,
+  "shared_domain_rows_before_optional_exclusion": 45708,
+  "shared_domains_excluded": true,
+  "reference_data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed",
+  "metrics": {
+    "threshold": 0.48883795738220215,
+    "accuracy": 0.5467786866822414,
+    "precision": 0.5461334297644715,
+    "recall": 0.9997377114701272,
+    "f1": 0.7063851192590517,
+    "roc_auc": 0.7159923854322143,
+    "average_precision": 0.6849629551545015,
+    "false_positive_rate": 0.9964946183403366,
+    "confusion_matrix": {
+      "true_negative": 468,
+      "false_positive": 133041,
+      "false_negative": 42,
+      "true_positive": 160087
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "model_version": "0.2.0-experimental-char_logistic",
+  "model_type": "char_logistic",
+  "label_convention": {
+    "0": "legitimate",
+    "1": "phishing"
+  },
+  "threshold": 0.7488846775184376,
+  "created_at": "2026-10-05T12:33:28.209537+00:00",
+  "selection_method": "fixed parameters; inner-domain validation FPR budget",
+  "maximum_validation_fpr": 0.01,
+  "data_dir": "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed",
+  "split_sha256": {
+    "train": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+    "validation": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+    "test": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+  },
+  "development_sha256": "7e3b46ff3bd9a76eafae482796dc4a1ca9c0cb905b8f3111a38054b6d4956760",
+  "fit_sha256": "e2dcc2c88f2c02b6b84e62dd9f05fdf176ea9ed86919af4c7e42fc32c73d6c9a",
+  "validation_sha256": "d6a8e78b8515505a9ebab14746bb2cf8245d344e00d76c86f3108096471ae0db",
+  "dataset_rows": {
+    "fit": 40211,
+    "validation": 9789
+  },
+  "validation_metrics": {
+    "threshold": 0.7488846775184376,
+    "accuracy": 0.8549392174890182,
+    "precision": 0.98375,
+    "recall": 0.6970770593445527,
+    "f1": 0.815966822187662,
+    "roc_auc": 0.9555985444508406,
+    "average_precision": 0.9590771088957614,
+    "false_positive_rate": 0.009861558884885265,
+    "confusion_matrix": {
+      "true_negative": 5221,
+      "false_positive": 52,
+      "false_negative": 1368,
+      "true_positive": 3148
+    }
+  },
+  "cross_validation_summary": {
+    "accuracy": {
+      "mean": 0.8561198714319987,
+      "std": 0.00525327866048415
+    },
+    "precision": {
+      "mean": 0.9844637896842002,
+      "std": 0.0018812125467206882
+    },
+    "recall": {
+      "mean": 0.7045508222773477,
+      "std": 0.011405915860560254
+    },
+    "f1": {
+      "mean": 0.8212693351592728,
+      "std": 0.007766873646268574
+    },
+    "roc_auc": {
+      "mean": 0.9563486489396983,
+      "std": 0.0013176482424900782
+    },
+    "average_precision": {
+      "mean": 0.960632199396011,
+      "std": 0.0013033823568891507
+    },
+    "false_positive_rate": {
+      "mean": 0.00983651303376384,
+      "std": 0.001232227240770532
+    },
+    "false_alarms_per_1000_benign": {
+      "mean": 9.83651303376384,
+      "std": 1.2322272407705321
+    }
+  },
+  "score_caution": "uncalibrated; advisory research experiment only",
+  "activation_eligible": false,
+  "representation": {
+    "scheme_removed": true,
+    "fragment_removed": true,
+    "analyzer": "char",
+    "ngram_range": [
+      3,
+      5
+    ],
+    "max_features": 100000,
+    "learned_vocabulary_size": 100000
+  }
+}

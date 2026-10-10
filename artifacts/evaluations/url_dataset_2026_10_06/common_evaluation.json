@@ -1,0 +1,222 @@
+{
+  "dataset": "/Users/hrishy/Downloads/URL dataset.csv",
+  "dataset_sha256": "accb2dfbfd3329a8b5cb1b85dcad90314a660c272be755cb45d0f6865014b466",
+  "evaluation_role": "frozen_external_comparison",
+  "independent_provenance_verified": false,
+  "provenance_caution": "Source origin and label quality not independently verified; shared domains excluded but template leakage may remain.",
+  "cleaning_report": {
+    "rows_before": 450176,
+    "missing_urls_removed": 0,
+    "missing_labels_removed": 0,
+    "blank_urls_removed": 0,
+    "invalid_urls_removed": 567,
+    "duplicate_urls_removed": 0,
+    "rows_after": 449609
+  },
+  "exact_overlap_excluded": 9265,
+  "shared_domain_rows_excluded_after_exact": 229075,
+  "reference_sha256": {
+    "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/reference/train.csv": "3606dbf9755b77d0087c8193d4e29c98941c4b8484a50b7c30fb83920523250b",
+    "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/reference/validation.csv": "cc9f668ac0071447d78d2849948de60fbc0248318ccff006e899525055fa5164",
+    "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/reference/test.csv": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6",
+    "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed/train.csv": "a86f37e206ae4d71b1c6df2a6958d43e839bb66c36017f2d7b1191b2140a375c",
+    "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed/validation.csv": "48f152ddd97561ff83f025302fd4753b0644f400180ec1ce1e4219b629791de0",
+    "/Users/hrishy/Documents/PhishingURLChecker/data/processed/mixed/test.csv": "bf31c33b74c3d84bbe730fe493bcc4257aa64cb36f31c9b41ac05e14b259eec6"
+  },
+  "rows_evaluated": 211269,
+  "class_counts": {
+    "0": 153225,
+    "1": 58044
+  },
+  "majority_class_accuracy": 0.7252602132825924,
+  "scheme_class_counts": {
+    "0": {
+      "http": 0,
+      "https": 153225
+    },
+    "1": {
+      "http": 55138,
+      "https": 2906
+    }
+  },
+  "protocol_only_baseline": {
+    "threshold": 0.5,
+    "accuracy": 0.9862450241161742,
+    "precision": 1.0,
+    "recall": 0.9499345324236785,
+    "f1": 0.974324539237688,
+    "roc_auc": 0.9749672662118393,
+    "average_precision": 0.9636895083075043,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": {
+      "true_negative": 153225,
+      "false_positive": 0,
+      "false_negative": 2906,
+      "true_positive": 55138
+    }
+  },
+  "models": {
+    "active_xgboost": {
+      "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts",
+      "model_sha256": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7",
+      "metadata_sha256": "7dd13d9ec074a4db7889f486dc0bab8a81399dc5388a1603a835d9abcf185c1e",
+      "overall": {
+        "threshold": 0.4711279273033142,
+        "accuracy": 0.8911861181716201,
+        "precision": 0.746300746174276,
+        "recall": 0.9149782923299565,
+        "f1": 0.8220762033016787,
+        "roc_auc": 0.9375507311453959,
+        "average_precision": 0.8119830782651831,
+        "false_positive_rate": 0.11782672540381792,
+        "confusion_matrix": {
+          "true_negative": 135171,
+          "false_positive": 18054,
+          "false_negative": 4935,
+          "true_positive": 53109
+        }
+      },
+      "by_scheme": {
+        "http": {
+          "rows": 55138,
+          "class_counts": {
+            "1": 55138
+          },
+          "recall_phishing": 0.9276723856505495,
+          "caution": "Single-class subset: accuracy equals phishing recall; no FPR or AUC."
+        },
+        "https": {
+          "rows": 156131,
+          "class_counts": {
+            "0": 153225,
+            "1": 2906
+          },
+          "metrics": {
+            "threshold": 0.4711279273033142,
+            "accuracy": 0.8783009139760842,
+            "precision": 0.09788637385699296,
+            "recall": 0.6741225051617343,
+            "f1": 0.1709498669226406,
+            "roc_auc": 0.8611766957646211,
+            "average_precision": 0.11225667655509503,
+            "false_positive_rate": 0.11782672540381792,
+            "confusion_matrix": {
+              "true_negative": 135171,
+              "false_positive": 18054,
+              "false_negative": 947,
+              "true_positive": 1959
+            }
+          }
+        }
+      }
+    },
+    "tuned_xgboost": {
+      "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/xgboost",
+      "model_sha256": "b90d0fe8cc1543ea88f9800413af4ac7b95a5b1e73f2c4907487455c0552708c",
+      "metadata_sha256": "23ef9cc692817103329b6a18de7db649f42bc0333396984442391f788cb6f958",
+      "overall": {
+        "threshold": 0.9151458740234375,
+        "accuracy": 0.7726216340305487,
+        "precision": 0.7145736833076,
+        "recall": 0.2870408655502722,
+        "f1": 0.40956243854473945,
+        "roc_auc": 0.8591474150637591,
+        "average_precision": 0.6935181150224681,
+        "false_positive_rate": 0.04343286017294828,
+        "confusion_matrix": {
+          "true_negative": 146570,
+          "false_positive": 6655,
+          "false_negative": 41383,
+          "true_positive": 16661
+        }
+      },
+      "by_scheme": {
+        "http": {
+          "rows": 55138,
+          "class_counts": {
+            "1": 55138
+          },
+          "recall_phishing": 0.28474010664151767,
+          "caution": "Single-class subset: accuracy equals phishing recall; no FPR or AUC."
+        },
+        "https": {
+          "rows": 156131,
+          "class_counts": {
+            "0": 153225,
+            "1": 2906
+          },
+          "metrics": {
+            "threshold": 0.9151458740234375,
+            "accuracy": 0.9449180495865651,
+            "precision": 0.12618172268907563,
+            "recall": 0.33069511355815556,
+            "f1": 0.18266489260596844,
+            "roc_auc": 0.8406720287842134,
+            "average_precision": 0.15319178683201576,
+            "false_positive_rate": 0.04343286017294828,
+            "confusion_matrix": {
+              "true_negative": 146570,
+              "false_positive": 6655,
+              "false_negative": 1945,
+              "true_positive": 961
+            }
+          }
+        }
+      }
+    },
+    "char_logistic": {
+      "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/char_logistic",
+      "model_sha256": "70a9ab8b39e84785d8f029326ecef9d169dd88e032ca7a87804d921d2e4c7001",
+      "metadata_sha256": "9c3de225baedb2e3c496a0e664f341decb63ba3cdf5360904407a420d7a84d0f",
+      "overall": {
+        "threshold": 0.9642041195785024,
+        "accuracy": 0.8065262769265723,
+        "precision": 0.99918590451823,
+        "recall": 0.2960340431396871,
+        "f1": 0.45674565728791483,
+        "roc_auc": 0.956345195124253,
+        "average_precision": 0.92491633369103,
+        "false_positive_rate": 9.136890194158916e-05,
+        "confusion_matrix": {
+          "true_negative": 153211,
+          "false_positive": 14,
+          "false_negative": 40861,
+          "true_positive": 17183
+        }
+      },
+      "by_scheme": {
+        "http": {
+          "rows": 55138,
+          "class_counts": {
+            "1": 55138
+          },
+          "recall_phishing": 0.2894374115854764,
+          "caution": "Single-class subset: accuracy equals phishing recall; no FPR or AUC."
+        },
+        "https": {
+          "rows": 156131,
+          "class_counts": {
+            "0": 153225,
+            "1": 2906
+          },
+          "metrics": {
+            "threshold": 0.9642041195785024,
+            "accuracy": 0.9891373269882342,
+            "precision": 0.9886914378029079,
+            "recall": 0.4211975223675155,
+            "f1": 0.5907335907335908,
+            "roc_auc": 0.9628476648591193,
+            "average_precision": 0.7630724008550342,
+            "false_positive_rate": 9.136890194158916e-05,
+            "confusion_matrix": {
+              "true_negative": 153211,
+              "false_positive": 14,
+              "false_negative": 1682,
+              "true_positive": 1224
+            }
+          }
+        }
+      }
+    }
+  }
+}

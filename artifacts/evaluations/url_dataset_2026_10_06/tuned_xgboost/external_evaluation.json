@@ -1,0 +1,55 @@
+{
+  "evaluation_role": "development_stress_test",
+  "independent_provenance_verified": false,
+  "provenance_caution": "File fingerprints and domain exclusion do not establish independent collection or remove all template leakage. Verify provenance separately.",
+  "dataset": "/Users/hrishy/Downloads/URL dataset.csv",
+  "dataset_sha256": "accb2dfbfd3329a8b5cb1b85dcad90314a660c272be755cb45d0f6865014b466",
+  "model_sha256": "b90d0fe8cc1543ea88f9800413af4ac7b95a5b1e73f2c4907487455c0552708c",
+  "metadata_sha256": "23ef9cc692817103329b6a18de7db649f42bc0333396984442391f788cb6f958",
+  "label_mapping": {
+    "legitimate": 0,
+    "phishing": 1
+  },
+  "missing_scheme_policy": "reject",
+  "scheme_assumed_rows_before_cleaning": 0,
+  "cleaning_report": {
+    "rows_before": 450176,
+    "missing_urls_removed": 0,
+    "missing_labels_removed": 0,
+    "blank_urls_removed": 0,
+    "invalid_urls_removed": 567,
+    "duplicate_urls_removed": 0,
+    "rows_after": 449609
+  },
+  "conflicting_label_exclusion_enabled": false,
+  "conflicting_urls_excluded": 0,
+  "conflicting_rows_excluded": 0,
+  "evaluated_class_counts": {
+    "0": 153225,
+    "1": 58044
+  },
+  "majority_class_accuracy": 0.7252602132825924,
+  "rows_evaluated": 211269,
+  "model_path": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/xgboost/phishguard_model.joblib",
+  "threshold": 0.9151458740234375,
+  "exact_overlap_excluded": 9265,
+  "shared_domain_rows_before_optional_exclusion": 229075,
+  "shared_domains_excluded": true,
+  "reference_data_dir": "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/source_tuning_full_v1/reference",
+  "metrics": {
+    "threshold": 0.9151458740234375,
+    "accuracy": 0.7726216340305487,
+    "precision": 0.7145736833076,
+    "recall": 0.2870408655502722,
+    "f1": 0.40956243854473945,
+    "roc_auc": 0.8591474150637591,
+    "average_precision": 0.6935181150224681,
+    "false_positive_rate": 0.04343286017294828,
+    "confusion_matrix": {
+      "true_negative": 146570,
+      "false_positive": 6655,
+      "false_negative": 41383,
+      "true_positive": 16661
+    }
+  }
+}

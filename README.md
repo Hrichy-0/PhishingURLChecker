@@ -4,10 +4,11 @@ PhishGuard is an end-to-end, URL-only phishing risk detector. It validates and
 cleans labeled URL datasets, trains an XGBoost pipeline, serves predictions
 through FastAPI, and connects to a Chrome Manifest V3 extension.
 
-> **Project status:** learning/portfolio prototype. The full pipeline works.
-> The active version uses broader training data and fixes the observed Apple
-> deep-link false positive. Remaining false positives and source bias still
-> require further evaluation.
+> **Project status:** learning/research prototype. Native local training and
+> saved-model evaluation are verified. The API/extension still uses the older
+> URL-only joblib model; it requires working scikit-learn native dependencies.
+> The current Windows policy blocks that serving dependency. See the local audit
+> and Mac setup guide. False positives and source bias require further evaluation.
 
 The detector never visits a submitted URL. All 21 model features are computed from
 the URL string, which keeps inference fast and avoids executing content from a
@@ -56,6 +57,16 @@ improves some external ranking metrics but still produces substantial false
 alarms. **The active API/extension model has not been replaced.** An optional
 offline URL+HTML feature extractor and same-row hybrid benchmark are implemented,
 but no hybrid model has yet been trained on real website-content data.
+
+A native Windows URL+HTML training command now reads the full local PhreshPhish
+Parquet download in batches and caches 38 numeric features. It compares URL-only,
+HTML-derived, and combined models on identical domain/exact-HTML grouped rows,
+supports CPU or CUDA, and leaves active artifacts unchanged. See
+[`docs/native-html-training.md`](docs/native-html-training.md) for the full command,
+feature definitions, and evaluation limitations. Full paired training has since
+completed: see [HTML experiment results](docs/html-training-results-2026-10-11.md)
+and [Mac pull/setup instructions](docs/mac-pull-and-models.md). The repository now
+includes model artifacts and research results; datasets remain excluded.
 
 See [`docs/model-comparison.md`](docs/model-comparison.md) for measured results,
 the files to study, reproducible commands, and the remaining evaluation work.
