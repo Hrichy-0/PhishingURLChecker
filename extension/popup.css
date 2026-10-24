@@ -64,6 +64,13 @@ button {
   font-weight: 700;
 }
 
+button.secondary {
+  margin-top: 8px;
+  border: 1px solid #173e8f;
+  background: white;
+  color: #173e8f;
+}
+
 button:disabled {
   cursor: wait;
   opacity: 0.65;

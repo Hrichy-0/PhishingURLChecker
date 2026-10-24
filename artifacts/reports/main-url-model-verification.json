@@ -1,0 +1,151 @@
+{
+  "health": {
+    "status": "ok",
+    "model_available": true,
+    "model_type": "Native XGBoost: url_only",
+    "model_sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+    "experimental": true,
+    "feature_count": 21
+  },
+  "feature_order": [
+    "url_length",
+    "hostname_length",
+    "path_length",
+    "query_length",
+    "dot_count",
+    "hyphen_count",
+    "underscore_count",
+    "digit_count",
+    "digit_ratio",
+    "subdomain_count",
+    "query_parameter_count",
+    "percent_encoding_count",
+    "special_character_count",
+    "has_ip_hostname",
+    "uses_https",
+    "has_at_symbol",
+    "has_explicit_port",
+    "suspicious_word_count",
+    "character_entropy",
+    "longest_token_length",
+    "tld_length"
+  ],
+  "matrix_shape": [
+    6,
+    21
+  ],
+  "finite_features": true,
+  "features_used_by_trees": 20,
+  "unused_tree_features": [
+    "has_explicit_port"
+  ],
+  "prediction_tree_count": 480,
+  "direct_api_parity_cases": [
+    {
+      "url": "https://www.apple.com/de/",
+      "score": 0.13128569722175598,
+      "is_phishing": false
+    },
+    {
+      "url": "https://example.com/",
+      "score": 0.5175921320915222,
+      "is_phishing": true
+    },
+    {
+      "url": "https://a.b.example.test/login/verify?account=42&next=%2Fhome",
+      "score": 0.9951139688491821,
+      "is_phishing": true
+    },
+    {
+      "url": "http://user@192.0.2.1:8080/reset?id=1234",
+      "score": 0.9996529817581177,
+      "is_phishing": true
+    },
+    {
+      "url": "https://long-domain-name-123.example.test/path_one#part",
+      "score": 0.9613776206970215,
+      "is_phishing": true
+    },
+    {
+      "url": "https://example.test/a%20b?x=1&y=2",
+      "score": 0.9976620674133301,
+      "is_phishing": true
+    }
+  ],
+  "browser_origin_preflight_passed": true,
+  "limits": "In-process API test; not a live Chrome UI or accuracy evaluation",
+  "protected_artifact_hashes": {
+    "artifacts/phishguard_model.joblib": "89ae67ee2911e4072a699afb21307015f3f1635e98acfbab579f1ac2740188c7",
+    "artifacts/model_metadata.json": "7dd13d9ec074a4db7889f486dc0bab8a81399dc5388a1603a835d9abcf185c1e",
+    "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/phreshphish_html_20261010/url_only/xgboost_model.ubj": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+    "/Users/hrishy/Documents/PhishingURLChecker/artifacts/experiments/phreshphish_html_20261010/url_only/model_metadata.json": "2f75a0f22f613431a52f97ba54f6b8e95e7ef39cce55231d96154625d7333858"
+  },
+  "prediction_report_checks": {
+    "validation": {
+      "rows": 56301,
+      "recorded_confusion_matrix_reproduced": true,
+      "metrics": {
+        "threshold": 0.4901971220970154,
+        "accuracy": 0.945329567858475,
+        "precision": 0.9637157833430402,
+        "recall": 0.9475462406230315,
+        "f1": 0.9555626136921433,
+        "roc_auc": 0.984285012958057,
+        "average_precision": 0.9899952420812729,
+        "false_positive_rate": 0.058292397660818715,
+        "confusion_matrix": {
+          "true_negative": 20129,
+          "false_positive": 1246,
+          "false_negative": 1832,
+          "true_positive": 33094
+        }
+      },
+      "source_sha256": "6cd4fb5f6c5d36d341e256d0e55205e15a171d0ade364fae3cf3a798cb669dd2",
+      "caution": "Recomputed from saved prediction outputs, not fresh inference on raw records"
+    },
+    "test": {
+      "rows": 39866,
+      "recorded_confusion_matrix_reproduced": true,
+      "metrics": {
+        "threshold": 0.4901971220970154,
+        "accuracy": 0.9040284954597902,
+        "precision": 0.9001510682684699,
+        "recall": 0.836933984348873,
+        "f1": 0.8673922085124082,
+        "roc_auc": 0.9532555709813338,
+        "average_precision": 0.9424344241079378,
+        "false_positive_rate": 0.05570941200080273,
+        "confusion_matrix": {
+          "true_negative": 23527,
+          "false_positive": 1388,
+          "false_negative": 2438,
+          "true_positive": 12513
+        }
+      },
+      "source_sha256": "1f63b4315ff4de84a686c5d22116d645f32a412bbe1e7443ba24dd01a765c511",
+      "caution": "Recomputed from saved prediction outputs, not fresh inference on raw records"
+    },
+    "publisher_test": {
+      "rows": 84746,
+      "recorded_confusion_matrix_reproduced": true,
+      "metrics": {
+        "threshold": 0.4901971220970154,
+        "accuracy": 0.8497864205980223,
+        "precision": 0.9381292923563137,
+        "recall": 0.8271618169801547,
+        "f1": 0.8791578068043743,
+        "roc_auc": 0.9349015303863932,
+        "average_precision": 0.9666409631742146,
+        "false_positive_rate": 0.1061780760004172,
+        "confusion_matrix": {
+          "true_negative": 25709,
+          "false_positive": 3054,
+          "false_negative": 9676,
+          "true_positive": 46307
+        }
+      },
+      "source_sha256": "a357fd267b61124d0c298719057046bbd778670b0dd946c54ecb76b42fc0e00f",
+      "caution": "Recomputed from saved prediction outputs, not fresh inference on raw records"
+    }
+  }
+}

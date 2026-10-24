@@ -11,6 +11,15 @@ import xgboost as xgb
 from phishguard.native_html import HTML_FEATURE_NAMES, fingerprint, snapshot_vector
 
 
+def score_snapshot(model: xgb.Booster, values, names, metadata: dict) -> float:
+    """Use only the saved best_iteration trees, as the API service does."""
+    rounds = int(metadata.get("best_iteration", model.num_boosted_rounds() - 1)) + 1
+    if not 0 < rounds <= model.num_boosted_rounds():
+        raise ValueError("Model metadata has an invalid prediction tree range")
+    data = xgb.DMatrix(values, feature_names=list(names))
+    return float(model.predict(data, iteration_range=(0, rounds))[0])
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model-dir", type=Path, required=True)
@@ -39,7 +48,7 @@ def main() -> None:
     values = snapshot_vector(
         args.url, html, names, metadata.get("max_html_bytes", 1_000_000)
     )
-    score = float(model.predict(xgb.DMatrix(values, feature_names=list(names)))[0])
+    score = score_snapshot(model, values, names, metadata)
     print(
         json.dumps(
             {

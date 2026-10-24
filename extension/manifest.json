@@ -3,7 +3,7 @@
   "name": "PhishGuard URL Checker",
   "version": "0.1.0",
   "description": "Checks the active tab URL with a local URL-only phishing model.",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "scripting"],
   "host_permissions": ["http://127.0.0.1:8000/*"],
   "action": {
     "default_title": "Check this URL with PhishGuard",
