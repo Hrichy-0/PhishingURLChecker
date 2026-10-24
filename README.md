@@ -1,32 +1,88 @@
 # PhishingURLChecker (PhishGuard ML)
 
-PhishGuard is a phishing detection research project with a URL-only FastAPI
-service and Chrome Manifest V3 extension. The active TalentUD research direction
-is **Evaluating On-Device Phishing Detection Models on Real-World Web Pages**.
-The submitted scope includes comparison of URL-based and URL+static-webpage-content
-models, with planned browser-local inference and real-world evaluation.
+PhishGuard is a research prototype for phishing detection that runs on the
+user's own device. It is part of the TalentUD project **Evaluating On-Device
+Phishing Detection Models on Real-World Web Pages**, which compares a URL-only
+model with a URL + static-webpage-content model.
 
-The current model runs on-device through a local Python service, not inside Chrome
-yet. See the [project overview](docs/project-overview.md) for a summary of all work,
-results and next steps.
+- **Models:** two XGBoost models trained on the PhreshPhish dataset. The URL-only
+  model uses 21 features of the URL string; the URL+HTML model adds 17 features
+  of the page's HTML.
+- **Local API:** a FastAPI service on `127.0.0.1` that scores a URL, or a URL plus
+  the HTML the browser already loaded. It never fetches websites.
+- **Chrome extension:** a Manifest V3 popup with "Check this URL" (URL-only) and
+  "Check URL + page content (experimental)" (URL+HTML).
+- **Real-website testing:** a Playwright script that drives the real popup on a
+  fixed list of websites.
+
+Inference runs locally through the Python service; running the models inside the
+browser itself is planned but not implemented yet. The full summary is in the
+[project overview](docs/project-overview.md).
 
 The separate [Word project documentation](PhishingURLChecker_Project_Documentation.docx)
 records the implementation history, model comparisons, evaluation limitations,
 current review pilot and Mac/Windows operating commands, updated 19 October 2026.
 
-> **Project status:** learning/research prototype. Native local training and
-> saved-model evaluation are verified. The default local API/extension model is
-> now the native PhreshPhish URL-only model with 21 lexical features. It remains
-> experimental/advisory, not production-approved. The older joblib model is kept
-> for explicit rollback. False positives and source bias require further evaluation.
+## Progress so far
 
-The API computes 21 features from the submitted URL string without visiting the
-site. An experimental `/predict_html` endpoint and popup button score the loaded
-page's HTML with the saved URL+HTML research model for RPA real-website testing
-([docs/archive/rpa-real-world-testing.md](docs/archive/rpa-real-world-testing.md)); the default
-URL-only path is unchanged.
+### 1. Cross-validation
 
-### Main local URL model
+Five-fold grouped cross-validation on 454,185 development records. Records that
+share a domain or identical page content stay in the same fold (154,074 groups).
+A separate grouped inner validation set chose early stopping and the threshold;
+the test sets were not used.
+
+| Model (F1 threshold policy) | Accuracy | Precision | Recall | False-positive rate |
+|---|---:|---:|---:|---:|
+| URL-only | 90.93% | 90.09% | 89.95% | 8.26% |
+| URL + HTML | 92.59% | 95.01% | 88.35% | 3.87% |
+
+- **Paired bootstrap** (whole groups resampled): adding HTML lowered the
+  false-positive rate by 4.4 percentage points (95% CI 3.8–5.0). The recall
+  differences were not statistically conclusive.
+- **Instability:** the URL-only false-positive rate varied from 4.25% to 16.71%
+  across folds, driven by one large linked group of domains.
+
+### 2. Leakage audit
+
+- **Integrity:** all 578,797 records match their original checksums, and the URL
+  features re-extract exactly.
+- **Overlap:** no URL, domain or identical page content appears in more than one
+  split or fold.
+- **Label conflicts:** 66 records share identical content but have opposite
+  labels. They are mostly generic pages ("store unavailable", server default,
+  geo-blocked), so they were flagged rather than relabelled.
+
+### 3. Real-website test
+
+The Playwright runner opened 197 real legitimate websites (banks, government,
+universities, news, shopping, email and software), excluding every domain seen in
+the project's data and each verified as an official site. All 195 scored popups
+matched the API's answer (median 76 ms).
+
+| Legitimate sites | n | URL+HTML false alarms | URL-only false alarms |
+|---|---:|---:|---:|
+| Loaded normally (HTTP 200) | 152 | 29.6% | 27.0% |
+| Blocked the automated browser (403/429/500) | 23 | 95.7% | 21.7% |
+
+On new real sites both models falsely flag about 27–30% of normal pages, far
+above the 4–8% measured in cross-validation. The URL+HTML model also flags almost
+every bot-check or error page. Details: [RPA report](docs/archive/rpa-real-world-testing.md)
+and [`results.json`](artifacts/experiments/rpa_url_html_20261024/results.json).
+
+### Next steps
+
+1. Close the gap between development and real-world false alarms: decide how
+   blocked/error pages are treated, then test threshold or training changes on
+   separate legitimate pages.
+2. Finish independent label review for the fresh OpenPhish/Tranco benchmark and
+   score it once.
+3. Move inference into the browser and measure latency, memory and privacy.
+
+These are research results, not production approval. A low score never means a
+site is safe.
+
+## Run the main local model
 
 Start the main model from the repository root without an environment override:
 
@@ -54,19 +110,7 @@ PHISHGUARD_MODEL=legacy .venv/bin/python -m uvicorn api.main:app --host 127.0.0.
 Leave `PHISHGUARD_EXPERIMENTAL_MODEL_DIR` unset for normal use; it remains a
 research override and cannot be combined with `PHISHGUARD_MODEL=legacy`.
 A missing/corrupt main model reports unavailable, never silently loads the old
-model. No saved model/metadata was rewritten to change its research eligibility.
-Five-fold domain/exact-content-grouped development CV is complete on 454,185
-train+validation records. The inner-F1 policy yielded 89.95% recall and 8.26% FPR;
-an inner-validation 1% FPR budget yielded 71.98% recall and 1.06% outer FPR.
-F1 cutoffs were unstable across folds. These are newly fitted research-fold
-models, not improved results for the unchanged extension model. See the
-[protocol, uncertainty and results](docs/archive/talentud-evaluation-plan.md#completed-url-only-grouped-cv-2026-10-16).
-
-The [professor evaluation follow-up](docs/archive/professor-evaluation-followup.md) adds
-same-role URL+content CV, paired uncertainty, a cutoff-instability diagnosis and
-actual Chrome popup smoke tests. The pilot found a false positive on official
-Python documentation; it is not independent accuracy evidence. Reliability gates
-remain open.
+model.
 
 ## Preliminary training comparison: URL + HTML
 
@@ -180,9 +224,9 @@ Source-held-out XGBoost tuning is available through the same benchmark command
 The [file-purpose guide](docs/archive/architecture.md#file-purpose-audit--2026-10-06)
 distinguishes runtime files, current research commands, and optional/history files.
 
-The [consolidated dataset audit](docs/archive/dataset-audit-report.md) combines the
-three read-only agent audits of training sources, uploaded URLs, and Hugging Face
-data, including label conflicts, false-positive patterns, source bias, and next steps.
+The [consolidated dataset audit](docs/archive/dataset-audit-report.md) covers the
+training sources, an uploaded URL dataset and the Hugging Face data, including
+label conflicts, false-positive patterns, source bias and next steps.
 
 ## Technology stack
 
@@ -201,7 +245,8 @@ api/                    FastAPI application
 artifacts/              Tracked models, metadata, evaluations, and research results
 data/raw/               Local original datasets, including full PhreshPhish (ignored)
 data/processed/         Local cleaned splits and numeric feature caches (ignored)
-docs/                   Architecture and model documentation
+docs/                   Project overview and detailed reports (docs/archive/)
+examples/               Inert HTML fixtures and the RPA website lists
 extension/              Unpacked Chrome extension
 scripts/                Reproducible data and training commands
 src/phishguard/         Reusable data, feature, model, and prediction code
@@ -248,7 +293,7 @@ if a DLL import error occurs. GPU hardware is not required by this project's CPU
 #### Models and local datasets
 
 GitHub now includes code, tests, extension files, trained models, metadata,
-evaluation JSONs/CSVs, and research reports. A pull brings these files into the
+evaluation JSONs and research reports. Result files that contain raw URLs stay local. A pull brings these files into the
 existing checkout. Raw datasets, dataset splits, feature caches, and virtual
 environments remain local. Retraining requires the datasets separately.
 
@@ -417,10 +462,9 @@ ruff check src scripts tests api
 pytest -q
 ```
 
-Latest validation: 36 focused data/native-training tests passed, and Ruff checks
-passed. All three new models reproduced internal/publisher-test results on CPU.
-Full API/scikit-learn tests remain blocked on this Windows machine by its native
-dependency policy; see [local audit](docs/archive/local-check-2026-10-09.md).
+Latest validation (25 October 2026, macOS): 147 tests pass and Ruff checks pass.
+On Windows, the scikit-learn legacy path was previously blocked by a native
+dependency policy; see the [local audit](docs/archive/local-check-2026-10-09.md).
 
 ## Important safety boundary
 
@@ -460,7 +504,11 @@ are in [`docs/archive/model-card.md`](docs/archive/model-card.md).
 - [x] Train and compare URL-only, HTML-derived, and URL+HTML models on matching rows.
 - [x] Verify saved native models on CPU and publish models/results for Mac pulls.
 - [x] Add an experimental URL+HTML endpoint and popup button for RPA testing.
-- [ ] Run the full RPA website list and decide on HTML integration from its results.
+- [x] Run grouped cross-validation and a leakage audit for both models.
+- [x] Run the RPA test on 197 real legitimate websites.
+- [ ] Reduce real-world false alarms before deciding on HTML integration.
+- [ ] Score the fresh OpenPhish/Tranco benchmark after independent label review.
+- [ ] Run the models inside the browser (ONNX) and measure latency and memory.
 - [ ] Evaluate near-duplicate templates, temporal splits, and HTML size/truncation effects.
 - [ ] Add reputation signals and assess calibration before considering production use.
 
