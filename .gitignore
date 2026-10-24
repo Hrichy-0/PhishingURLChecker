@@ -37,3 +37,12 @@ artifacts/**/train.csv
 artifacts/**/validation.csv
 artifacts/**/test.csv
 artifacts/**/*fixture*/
+# Error/prediction files that contain raw URLs, including phishing URLs.
+artifacts/**/false_positives.csv
+artifacts/**/false_negatives.csv
+artifacts/**/out_of_fold_predictions.csv
+
+# AI assistant configuration (local only)
+CLAUDE.md
+AGENTS.md
+.claude/

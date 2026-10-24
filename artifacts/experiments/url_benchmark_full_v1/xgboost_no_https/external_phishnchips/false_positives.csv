@@ -1,8 +1,0 @@
-url,is_phishing,phishing_score,predicted_is_phishing
-https://login.microsoftonline.com/common/oauth2/authorize,0,0.95648295,1
-https://009.xn--p1ai,0,0.9456175,1
-https://you-online-dns.net,0,0.8481381,1
-https://access-88.com,0,0.91213554,1
-https://ggs-bf2.com,0,0.901495,1
-https://minecraft-schematics.com,0,0.8567124,1
-https://national-lottery.com,0,0.8480051,1
