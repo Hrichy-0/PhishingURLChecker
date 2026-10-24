@@ -115,8 +115,10 @@ intervals:
   earlier finding that generic unavailable or blocked pages in the training
   data are often labelled phishing.
 - **Normal pages:** on pages that loaded normally, the two models' false-alarm
-  rates are similar, about 27–30%. Development cross-validation measured
-  4–8%, so there is a large gap on new real sites.
+  rates are similar, about 27–30%. The same saved models flagged 10.6%
+  (URL-only) and 18.6% (URL+HTML) on the PhreshPhish publisher test, so there
+  is a large gap on new real sites. (The 4–8% from cross-validation comes from
+  separately trained fold models and is not directly comparable.)
 - **Disagreements:** the models disagreed on 41 sites. URL+HTML alone flagged
   31; URL-only alone flagged 10.
 - **By page type (URL+HTML):** homepages 48/124, login pages 8/16, long query

@@ -65,8 +65,8 @@ matched the API's answer (median 76 ms).
 | Loaded normally (HTTP 200) | 152 | 29.6% | 27.0% |
 | Blocked the automated browser (403/429/500) | 23 | 95.7% | 21.7% |
 
-On new real sites both models falsely flag about 27–30% of normal pages, far
-above the 4–8% measured in cross-validation. The URL+HTML model also flags almost
+On new real sites both saved models falsely flag about 27–30% of normal pages,
+against 10.6% (URL-only) and 18.6% (URL+HTML) on their earlier PhreshPhish test. The URL+HTML model also flags almost
 every bot-check or error page. Details: [RPA report](docs/archive/rpa-real-world-testing.md)
 and [`results.json`](artifacts/experiments/rpa_url_html_20261024/results.json).
 

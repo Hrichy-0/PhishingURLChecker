@@ -8,8 +8,23 @@ device can detect previously unseen phishing pages. The models combine URL
 features with static webpage-content features. The aim is to keep false alarms
 low, protect privacy and give useful explanations.
 
-This document summarises the whole project as of 24 October 2026. The detailed
+This document summarises the whole project as of 25 October 2026. The detailed
 reports it draws on are in [`archive/`](archive/); see the index at the end.
+
+## Key findings
+
+- **Cross-validation:** in five-fold grouped cross-validation on 454,185 records,
+  adding HTML features lowered the false-positive rate by 4.4 points (95% CI
+  3.8–5.0); recall differences were not conclusive (section 5).
+- **Leakage:** no URL, domain or identical page content crosses splits or folds.
+  66 records share identical content but have opposite labels, mostly generic
+  unavailable or blocked pages (section 5).
+- **Real websites:** on 152 new legitimate sites that loaded normally, the saved
+  models falsely flagged 27.0% (URL-only) and 29.6% (URL+HTML), against 10.6% and
+  18.6% on their earlier PhreshPhish test. The URL+HTML model flagged 22 of 23
+  blocked or error pages (section 7).
+- **Open question:** how to close this gap between development and real-world
+  false alarms, and how pages that block automated browsers should be treated.
 
 ## 1. What exists today
 
@@ -125,6 +140,10 @@ validation-selected cutoffs, purged publisher test (84,746 pages):
 With cutoffs chosen for about 1% validation FPR, URL+HTML reached 72.37% recall
 at 1.80% test FPR, against 61.35% at 1.70% for URL-only.
 
+These two saved models are the ones served by the API and used in the
+real-website test (section 7). Their cutoffs were chosen once on the original
+validation split.
+
 ## 5. Evaluation of the current models (16–19 Oct)
 
 ### Leakage audit
@@ -168,12 +187,19 @@ at 1.80% test FPR, against 61.35% at 1.70% for URL-only.
 These are development results, not real-world accuracy. The hyperparameters
 were chosen earlier on the same collection.
 
+Why URL+HTML has fewer false alarms here but more in section 4: the
+cross-validation trains new fold models and picks a cutoff inside each fold,
+and evaluates on development data. Section 4 measures the two saved models,
+each with its single saved cutoff, on the later publisher test set. Different
+models, cutoffs and test data give different trade-offs; the paired
+cross-validation is the controlled comparison.
+
 ## 6. On-device measurements
 
 - **Local URL-only service** (Mac ARM64 CPU): median 0.23 ms per URL (p95
   0.29 ms). The model loads in 73 ms and is 2.4 MB.
-- **Extension content check:** median 72 ms from click to result, including
-  page capture and inference, measured in the RPA smoke test.
+- **Extension content check:** median 76 ms from click to result (p95 144 ms),
+  including page capture and inference, measured in the full RPA run.
 
 Browser-only inference, memory and energy have not been measured yet.
 
@@ -202,8 +228,11 @@ email and software. It excludes 952,870 domains seen anywhere in the project.
 Each site's official status was verified through Wikidata. The list is frozen
 before scoring.
 
-**Full run (24–25 Oct).** 175 real legitimate sites were scored; every popup
-matched the API (median 76 ms).
+**Full run (24–25 Oct).** The run covered 217 cases: 197 real sites and 20
+simulated cases. 195 were scored and every popup matched the API (median
+76 ms). The 22 failures were mostly timeouts; 7 came from a runner bug, since
+fixed. The results below cover the 175 real sites that were scored, using the
+saved models and their saved cutoffs.
 
 | Pages | n | URL+HTML false alarms | URL-only false alarms |
 |---|---:|---:|---:|
@@ -211,8 +240,9 @@ matched the API (median 76 ms).
 | Loaded normally (HTTP 200) | 152 | 29.6% (22.9–37.3) | 27.0% (20.6–34.5) |
 | Blocked or error page (403/429/500) | 23 | 95.7% | 21.7% |
 
-- On normal pages both models falsely flag about 27–30% of legitimate sites,
-  far above the 4–8% measured in development cross-validation.
+- On normal pages both saved models falsely flag about 27–30% of legitimate
+  sites. On their earlier PhreshPhish test set the same models flagged 10.6%
+  (URL-only) and 18.6% (URL+HTML).
 - The URL+HTML model flags almost every blocked or error page, consistent with
   generic unavailable pages carrying phishing labels in the training data.
 - All 20 simulated cases, including 5 harmless controls, were flagged HIGH.
@@ -234,6 +264,9 @@ matched the API (median 76 ms).
 - The extension sends the DOM after JavaScript has run, while training used
   crawler snapshots. The runner measures this difference.
 - Several earlier datasets have unverified provenance, and labels age over time.
+- The real-website test contained only legitimate sites, so it measures false
+  alarms, not phishing detection. Detection on real phishing pages is untested;
+  the fresh OpenPhish benchmark will measure it from URLs alone.
 
 ## 9. Next steps
 
@@ -266,4 +299,4 @@ matched the API (median 76 ms).
 | [talentud-evaluation-plan.md](archive/talentud-evaluation-plan.md) | Evaluation protocol and on-device plan |
 | [professor-evaluation-followup.md](archive/professor-evaluation-followup.md) | Cross-validation, leakage and uncertainty in full |
 | [frozen-url-benchmark.md](archive/frozen-url-benchmark.md) | Fresh benchmark and label-review protocol |
-| [rpa-real-world-testing.md](archive/rpa-real-world-testing.md) | RPA setup, safety and smoke tests |
+| [rpa-real-world-testing.md](archive/rpa-real-world-testing.md) | RPA setup, safety and full real-website results |
