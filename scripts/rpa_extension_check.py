@@ -141,7 +141,14 @@ def summarize(records: list[dict]) -> dict:
 
 
 def check_case(
-    playwright, context, cdp, client, api: str, case: dict, shots: Path, index: int
+    playwright,
+    context,
+    cdp,
+    client,
+    api: str,
+    case: dict,
+    shots: Path | None,
+    index: int,
 ) -> dict:
     record = {**case, "final_url": None, "http_status": None}
     page = context.new_page()
@@ -163,7 +170,12 @@ def check_case(
         page.wait_for_timeout(1_000)
         record["final_url"] = page.url
         record["http_status"] = response.status if response else None
-        raw_html = response.text() if response and not case["simulated"] else None
+        raw_html = None
+        if response and not case["simulated"]:
+            try:
+                raw_html = response.text()
+            except Exception:  # Body can be unavailable after redirects; optional.
+                record["raw_html_error"] = "response body unavailable"
 
         tabs = cdp.send("Target.getTargets", {"filter": [{"type": "tab"}]})[
             "targetInfos"
@@ -203,7 +215,8 @@ def check_case(
             "#result:not(.hidden), #error:not(.hidden)", timeout=30_000
         )
         record["popup_ms"] = (time.perf_counter() - start) * 1000
-        popup.screenshot(path=str(shots / f"{index:03d}.png"))
+        if shots:
+            popup.screenshot(path=str(shots / f"{index:03d}.png"))
         api_result = response_info.value.json()
         if not response_info.value.ok:
             raise RuntimeError(f"/predict_html {response_info.value.status}")
@@ -258,7 +271,9 @@ def check_case(
     return record
 
 
-def run(cases: list[dict], output: Path, api: str, headed: bool) -> dict:
+def run(
+    cases: list[dict], output: Path, api: str, headed: bool, screenshots: bool = False
+) -> dict:
     import httpx
     from playwright.sync_api import sync_playwright
 
@@ -269,8 +284,9 @@ def run(cases: list[dict], output: Path, api: str, headed: bool) -> dict:
             "The API's URL+HTML model is unavailable; start the API first."
         )
     output.mkdir(parents=True)
-    shots = output / "screenshots"
-    shots.mkdir()
+    shots = output / "screenshots" if screenshots else None
+    if shots:
+        shots.mkdir()
     records = []
     with sync_playwright() as playwright, tempfile.TemporaryDirectory() as profile:
         context = playwright.chromium.launch_persistent_context(
@@ -325,6 +341,9 @@ def main() -> None:
     parser.add_argument("--api", default="http://127.0.0.1:8000")
     parser.add_argument("--limit", type=int, help="Check only the first N of each list")
     parser.add_argument("--headed", action="store_true")
+    parser.add_argument(
+        "--screenshots", action="store_true", help="Save a PNG of each popup"
+    )
     args = parser.parse_args()
     if args.output.exists():
         raise SystemExit("Output exists; use a new run directory")
@@ -335,7 +354,7 @@ def main() -> None:
         cases += load_cases(args.simulated, simulated=True)[: args.limit]
     if not cases:
         raise SystemExit("Pass --sites and/or --simulated")
-    report = run(cases, args.output, args.api, args.headed)
+    report = run(cases, args.output, args.api, args.headed, args.screenshots)
     print(json.dumps(report["summary"], indent=2))
 
 

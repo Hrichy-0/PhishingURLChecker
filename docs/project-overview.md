@@ -192,7 +192,7 @@ pages. All popups matched the API. `docs.python.org` was a false positive
   - display/API agreement
   - URL-only vs URL+HTML decisions
   - raw-HTML vs rendered-DOM scores
-  - latency, errors and screenshots
+  - latency and errors (popup screenshots only with `--screenshots`)
 - **Safety:** simulated phishing-like cases use reserved test hosts served from
   local fixtures. No live phishing page is ever visited.
 
@@ -202,14 +202,20 @@ email and software. It excludes 952,870 domains seen anywhere in the project.
 Each site's official status was verified through Wikidata. The list is frozen
 before scoring.
 
-**Early warning from smoke tests.**
-- All 26 test cases ran, and every displayed result matched the API.
-- The URL+HTML model flagged mozilla.org's homepage HIGH, and the URL-only
-  model did not.
-- All 5 benign control fixtures (plain article pages) were also flagged HIGH.
+**Full run (24–25 Oct).** 175 real legitimate sites were scored; every popup
+matched the API (median 76 ms).
 
-The URL+HTML model and its 0.2209 cutoff may flag many small or unusual
-legitimate pages. The full run on the 197 sites will measure this.
+| Pages | n | URL+HTML false alarms | URL-only false alarms |
+|---|---:|---:|---:|
+| All scored | 175 | 38.3% (31.4–45.7) | 26.3% (20.3–33.3) |
+| Loaded normally (HTTP 200) | 152 | 29.6% (22.9–37.3) | 27.0% (20.6–34.5) |
+| Blocked or error page (403/429/500) | 23 | 95.7% | 21.7% |
+
+- On normal pages both models falsely flag about 27–30% of legitimate sites,
+  far above the 4–8% measured in development cross-validation.
+- The URL+HTML model flags almost every blocked or error page, consistent with
+  generic unavailable pages carrying phishing labels in the training data.
+- All 20 simulated cases, including 5 harmless controls, were flagged HIGH.
 
 **Fresh URL-only benchmark.**
 - 100 OpenPhish candidates and 100 Tranco candidates, excluding all previously
@@ -231,8 +237,9 @@ legitimate pages. The full run on the 197 sites will measure this.
 
 ## 9. Next steps
 
-1. Run the RPA test on all 197 sites once. Report the false-positive rate per
-   category with Wilson intervals, and how often the two models disagree.
+1. Close the gap between development and real-world false alarms (section 7):
+   decide how blocked/error pages are treated, then test cutoff and training
+   changes on separate legitimate pages, never on the 197-site list.
 2. Finish the independent label review and score the fresh URL-only benchmark
    once.
 3. Compare the original logistic baseline on the same cohort.
