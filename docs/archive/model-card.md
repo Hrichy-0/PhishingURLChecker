@@ -8,7 +8,47 @@ warning signal. It does not retrieve or execute content from the URL.
 
 ## Data
 
-The active XGBoost model uses PhiUSIIL and the local `balanced_urls.csv` source.
+### Main local model: native PhreshPhish URL-only
+
+The default API now selects
+`artifacts/experiments/phreshphish_html_20261010/url_only/`, retaining its original
+research metadata (`activation_eligible: false`). It is a local advisory default,
+not an independently validated production release. Its SHA-256 is
+`9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47`.
+
+The extractor, metadata and booster agree on all 21 features in order. All are
+supplied as float32 values; 20 are used in tree splits and `has_explicit_port`
+is unused. Inference uses 480 trees on CPU and the saved threshold
+`0.4901971220970154`. The native lexical definitions are unchanged, including
+known naive subdomain-count semantics. The original joblib artifacts are untouched.
+
+| Cohort | Rows | Accuracy | Recall | FPR |
+|---|---:|---:|---:|---:|
+| Internal test | 39,866 | 90.40% | 83.69% | 5.57% |
+| Purged publisher test | 84,746 | 84.98% | 82.72% | 10.62% |
+
+The publisher test shares collection lineage and an overlapping boundary date
+with development; it is not independent proof of future browsing performance.
+The 21-input/API parity check is functional verification, not accuracy evidence.
+The feature Parquets have been recovered and verified. Five-fold grouped CV on
+454,185 train+validation records is complete for the fixed URL-only configuration,
+with inner-validation stopping/cutoffs and component-clustered conditional
+intervals. The inner-F1 policy yielded 89.95% recall and 8.26% FPR; at a 1%
+inner-validation FPR budget, outer recall was 71.98% and FPR 1.06%. This evaluates
+five research fold models, not a replacement of this saved model. The original
+saved cutoff is only a descriptive reference in CV because it was previously
+selected on validation now inside development. No learning curve has run yet.
+See the [current TalentUD evaluation plan](talentud-evaluation-plan.md).
+HTML models remain experimental research candidates within the submitted scope
+and are not validated by the URL-only CV. Since 23 October 2026 the saved URL+HTML
+model is reachable only through the experimental `/predict_html` endpoint and the
+popup's content button used for RPA testing
+([rpa-real-world-testing.md](rpa-real-world-testing.md)); the default popup check
+remains URL-only.
+
+### Historical joblib model (remaining sections describe this baseline)
+
+The historical XGBoost model uses PhiUSIIL and the local `balanced_urls.csv` source.
 After cleaning and cross-source deduplication, 574,716 URLs remain. Registered
 domains are kept entirely within one split across both sources. The original
 PhiUSIIL-only model and splits were preserved for comparison.

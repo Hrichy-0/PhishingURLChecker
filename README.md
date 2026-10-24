@@ -1,21 +1,78 @@
 # PhishingURLChecker (PhishGuard ML)
 
 PhishGuard is a phishing detection research project with a URL-only FastAPI
-service and Chrome Manifest V3 extension. It also trains and evaluates separate
-URL-only, HTML-derived, and combined URL+HTML XGBoost models locally.
+service and Chrome Manifest V3 extension. The active TalentUD research direction
+is **Evaluating On-Device Phishing Detection Models on Real-World Web Pages**.
+The submitted scope includes comparison of URL-based and URL+static-webpage-content
+models, with planned browser-local inference and real-world evaluation.
+
+The current model runs on-device through a local Python service, not inside Chrome
+yet. See the [project overview](docs/project-overview.md) for a summary of all work,
+results and next steps.
+
+The separate [Word project documentation](PhishingURLChecker_Project_Documentation.docx)
+records the implementation history, model comparisons, evaluation limitations,
+current review pilot and Mac/Windows operating commands, updated 19 October 2026.
 
 > **Project status:** learning/research prototype. Native local training and
-> saved-model evaluation are verified. The API/extension still uses the older
-> URL-only joblib model; it requires working scikit-learn native dependencies.
-> The current Windows policy blocks that serving dependency. See the local audit
-> and Mac setup guide. False positives and source bias require further evaluation.
+> saved-model evaluation are verified. The default local API/extension model is
+> now the native PhreshPhish URL-only model with 21 lexical features. It remains
+> experimental/advisory, not production-approved. The older joblib model is kept
+> for explicit rollback. False positives and source bias require further evaluation.
 
 The API computes 21 features from the submitted URL string without visiting the
-site. The experimental combined model adds 17 HTML-derived features from a saved
-page snapshot. Its extractor parses HTML without executing JavaScript, fetching
-resources, or following links. These experiments have not replaced the API model.
+site. An experimental `/predict_html` endpoint and popup button score the loaded
+page's HTML with the saved URL+HTML research model for RPA real-website testing
+([docs/archive/rpa-real-world-testing.md](docs/archive/rpa-real-world-testing.md)); the default
+URL-only path is unchanged.
 
-## Latest training results: URL + HTML
+### Main local URL model
+
+Start the main model from the repository root without an environment override:
+
+```bash
+.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+```
+
+It loads `artifacts/experiments/phreshphish_html_20261010/url_only/`, verifies the
+model checksum and feature order, runs on CPU, and retains its saved cutoff
+`0.4901971220970154`. `/health` and `/predict` identify the model, checksum and
+21-feature count. The popup continues to label the result experimental. Restart
+any existing API process and reload the unpacked extension after changing code.
+On Windows use `.\.venv\Scripts\python.exe` instead of `.venv/bin/python`.
+
+All 21 features are supplied correctly; the learned trees use 20, with no split
+using `has_explicit_port`. Zero split usage is not a broken input. Feature
+definitions are unchanged; existing suffix/counting limitations still apply.
+
+To explicitly run the preserved older model on macOS:
+
+```bash
+PHISHGUARD_MODEL=legacy .venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+```
+
+Leave `PHISHGUARD_EXPERIMENTAL_MODEL_DIR` unset for normal use; it remains a
+research override and cannot be combined with `PHISHGUARD_MODEL=legacy`.
+A missing/corrupt main model reports unavailable, never silently loads the old
+model. No saved model/metadata was rewritten to change its research eligibility.
+Five-fold domain/exact-content-grouped development CV is complete on 454,185
+train+validation records. The inner-F1 policy yielded 89.95% recall and 8.26% FPR;
+an inner-validation 1% FPR budget yielded 71.98% recall and 1.06% outer FPR.
+F1 cutoffs were unstable across folds. These are newly fitted research-fold
+models, not improved results for the unchanged extension model. See the
+[protocol, uncertainty and results](docs/archive/talentud-evaluation-plan.md#completed-url-only-grouped-cv-2026-10-16).
+
+The [professor evaluation follow-up](docs/archive/professor-evaluation-followup.md) adds
+same-role URL+content CV, paired uncertainty, a cutoff-instability diagnosis and
+actual Chrome popup smoke tests. The pilot found a false positive on official
+Python documentation; it is not independent accuracy evidence. Reliability gates
+remain open.
+
+## Preliminary training comparison: URL + HTML
+
+These results are preserved research evidence, not approval for deployment.
+URL+content comparison remains within the submitted research scope. The URL-only
+package from this experiment remains the main local model for now.
 
 Full paired PhreshPhish training completed on **2026-10-11**, using the locally
 downloaded **36.58 GB dataset (77 original Parquet files)**. Checksums and HTML
@@ -69,12 +126,12 @@ percentiles, causal effects, or the explanation of an individual prediction.
 Saved models are under `artifacts/experiments/phreshphish_html_20261010/`, with
 `url_only`, `html_features`, and `url_html` subdirectories. All three saved models
 reproduced internal/publisher-test confusion matrices on CPU. See
-[full results and limitations](docs/html-training-results-2026-10-11.md) and
-[training/feature definitions](docs/native-html-training.md).
+[full results and limitations](docs/archive/html-training-results-2026-10-11.md) and
+[training/feature definitions](docs/archive/native-html-training.md).
 
-## Active API model performance
+## Legacy model performance (preserved for rollback)
 
-The active XGBoost model was trained on PhiUSIIL plus `balanced_urls.csv`.
+The previous XGBoost model was trained on PhiUSIIL plus `balanced_urls.csv`.
 Its 60,551-row test set is domain-disjoint from training and validation across
 both sources. This is a mixed-source holdout, not a third-party external test.
 
@@ -90,21 +147,21 @@ both sources. This is a mixed-source holdout, not a third-party external test.
 | False negatives | 2,182 |
 
 These are offline dataset results, not a guarantee of future performance. See
-[`docs/model-card.md`](docs/model-card.md) for limitations and
-[`docs/xgboost-experiments.md`](docs/xgboost-experiments.md) for the same-split
+[`docs/archive/model-card.md`](docs/archive/model-card.md) for limitations and
+[`docs/archive/xgboost-experiments.md`](docs/archive/xgboost-experiments.md) for the same-split
 logistic comparison (83.54% accuracy), the PhiUSIIL-only experiment (97.80%),
 and the reproducible workflow.
 
 Frozen-model evaluation on two additional Kaggle datasets found substantially
 worse results, with high false-alarm rates and missing-protocol limitations.
 The 93.19% holdout score must not be presented as universal accuracy. See
-[`docs/external-evaluation.md`](docs/external-evaluation.md) for all assumptions,
+[`docs/archive/external-evaluation.md`](docs/archive/external-evaluation.md) for all assumptions,
 metrics, class-imbalance baselines, and commands. The active model was unchanged.
 
 Two Hugging Face evaluations likewise found poor results: 44.42% accuracy on
 retained PhishNChips URLs and 71.50% on the retained complete-URL subset of
 ealvaradob's URL dataset. Both excluded previously used domains and preserved
-original protocols. See [`docs/huggingface-evaluation.md`](docs/huggingface-evaluation.md)
+original protocols. See [`docs/archive/huggingface-evaluation.md`](docs/archive/huggingface-evaluation.md)
 for the fixed-model procedure, high false-alarm rates, and selection limitations.
 
 ## Other experimental alternatives
@@ -113,16 +170,17 @@ Domain-grouped cross-validation now compares XGBoost, XGBoost without the direct
 HTTPS feature, and character TF-IDF + Logistic Regression. The character model
 improves some external ranking metrics but still produces substantial false
 alarms. These URL benchmarks complement the completed PhreshPhish URL+HTML
-comparison above. **The active API/extension model has not been replaced.**
+comparison above. **The main API now selects the native URL-only model;
+the older joblib pair and all research artifacts remain unchanged.**
 
-See [`docs/model-comparison.md`](docs/model-comparison.md) for measured results,
+See [`docs/archive/model-comparison.md`](docs/archive/model-comparison.md) for measured results,
 the files to study, reproducible commands, and the remaining evaluation work.
 Source-held-out XGBoost tuning is available through the same benchmark command
 (`--mode tune`), with six explicit candidates rather than a large search framework.
-The [file-purpose guide](docs/architecture.md#file-purpose-audit--2026-10-06)
+The [file-purpose guide](docs/archive/architecture.md#file-purpose-audit--2026-10-06)
 distinguishes runtime files, current research commands, and optional/history files.
 
-The [consolidated dataset audit](docs/dataset-audit-report.md) combines the
+The [consolidated dataset audit](docs/archive/dataset-audit-report.md) combines the
 three read-only agent audits of training sources, uploaded URLs, and Hugging Face
 data, including label conflicts, false-positive patterns, source bias, and next steps.
 
@@ -130,7 +188,7 @@ data, including label conflicts, false-positive patterns, source bias, and next 
 
 - Python 3.11+
 - pandas, scikit-learn, and XGBoost
-- joblib packaging for the active API model; native UBJ models for local experiments
+- native UBJ for the main URL model; joblib for the preserved legacy baseline
 - PyArrow for batched Parquet dataset processing
 - FastAPI, Pydantic, and Uvicorn
 - pytest and Ruff
@@ -194,22 +252,26 @@ evaluation JSONs/CSVs, and research reports. A pull brings these files into the
 existing checkout. Raw datasets, dataset splits, feature caches, and virtual
 environments remain local. Retraining requires the datasets separately.
 
-For API inference alone, the required pair is
-`artifacts/phishguard_model.joblib` and `artifacts/model_metadata.json`.
-Load only your own trusted joblib files, never arbitrary downloaded models.
+For default API inference, the required pair is `xgboost_model.ubj` and
+`model_metadata.json` under
+`artifacts/experiments/phreshphish_html_20261010/url_only/`. The older root-level
+joblib/metadata pair is used only with `PHISHGUARD_MODEL=legacy`.
+Load only your own trusted artifacts, never arbitrary downloaded joblib models.
 `requirements-model-runtime.txt` pins the model dependency versions, including
 NumPy 2.5.3, pandas 2.3.3, scikit-learn 1.9.1, XGBoost 3.4.1 and joblib 1.6.0.
-Use these pins when loading the saved Python model:
+Use these pins when setting up the saved-model runtime:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-model-runtime.txt
 .\.venv\Scripts\python.exe -m uvicorn api.main:app --host 127.0.0.1 --port 8000
 ```
 
-Native XGBoost training and saved-model evaluation have run on this Windows
-laptop. The current Windows Application Control policy blocks a scikit-learn
-native serving dependency, so the full API/extension workflow has not been
-verified here. Without a loadable model pair, `/health` reports degraded.
+Native XGBoost training and saved-model evaluation ran on the Windows training
+laptop. Its policy previously blocked a scikit-learn native dependency in the
+legacy serving path. The new default does not deserialize that legacy pipeline,
+but full Windows API/extension behavior still needs verification on that machine;
+do not disable security policy to make it work. Without a loadable selected model,
+`/health` reports degraded.
 
 Saved experiment metadata contains absolute `/Users/...` Mac data paths. API
 inference does not read those paths, but evaluation commands and old audit
@@ -237,7 +299,7 @@ git pull --ff-only origin main
 
 Use the existing Python 3.12 environment, or create a native Mac environment with
 `python3.12 -m venv .venv` first. Do not copy the Windows environment. See the
-[Mac pull guide](docs/mac-pull-and-models.md) for preserving local artifact
+[Mac pull guide](docs/archive/mac-pull-and-models.md) for preserving local artifact
 conflicts and resolving native library dependencies. The new models run on CPU;
 CUDA is not required for Mac inference.
 
@@ -271,7 +333,7 @@ Choose a new output directory for each run. Use `--device cpu` for CPU training;
 `--extract-only` performs extraction without fitting. This reads the full local
 download in batches and reuses verified caches where available. It writes
 separate experiment models; it does not activate them in the API. See the
-[training guide](docs/native-html-training.md) for the complete procedure.
+[training guide](docs/archive/native-html-training.md) for the complete procedure.
 
 ## Rebuild the PhiUSIIL-only experiment
 
@@ -286,10 +348,12 @@ python scripts/split_data.py
 python scripts/train_model.py --artifacts-dir artifacts/experiments/xgboost_phiusiil
 ```
 
-To reproduce the active broader model, follow the mixed-source commands in
-[`docs/xgboost-experiments.md`](docs/xgboost-experiments.md#reproduce-training).
-`scripts/activate_model.py --artifacts-dir ...` activates an evaluated experiment
-and archives the previous model. Restart the API after activation.
+To reproduce the older mixed-source model, follow the commands in
+[`docs/archive/xgboost-experiments.md`](docs/archive/xgboost-experiments.md#reproduce-training).
+`scripts/activate_model.py --artifacts-dir ...` replaces the legacy joblib pair
+and archives the previous pair; it does not change the default native selection.
+Development candidates still fail its activation guard. Restart the API after
+changing the selected model or artifacts.
 
 Raw datasets, processed splits, and feature caches are ignored by Git. Selected
 model artifacts and research results are tracked for transfer and review.
@@ -356,7 +420,7 @@ pytest -q
 Latest validation: 36 focused data/native-training tests passed, and Ruff checks
 passed. All three new models reproduced internal/publisher-test results on CPU.
 Full API/scikit-learn tests remain blocked on this Windows machine by its native
-dependency policy; see [local audit](docs/local-check-2026-10-09.md).
+dependency policy; see [local audit](docs/archive/local-check-2026-10-09.md).
 
 ## Important safety boundary
 
@@ -376,9 +440,9 @@ never be presented as proof that a website is safe.
 - why strong offline metrics can still hide collection bias.
 
 The complete chronological record is in
-[`docs/project-journey.md`](docs/project-journey.md). The architecture is in
-[`docs/architecture.md`](docs/architecture.md), and responsible-use details
-are in [`docs/model-card.md`](docs/model-card.md).
+[`docs/archive/project-journey.md`](docs/archive/project-journey.md). The architecture is in
+[`docs/archive/architecture.md`](docs/archive/architecture.md), and responsible-use details
+are in [`docs/archive/model-card.md`](docs/archive/model-card.md).
 
 ## Roadmap
 
@@ -395,7 +459,8 @@ are in [`docs/model-card.md`](docs/model-card.md).
 - [x] Download and process the full PhreshPhish dataset locally.
 - [x] Train and compare URL-only, HTML-derived, and URL+HTML models on matching rows.
 - [x] Verify saved native models on CPU and publish models/results for Mac pulls.
-- [ ] Integrate HTML inference into the API/extension after further evaluation.
+- [x] Add an experimental URL+HTML endpoint and popup button for RPA testing.
+- [ ] Run the full RPA website list and decide on HTML integration from its results.
 - [ ] Evaluate near-duplicate templates, temporal splits, and HTML size/truncation effects.
 - [ ] Add reputation signals and assess calibration before considering production use.
 

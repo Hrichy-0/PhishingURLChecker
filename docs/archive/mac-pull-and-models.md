@@ -45,7 +45,7 @@ dependency, not a security-policy change. See
 
 ## Inspect results and run the newly trained models
 
-Read `docs/html-training-results-2026-10-11.md`, or the underlying
+Read `docs/archive/html-training-results-2026-10-11.md`, or the underlying
 `artifacts/experiments/phreshphish_html_20261010/comparison.json`.
 
 ```bash
@@ -68,8 +68,14 @@ fixture, not a real phishing page or a demonstration of measured accuracy:
 ```
 
 These commands do not fetch websites, execute HTML, or upload page contents.
-The active FastAPI/extension model is still the old joblib URL-only model; native
-experiments are separate and are not automatically activated.
+The main local FastAPI/extension model is now the native URL-only model above.
+Run `.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000` from
+the repository root and check `/health` for `Native XGBoost: url_only`, its
+checksum and `feature_count: 21`. Keep research overrides unset unless intended.
+The experimental label remains: choosing a main local model is not production
+approval. The original joblib model is preserved and can be selected with
+`PHISHGUARD_MODEL=legacy` before the same server command. HTML-derived models
+remain offline/separate; do not point the URL endpoint at their feature schema.
 
 Retraining/auditing raw input rows requires datasets to be downloaded separately.
 The 36.58 GB PhreshPhish dataset has intentionally not been uploaded to GitHub.

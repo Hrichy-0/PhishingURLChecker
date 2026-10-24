@@ -452,7 +452,7 @@ ealvaradob excludes 608,193 invalid/incomplete URLs and 14,295 duplicates before
 overlap exclusion, so its results do not describe the full original population.
 These sources previously informed broader development work. None of these tests
 is an untouched independent final evaluation, and labels/provenance are not
-independently verified. See `docs/huggingface-evaluation.md` for source limitations.
+independently verified. See `docs/archive/huggingface-evaluation.md` for source limitations.
 
 **Decision: do not activate this cutoff based on these results.** It lowers
 false alarms but does not deliver the empirical validation 2% budget externally,

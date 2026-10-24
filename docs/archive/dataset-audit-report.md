@@ -35,16 +35,16 @@ two dependency deprecation warnings. Tests do not validate publisher labels.
 
 Key local evidence, linked relative to this report:
 
-- [Active metadata](../artifacts/model_metadata.json) and
-  [mixed split manifest](../data/processed/mixed/split_manifest.json).
-- [Validation cutoff comparison](../artifacts/evaluations/validation_thresholds_2026_10_06/validation_thresholds.json).
-- [Same-cohort model comparison](../artifacts/evaluations/url_dataset_2026_10_06/common_evaluation.json).
-- [Frozen external cutoff comparison](../artifacts/evaluations/fixed_threshold_external_2026_10_08/external_evaluation.json).
-- [Full false-positive diagnostic](../artifacts/evaluations/false_positive_patterns_2026_10_08/false_positive_patterns.json).
-- [Cleaning](../src/phishguard/data.py), [features](../src/phishguard/features.py),
-  [domain grouping](../src/phishguard/domains.py), and [API](../api/main.py).
-- [HF manifests: PhishNChips](../data/external/huggingface/phishnchips/download_manifest.json)
-  and [ealvaradob](../data/external/huggingface/ealvaradob/download_manifest.json).
+- [Active metadata](../../artifacts/model_metadata.json) and
+  [mixed split manifest](../../data/processed/mixed/split_manifest.json).
+- [Validation cutoff comparison](../../artifacts/evaluations/validation_thresholds_2026_10_06/validation_thresholds.json).
+- [Same-cohort model comparison](../../artifacts/evaluations/url_dataset_2026_10_06/common_evaluation.json).
+- [Frozen external cutoff comparison](../../artifacts/evaluations/fixed_threshold_external_2026_10_08/external_evaluation.json).
+- [Full false-positive diagnostic](../../artifacts/evaluations/false_positive_patterns_2026_10_08/false_positive_patterns.json).
+- [Cleaning](../../src/phishguard/data.py), [features](../../src/phishguard/features.py),
+  [domain grouping](../../src/phishguard/domains.py), and [API](../../api/main.py).
+- [HF manifests: PhishNChips](../../data/external/huggingface/phishnchips/download_manifest.json)
+  and [ealvaradob](../../data/external/huggingface/ealvaradob/download_manifest.json).
 
 Raw/derived data and generated artifacts remain local/ignored by Git; these
 links can therefore be unavailable in a public repository checkout.

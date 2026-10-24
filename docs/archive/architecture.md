@@ -1,22 +1,33 @@
 # Architecture and learning plan
 
+Current TalentUD scope retains the submitted URL versus URL+static-content
+comparison and planned browser-local inference. HTML models remain experimental;
+the URL+HTML model is reachable only through the experimental `/predict_html`
+endpoint and popup content button used for RPA testing. The current loopback API runs locally but is not
+browser-only inference. The
+[current research protocol](talentud-evaluation-plan.md) defines grouped CV,
+device measurements and safe real-page testing. The completed current CV covers
+only URL XGBoost, not the full proposed model comparison.
+
 ## End-to-end flow
 
 ```mermaid
 flowchart LR
-    A["Labeled URL CSV sources"] --> B["Validation and label mapping"]
+    A["Labeled URL data"] --> B["Validation and label mapping"]
     B --> C["Train / validation / test split"]
     C --> D["URL feature transformer"]
     D --> E["Validation-selected XGBoost"]
-    E --> F["Saved pipeline + metadata"]
+    E --> F["Saved URL model + metadata"]
     F --> G["FastAPI /predict endpoint"]
     H["Chrome extension"] --> G
     G --> H
 ```
 
-The saved object is a complete pipeline, not just a classifier. Packaging the
-feature transformer with the model guarantees that training and API inference
-use identical logic.
+The default local API now loads the native PhreshPhish URL-only UBJ model plus
+metadata, using the shared lexical extractor and validating its 21-feature schema
+and checksum. The older joblib pipeline is retained behind explicit legacy
+selection. Feature definitions must remain compatible with each saved model;
+changing them requires retraining rather than silently changing serving inputs.
 
 ## Components
 
@@ -66,7 +77,9 @@ FastAPI will expose:
 - a response containing the normalized label, phishing probability, model
   version, and a small set of human-readable reasons.
 
-The API validates inputs and does not retrieve the submitted URL.
+The API validates inputs and does not retrieve the submitted URL. The separate
+experimental `POST /predict_html` takes `{url, html}` from the browser and uses the
+URL+HTML model (`docs/archive/rpa-real-world-testing.md`).
 
 ### Extension layer
 
@@ -168,7 +181,7 @@ There is no need to open all scripts at once.
 | `extension/manifest.json` | Extension identity, permissions, popup entry point |
 | `extension/popup.html` | Popup layout |
 | `extension/popup.css` | Popup appearance |
-| `extension/popup.js` | Reads active-tab URL and calls local API |
+| `extension/popup.js` | Reads active-tab URL (and, for the content button, page HTML) and calls local API |
 | `extension/README.md`, `api/README.md` | Human setup instructions; not executed |
 
 ### Tests and documentation
@@ -181,13 +194,13 @@ They are verification code, not unused production code.
 | Document | Purpose |
 |---|---|
 | `README.md` | Main setup and current status |
-| `docs/architecture.md` | Architecture and this file-purpose guide |
-| `docs/model-card.md` | Active model's measured performance and limitations |
-| `docs/model-comparison.md` | New CV/source-tuning experiments, results, commands |
-| `docs/xgboost-experiments.md` | Earlier XGBoost experiments and reproduction |
-| `docs/external-evaluation.md` | Earlier Kaggle stress-test evidence |
-| `docs/huggingface-evaluation.md` | Earlier frozen HF results; those sources now used for development |
-| `docs/project-journey.md` | Learning/history record |
+| `docs/archive/architecture.md` | Architecture and this file-purpose guide |
+| `docs/archive/model-card.md` | Active model's measured performance and limitations |
+| `docs/archive/model-comparison.md` | New CV/source-tuning experiments, results, commands |
+| `docs/archive/xgboost-experiments.md` | Earlier XGBoost experiments and reproduction |
+| `docs/archive/external-evaluation.md` | Earlier Kaggle stress-test evidence |
+| `docs/archive/huggingface-evaluation.md` | Earlier frozen HF results; those sources now used for development |
+| `docs/archive/project-journey.md` | Learning/history record |
 | `SECURITY.md` | Safe-testing and issue-reporting policy |
 | `notebooks/README.md` | **Inactive placeholder**; no actual notebooks are present |
 
@@ -198,9 +211,12 @@ wanted; it was left untouched.
 
 ### Data, artifacts, and generated clutter
 
+- The default API reads `xgboost_model.ubj` and `model_metadata.json` under
+  `artifacts/experiments/phreshphish_html_20261010/url_only/`. All 21 features
+  are supplied; 20 appear in learned splits. This remains an advisory prototype.
 - `artifacts/phishguard_model.joblib` and `artifacts/model_metadata.json` are the
-  **only active model pair** read by the default API.
-- `artifacts/experiments/` contains inactive candidate models and their reports.
+  preserved older pair, loaded only with `PHISHGUARD_MODEL=legacy`.
+- Other `artifacts/experiments/` entries are research candidates and reports.
   Tuning saves only the selected XGBoost and the character comparison, not all
   six trial models. A `reference/` split trio is required to exclude tuning-used
   domains correctly during later frozen evaluation.
@@ -213,7 +229,7 @@ wanted; it was left untouched.
 - `.pytest_cache/`, `.ruff_cache/`, and `__pycache__/` are regenerable caches.
 - `.venv/` is the **working Python environment**, not a disposable experiment.
 - `pyproject.toml` declares dependencies/package/test configuration; `.gitignore`
-  keeps generated data, artifacts, and caches out of Git.
+  excludes datasets/caches while selected models and result artifacts are tracked.
 
 No source files or datasets were deleted during this audit. No new Python files
 were added for source tuning. Duplicate source-cleaning and model-packaging logic
