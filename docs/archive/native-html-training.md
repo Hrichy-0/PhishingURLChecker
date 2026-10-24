@@ -77,7 +77,6 @@ parse error). These checks are software validation, not real-data hybrid accurac
 results. The moved strict HTML parser matches its original implementation.
 
 ```powershell
-cd "C:\Users\hrish\Documents\PhishingURLChecker"
 .\.venv\Scripts\python.exe -u scripts/train_native_html_model.py --dataset-dir data/raw/phreshphish --cache-dir data/processed/html_features_v1 --output-dir artifacts/experiments/phreshphish_html_20261011_rerun --trees 800 --threads 4 --device cuda
 ```
 

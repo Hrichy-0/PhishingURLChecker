@@ -82,26 +82,20 @@ and [`results.json`](artifacts/experiments/rpa_url_html_20261024/results.json).
 These are research results, not production approval. A low score never means a
 site is safe.
 
-## Run the main local model
+## Models served by the API
 
-Start the main model from the repository root without an environment override:
-
-```bash
-.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
-```
-
-It loads `artifacts/experiments/phreshphish_html_20261010/url_only/`, verifies the
-model checksum and feature order, runs on CPU, and retains its saved cutoff
-`0.4901971220970154`. `/health` and `/predict` identify the model, checksum and
-21-feature count. The popup continues to label the result experimental. Restart
-any existing API process and reload the unpacked extension after changing code.
-On Windows use `.\.venv\Scripts\python.exe` instead of `.venv/bin/python`.
+`POST /predict` uses the URL-only model in
+`artifacts/experiments/phreshphish_html_20261010/url_only/` (cutoff
+`0.4901971220970154`). `POST /predict_html` uses the URL+HTML model in
+`.../url_html/` (cutoff `0.2209`). On loading, the API verifies each model's
+checksum, feature order and tree range, and runs on CPU. `/health` reports both.
+Restart the API and reload the unpacked extension after changing code.
 
 All 21 features are supplied correctly; the learned trees use 20, with no split
 using `has_explicit_port`. Zero split usage is not a broken input. Feature
 definitions are unchanged; existing suffix/counting limitations still apply.
 
-To explicitly run the preserved older model on macOS:
+To run the preserved older model instead:
 
 ```bash
 PHISHGUARD_MODEL=legacy .venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
@@ -255,181 +249,32 @@ tests/                   Unit and API tests
 
 ## Set up
 
-### Windows laptop (PowerShell / VS Code)
-
-Use the existing checkout with Git, Python 3.12, VS Code and Chrome installed.
-In the VS Code PowerShell terminal:
-
-```powershell
-cd "C:\Users\hrish\Documents\PhishingURLChecker"
-git status
-git pull --ff-only origin main
-py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements-model-runtime.txt
-.\.venv\Scripts\python.exe -m pip install -e ".[data,dev]"
-code .
-```
-
-Preserve any local edits before pulling. Create `.venv` only if a suitable
-environment does not already exist. In VS Code select
-**Python: Select Interpreter → `.venv\Scripts\python.exe`**. These commands call
-the environment directly, so PowerShell activation-policy changes are unnecessary.
-Do not copy the Mac `.venv` to Windows; recreate it. See the official
-[Python virtual-environment guide](https://docs.python.org/3/library/venv.html).
-
-Run the project checks:
-
-```powershell
-.\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m ruff check .
-.\.venv\Scripts\python.exe -m ruff format --check .
-```
-
-XGBoost on Windows requires the Microsoft Visual C++ Redistributable runtime;
-see the official [XGBoost installation guide](https://xgboost.readthedocs.io/en/stable/install.html#python)
-if a DLL import error occurs. GPU hardware is not required by this project's CPU workflow.
-
-#### Models and local datasets
-
-GitHub now includes code, tests, extension files, trained models, metadata,
-evaluation JSONs and research reports. Result files that contain raw URLs stay local. A pull brings these files into the
-existing checkout. Raw datasets, dataset splits, feature caches, and virtual
-environments remain local. Retraining requires the datasets separately.
-
-For default API inference, the required pair is `xgboost_model.ubj` and
-`model_metadata.json` under
-`artifacts/experiments/phreshphish_html_20261010/url_only/`. The older root-level
-joblib/metadata pair is used only with `PHISHGUARD_MODEL=legacy`.
-Load only your own trusted artifacts, never arbitrary downloaded joblib models.
-`requirements-model-runtime.txt` pins the model dependency versions, including
-NumPy 2.5.3, pandas 2.3.3, scikit-learn 1.9.1, XGBoost 3.4.1 and joblib 1.6.0.
-Use these pins when setting up the saved-model runtime:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-model-runtime.txt
-.\.venv\Scripts\python.exe -m uvicorn api.main:app --host 127.0.0.1 --port 8000
-```
-
-Native XGBoost training and saved-model evaluation ran on the Windows training
-laptop. Its policy previously blocked a scikit-learn native dependency in the
-legacy serving path. The new default does not deserialize that legacy pipeline,
-but full Windows API/extension behavior still needs verification on that machine;
-do not disable security policy to make it work. Without a loadable selected model,
-`/health` reports degraded.
-
-Saved experiment metadata contains absolute `/Users/...` Mac data paths. API
-inference does not read those paths, but evaluation commands and old audit
-references do. Keep the original metadata unchanged; transferred experiments need
-an explicit Windows-local provenance/path migration before evaluation, or rebuild
-datasets/model packages on Windows to generate local paths. Do not claim that
-copying artifacts alone makes every historical evaluation command portable.
-
-All commands below use `python` for brevity. In PowerShell without activation,
-replace it with `.\.venv\Scripts\python.exe`; run multiline Bash examples as one
-line (PowerShell does not use `\` for line continuation). Load `extension/` through
-Chrome's **Load unpacked** after starting the API. Do not visit phishing examples.
-
-### Pull onto your existing Mac checkout
+Requires Python 3.11+ (3.12 used in development), Git and Chrome. From the
+repository root:
 
 ```bash
-cd /your/existing/PhishingURLChecker
-git status
-git pull --ff-only origin main
+python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements-model-runtime.txt
 .venv/bin/python -m pip install -e '.[data,dev]'
-.venv/bin/python -m pip check
+```
+
+On Windows use `py -3.12 -m venv .venv` and `.\.venv\Scripts\python.exe` in place
+of `.venv/bin/python`. `requirements-model-runtime.txt` pins the versions the saved
+models were built with (XGBoost 3.4.1, NumPy 2.5.3, pandas 2.3.3, scikit-learn 1.9.1).
+If XGBoost reports a missing `libomp.dylib` on macOS, run `brew install libomp`;
+on Windows it needs the Microsoft Visual C++ Redistributable.
+
+The trained models and results are in the repository; raw datasets are not.
+Check that the model files arrived intact:
+
+```bash
 .venv/bin/python scripts/verify_transferred_artifacts.py
 ```
 
-Use the existing Python 3.12 environment, or create a native Mac environment with
-`python3.12 -m venv .venv` first. Do not copy the Windows environment. If XGBoost
-reports a missing `libomp.dylib`, install it with `brew install libomp`. The models
-run on CPU; CUDA is not required for Mac inference.
-
-### Run a saved experimental model
-
-In a Mac terminal, the URL-only model accepts a URL:
+## Run the API
 
 ```bash
-.venv/bin/python scripts/predict_native_snapshot.py --model-dir artifacts/experiments/phreshphish_html_20261010/url_only --url 'https://example.com/login'
-```
-
-The combined model requires a saved HTML file. This example uses a synthetic
-fixture to demonstrate the command, not measured phishing detection accuracy:
-
-```bash
-.venv/bin/python scripts/predict_native_snapshot.py --model-dir artifacts/experiments/phreshphish_html_20261010/url_html --url 'https://example.test/login' --html-file examples/hybrid/login_fixture.html
-```
-
-On Windows, replace `.venv/bin/python` with `.\.venv\Scripts\python.exe`.
-These commands use the matching saved-model feature schema and do not fetch sites.
-
-### Retrain locally on the full downloaded PhreshPhish dataset
-
-In a VS Code PowerShell terminal, with the full dataset already downloaded:
-
-```powershell
-.\.venv\Scripts\python.exe -u scripts/train_native_html_model.py --dataset-dir data/raw/phreshphish --cache-dir data/processed/html_features_v1 --output-dir artifacts/experiments/phreshphish_html_rerun --trees 800 --threads 4 --device cuda
-```
-
-Choose a new output directory for each run. Use `--device cpu` for CPU training;
-`--extract-only` performs extraction without fitting. This reads the full local
-download in batches and reuses verified caches where available. It writes
-separate experiment models; it does not activate them in the API. See the
-[training guide](docs/archive/native-html-training.md) for the complete procedure.
-
-## Rebuild the PhiUSIIL-only experiment
-
-The raw dataset is the **PhiUSIIL Phishing URLs** Kaggle dataset. Its source
-labels are `0 = phishing` and `1 = legitimate`; the cleaning step converts them
-to the project convention `1 = phishing` and `0 = legitimate`.
-
-```bash
-python scripts/download_data.py
-python scripts/prepare_data.py
-python scripts/split_data.py
-python scripts/train_model.py --artifacts-dir artifacts/experiments/xgboost_phiusiil
-```
-
-To reproduce the older mixed-source model, follow the commands in
-[`docs/archive/xgboost-experiments.md`](docs/archive/xgboost-experiments.md#reproduce-training).
-`scripts/activate_model.py --artifacts-dir ...` replaces the legacy joblib pair
-and archives the previous pair; it does not change the default native selection.
-Development candidates still fail its activation guard. Restart the API after
-changing the selected model or artifacts.
-
-Raw datasets, processed splits, and feature caches are ignored by Git. Selected
-model artifacts and research results are tracked for transfer and review.
-
-### Prepare a different dataset
-
-The cleaner can also standardize another CSV without changing the rest of the
-training pipeline. The current external dataset has columns `url` and `label`,
-with textual labels `legitimate` and `phishing`:
-
-```bash
-python scripts/prepare_data.py \
-  --input data/external/balanced_urls.csv \
-  --url-column url \
-  --label-column label \
-  --label-convention text \
-  --output data/processed/sources/balanced.csv
-```
-
-This writes the same internal schema—`url` plus `is_phishing`—to
-the selected output path. `split_data.py --input ... --output-dir ...` supports
-one or several cleaned files, and `train_model.py --data-dir ...` accepts the
-resulting splits. For a dataset using `0 = legitimate` and `1 = phishing`, use
-`--label-convention project`. Always state the correct convention for a new
-dataset because reversing numeric labels would silently train the wrong model.
-For other two-class label names, specify both `--legitimate-label benign` and
-`--phishing-label malicious`, along with the actual URL and label column names.
-
-## Run and test the API
-
-```bash
-uvicorn api.main:app --reload
+.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
 ```
 
 Open <http://127.0.0.1:8000/docs>, or send:
@@ -440,30 +285,51 @@ curl -X POST http://127.0.0.1:8000/predict \
   -d '{"url":"https://example.com/login"}'
 ```
 
-The current response field is named `phishing_probability`, but it should be
-interpreted as a model score—not literal certainty that a site is phishing.
-It also includes the selected threshold, a risk level, and human-readable
-lexical signals.
+`phishing_probability` is a model score, not a calibrated certainty. The response
+also includes the threshold, a risk level and simple URL-based reasons.
 
 ## Load the Chrome extension
 
 1. Keep the API running on `127.0.0.1:8000`.
-2. Open `chrome://extensions`.
-3. Enable **Developer mode**.
-4. Choose **Load unpacked** and select the `extension/` directory.
-5. Visit an HTTP or HTTPS page and click the PhishGuard toolbar action.
+2. Open `chrome://extensions` and enable **Developer mode**.
+3. Choose **Load unpacked** and select the `extension/` directory.
+4. Open an HTTP or HTTPS page and click the PhishGuard toolbar action.
+
+## Try the saved models directly
+
+Score a URL with the URL-only model, or a URL plus a saved HTML file with the
+URL+HTML model. The example HTML is an inert fixture; neither command fetches sites.
+
+```bash
+.venv/bin/python scripts/predict_native_snapshot.py --model-dir artifacts/experiments/phreshphish_html_20261010/url_only --url 'https://example.com/login'
+.venv/bin/python scripts/predict_native_snapshot.py --model-dir artifacts/experiments/phreshphish_html_20261010/url_html --url 'https://example.test/login' --html-file examples/hybrid/login_fixture.html
+```
+
+## Reproduce the main experiment
+
+Download the [PhreshPhish dataset](https://huggingface.co/datasets/phreshphish/phreshphish)
+(36.6 GB) with `scripts/download_phreshphish_full.py`, then train and compare the
+URL-only, HTML-only and URL+HTML models on identical splits:
+
+```bash
+.venv/bin/python -u scripts/train_native_html_model.py --dataset-dir data/raw/phreshphish --cache-dir data/processed/html_features_v1 --output-dir artifacts/experiments/NEW_RUN --trees 800 --threads 4 --device cpu
+```
+
+Use a new output directory for each run; `--device cuda` uses an NVIDIA GPU.
+Grouped cross-validation uses `scripts/cross_validate_native.py`, and the
+real-website test is described in the
+[RPA report](docs/archive/rpa-real-world-testing.md). Training details are in the
+[HTML training guide](docs/archive/native-html-training.md).
 
 ## Verify the project
 
 ```bash
-ruff format --check src scripts tests api
-ruff check src scripts tests api
-pytest -q
+.venv/bin/python -m pytest -q
+.venv/bin/python -m ruff check .
+.venv/bin/python -m ruff format --check .
 ```
 
 Latest validation (25 October 2026, macOS): 147 tests pass and Ruff checks pass.
-On Windows, the scikit-learn legacy path was previously blocked by a native
-dependency policy.
 
 ## Important safety boundary
 
@@ -501,7 +367,7 @@ are in [`docs/archive/model-card.md`](docs/archive/model-card.md).
 - [ ] Evaluate on an unused third source and assess score calibration.
 - [x] Download and process the full PhreshPhish dataset locally.
 - [x] Train and compare URL-only, HTML-derived, and URL+HTML models on matching rows.
-- [x] Verify saved native models on CPU and publish models/results for Mac pulls.
+- [x] Verify saved native models on CPU and publish models and results.
 - [x] Add an experimental URL+HTML endpoint and popup button for RPA testing.
 - [x] Run grouped cross-validation and a leakage audit for both models.
 - [x] Run the RPA test on 197 real legitimate websites.
@@ -514,8 +380,8 @@ are in [`docs/archive/model-card.md`](docs/archive/model-card.md).
 ## Data and generated files
 
 The repository includes selected trained models, metadata, feature-importance
-reports, evaluation outputs, and the artifact checksum manifest. Pulling the
-latest changes transfers those files without retraining.
+reports, evaluation outputs and the artifact checksum manifest, so the models run
+without retraining. Result files that contain raw URLs are kept out of the repository.
 
 Raw datasets (including the 36.58 GB PhreshPhish download), dataset-containing
 split files, numeric caches, virtual environments, and temporary test files are

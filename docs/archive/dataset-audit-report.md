@@ -174,7 +174,7 @@ classifier**; preserve the baseline transformer and retrain a versioned candidat
 
 ## 5. Uploaded dataset audit
 
-Local input: `/Users/hrishy/Downloads/URL dataset.csv`, SHA-256
+Local input: `URL dataset.csv` (a locally uploaded file), SHA-256
 `accb2dfbfd3329a8b5cb1b85dcad90314a660c272be755cb45d0f6865014b466`.
 
 It contains 450,176 rows with `url`/`type`: 345,738 legitimate, 104,438 phishing.
