@@ -1,0 +1,161 @@
+{
+  "left": "artifacts/experiments/talentud_url_grouped_cv_20261016",
+  "right": "artifacts/experiments/talentud_combined_grouped_cv_20261016",
+  "rows": 454185,
+  "same_records_roles_components": true,
+  "draws": 1000,
+  "seed": 42,
+  "method": "Right minus left; paired whole-component resampling within folds",
+  "conditional_on_fitted_models": true,
+  "limitation": "Development-only; excludes refitting, source and label uncertainty",
+  "policy_differences": {
+    "saved_cutoff_reference": {
+      "accuracy": {
+        "point": 0.02776401686537433,
+        "percentile_95_interval": [
+          0.0022733287734584585,
+          0.05249584897648595
+        ]
+      },
+      "precision": {
+        "point": 0.007631063125801196,
+        "percentile_95_interval": [
+          0.0017395515518304763,
+          0.01526726132744901
+        ]
+      },
+      "recall": {
+        "point": 0.05694949387371773,
+        "percentile_95_interval": [
+          0.0024500251554430107,
+          0.10417038112622656
+        ]
+      },
+      "f1": {
+        "point": 0.03327923550540246,
+        "percentile_95_interval": [
+          0.0023888380259705303,
+          0.0596076251795237
+        ]
+      },
+      "false_positive_rate": {
+        "point": -0.0034165805117601436,
+        "percentile_95_interval": [
+          -0.007816117171102576,
+          0.0006045370767432379
+        ]
+      }
+    },
+    "inner_f1_recall90": {
+      "accuracy": {
+        "point": 0.01659235773968759,
+        "percentile_95_interval": [
+          -0.027828848751665705,
+          0.04677942510979328
+        ]
+      },
+      "precision": {
+        "point": 0.04919302546411408,
+        "percentile_95_interval": [
+          0.032536566758194246,
+          0.0717097479614457
+        ]
+      },
+      "recall": {
+        "point": -0.016062429502974762,
+        "percentile_95_interval": [
+          -0.10586311685432197,
+          0.04983929666493363
+        ]
+      },
+      "f1": {
+        "point": 0.01535581731033997,
+        "percentile_95_interval": [
+          -0.037229163179588465,
+          0.060685590081780746
+        ]
+      },
+      "false_positive_rate": {
+        "point": -0.04383400103385888,
+        "percentile_95_interval": [
+          -0.05033290980738221,
+          -0.03757740254197888
+        ]
+      }
+    },
+    "inner_fpr01": {
+      "accuracy": {
+        "point": 0.034618052115327425,
+        "percentile_95_interval": [
+          -0.03809788355619673,
+          0.08362011889174317
+        ]
+      },
+      "precision": {
+        "point": 0.0019470667577824452,
+        "percentile_95_interval": [
+          -0.0014261311357327388,
+          0.00534093049512316
+        ]
+      },
+      "recall": {
+        "point": 0.07585842987089064,
+        "percentile_95_interval": [
+          -0.07814792667953663,
+          0.1805897801526554
+        ]
+      },
+      "f1": {
+        "point": 0.04916552913754357,
+        "percentile_95_interval": [
+          -0.05148161896902438,
+          0.1170188952669334
+        ]
+      },
+      "false_positive_rate": {
+        "point": -0.00021404109589041008,
+        "percentile_95_interval": [
+          -0.0010938976718595187,
+          0.0008174919976188255
+        ]
+      }
+    },
+    "inner_fpr02": {
+      "accuracy": {
+        "point": 0.024967799464975737,
+        "percentile_95_interval": [
+          -0.032509995024371255,
+          0.06572001744693493
+        ]
+      },
+      "precision": {
+        "point": 0.0017787754189242388,
+        "percentile_95_interval": [
+          -0.0025497755171792758,
+          0.006460348988992993
+        ]
+      },
+      "recall": {
+        "point": 0.055027617890390124,
+        "percentile_95_interval": [
+          -0.06764114443924955,
+          0.14386516942586522
+        ]
+      },
+      "f1": {
+        "point": 0.032824006609001866,
+        "percentile_95_interval": [
+          -0.040614580421445334,
+          0.08590194260234155
+        ]
+      },
+      "false_positive_rate": {
+        "point": 0.00010903980356681553,
+        "percentile_95_interval": [
+          -0.0012841918246194511,
+          0.0017739268516934956
+        ]
+      }
+    }
+  }
+}

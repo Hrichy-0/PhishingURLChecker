@@ -1,0 +1,382 @@
+{
+  "created_at": "2026-10-19T12:39:51.671949+00:00",
+  "purpose": "Diagnostic replay on deliberately selected development records",
+  "not_external_accuracy": true,
+  "no_network_or_rendering": true,
+  "bundle_sha256": "ff94086bfd6bf6aa58c5649e27b4a753f42426b968d17d752fd7d6fe7a2be325",
+  "request_sha256": "3bbfe4d1143daba924c7637b81271a1222d613605be7e8ebac4770b24cfd4740",
+  "records": 78,
+  "unique_snapshots": 21,
+  "dataset_class_counts": {
+    "1": 54,
+    "0": 24
+  },
+  "truncated_records": 1,
+  "all_38_features_reproduce_cached_float32_values_exactly": true,
+  "truncation_flag_restored_from_transfer_provenance": true,
+  "raw_shard_hashes": "Windows-reported hashes match; not rehashed on Mac",
+  "models": {
+    "url_only": {
+      "features": 21,
+      "frozen_model_sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+      "frozen_cutoff": 0.4901971220970154,
+      "frozen_diagnostic_metrics_against_dataset_labels": {
+        "threshold": 0.4901971220970154,
+        "accuracy": 0.9230769230769231,
+        "precision": 0.9444444444444444,
+        "recall": 0.9444444444444444,
+        "f1": 0.9444444444444444,
+        "roc_auc": 0.9675925925925927,
+        "average_precision": 0.9840979818754267,
+        "false_positive_rate": 0.125,
+        "confusion_matrix": {
+          "true_negative": 21,
+          "false_positive": 3,
+          "false_negative": 3,
+          "true_positive": 51
+        }
+      },
+      "held_fold_raw_feature_scores_match_saved_oof_exactly": true,
+      "held_fold_diagnostic_metrics_against_dataset_labels": {
+        "saved_cutoff_reference": {
+          "accuracy": 0.9102564102564102,
+          "precision": 0.9433962264150944,
+          "recall": 0.9259259259259259,
+          "f1": 0.9345794392523364,
+          "false_positive_rate": 0.125,
+          "confusion_matrix": {
+            "true_negative": 21,
+            "false_positive": 3,
+            "false_negative": 4,
+            "true_positive": 50
+          }
+        },
+        "inner_f1_recall90": {
+          "accuracy": 0.9230769230769231,
+          "precision": 0.9285714285714286,
+          "recall": 0.9629629629629629,
+          "f1": 0.9454545454545454,
+          "false_positive_rate": 0.16666666666666666,
+          "confusion_matrix": {
+            "true_negative": 20,
+            "false_positive": 4,
+            "false_negative": 2,
+            "true_positive": 52
+          }
+        },
+        "inner_fpr01": {
+          "accuracy": 0.8589743589743589,
+          "precision": 0.9387755102040817,
+          "recall": 0.8518518518518519,
+          "f1": 0.8932038834951458,
+          "false_positive_rate": 0.125,
+          "confusion_matrix": {
+            "true_negative": 21,
+            "false_positive": 3,
+            "false_negative": 8,
+            "true_positive": 46
+          }
+        },
+        "inner_fpr02": {
+          "accuracy": 0.8717948717948718,
+          "precision": 0.94,
+          "recall": 0.8703703703703703,
+          "f1": 0.9038461538461539,
+          "false_positive_rate": 0.125,
+          "confusion_matrix": {
+            "true_negative": 21,
+            "false_positive": 3,
+            "false_negative": 7,
+            "true_positive": 47
+          }
+        }
+      }
+    },
+    "url_html": {
+      "features": 38,
+      "frozen_model_sha256": "41f3e3c9a25b20f181667f5d94cbdb1be67668fcf7318d2896f694971313040f",
+      "frozen_cutoff": 0.22090303897857666,
+      "frozen_diagnostic_metrics_against_dataset_labels": {
+        "threshold": 0.22090303897857666,
+        "accuracy": 0.7692307692307693,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.8571428571428571,
+        "roc_auc": 0.9560185185185186,
+        "average_precision": 0.972168013109499,
+        "false_positive_rate": 0.75,
+        "confusion_matrix": {
+          "true_negative": 6,
+          "false_positive": 18,
+          "false_negative": 0,
+          "true_positive": 54
+        }
+      },
+      "held_fold_raw_feature_scores_match_saved_oof_exactly": true,
+      "held_fold_diagnostic_metrics_against_dataset_labels": {
+        "saved_cutoff_reference": {
+          "accuracy": 0.8717948717948718,
+          "precision": 0.84375,
+          "recall": 1.0,
+          "f1": 0.9152542372881356,
+          "false_positive_rate": 0.4166666666666667,
+          "confusion_matrix": {
+            "true_negative": 14,
+            "false_positive": 10,
+            "false_negative": 0,
+            "true_positive": 54
+          }
+        },
+        "inner_f1_recall90": {
+          "accuracy": 0.8461538461538461,
+          "precision": 0.828125,
+          "recall": 0.9814814814814815,
+          "f1": 0.8983050847457628,
+          "false_positive_rate": 0.4583333333333333,
+          "confusion_matrix": {
+            "true_negative": 13,
+            "false_positive": 11,
+            "false_negative": 1,
+            "true_positive": 53
+          }
+        },
+        "inner_fpr01": {
+          "accuracy": 0.8974358974358975,
+          "precision": 0.9259259259259259,
+          "recall": 0.9259259259259259,
+          "f1": 0.9259259259259259,
+          "false_positive_rate": 0.16666666666666666,
+          "confusion_matrix": {
+            "true_negative": 20,
+            "false_positive": 4,
+            "false_negative": 4,
+            "true_positive": 50
+          }
+        },
+        "inner_fpr02": {
+          "accuracy": 0.8846153846153846,
+          "precision": 0.8688524590163934,
+          "recall": 0.9814814814814815,
+          "f1": 0.9217391304347826,
+          "false_positive_rate": 0.3333333333333333,
+          "confusion_matrix": {
+            "true_negative": 16,
+            "false_positive": 8,
+            "false_negative": 1,
+            "true_positive": 53
+          }
+        }
+      }
+    }
+  },
+  "label_groups": [
+    {
+      "html_sha256": "0a81e60b712da7787eae3663959f12a00c37b0eabf1b1d8d681e7a3011dc8fb4",
+      "records": 1,
+      "dataset_labels": [
+        0
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "0c8e3aab055a8b95bf70680049a6229df360e82fc41e93d3c0c42cc47ef564ff",
+      "records": 1,
+      "dataset_labels": [
+        1
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "0e7524afb68825427e3c8f1e143ccc91c5e7b6be0e6ef7db1ac14919216c5a13",
+      "records": 1,
+      "dataset_labels": [
+        0
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "13ca79680d36f6f9defd031a99f03f45545828e122ee42366cae54d1cd2f6774",
+      "records": 11,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 11,
+      "combined_held_scores_distinct": 11
+    },
+    {
+      "html_sha256": "336328c66fde2d7f59a40089a06b6d48f7721dd36f9a89d3c64ba4dd3cf594e9",
+      "records": 6,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 6,
+      "combined_held_scores_distinct": 6
+    },
+    {
+      "html_sha256": "3373d56be3e6efaa71112b3f57356d03c21d1711e48b9b0c3303917a80571e73",
+      "records": 1,
+      "dataset_labels": [
+        0
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "37a4a3d6cac9b9e42b4d904530d3e79c70b40f45d50fd33eb05fc4a05bf7e318",
+      "records": 2,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 2,
+      "combined_held_scores_distinct": 2
+    },
+    {
+      "html_sha256": "3f590ead6119590621520bb82bc320b9cad967bc5ed90f1c4917de5b935e566a",
+      "records": 1,
+      "dataset_labels": [
+        1
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "4294915ce86905112608e9e4ba109f652d06980db9a2a587a31ef3c5fbc3836c",
+      "records": 1,
+      "dataset_labels": [
+        1
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "46122926a9e84af1e0b3b4d698db711276f0ed33e6abfd5b801c1f80f7c8c2e5",
+      "records": 1,
+      "dataset_labels": [
+        0
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "6ef31cc50a6869a601f85eee8b86040273aa0af95d3964293ea1ff7ddc795f8a",
+      "records": 1,
+      "dataset_labels": [
+        0
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "84ecb135d6ef0478e3e8274ac18e0de363ba4f1e80d307d2769900b4260bc244",
+      "records": 6,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 6,
+      "combined_held_scores_distinct": 6
+    },
+    {
+      "html_sha256": "92d6e92bc24505b309bb90d903df64b319a53e4cb4bc3bdac71f211e23a9e371",
+      "records": 14,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 14,
+      "combined_held_scores_distinct": 14
+    },
+    {
+      "html_sha256": "ba428c29c1fbf31d24039472137da6b43114b4cb3627198ba3a2393380db2294",
+      "records": 1,
+      "dataset_labels": [
+        1
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "c11b42f18c6378b17edc7754ac3c750075515cb1f5c2b8ebe09c9c58dee2073f",
+      "records": 2,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 2,
+      "combined_held_scores_distinct": 2
+    },
+    {
+      "html_sha256": "c479c939ec3200802349d0791e93c762510a95dc8f727be0a4cfb64352f29431",
+      "records": 1,
+      "dataset_labels": [
+        0
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "d0b8f5eec76b66d8f12a99468f5887f075262efc24e692a3a58866709cd93dc6",
+      "records": 9,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 9,
+      "combined_held_scores_distinct": 9
+    },
+    {
+      "html_sha256": "d58d4208e3a0794e199c6db6097487de3fb5443c522e33d69edc2c30847a2661",
+      "records": 1,
+      "dataset_labels": [
+        1
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "d67e4df49f2e11e32f51e56dd17a5bf3a3f174cd5684d8247ed8a7ec0a981001",
+      "records": 13,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 13,
+      "combined_held_scores_distinct": 12
+    },
+    {
+      "html_sha256": "eb5b8b1e56316bc9be2664e154ca5aad0223703319191dd9eaffaca516528542",
+      "records": 1,
+      "dataset_labels": [
+        1
+      ],
+      "url_held_scores_distinct": 1,
+      "combined_held_scores_distinct": 1
+    },
+    {
+      "html_sha256": "fcaa5d5e5c4ee92548cf1a4492fb7f78856a8bfb504c05744ed1e736de7c01d1",
+      "records": 3,
+      "dataset_labels": [
+        0,
+        1
+      ],
+      "url_held_scores_distinct": 3,
+      "combined_held_scores_distinct": 3
+    }
+  ],
+  "limitations": [
+    "Selected anomaly sample, not representative or independent",
+    "Dataset labels are not independently adjudicated truth",
+    "Original frozen-model results reuse train/validation records",
+    "OOF models exclude the record component, but sample selection is post-hoc",
+    "One truncated raw document cannot be fully rehashed from its saved prefix",
+    "No extension integration, new training, cutoff changes or live-page test"
+  ],
+  "held_f1_policy_decision_disagreements": 8,
+  "saved_model_and_metadata_unchanged": true
+}

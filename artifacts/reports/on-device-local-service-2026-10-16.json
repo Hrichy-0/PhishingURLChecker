@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-10-16T21:12:12.150806+00:00",
+  "scope": "Local Python service: URL features, CPU inference, response building",
+  "not_measured": [
+    "accuracy",
+    "browser inference",
+    "HTTP/popup latency",
+    "memory",
+    "energy"
+  ],
+  "workload": "Synthetic reserved URLs; no labels, fetching or website visits",
+  "runtime": {
+    "os": "Darwin",
+    "os_release": "27.0.0",
+    "architecture": "arm64",
+    "python": "3.12.14",
+    "xgboost": "3.4.1",
+    "inference_device": "cpu",
+    "threads": 4
+  },
+  "model_sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+  "feature_count": 21,
+  "threshold": 0.4901971220970154,
+  "model_file_bytes": 2407390,
+  "model_load_ms_after_imports": 73.245958,
+  "warmup_calls": 30,
+  "timed_calls": 600,
+  "latency_ms": {
+    "median": 0.225188,
+    "p95": 0.29157115,
+    "p99": 0.3465745,
+    "mean": 0.23523381000000002
+  },
+  "limitations": "One process on one device; not a cold application launch or CI"
+}

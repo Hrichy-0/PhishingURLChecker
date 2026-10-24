@@ -1,0 +1,60 @@
+{
+  "status": "verified_record_integrity_and_exact_isolation",
+  "scope": "All four splits: file identity, readability, labels, feature recomputation, domain identities and exact record isolation; no training or model changes",
+  "transfer_history": "Initial validation copy contained only zero bytes; replacement now matches the original manifest and is readable",
+  "splits": {
+    "train": {
+      "sha256_matches_manifest": true,
+      "rows": 397884,
+      "class_counts": {"0": 226241, "1": 171643},
+      "unique_domains": 154716
+    },
+    "validation": {
+      "sha256_matches_manifest": true,
+      "bytes": 7674122,
+      "expected_sha256": "9d4948bf46e48b3e303900cfba0b1eddb4b693230303f9979b283edf13b316b7",
+      "actual_sha256": "9d4948bf46e48b3e303900cfba0b1eddb4b693230303f9979b283edf13b316b7",
+      "rows": 56301,
+      "class_counts": {"0": 21375, "1": 34926},
+      "unique_domains": 18728
+    },
+    "test": {
+      "sha256_matches_manifest": true,
+      "rows": 39866,
+      "class_counts": {"0": 24915, "1": 14951},
+      "unique_domains": 18727
+    },
+    "publisher_test": {
+      "sha256_matches_manifest": true,
+      "rows": 84746,
+      "class_counts": {"0": 28763, "1": 55983},
+      "unique_domains": 60528
+    }
+  },
+  "all_four_splits_checks": {
+    "rows_audited": 578797,
+    "row_and_label_counts_match_manifest": true,
+    "all_21_url_feature_columns_present": true,
+    "nonfinite_url_feature_values": 0,
+    "maximum_absolute_difference_against_reextracted_float32_url_features": 0.0,
+    "recomputed_registered_domain_mismatches": 0,
+    "missing_or_invalid_urls": 0,
+    "within_split_duplicate_or_conflicting_urls": 0,
+    "pairwise_url_domain_nonempty_html_hash_overlap_all_six_split_pairs": 0
+  },
+  "development_rows_available_for_cv": 454185,
+  "date_ranges": {
+    "train": ["2024-07-02", "2025-09-08"],
+    "validation": ["2024-07-02", "2025-09-08"],
+    "test": ["2024-07-03", "2025-09-08"],
+    "publisher_test": ["2025-09-08", "2025-12-16"]
+  },
+  "limitations": [
+    "Exact isolation does not prove absence of near-template, source or other leakage",
+    "Date ranges overlap; this is not a strict temporal holdout",
+    "Labels match the manifest but their real-world correctness is not independently established",
+    "Existing publisher results have already been inspected and are not a fresh final test",
+    "No models trained or prediction thresholds changed"
+  ],
+  "next_action": "Implement and validate grouped CV using only train plus validation; keep domain/exact-content connected components together and use grouped inner validation"
+}

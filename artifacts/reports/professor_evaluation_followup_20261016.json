@@ -1,0 +1,91 @@
+{
+  "status": "development_checks_and_benign_ui_pilot_completed_not_final_validation",
+  "extension_model_changed": false,
+  "runs": {
+    "url_only": "artifacts/experiments/talentud_url_grouped_cv_20261016/cv_results.json",
+    "url_html": "artifacts/experiments/talentud_combined_grouped_cv_20261016/cv_results.json",
+    "paired_comparison": "artifacts/reports/talentud_paired_cv_20261016.json"
+  },
+  "comparison_checks": {
+    "identical_454185_development_rows_and_all_fit_inner_outer_roles": true,
+    "identical_domain_content_components": true,
+    "test_publisher_not_scored": true,
+    "five_combined_models_reloaded_and_454185_scores_reproduced_exactly": true,
+    "both_candidates_have_800_round_budget_and_40_round_patience": true
+  },
+  "additional_record_audit": {
+    "mixed_label_nonempty_exact_html_hashes_in_development": 9,
+    "rows_with_those_hashes": 66,
+    "caution": "Same content on different URLs is not automatically a wrong label; raw-content and label-evidence review needed"
+  },
+  "fold_5_url_cutoff_diagnostic": {
+    "inner_rows": 116963,
+    "inner_phishing_rows": 72687,
+    "original_inner_f1_cutoff": 0.13080310821533203,
+    "largest_component": {
+      "component_id": 8,
+      "rows": 32629,
+      "phishing_rows": 31626,
+      "registered_domains": 3340,
+      "inner_row_share": 0.27896856270786485,
+      "diagnostic_cutoff_without_component": 0.4910913407802582
+    },
+    "not_an_applied_exclusion_or_selected_replacement_cutoff": true
+  },
+  "native_chrome_ui_smoke": {
+    "method": "Actual installed extension via native UI automation; API at 127.0.0.1:8000",
+    "extension_id": "kdjlmcnaehbkpoohijaidlagmlbpeccm",
+    "source_folder_verified": "~/Documents/PhishingURLChecker/extension",
+    "model_sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+    "feature_count": 21,
+    "cutoff": 0.4901971220970154,
+    "existing_profile_used": true,
+    "hostile_sites_visited": false,
+    "all_four_post_requests_returned_200": true,
+    "cases": [
+      {"url": "https://www.apple.com/de/", "score": 0.13128569722175598, "popup_score": "13.1/100", "popup_risk": "LOW RISK", "display_parity": true, "reference": "benign official page", "development_domain_seen": true, "development_exact_url_seen": true},
+      {"url": "https://www.python.org/", "score": 0.29231536388397217, "popup_score": "29.2/100", "popup_risk": "LOW RISK", "display_parity": true, "reference": "benign official page", "development_domain_seen": true, "development_exact_url_seen": false},
+      {"url": "https://docs.python.org/3/", "score": 0.7034170031547546, "popup_score": "70.3/100", "popup_risk": "HIGH RISK", "display_parity": true, "reference": "benign official documentation", "reference_false_positive": true, "development_domain_seen": true, "development_exact_url_seen": false},
+      {"url": "https://www.mozilla.org/en-US/", "score": 0.09517773985862732, "popup_score": "9.5/100", "popup_risk": "LOW RISK", "display_parity": true, "reference": "benign official page", "development_domain_seen": true, "development_exact_url_seen": false}
+    ],
+    "unsupported_chrome_internal_page": "Check button visibly disabled; no active HTTP page",
+    "limitations": [
+      "Small convenience engineering pilot; not an independently labeled accuracy cohort",
+      "All four registered domains already occur in development",
+      "Only the deployed URL-only model is connected to the popup",
+      "No browser-only inference, content capture, memory or timed UI latency test",
+      "No screenshots or browsing history outside the research cases retained in this report"
+    ]
+  },
+  "raw_review_handoff": {
+    "original_shards_available_on_windows_confirmed": true,
+    "requested_records": 78,
+    "distinct_html_snapshots": 21,
+    "maximum_saved_bytes_per_snapshot": 1000000,
+    "private_package": "data/processed/review_request_package.zip",
+    "script": "scripts/export_review_bundle.py",
+    "raw_content_review_status": "returned_bundle_verified_and_offline_url_html_replay_completed",
+    "returned_bundle": "data/processed/phreshphish_review_bundle_completed.zip",
+    "replay_report": "artifacts/experiments/review_bundle_replay_20261019/summary.json",
+    "records_verified": 78,
+    "reconstructed_features_match_cached_exactly": 38,
+    "truncated_snapshots": 1,
+    "raw_content_findings": {
+      "mixed_label_records": 66,
+      "shopify_unavailable_store_records": 46,
+      "apache_default_page_records": 13,
+      "country_blocked_records": 3,
+      "connection_error_login_shell_records": 2,
+      "same_astrology_content_records": 2,
+      "labels_not_automatically_changed": true
+    }
+  },
+  "verification": {"pytest_passed": 117, "dependency_deprecation_warnings": 2},
+  "remaining_gates": [
+    "Review label/content evidence and near-template/source/time dependence",
+    "Predeclare the final policy and evaluation cohort without final-score-driven tuning",
+    "Obtain a fresh domain-disjoint source/time-reviewed cohort with both classes",
+    "Separate broader accuracy evaluation from isolated-profile UI integration testing",
+    "Browser-local inference and content-extractor parity remain unimplemented"
+  ]
+}

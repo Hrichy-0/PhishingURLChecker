@@ -114,3 +114,37 @@ def test_native_booster_save_reload_preserves_predictions(tmp_path):
     np.testing.assert_array_equal(model.predict(data), restored.predict(data))
     assert restored.num_features() == len(TRAINING_FEATURES)
     assert restored.predict(data)[:4].max() < restored.predict(data)[4:].min()
+
+
+def test_on_device_benchmark_is_url_only_and_does_not_connect(monkeypatch, tmp_path):
+    import socket
+
+    from scripts.benchmark_on_device import benchmark
+
+    class FakeService:
+        metadata = {"features": list(TRAINING_FEATURES), "threshold": 0.49}
+        model_sha256 = "test-checksum"
+
+        def __init__(self, directory):
+            pass
+
+        def predict(self, url):
+            assert url.startswith(("http://", "https://"))
+            return {"is_phishing": False}
+
+    def no_connection(*args, **kwargs):
+        raise AssertionError("Benchmark must not connect to a network")
+
+    monkeypatch.setattr("scripts.benchmark_on_device.NativeURLService", FakeService)
+    monkeypatch.setattr(socket.socket, "connect", no_connection)
+    monkeypatch.setattr(socket, "create_connection", no_connection)
+    (tmp_path / "xgboost_model.ubj").write_bytes(b"fake")
+    result = benchmark(tmp_path, repeats=6, warmup=2)
+    assert result["feature_count"] == 21
+    assert result["timed_calls"] == 6
+    assert result["model_file_bytes"] == 4
+    assert result["latency_ms"]["p95"] >= result["latency_ms"]["median"]
+    assert "accuracy" in result["not_measured"]
+    assert "browser inference" in result["not_measured"]
+    with pytest.raises(ValueError):
+        benchmark(tmp_path, repeats=0)
