@@ -64,7 +64,7 @@ collection artifacts and missingness can also act as dataset shortcuts.
 
 Full HTML extraction and paired CUDA training completed on 2026-10-11. See
 [`html-training-results-2026-10-11.md`](html-training-results-2026-10-11.md) for
-measured results and [`mac-pull-and-models.md`](mac-pull-and-models.md) for transfer.
+measured results.
 Existing Python, PyArrow and XGBoost dependencies are sufficient. CPU is default;
 `--device cuda` uses the GTX 1660 Ti. A CUDA request that falls back to CPU is an
 error. No security-policy or PowerShell execution-policy change is required.

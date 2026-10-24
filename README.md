@@ -343,10 +343,9 @@ git pull --ff-only origin main
 ```
 
 Use the existing Python 3.12 environment, or create a native Mac environment with
-`python3.12 -m venv .venv` first. Do not copy the Windows environment. See the
-[Mac pull guide](docs/archive/mac-pull-and-models.md) for preserving local artifact
-conflicts and resolving native library dependencies. The new models run on CPU;
-CUDA is not required for Mac inference.
+`python3.12 -m venv .venv` first. Do not copy the Windows environment. If XGBoost
+reports a missing `libomp.dylib`, install it with `brew install libomp`. The models
+run on CPU; CUDA is not required for Mac inference.
 
 ### Run a saved experimental model
 
@@ -464,7 +463,7 @@ pytest -q
 
 Latest validation (25 October 2026, macOS): 147 tests pass and Ruff checks pass.
 On Windows, the scikit-learn legacy path was previously blocked by a native
-dependency policy; see the [local audit](docs/archive/local-check-2026-10-09.md).
+dependency policy.
 
 ## Important safety boundary
 

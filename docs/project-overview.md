@@ -261,11 +261,8 @@ matched the API (median 76 ms).
 | [huggingface-evaluation.md](archive/huggingface-evaluation.md) | Hugging Face stress tests |
 | [dataset-audit-report.md](archive/dataset-audit-report.md) | Dataset shortcuts and label audit |
 | [model-comparison.md](archive/model-comparison.md) | Grouped CV, character model and source tuning |
-| [local-check-2026-10-09.md](archive/local-check-2026-10-09.md) | Windows verification and dataset candidates |
-| [native-local-training.md](archive/native-local-training.md) | Native PhreshPhish URL training |
 | [native-html-training.md](archive/native-html-training.md) | HTML feature design |
 | [html-training-results-2026-10-11.md](archive/html-training-results-2026-10-11.md) | URL vs URL+HTML results |
-| [mac-pull-and-models.md](archive/mac-pull-and-models.md) | Moving models to a Mac |
 | [talentud-evaluation-plan.md](archive/talentud-evaluation-plan.md) | Evaluation protocol and on-device plan |
 | [professor-evaluation-followup.md](archive/professor-evaluation-followup.md) | Cross-validation, leakage and uncertainty in full |
 | [frozen-url-benchmark.md](archive/frozen-url-benchmark.md) | Fresh benchmark and label-review protocol |
