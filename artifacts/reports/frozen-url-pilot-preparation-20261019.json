@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-10-19T20:12:12.559368+00:00",
+  "status": "awaiting_blinded_label_review",
+  "predictions_computed": false,
+  "accuracy_results_available": false,
+  "model_sha256": "9d9ae6a4808b0ac002c0062e0b1ddc83edd198dc52bfdbad5689aeab36559b47",
+  "threshold": 0.4901971220970154,
+  "feature_count": 21,
+  "prediction_rounds": 480,
+  "history_files_scanned": 81,
+  "history_files_with_url_columns": 67,
+  "known_local_domains_excluded": 952770,
+  "candidates": {
+    "OpenPhish_provider_labeled_pending_review": 100,
+    "Tranco_unlabeled_pending_review": 100,
+    "total": 200,
+    "all_domains_disjoint_from_known_local_history": true
+  },
+  "tranco_list_id": "467YX",
+  "protocol_sha256": "7bf75c5638a25e5d5529673e79fae68246d7120dd4f040b43b04f1433d353007",
+  "candidate_parquet_sha256": "e0013183eea0a96849b9c067f2a9780806476c61573cbde2369b87b72db947ab",
+  "excluded_domains_sha256": "09bf9f017caebc113d9045006b2351cac961f8b0777cd5e450e4fe7b87f31bbb",
+  "extension_changed": false,
+  "model_retrained": false,
+  "cutoff_tuned": false,
+  "live_candidate_urls_visited": false,
+  "software_tests_passed": 134,
+  "limitations": [
+    "Independent label review is not complete",
+    "Tranco ranking does not establish legitimate labels",
+    "OpenPhish provider labels are not independently adjudicated truth",
+    "Retrieval dates do not establish URL first-seen dates",
+    "Only locally available URL-bearing CSV/Parquet history is excluded",
+    "Domain separation does not prove campaign or upstream-source independence",
+    "This small source-selected pilot cannot certify real-world reliability"
+  ]
+}
