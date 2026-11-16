@@ -27,6 +27,7 @@ from phishguard.native import (
     url_matrix,
 )
 from phishguard.native_package import load, save
+from phishguard.native_training import fit_native_candidates
 
 
 def fingerprint(path: Path) -> str:
@@ -103,49 +104,13 @@ def main() -> None:
         )
         for name, matrix in matrices.items()
     }
-    best_model, best_f1, search, selected_params = None, -1.0, [], None
-    for depth, child_weight in ((3, 10), (5, 5), (7, 5)):
-        params = {
-            "objective": "binary:logistic",
-            "tree_method": "hist",
-            "device": "cpu",
-            "eval_metric": "logloss",
-            "eta": 0.05,
-            "max_depth": depth,
-            "min_child_weight": child_weight,
-            "subsample": 0.8,
-            "colsample_bytree": 0.8,
-            "lambda": 5.0,
-            "alpha": 0.1,
-            "nthread": args.threads,
-            "seed": args.seed,
-        }
-        print(
-            f"Fitting depth={depth} on local CPU, {args.threads} threads...", flush=True
-        )
-        model = xgb.train(
-            params,
-            datasets["train"],
-            num_boost_round=args.trees,
-            evals=[(datasets["validation"], "validation")],
-            early_stopping_rounds=40,
-            verbose_eval=50,
-        )
-        # Persist only the trees selected by validation early stopping.
-        selected = model[: model.best_iteration + 1]
-        scores = selected.predict(datasets["validation"])
-        threshold = choose_threshold(labels["validation"], scores)
-        metrics = evaluate_probabilities(labels["validation"], scores, threshold)
-        search.append(
-            {
-                "params": params,
-                "trees": selected.num_boosted_rounds(),
-                "validation_metrics": metrics,
-            }
-        )
-        if metrics["f1"] > best_f1:
-            best_model, best_f1, selected_params = selected, metrics["f1"], params
-    assert best_model is not None
+    best_model, selected_params, search = fit_native_candidates(
+        datasets["train"],
+        datasets["validation"],
+        trees=args.trees,
+        threads=args.threads,
+        seed=args.seed,
+    )
     validation_scores = best_model.predict(datasets["validation"])
     threshold = choose_threshold(labels["validation"], validation_scores)
     metrics = evaluate_probabilities(

@@ -27,6 +27,7 @@ from phishguard.native_html import (
     purge_publisher_test,
 )
 from phishguard.native_package import load, save
+from phishguard.native_training import fit_native_candidates
 from phishguard.thresholds import max_recall_at_fpr
 
 
@@ -130,52 +131,15 @@ def train_comparison(
             )
             for name, frame in all_frames.items()
         }
-        best, best_f1, selected_params, search = None, -1.0, None, []
-        for depth in depths:
-            params = {
-                "objective": "binary:logistic",
-                "tree_method": "hist",
-                "device": device,
-                "nthread": threads,
-                "eval_metric": "logloss",
-                "eta": 0.05,
-                "max_depth": depth,
-                "min_child_weight": 10 if depth == 3 else 5,
-                "subsample": 0.8,
-                "colsample_bytree": 0.8,
-                "lambda": 5.0,
-                "alpha": 0.1,
-                "seed": seed,
-            }
-            print(f"  Candidate depth={depth}", flush=True)
-            model = xgb.train(
-                params,
-                datasets["train"],
-                num_boost_round=trees,
-                evals=[(datasets["validation"], "validation")],
-                early_stopping_rounds=40,
-                verbose_eval=50,
-            )
-            actual_device = json.loads(model.save_config())["learner"]["generic_param"][
-                "device"
-            ]
-            if device == "cuda" and not actual_device.startswith("cuda"):
-                raise RuntimeError("CUDA was requested but XGBoost fell back to CPU")
-            selected = model[: model.best_iteration + 1]
-            scores = selected.predict(datasets["validation"])
-            labels = splits["validation"]["is_phishing"].to_numpy()
-            threshold = choose_threshold(labels, scores)
-            metrics = evaluate_probabilities(labels, scores, threshold)
-            search.append(
-                {
-                    "parameters": params,
-                    "trees": selected.num_boosted_rounds(),
-                    "validation_metrics": metrics,
-                }
-            )
-            if metrics["f1"] > best_f1:
-                best, best_f1, selected_params = selected, metrics["f1"], params
-        assert best is not None
+        best, selected_params, search = fit_native_candidates(
+            datasets["train"],
+            datasets["validation"],
+            trees=trees,
+            threads=threads,
+            seed=seed,
+            device=device,
+            depths=depths,
+        )
         validation_labels = splits["validation"]["is_phishing"].to_numpy()
         validation_scores = best.predict(datasets["validation"])
         threshold = choose_threshold(validation_labels, validation_scores)
