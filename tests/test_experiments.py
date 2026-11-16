@@ -9,15 +9,13 @@ import pytest
 
 from phishguard.experiments import (
     build_variant,
-    choose_low_fpr_threshold,
     grouped_fit_validation_indices,
     run_benchmark,
     run_source_tuning,
     source_class_weights,
     source_partitions,
-    source_validation_threshold,
 )
-from phishguard.modeling import build_model, evaluate_probabilities
+from phishguard.modeling import build_model
 from phishguard.split import validate_training_splits
 from phishguard.text_features import URLTextNormalizer
 from scripts.activate_model import main as activate_main
@@ -70,30 +68,6 @@ def test_character_pipeline_roundtrip_and_no_validation_vocabulary(tmp_path):
             ["https://never-seen.test/zzzzzzzzz"]
         ),
     )
-
-
-def test_low_false_positive_threshold_handles_ties():
-    labels = np.array([0, 0, 1, 1])
-    scores = np.array([0.1, 0.6, 0.6, 0.9])
-    threshold = choose_low_fpr_threshold(labels, scores, 0)
-    metrics = evaluate_probabilities(labels, scores, threshold)
-    assert threshold == 0.9
-    assert metrics["false_positive_rate"] == 0
-    assert metrics["recall"] == 0.5
-
-
-def test_threshold_can_choose_no_alerts():
-    labels = np.array([0, 0, 1, 1])
-    scores = np.ones(4)
-    threshold = choose_low_fpr_threshold(labels, scores, 0)
-    assert threshold > 1
-    assert evaluate_probabilities(labels, scores, threshold)["recall"] == 0
-
-
-@pytest.mark.parametrize("budget", [-0.01, 1.0])
-def test_threshold_rejects_invalid_budget(budget):
-    with pytest.raises(ValueError, match="maximum_fpr"):
-        choose_low_fpr_threshold(np.array([0, 1]), np.array([0.1, 0.9]), budget)
 
 
 def test_inner_validation_is_domain_disjoint():
@@ -195,21 +169,6 @@ def test_source_partitions_purge_shared_domains():
         assert not validation["url"].str.contains("shared.test", regex=False).any()
         assert set(test["source"]) == {source}
         assert source not in set(fit["source"]) | set(validation["source"])
-
-
-def test_source_threshold_applies_budget_to_each_source():
-    frame = pd.DataFrame({"source": ["a", "a", "b", "b"], "is_phishing": [0, 1, 0, 1]})
-    scores = np.array([0.2, 0.6, 0.8, 0.9])
-    threshold = source_validation_threshold(frame, scores, 0)
-    assert threshold == 0.9
-    for source in ("a", "b"):
-        mask = frame["source"].eq(source).to_numpy()
-        assert (
-            evaluate_probabilities(
-                frame.loc[mask, "is_phishing"].to_numpy(), scores[mask], threshold
-            )["false_positive_rate"]
-            == 0
-        )
 
 
 def test_source_tuning_saves_only_selected_and_comparison(tmp_path):

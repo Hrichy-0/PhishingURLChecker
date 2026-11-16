@@ -12,7 +12,6 @@ from scripts.cross_validate_native import (
     compare_runs,
     connected_groups,
     count_metrics,
-    low_fpr_threshold,
     make_partitions,
     run_cv,
 )
@@ -65,12 +64,7 @@ def test_every_role_is_group_disjoint_and_outer_rows_covered_once():
     )
 
 
-def test_low_fpr_ties_and_no_alert_fallback():
-    assert low_fpr_threshold([0, 1, 0, 1], [0.8, 0.8, 0.1, 0.9], 0.0) == 0.9
-    scores = np.asarray([1, 1], dtype=np.float32)
-    cutoff = low_fpr_threshold([0, 1], scores, 0.0)
-    assert cutoff > 1
-    assert not (scores >= cutoff).any()
+def test_count_metrics():
     assert count_metrics([90, 10, 20, 80])["false_positive_rate"] == 0.1
 
 

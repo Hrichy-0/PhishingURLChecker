@@ -16,13 +16,13 @@ import numpy as np
 import pandas as pd
 import sklearn
 from sklearn.exceptions import ConvergenceWarning
-from sklearn.metrics import roc_curve
 from sklearn.model_selection import GroupShuffleSplit, StratifiedGroupKFold
 
 from phishguard.domains import get_registered_domain
 from phishguard.features import URLFeatureExtractor
 from phishguard.modeling import TRAINING_FEATURES, build_model, evaluate_probabilities
 from phishguard.split import validate_training_splits
+from phishguard.thresholds import max_recall_at_fpr, per_source_max_recall_at_fpr
 
 URL_VARIANTS = ("xgboost", "xgboost_no_https", "char_logistic")
 # Deliberately small, explicit search: six hypotheses, not a large hidden HPO run.
@@ -83,31 +83,6 @@ METRIC_NAMES = (
 def frame_fingerprint(frame: pd.DataFrame) -> str:
     """Fingerprint selected records in their actual training order."""
     return hashlib.sha256(frame.to_csv(index=False).encode()).hexdigest()
-
-
-def choose_low_fpr_threshold(
-    labels: np.ndarray, probabilities: np.ndarray, maximum_fpr: float = 0.01
-) -> float:
-    """Maximize validation recall within an empirical false-alarm budget.
-
-    The budget is NOT a guarantee on new data. A threshold above 1 is an
-    intentional abstaining operating point when no positive is affordable.
-    """
-    if not 0 <= maximum_fpr < 1:
-        raise ValueError("maximum_fpr must be at least 0 and less than 1")
-    if set(np.unique(labels)) != {0, 1}:
-        raise ValueError("Threshold validation requires both classes")
-    if (
-        not np.isfinite(probabilities).all()
-        or ((probabilities < 0) | (probabilities > 1)).any()
-    ):
-        raise ValueError("Expected finite scores between 0 and 1")
-    fpr, recall, thresholds = roc_curve(labels, probabilities, drop_intermediate=False)
-    eligible = np.flatnonzero(fpr <= maximum_fpr)
-    # roc_curve thresholds descend: ties favor fewer alerts (higher threshold).
-    best = eligible[np.argmax(recall[eligible])]
-    threshold = float(thresholds[best])
-    return threshold if np.isfinite(threshold) else float(np.nextafter(1.0, 2.0))
 
 
 def grouped_fit_validation_indices(
@@ -218,30 +193,6 @@ def source_class_weights(fit: pd.DataFrame) -> np.ndarray:
     counts = fit.groupby(["source", "is_phishing"])["url"].transform("size")
     pairs = fit[["source", "is_phishing"]].drop_duplicates().shape[0]
     return len(fit) / (pairs * counts.to_numpy(dtype=float))
-
-
-def source_validation_threshold(
-    validation: pd.DataFrame,
-    scores: np.ndarray,
-    maximum_fpr: float,
-) -> float:
-    """Meet the empirical budget in each two-class inner validation source."""
-    thresholds = [
-        choose_low_fpr_threshold(
-            validation["is_phishing"].to_numpy(), scores, maximum_fpr
-        )
-    ]
-    for source in validation["source"].unique():
-        mask = validation["source"].eq(source).to_numpy()
-        if set(validation.loc[mask, "is_phishing"].unique()) == {0, 1}:
-            thresholds.append(
-                choose_low_fpr_threshold(
-                    validation.loc[mask, "is_phishing"].to_numpy(),
-                    scores[mask],
-                    maximum_fpr,
-                )
-            )
-    return max(thresholds)
 
 
 def metrics_with_sources(
@@ -423,7 +374,7 @@ def run_benchmark(
             )
             model = fit_variant(variant, fit, validation, seed + fold, trees)
             val_scores = model.predict_proba(model_input(validation, variant))[:, 1]
-            threshold = choose_low_fpr_threshold(
+            threshold = max_recall_at_fpr(
                 validation["is_phishing"].to_numpy(), val_scores, maximum_fpr
             )
             scores = model.predict_proba(model_input(test, variant))[:, 1]
@@ -477,7 +428,7 @@ def run_benchmark(
         validate_training_splits({"fit": fit, "validation": validation})
         model = fit_variant(variant, fit, validation, seed, trees)
         val_scores = model.predict_proba(model_input(validation, variant))[:, 1]
-        threshold = choose_low_fpr_threshold(
+        threshold = max_recall_at_fpr(
             validation["is_phishing"].to_numpy(), val_scores, maximum_fpr
         )
         metadata = {
@@ -625,7 +576,9 @@ def run_source_tuning(
                 balance_sources=candidate["weighted"],
             )
             val_scores = model.predict_proba(validation["url"])[:, 1]
-            threshold = source_validation_threshold(validation, val_scores, maximum_fpr)
+            threshold = per_source_max_recall_at_fpr(
+                validation, val_scores, maximum_fpr
+            )
             scores = model.predict_proba(test["url"])[:, 1]
             metrics = evaluate_probabilities(
                 test["is_phishing"].to_numpy(), scores, threshold
@@ -716,7 +669,7 @@ def run_source_tuning(
             balance_sources=candidate["weighted"],
         )
         scores = model.predict_proba(validation["url"])[:, 1]
-        threshold = source_validation_threshold(validation, scores, maximum_fpr)
+        threshold = per_source_max_recall_at_fpr(validation, scores, maximum_fpr)
         metadata = {
             "model_version": f"0.3.0-source-tuned-{variant}",
             "model_type": variant,

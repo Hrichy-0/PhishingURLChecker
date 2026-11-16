@@ -21,9 +21,9 @@ from phishguard.native import (
     TRAINING_FEATURES,
     choose_threshold,
     evaluate_probabilities,
-    ranking_curve,
 )
 from phishguard.native_html import HYBRID_FEATURE_NAMES
+from phishguard.thresholds import max_recall_at_fpr
 
 POLICIES = ("saved_cutoff_reference", "inner_f1_recall90", "inner_fpr01", "inner_fpr02")
 
@@ -85,14 +85,6 @@ def make_partitions(frame, groups, folds=5, seed=42):
     if not np.array_equal(np.sort(tests), np.arange(len(frame))):
         raise ValueError("Each development record must be evaluated exactly once")
     return partitions
-
-
-def low_fpr_threshold(labels, scores, budget):
-    thresholds, _, recalls, fprs = ranking_curve(labels, scores)
-    eligible = np.flatnonzero(fprs <= budget)
-    if not len(eligible):
-        return float(np.nextafter(np.float32(1), np.float32(np.inf)))
-    return float(thresholds[eligible[np.argmax(recalls[eligible])]])
 
 
 def count_metrics(counts):
@@ -381,8 +373,8 @@ def run_cv(
                 (
                     saved_cutoff,
                     choose_threshold(labels[validation], scores["validation"]),
-                    low_fpr_threshold(labels[validation], scores["validation"], 0.01),
-                    low_fpr_threshold(labels[validation], scores["validation"], 0.02),
+                    max_recall_at_fpr(labels[validation], scores["validation"], 0.01),
+                    max_recall_at_fpr(labels[validation], scores["validation"], 0.02),
                 ),
                 strict=True,
             )

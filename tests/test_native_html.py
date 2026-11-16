@@ -12,7 +12,6 @@ import pytest
 import xgboost as xgb
 
 from phishguard.html_features import CONTENT_FEATURE_NAMES, extract_content_features
-from phishguard.native import evaluate_probabilities
 from phishguard.native_html import (
     HTML_FEATURE_NAMES,
     HYBRID_FEATURE_NAMES,
@@ -24,7 +23,7 @@ from phishguard.native_html import (
     snapshot_features,
     snapshot_vector,
 )
-from scripts.train_native_html_model import low_fpr_threshold, train_comparison
+from scripts.train_native_html_model import train_comparison
 
 
 def snapshot_frame(prefix, count=160):
@@ -182,16 +181,6 @@ def test_cache_resumes_and_rejects_changed_original_data(tmp_path):
     source.write_bytes(b"x" * source.stat().st_size)
     with pytest.raises(ValueError, match="checksum"):
         prepare_snapshot_cache(raw, cache)
-
-
-def test_low_fpr_threshold_uses_validation_and_can_choose_no_alerts():
-    threshold = low_fpr_threshold([0, 0, 1, 1], [0.1, 0.9, 0.8, 0.95], 0)
-    assert threshold == 0.95
-    tied = np.asarray([1.0, 1.0], dtype=np.float32)
-    threshold = low_fpr_threshold([0, 1], tied, 0)
-    assert threshold > 1.0
-    metrics = evaluate_probabilities([0, 1], tied, threshold)
-    assert metrics["false_positive_rate"] == metrics["recall"] == 0
 
 
 def test_small_native_html_training_is_paired_and_reloadable(tmp_path):

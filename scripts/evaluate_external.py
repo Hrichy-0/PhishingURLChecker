@@ -21,8 +21,8 @@ from phishguard.data import (
     clean_url_data,
 )
 from phishguard.domains import get_registered_domain
-from phishguard.experiments import choose_low_fpr_threshold
 from phishguard.modeling import evaluate_probabilities
+from phishguard.thresholds import max_recall_at_fpr
 
 DATASET_PATH = PROJECT_ROOT / "data/external/balanced_urls.csv"
 BATCH_SIZE = 20_000
@@ -149,7 +149,7 @@ def validation_threshold_comparison(
     thresholds.extend(
         (
             f"validation_fpr_{budget:.0%}",
-            choose_low_fpr_threshold(labels, scores, budget),
+            max_recall_at_fpr(labels, scores, budget),
             budget,
         )
         for budget in budgets

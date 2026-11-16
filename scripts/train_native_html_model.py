@@ -18,7 +18,6 @@ from phishguard.html_features import MAX_HTML_BYTES
 from phishguard.native import (
     choose_threshold,
     evaluate_probabilities,
-    ranking_curve,
 )
 from phishguard.native_html import (
     VARIANT_FEATURES,
@@ -27,18 +26,7 @@ from phishguard.native_html import (
     prepare_snapshot_cache,
     purge_publisher_test,
 )
-
-
-def low_fpr_threshold(labels, scores, maximum_fpr: float = 0.01) -> float:
-    """Maximize validation recall under an FPR budget; ties prefer fewer alerts."""
-    if not 0 <= maximum_fpr <= 1:
-        raise ValueError("FPR budget must be in [0, 1]")
-    thresholds, _, recalls, fprs = ranking_curve(labels, scores)
-    eligible = np.flatnonzero(fprs <= maximum_fpr)
-    if not len(eligible):
-        # Scores are float32; a float64 epsilon can round back to 1 on comparison.
-        return float(np.nextafter(np.float32(1), np.float32(np.inf)))
-    return float(thresholds[eligible[np.argmax(recalls[eligible])]])
+from phishguard.thresholds import max_recall_at_fpr
 
 
 def protected_hashes() -> dict[str, str]:
@@ -190,7 +178,7 @@ def train_comparison(
         validation_labels = splits["validation"]["is_phishing"].to_numpy()
         validation_scores = best.predict(datasets["validation"])
         threshold = choose_threshold(validation_labels, validation_scores)
-        conservative = low_fpr_threshold(validation_labels, validation_scores)
+        conservative = max_recall_at_fpr(validation_labels, validation_scores)
         evaluations, conservative_evaluations = {}, {}
         for name, frame in all_frames.items():
             if name == "train":
