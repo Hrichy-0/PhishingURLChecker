@@ -10,7 +10,7 @@ import pytest
 
 from phishguard.content import (
     CONTENT_FEATURE_NAMES,
-    HYBRID_FEATURE_NAMES,
+    LEGACY_HYBRID_FEATURE_NAMES,
     MAX_HTML_BYTES,
     HybridFeatureExtractor,
     extract_content_features,
@@ -92,7 +92,7 @@ def test_hybrid_transformer_schema():
     frame = pd.DataFrame({"url": ["https://example.test/"], "html": ["<html></html>"]})
     transformer = HybridFeatureExtractor()
     values = transformer.fit_transform(frame)
-    assert values.shape == (1, len(HYBRID_FEATURE_NAMES))
+    assert values.shape == (1, len(LEGACY_HYBRID_FEATURE_NAMES))
     assert np.isfinite(values).all()
     assert "uses_https" not in transformer.get_feature_names_out()
     with pytest.raises(ValueError, match="DataFrame"):

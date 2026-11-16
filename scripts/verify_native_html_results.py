@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from phishguard.grouping import assert_disjoint
 from phishguard.native import evaluate_probabilities
 from phishguard.native_html import VARIANT_FEATURES
 from phishguard.native_package import load
@@ -27,11 +28,7 @@ def verify_results(experiment: Path) -> dict:
         with path.open("rb") as stream:
             frames[name] = pd.read_parquet(stream)
         assert len(frames[name]) == manifest["cohorts"][name]["rows"], name
-    for index, name in enumerate(frames):
-        for other in list(frames)[index + 1 :]:
-            assert set(frames[name]["domain"]).isdisjoint(frames[other]["domain"])
-            hashes = set(frames[name]["html_sha256"]) - {""}
-            assert hashes.isdisjoint(set(frames[other]["html_sha256"]) - {""})
+    assert_disjoint(frames)
     report = {
         "status": "verified",
         "domain_and_exact_html_disjoint": True,

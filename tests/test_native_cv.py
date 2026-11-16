@@ -4,14 +4,14 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from phishguard.grouping import connected_groups
+from phishguard.metrics import count_metrics
 from phishguard.native import TRAINING_FEATURES, url_matrix
 from phishguard.native_html import HYBRID_FEATURE_NAMES
 from scripts.cross_validate_native import (
     POLICIES,
     clustered_intervals,
     compare_runs,
-    connected_groups,
-    count_metrics,
     make_partitions,
     run_cv,
 )

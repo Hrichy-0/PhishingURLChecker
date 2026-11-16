@@ -19,7 +19,9 @@ from phishguard.lexical import extract_url_features
 from phishguard.modeling import TRAINING_FEATURES
 
 HYBRID_URL_FEATURES = tuple(n for n in TRAINING_FEATURES if n != "uses_https")
-HYBRID_FEATURE_NAMES = HYBRID_URL_FEATURES + CONTENT_FEATURE_NAMES
+# Legacy sklearn hybrid schema (no uses_https, no HTML availability flags). The
+# native URL+HTML schema is native_html.HYBRID_FEATURE_NAMES; keep names distinct.
+LEGACY_HYBRID_FEATURE_NAMES = HYBRID_URL_FEATURES + CONTENT_FEATURE_NAMES
 
 
 class HybridFeatureExtractor(TransformerMixin, BaseEstimator):
@@ -37,8 +39,10 @@ class HybridFeatureExtractor(TransformerMixin, BaseEstimator):
                 **extract_url_features(url),
                 **extract_content_features(url, html),
             }
-            rows.append([values[name] for name in HYBRID_FEATURE_NAMES])
-        return np.asarray(rows, dtype=np.float64).reshape(-1, len(HYBRID_FEATURE_NAMES))
+            rows.append([values[name] for name in LEGACY_HYBRID_FEATURE_NAMES])
+        return np.asarray(rows, dtype=np.float64).reshape(
+            -1, len(LEGACY_HYBRID_FEATURE_NAMES)
+        )
 
     def get_feature_names_out(self, input_features: object = None) -> np.ndarray:
-        return np.asarray(HYBRID_FEATURE_NAMES, dtype=object)
+        return np.asarray(LEGACY_HYBRID_FEATURE_NAMES, dtype=object)

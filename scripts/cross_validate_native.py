@@ -16,6 +16,13 @@ import xgboost as xgb
 from sklearn.model_selection import GroupShuffleSplit, StratifiedGroupKFold
 
 from phishguard.config import MAIN_URL_MODEL_DIR, PROJECT_ROOT
+from phishguard.grouping import assert_disjoint, connected_groups
+from phishguard.metrics import (
+    COUNT_METRICS,
+    cluster_bootstrap,
+    component_strata,
+    count_metrics,
+)
 from phishguard.native import (
     TRAINING_FEATURES,
     choose_threshold,
@@ -33,30 +40,6 @@ from phishguard.thresholds import max_recall_at_fpr
 POLICIES = ("saved_cutoff_reference", "inner_f1_recall90", "inner_fpr01", "inner_fpr02")
 
 
-def connected_groups(frame: pd.DataFrame) -> np.ndarray:
-    """Transitive domain/exact-content groups; content hashes are NOT features."""
-    if frame[["domain", "html_sha256"]].isna().any().any():
-        raise ValueError("Missing grouping metadata")
-    parents = {domain: domain for domain in frame.domain.unique()}
-
-    def root(domain):
-        while parents[domain] != domain:
-            parents[domain] = parents[parents[domain]]
-            domain = parents[domain]
-        return domain
-
-    owners = {}
-    for domain, digest in frame[["domain", "html_sha256"]].itertuples(index=False):
-        if not domain:
-            raise ValueError("Empty domain")
-        if digest:  # Empty hashes must not join all unavailable pages.
-            previous = owners.setdefault(digest, domain)
-            first, second = sorted((root(domain), root(previous)))
-            parents[second] = first
-    roots = frame.domain.map({domain: root(domain) for domain in parents})
-    return pd.factorize(roots, sort=True)[0]
-
-
 def make_partitions(frame, groups, folds=5, seed=42):
     labels = frame.is_phishing.to_numpy()
     if set(np.unique(labels)) != {0, 1} or len(np.unique(groups)) < folds:
@@ -69,17 +52,25 @@ def make_partitions(frame, groups, folds=5, seed=42):
         inner = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=seed + fold)
         fit, validation = next(inner.split(outer_train, groups=groups[outer_train]))
         parts = (outer_train[fit], outer_train[validation], outer_test)
-        for index, indices in enumerate(parts):
+        for indices in parts:
             if set(np.unique(labels[indices])) != {0, 1}:
                 raise ValueError(f"Fold {fold}: a role lacks both classes")
-            for other in parts[index + 1 :]:
-                for column in ("domain", "html_sha256"):
-                    left = set(frame.iloc[indices][column]) - {""}
-                    right = set(frame.iloc[other][column]) - {""}
-                    if left & right:
-                        raise ValueError(f"Fold {fold}: {column} leakage")
-                if set(groups[indices]) & set(groups[other]):
-                    raise ValueError("Component leakage")
+        roles = ("fit", "validation", "test")
+        assert_disjoint(
+            {
+                role: frame.iloc[indices]
+                for role, indices in zip(roles, parts, strict=True)
+            },
+            context=f"Fold {fold}: ",
+        )
+        assert_disjoint(
+            {
+                role: pd.DataFrame({"component": groups[indices]})
+                for role, indices in zip(roles, parts, strict=True)
+            },
+            ("component",),
+            f"Fold {fold}: ",
+        )
         partitions.append(parts)
     tests = np.concatenate([parts[2] for parts in partitions])
     if not np.array_equal(np.sort(tests), np.arange(len(frame))):
@@ -87,46 +78,16 @@ def make_partitions(frame, groups, folds=5, seed=42):
     return partitions
 
 
-def count_metrics(counts):
-    tn, fp, fn, tp = (int(value) for value in counts)
-    return {
-        "accuracy": (tn + tp) / max(1, tn + fp + fn + tp),
-        "precision": tp / max(1, tp + fp),
-        "recall": tp / max(1, tp + fn),
-        "f1": 2 * tp / max(1, 2 * tp + fp + fn),
-        "false_positive_rate": fp / max(1, fp + tn),
-        "confusion_matrix": {
-            "true_negative": tn,
-            "false_positive": fp,
-            "false_negative": fn,
-            "true_positive": tp,
-        },
-    }
-
-
 def clustered_intervals(oof: pd.DataFrame, draws=1000, seed=42):
     """Percentile cluster bootstrap within folds, conditional on fitted models."""
-    if draws < 1:
-        raise ValueError("Require positive bootstrap draws")
-    if (oof.groupby("component_id").fold.nunique() != 1).any():
-        raise ValueError("A component crosses outer folds")
-    components, groups = np.unique(oof.component_id, return_inverse=True)
-    group_folds = np.zeros(len(components), dtype=int)
-    group_folds[groups] = oof.fold
+    groups, strata = component_strata(oof)
     labels = oof.is_phishing.to_numpy(dtype=int)
-    counts = np.zeros((len(components), len(POLICIES), 4), dtype=np.int64)
+    counts = np.zeros((groups.max() + 1, len(POLICIES), 4), dtype=np.int64)
     for index, policy in enumerate(POLICIES):
         predicted = oof.score.to_numpy() >= oof[f"threshold_{policy}"].to_numpy()
         np.add.at(counts[:, index, :], (groups, labels * 2 + predicted), 1)
-    strata = [np.flatnonzero(group_folds == fold) for fold in np.unique(group_folds)]
-    rng = np.random.default_rng(seed)
     samples = {policy: [] for policy in POLICIES}
-    for _ in range(draws):
-        selected = np.concatenate([rng.choice(s, len(s), replace=True) for s in strata])
-        totals = counts[selected].sum(axis=0)
-        # A replicate missing a class cannot estimate both FPR and recall.
-        if any(row[0] + row[1] == 0 or row[2] + row[3] == 0 for row in totals):
-            continue
+    for totals in cluster_bootstrap(counts, strata, draws, seed):
         for policy, total in zip(POLICIES, totals, strict=True):
             samples[policy].append(count_metrics(total))
     intervals = {}
@@ -135,13 +96,7 @@ def clustered_intervals(oof: pd.DataFrame, draws=1000, seed=42):
             raise ValueError("No two-class bootstrap replicate")
         intervals[policy] = {
             metric: np.percentile([r[metric] for r in records], [2.5, 97.5]).tolist()
-            for metric in (
-                "accuracy",
-                "precision",
-                "recall",
-                "f1",
-                "false_positive_rate",
-            )
+            for metric in COUNT_METRICS
         }
     return {
         "draws_requested": draws,
@@ -170,15 +125,8 @@ def compare_runs(left: Path, right: Path, draws=1000, seed=42):
         != reports[1]["provenance"]["split_sha256"]
     ):
         raise ValueError("Different source records")
-    if draws < 1:
-        raise ValueError("Require positive bootstrap draws")
-    if (a.groupby("component_id").fold.nunique() != 1).any():
-        raise ValueError("Component crosses folds")
-    components, groups = np.unique(a.component_id, return_inverse=True)
-    folds = np.zeros(len(components), dtype=int)
-    folds[groups] = a.fold
-    strata = [np.flatnonzero(folds == fold) for fold in np.unique(folds)]
-    counts = np.zeros((len(components), 2, len(POLICIES), 4), dtype=np.int64)
+    groups, strata = component_strata(a)
+    counts = np.zeros((groups.max() + 1, 2, len(POLICIES), 4), dtype=np.int64)
     for model, frame in enumerate((a, b)):
         for index, policy in enumerate(POLICIES):
             predicted = (
@@ -189,22 +137,13 @@ def compare_runs(left: Path, right: Path, draws=1000, seed=42):
                 (groups, frame.is_phishing.to_numpy() * 2 + predicted),
                 1,
             )
-    metrics = ("accuracy", "precision", "recall", "f1", "false_positive_rate")
-    samples = {policy: {metric: [] for metric in metrics} for policy in POLICIES}
-    rng = np.random.default_rng(seed)
+    samples = {policy: {metric: [] for metric in COUNT_METRICS} for policy in POLICIES}
     valid = 0
-    for _ in range(draws):
-        selected = np.concatenate([rng.choice(s, len(s), replace=True) for s in strata])
-        totals = counts[selected].sum(axis=0)
-        if any(
-            row[0] + row[1] == 0 or row[2] + row[3] == 0
-            for row in totals.reshape(-1, 4)
-        ):
-            continue
+    for totals in cluster_bootstrap(counts, strata, draws, seed):
         valid += 1
         for index, policy in enumerate(POLICIES):
             first, second = [count_metrics(totals[model, index]) for model in (0, 1)]
-            for metric in metrics:
+            for metric in COUNT_METRICS:
                 samples[policy][metric].append(second[metric] - first[metric])
     if not valid:
         raise ValueError("No valid paired bootstrap samples")
@@ -528,13 +467,7 @@ def main():
         frames[name] = pd.read_parquet(path, columns=columns)
         if len(frames[name]) != manifest["cohorts"][name]["rows"]:
             raise ValueError("Manifest row count mismatch")
-    for index, name in enumerate(frames):
-        for other in list(frames)[index + 1 :]:
-            for column in ("url", "domain", "html_sha256"):
-                if (set(frames[name][column]) - {""}) & (
-                    set(frames[other][column]) - {""}
-                ):
-                    raise ValueError(f"Cross-split {column} leakage")
+    assert_disjoint(frames, ("url", "domain", "html_sha256"), "Cross-split ")
     development = pd.concat(
         [frames[name].assign(original_split=name) for name in ("train", "validation")],
         ignore_index=True,
