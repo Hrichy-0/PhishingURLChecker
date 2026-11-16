@@ -111,7 +111,7 @@ def test_content_service_scores_html_and_rejects_url_only_schema(tmp_path):
 
 
 def test_snapshot_script_matches_service_tree_range(tmp_path):
-    from scripts.predict_native_snapshot import score_snapshot
+    from phishguard.native_package import load
 
     urls = ["https://example.test/", "http://example.test/login"]
     data = xgb.DMatrix(
@@ -133,9 +133,10 @@ def test_snapshot_script_matches_service_tree_range(tmp_path):
     }
     (tmp_path / "model_metadata.json").write_text(json.dumps(metadata))
     service = NativeURLService(tmp_path)
+    package = load(tmp_path)[0]
     for url in urls:
         values = url_matrix([url])
-        script = score_snapshot(booster, values, TRAINING_FEATURES, metadata)
+        script = float(package.scores(values)[0])
         assert np.isclose(script, service.predict(url)["phishing_probability"])
         full = float(
             booster.predict(xgb.DMatrix(values, feature_names=list(TRAINING_FEATURES)))[
@@ -143,5 +144,7 @@ def test_snapshot_script_matches_service_tree_range(tmp_path):
             ]
         )
         assert not np.isclose(script, full)
+    metadata["best_iteration"] = 9
+    (tmp_path / "model_metadata.json").write_text(json.dumps(metadata))
     with pytest.raises(ValueError, match="tree range"):
-        score_snapshot(booster, values, TRAINING_FEATURES, {"best_iteration": 9})
+        load(tmp_path)

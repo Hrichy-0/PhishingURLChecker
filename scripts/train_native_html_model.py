@@ -26,6 +26,7 @@ from phishguard.native_html import (
     prepare_snapshot_cache,
     purge_publisher_test,
 )
+from phishguard.native_package import load, save
 from phishguard.thresholds import max_recall_at_fpr
 
 
@@ -198,15 +199,6 @@ def train_comparison(
             ).to_csv(output_dir / f"{variant}_{name}_predictions.csv", index=False)
         artifact_dir = output_dir / variant
         artifact_dir.mkdir()
-        model_path = artifact_dir / "xgboost_model.ubj"
-        model_path.write_bytes(best.save_raw(raw_format="ubj"))
-        restored = xgb.Booster()
-        restored.load_model(bytearray(model_path.read_bytes()))
-        restored.set_param({"device": device, "nthread": threads})
-        np.testing.assert_array_equal(
-            best.predict(datasets["validation"]),
-            restored.predict(datasets["validation"]),
-        )
         gains = best.get_score(importance_type="gain")
         total = sum(gains.values())
         metadata = {
@@ -215,7 +207,6 @@ def train_comparison(
             "created_at": datetime.now(UTC).isoformat(),
             "features": list(names),
             "threshold": threshold,
-            "best_iteration": best.num_boosted_rounds() - 1,
             "parameters": selected_params,
             "max_html_bytes": provenance.get("max_html_bytes", MAX_HTML_BYTES),
             "validation_search": search,
@@ -245,11 +236,15 @@ def train_comparison(
                 "xgboost": xgb.__version__,
             },
             "training_and_evaluation_seconds": time.monotonic() - fit_started,
-            "model_sha256": fingerprint(model_path),
             "save_reload_predictions_identical": True,
         }
-        (artifact_dir / "model_metadata.json").write_text(
-            json.dumps(metadata, indent=2) + "\n"
+        save(best, artifact_dir, metadata)
+        # The metadata claims an identical reload; a failed check aborts the run.
+        restored = load(artifact_dir, names)[0].booster
+        restored.set_param({"device": device, "nthread": threads})
+        np.testing.assert_array_equal(
+            best.predict(datasets["validation"]),
+            restored.predict(datasets["validation"]),
         )
         comparison[variant] = {
             "features": len(names),

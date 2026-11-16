@@ -8,10 +8,10 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import xgboost as xgb
 
 from phishguard.native import evaluate_probabilities
 from phishguard.native_html import VARIANT_FEATURES, fingerprint
+from phishguard.native_package import load
 
 
 def verify_results(experiment: Path) -> dict:
@@ -40,15 +40,9 @@ def verify_results(experiment: Path) -> dict:
     }
     for variant, names in VARIANT_FEATURES.items():
         directory = experiment / variant
-        metadata = json.loads((directory / "model_metadata.json").read_text())
-        path = directory / "xgboost_model.ubj"
-        assert fingerprint(path) == metadata["model_sha256"]
-        assert metadata["features"] == list(names)
-        model = xgb.Booster()
-        model.load_model(bytearray(path.read_bytes()))
-        model.set_param({"device": "cpu", "nthread": 4})
-        assert model.num_features() == len(names)
-        assert model.num_boosted_rounds() == metadata["best_iteration"] + 1
+        model, metadata = load(directory, names)
+        # Saved experiment packages keep only their best-iteration trees.
+        assert model.booster.num_boosted_rounds() == model.rounds
         checked = {}
         for name in ("validation", "test", "publisher_test"):
             frame = frames[name]
@@ -56,7 +50,7 @@ def verify_results(experiment: Path) -> dict:
             labels = frame["is_phishing"].to_numpy()
             np.testing.assert_array_equal(labels, saved["is_phishing"])
             matrix = frame.loc[:, list(names)].to_numpy(dtype=np.float32)
-            scores = model.predict(xgb.DMatrix(matrix, feature_names=list(names)))
+            scores = model.scores(matrix)
             np.testing.assert_allclose(scores, saved["score"], rtol=1e-5, atol=1e-7)
             predicted = scores >= metadata["threshold"]
             saved_predicted = saved["predicted"].to_numpy(dtype=bool)
@@ -84,8 +78,8 @@ def verify_results(experiment: Path) -> dict:
         assert checked["publisher_test"]["confusion_matrix_matches"], variant
         report["models"][variant] = {
             "model_checksum_verified": True,
-            "features": model.num_features(),
-            "trees": model.num_boosted_rounds(),
+            "features": len(model.features),
+            "trees": model.rounds,
             "cohorts": checked,
         }
         print(f"Verified saved {variant} on CPU", flush=True)

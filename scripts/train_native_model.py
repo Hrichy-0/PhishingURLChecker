@@ -26,6 +26,7 @@ from phishguard.native import (
     evaluate_probabilities,
     url_matrix,
 )
+from phishguard.native_package import load, save
 
 
 def fingerprint(path: Path) -> str:
@@ -160,8 +161,6 @@ def main() -> None:
             by_source[source] = evaluate_probabilities(
                 labels["test"][mask], scores[mask], threshold
             )
-    model_path = args.artifacts_dir / "xgboost_model.ubj"
-    model_path.write_bytes(best_model.save_raw(raw_format="ubj"))
     metadata = {
         "model_version": "0.1.0-native-xgboost-phreshphish",
         "model_type": "Shared URL lexical features + native XGBoost Booster",
@@ -170,7 +169,6 @@ def main() -> None:
         "parameters": selected_params,
         "features": list(TRAINING_FEATURES),
         "dropped_features": ["slash_count"],
-        "best_iteration": best_model.num_boosted_rounds() - 1,
         "selection_method": (
             "validation F1, minimum 90% recall; ties prefer fewer alerts"
         ),
@@ -198,8 +196,7 @@ def main() -> None:
         "artifact_format": "Native UBJ; not the scikit-learn joblib API package",
         "active_model_hashes_before": active_hashes,
     }
-    metadata_path = args.artifacts_dir / "model_metadata.json"
-    metadata_path.write_text(json.dumps(metadata, indent=2) + "\n")
+    metadata = save(best_model, args.artifacts_dir, metadata)
     print("DOMAIN-DISJOINT MIXED HOLDOUT:", json.dumps(metrics), flush=True)
     # Independent publisher test is never used to choose model or threshold.
     external, cleaning = clean_url_data(
@@ -232,23 +229,15 @@ def main() -> None:
         ),
         "independent_collection_verified": False,
     }
-    previous_native = (
-        PROJECT_ROOT / "artifacts/experiments/xgboost_mixed/xgboost_model.ubj"
-    )
+    previous_dir = PROJECT_ROOT / "artifacts/experiments/xgboost_mixed"
+    previous_native = previous_dir / "xgboost_model.ubj"
     if previous_native.exists():
-        previous = xgb.Booster()
-        previous.load_model(bytearray(previous_native.read_bytes()))
-        previous_metadata = json.loads(
-            (PROJECT_ROOT / "artifacts/model_metadata.json").read_text()
+        # shortcut: this package predates model_sha256, so its hash is recorded,
+        # not verified; drop the comparison if the model is ever re-saved.
+        previous, previous_metadata = load(
+            previous_dir, TRAINING_FEATURES, fingerprint(previous_native)
         )
-        if list(TRAINING_FEATURES) != previous_metadata["features"]:
-            raise ValueError("Previous model feature order differs")
-        if previous.num_features() != len(TRAINING_FEATURES):
-            raise ValueError("Previous model feature count differs")
-        previous_scores = previous.predict(
-            xgb.DMatrix(external_features),
-            iteration_range=(0, previous_metadata["best_iteration"] + 1),
-        )
+        previous_scores = previous.scores(external_features)
         external_report["previous_model_same_rows"] = evaluate_probabilities(
             external["is_phishing"].to_numpy(),
             previous_scores,
@@ -267,7 +256,7 @@ def main() -> None:
     completed = {
         "status": "completed",
         "elapsed_seconds": time.monotonic() - started,
-        "model_sha256": fingerprint(model_path),
+        "model_sha256": metadata["model_sha256"],
         "active_model_unchanged": True,
         "training_device": "local Windows CPU",
         "threads": args.threads,

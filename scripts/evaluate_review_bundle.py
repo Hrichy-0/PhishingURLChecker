@@ -13,10 +13,10 @@ from pathlib import Path, PurePosixPath
 
 import numpy as np
 import pandas as pd
-import xgboost as xgb
 
 from phishguard.native import TRAINING_FEATURES, evaluate_probabilities
 from phishguard.native_html import HYBRID_FEATURE_NAMES, fingerprint, snapshot_vector
+from phishguard.native_package import METADATA_FILE, MODEL_FILE, load, open_model
 
 SCHEMAS = {"url_only": TRAINING_FEATURES, "url_html": HYBRID_FEATURE_NAMES}
 
@@ -131,22 +131,6 @@ def matrix_from_snapshots(records, snapshots):
     return np.asarray(rows, dtype=np.float32)
 
 
-def predict(path, names, values, rounds, expected_hash):
-    if fingerprint(path) != expected_hash:
-        raise ValueError("Model checksum mismatch")
-    model = xgb.Booster()
-    model.load_model(bytearray(path.read_bytes()))
-    model.set_param({"device": "cpu", "nthread": 4})
-    if model.feature_names != list(names) or model.num_features() != len(names):
-        raise ValueError("Model feature schema differs")
-    if not 0 < rounds <= model.num_boosted_rounds():
-        raise ValueError("Invalid prediction tree range")
-    return model.predict(
-        xgb.DMatrix(values, feature_names=list(names), nthread=4),
-        iteration_range=(0, rounds),
-    )
-
-
 def evaluate(
     bundle: Path, requests: Path, experiment: Path, cv_root: Path, output: Path
 ):
@@ -219,19 +203,11 @@ def evaluate(
         columns = [HYBRID_FEATURE_NAMES.index(name) for name in names]
         values = matrix[:, columns]
         directory = experiment / variant
-        metadata_path = directory / "model_metadata.json"
-        metadata = json.loads(metadata_path.read_text())
-        if metadata["features"] != list(names):
-            raise ValueError("Saved metadata feature schema differs")
-        model_path = directory / "xgboost_model.ubj"
+        metadata_path = directory / METADATA_FILE
+        model_path = directory / MODEL_FILE
         protected.update({str(p): fingerprint(p) for p in (metadata_path, model_path)})
-        frozen = predict(
-            model_path,
-            names,
-            values,
-            metadata["best_iteration"] + 1,
-            metadata["model_sha256"],
-        )
+        model, metadata = load(directory, names)
+        frozen = model.scores(values)
         details[f"{variant}_frozen_score"] = frozen
         cutoff = metadata["threshold"]
         details[f"{variant}_frozen_flag"] = frozen >= cutoff
@@ -267,9 +243,10 @@ def evaluate(
             if not selected.any():
                 continue
             path = cv_dir / f"fold_{record['fold']}.ubj"
-            held_scores[selected] = predict(
-                path, names, values[selected], record["trees"], record["model_sha256"]
+            fold_model = open_model(
+                path, names, record["trees"], record["model_sha256"]
             )
+            held_scores[selected] = fold_model.scores(values[selected])
             for policy in policies:
                 cutoffs[policy][selected] = record["cutoffs"][policy]
         np.testing.assert_array_equal(held_scores, oof.score.to_numpy(dtype=np.float32))
