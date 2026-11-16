@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import platform
 import subprocess
@@ -28,10 +27,7 @@ from phishguard.native import (
 )
 from phishguard.native_package import load, save
 from phishguard.native_training import fit_native_candidates
-
-
-def fingerprint(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+from phishguard.provenance import assert_unchanged, sha256_file, snapshot
 
 
 def main() -> None:
@@ -51,10 +47,10 @@ def main() -> None:
     args.artifacts_dir.mkdir(parents=True, exist_ok=True)
     args.data_dir.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
-    active_hashes = {
-        name: fingerprint(PROJECT_ROOT / "artifacts" / name)
+    active_hashes = snapshot(
+        PROJECT_ROOT / "artifacts" / name
         for name in ("phishguard_model.joblib", "model_metadata.json")
-    }
+    )
     sources, frames = [], []
     for path in args.input:
         frame, cleaning = clean_url_data(
@@ -68,7 +64,7 @@ def main() -> None:
         sources.append(
             {
                 "path": str(path.resolve()),
-                "sha256": fingerprint(path),
+                "sha256": sha256_file(path),
                 "cleaning": cleaning,
             }
         )
@@ -90,7 +86,7 @@ def main() -> None:
     for name, frame in splits.items():
         path = args.data_dir / f"{name}.csv"
         frame.to_csv(path, index=False)
-        manifest["split_sha256"][name] = fingerprint(path)
+        manifest["split_sha256"][name] = sha256_file(path)
         print(f"Extracting {name}: {len(frame):,} rows...", flush=True)
         matrices[name] = url_matrix(frame["url"])
         labels[name] = frame["is_phishing"].to_numpy()
@@ -159,7 +155,9 @@ def main() -> None:
         },
         "activation_eligible": False,
         "artifact_format": "Native UBJ; not the scikit-learn joblib API package",
-        "active_model_hashes_before": active_hashes,
+        "active_model_hashes_before": {
+            Path(path).name: digest for path, digest in active_hashes.items()
+        },
     }
     metadata = save(best_model, args.artifacts_dir, metadata)
     print("DOMAIN-DISJOINT MIXED HOLDOUT:", json.dumps(metrics), flush=True)
@@ -181,7 +179,7 @@ def main() -> None:
     )
     external_report = {
         "dataset": str(args.external_test.resolve()),
-        "dataset_sha256": fingerprint(args.external_test),
+        "dataset_sha256": sha256_file(args.external_test),
         "cleaning": cleaning,
         "known_domain_rows_excluded": int(overlap.sum()),
         "rows_evaluated": len(external),
@@ -200,7 +198,7 @@ def main() -> None:
         # shortcut: this package predates model_sha256, so its hash is recorded,
         # not verified; drop the comparison if the model is ever re-saved.
         previous, previous_metadata = load(
-            previous_dir, TRAINING_FEATURES, fingerprint(previous_native)
+            previous_dir, TRAINING_FEATURES, sha256_file(previous_native)
         )
         previous_scores = previous.scores(external_features)
         external_report["previous_model_same_rows"] = evaluate_probabilities(
@@ -208,16 +206,12 @@ def main() -> None:
             previous_scores,
             previous_metadata["threshold"],
         )
-        external_report["previous_native_sha256"] = fingerprint(previous_native)
+        external_report["previous_native_sha256"] = sha256_file(previous_native)
     (args.artifacts_dir / "phreshphish_external_evaluation.json").write_text(
         json.dumps(external_report, indent=2) + "\n"
     )
     print("PURGED PUBLISHER TEST:", json.dumps(external_report), flush=True)
-    after = {
-        name: fingerprint(PROJECT_ROOT / "artifacts" / name) for name in active_hashes
-    }
-    if active_hashes != after:
-        raise ValueError("Active model files changed during the experiment")
+    assert_unchanged(active_hashes)
     completed = {
         "status": "completed",
         "elapsed_seconds": time.monotonic() - started,

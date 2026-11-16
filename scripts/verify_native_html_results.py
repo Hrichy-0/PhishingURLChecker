@@ -10,18 +10,20 @@ import numpy as np
 import pandas as pd
 
 from phishguard.native import evaluate_probabilities
-from phishguard.native_html import VARIANT_FEATURES, fingerprint
+from phishguard.native_html import VARIANT_FEATURES
 from phishguard.native_package import load
+from phishguard.provenance import verify_split_files
 
 
 def verify_results(experiment: Path) -> dict:
     manifest = json.loads((experiment / "split_manifest.json").read_text())
     comparison = json.loads((experiment / "comparison.json").read_text())
     assert comparison["status"] == "completed"
+    splits = ("train", "validation", "test", "publisher_test")
+    verify_split_files(experiment, manifest, splits)
     frames = {}
-    for name in ("train", "validation", "test", "publisher_test"):
+    for name in splits:
         path = experiment / f"{name}_rows.parquet"
-        assert fingerprint(path) == manifest["split_sha256"][name], name
         with path.open("rb") as stream:
             frames[name] = pd.read_parquet(stream)
         assert len(frames[name]) == manifest["cohorts"][name]["rows"], name

@@ -28,6 +28,7 @@ from phishguard.native_html import (
 )
 from phishguard.native_package import load, save
 from phishguard.native_training import fit_native_candidates
+from phishguard.provenance import assert_unchanged, snapshot
 from phishguard.thresholds import max_recall_at_fpr
 
 
@@ -42,7 +43,7 @@ def protected_hashes() -> dict[str, str]:
         / "artifacts/experiments/phreshphish_full_download_20261009"
         / "model_metadata.json",
     ]
-    return {str(path): fingerprint(path) for path in paths if path.exists()}
+    return snapshot(paths, missing_ok=True)
 
 
 def _cohort_summary(frame: pd.DataFrame) -> dict:
@@ -217,8 +218,7 @@ def train_comparison(
             "validation_1_percent_fpr_metrics": conservative_evaluations,
         }
         print(f"  Publisher test: {evaluations['publisher_test']}", flush=True)
-    if before != protected_hashes():
-        raise RuntimeError("A protected model artifact changed during training")
+    assert_unchanged(before)
     report = {
         "status": "completed",
         "paired_comparison": True,

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import platform
 import time
@@ -23,14 +22,15 @@ from phishguard.native import (
     evaluate_probabilities,
 )
 from phishguard.native_html import HYBRID_FEATURE_NAMES
+from phishguard.provenance import (
+    assert_unchanged,
+    sha256_file,
+    snapshot,
+    verify_split_files,
+)
 from phishguard.thresholds import max_recall_at_fpr
 
 POLICIES = ("saved_cutoff_reference", "inner_f1_recall90", "inner_fpr01", "inner_fpr02")
-
-
-def fingerprint(path: Path) -> str:
-    with path.open("rb") as stream:
-        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 def connected_groups(frame: pd.DataFrame) -> np.ndarray:
@@ -385,7 +385,7 @@ def run_cv(
             "fold": fold,
             "trees": best.num_boosted_rounds(),
             "parameters": params,
-            "model_sha256": fingerprint(model_path),
+            "model_sha256": sha256_file(model_path),
             "cutoffs": cutoffs,
             "roles": {},
             "metrics": {},
@@ -466,7 +466,7 @@ def run_cv(
     print("Computing component-clustered confidence intervals...", flush=True)
     report["bootstrap"] = clustered_intervals(oof, bootstrap_draws, seed)
     report["output_sha256"] = {
-        name: fingerprint(output / name)
+        name: sha256_file(output / name)
         for name in ("out_of_fold.parquet", "role_assignments.parquet")
     }
     report["seconds"] = time.monotonic() - started
@@ -512,16 +512,15 @@ def main():
     if metadata["features"] != list(feature_names):
         raise ValueError("Model feature definitions do not match")
     if (
-        fingerprint(args.experiment / args.variant / "xgboost_model.ubj")
+        sha256_file(args.experiment / args.variant / "xgboost_model.ubj")
         != metadata["model_sha256"]
     ):
         raise ValueError("Current model checksum mismatch")
-    frames, hashes = {}, {}
-    for name in ("train", "validation", "test", "publisher_test"):
+    splits = ("train", "validation", "test", "publisher_test")
+    hashes = verify_split_files(args.experiment, manifest, splits)
+    frames = {}
+    for name in splits:
         path = args.experiment / f"{name}_rows.parquet"
-        hashes[name] = fingerprint(path)
-        if hashes[name] != manifest["split_sha256"][name]:
-            raise ValueError(f"Input checksum mismatch: {name}")
         # Holdout labels and feature values are never loaded by this command.
         columns = ["url", "domain", "html_sha256"]
         if name in {"train", "validation"}:
@@ -552,15 +551,15 @@ def main():
         args.experiment / args.variant / name
         for name in ("xgboost_model.ubj", "model_metadata.json")
     ]
-    before = {str(path): fingerprint(path) for path in protected}
+    before = snapshot(protected)
     provenance = {
         "variant": args.variant,
         "split_sha256": hashes,
-        "manifest_sha256": fingerprint(args.experiment / "split_manifest.json"),
+        "manifest_sha256": sha256_file(args.experiment / "split_manifest.json"),
         "current_model_sha256": metadata["model_sha256"],
         "protected_artifacts_before": before,
         "source_code_sha256": {
-            name: fingerprint(PROJECT_ROOT / name)
+            name: sha256_file(PROJECT_ROOT / name)
             for name in (
                 "scripts/cross_validate_native.py",
                 "src/phishguard/native.py",
@@ -579,9 +578,7 @@ def main():
         provenance=provenance,
         feature_names=feature_names,
     )
-    unchanged = before == {str(path): fingerprint(path) for path in protected}
-    if not unchanged:
-        raise RuntimeError("Protected model changed during CV")
+    assert_unchanged(before)
     report["protected_artifacts_unchanged"] = True
     (args.output / "cv_results.json").write_text(
         json.dumps(report, indent=2, allow_nan=False) + "\n"

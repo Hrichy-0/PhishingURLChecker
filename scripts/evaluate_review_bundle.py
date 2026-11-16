@@ -17,6 +17,7 @@ import pandas as pd
 from phishguard.native import TRAINING_FEATURES, evaluate_probabilities
 from phishguard.native_html import HYBRID_FEATURE_NAMES, fingerprint, snapshot_vector
 from phishguard.native_package import METADATA_FILE, MODEL_FILE, load, open_model
+from phishguard.provenance import assert_unchanged, snapshot, verify_split_files
 
 SCHEMAS = {"url_only": TRAINING_FEATURES, "url_html": HYBRID_FEATURE_NAMES}
 
@@ -142,12 +143,11 @@ def evaluate(
     if fingerprint(split_manifest_path) != expected["split_manifest_sha256"]:
         raise ValueError("Experiment manifest differs from request")
     split_manifest = json.loads(split_manifest_path.read_text())
-    frames = {}
-    for split in ("train", "validation"):
-        path = experiment / f"{split}_rows.parquet"
-        if fingerprint(path) != split_manifest["split_sha256"][split]:
-            raise ValueError("Feature-record checksum differs")
-        frames[split] = pd.read_parquet(path)
+    verify_split_files(experiment, split_manifest, ("train", "validation"))
+    frames = {
+        split: pd.read_parquet(experiment / f"{split}_rows.parquet")
+        for split in ("train", "validation")
+    }
     cached_rows, labels = [], []
     for request, _ in records:
         row = frames[request["original_split"]].iloc[request["split_row_index"]]
@@ -198,14 +198,15 @@ def evaluate(
             "No extension integration, new training, cutoff changes or live-page test",
         ],
     }
-    protected = {}
+    protected = snapshot(
+        experiment / variant / name
+        for variant in SCHEMAS
+        for name in (METADATA_FILE, MODEL_FILE)
+    )
     for variant, names in SCHEMAS.items():
         columns = [HYBRID_FEATURE_NAMES.index(name) for name in names]
         values = matrix[:, columns]
         directory = experiment / variant
-        metadata_path = directory / METADATA_FILE
-        model_path = directory / MODEL_FILE
-        protected.update({str(p): fingerprint(p) for p in (metadata_path, model_path)})
         model, metadata = load(directory, names)
         frozen = model.scores(values)
         details[f"{variant}_frozen_score"] = frozen
@@ -292,11 +293,8 @@ def evaluate(
             != details.url_html_inner_f1_recall90_flag
         ).sum()
     )
-    result["saved_model_and_metadata_unchanged"] = all(
-        fingerprint(Path(p)) == h for p, h in protected.items()
-    )
-    if not result["saved_model_and_metadata_unchanged"]:
-        raise RuntimeError("Saved artifacts changed")
+    assert_unchanged(protected)
+    result["saved_model_and_metadata_unchanged"] = True
     output.mkdir(parents=True)
     details.to_parquet(output / "record_predictions.parquet", index=False)
     (output / "summary.json").write_text(json.dumps(result, indent=2) + "\n")
